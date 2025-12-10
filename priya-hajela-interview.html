@@ -4,16 +4,15 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Resilience, Partition & Human Spirit — A Conversation with Priya Hajela | Ajiva Talks</title>
-<meta name="description" content="Ajiva Talks interviews Priya Hajela about her novel Ladies’ Tailor and the themes of resilience, identity, belonging and the human spirit.">
-
-<link rel="canonical" href="https://ajivatalks.in/priya-hajela-interview">
+<meta name="description" content="Ajiva Talks interviews Priya Hajela about her novel Ladies’ Tailor and the themes of resilience, identity, belonging and the human spirit." />
+<link rel="canonical" href="https://ajivatalks.in/priya-hajela-interview" />
 
 <!-- Open Graph -->
-<meta property="og:title" content="Resilience & Human Spirit — Interview with Priya Hajela">
-<meta property="og:description" content="Priya Hajela discusses her book Ladies’ Tailor, Partition, identity and resilience in this Ajiva Talks interview.">
-<meta property="og:url" content="https://ajivatalks.in/priya-hajela-interview">
-<meta property="og:image" content="https://ajivatalks.in/og-default.jpg">
-<meta property="og:type" content="article">
+<meta property="og:title" content="Resilience & Human Spirit — Interview with Priya Hajela" />
+<meta property="og:description" content="Priya Hajela discusses her book Ladies’ Tailor, Partition, identity and resilience in this Ajiva Talks interview." />
+<meta property="og:url" content="https://ajivatalks.in/priya-hajela-interview" />
+<meta property="og:image" content="https://ajivatalks.in/og-default.jpg" />
+<meta property="og:type" content="article" />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
@@ -27,299 +26,286 @@ gtag('js', new Date());
 gtag('config', 'G-C48YM39L27');
 </script>
 
-<!-- Adsense (placeholder for approval) -->
+<!-- Adsense placeholder (only for approval readiness) -->
 <meta name="google-adsense-account" content="ca-pub-0000000000000000">
 
 <!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-  :root{
-    --bg: #FFF6ED;
-    --text: #222;
-    --muted: #666;
-    --accent: #FF914D;
-    --card-bg: #fff;
-    --container: 880px;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--text);
-    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-  }
+:root{
+  --bg: #FFF6ED;
+  --card: #fff;
+  --text: #111;
+  --muted: #6b6b6b;
+  --accent: #FF914D;
+  --container: 920px;
+  --radius: 14px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  -webkit-font-feature-settings: "ss01" on;
+}
 
-  /* Progress bar */
-  #progress-bar{
-    position:fixed; top:0; left:0; height:4px; width:0%;
-    background:var(--accent); z-index:1200; transition:width .12s linear;
-  }
+/* Progress bar */
+#progress { position: fixed; top: 0; left: 0; height: 4px; width: 0%; background: var(--accent); z-index:1400; transition: width .12s linear; }
 
-  /* Top controls (home + back to top) */
-  .top-controls{
-    position:fixed; right:18px; bottom:18px; z-index:1200; display:flex; gap:12px; flex-direction:column;
-  }
-  .control-btn{
-    background:#111;color:#fff;border-radius:999px;padding:10px 12px;text-decoration:none;font-weight:600;
-    box-shadow:0 6px 18px rgba(0,0,0,0.12);display:inline-block;font-size:14px;
-  }
-  .control-btn.secondary{ background: rgba(255,255,255,0.95); color:#111; border:1px solid #eee; }
+/* Header / Hero (Option 1: clean minimal) */
+.header {
+  text-align:center;
+  padding:56px 20px 20px;
+}
+.brand {
+  font-family: Anton, sans-serif;
+  font-size:46px;
+  letter-spacing:1px;
+}
+.brand span{ color:var(--accent) }
+.hero-sub { margin-top:8px; color:var(--muted); font-size:15px; }
 
-  /* Page layout */
-  header{ text-align:center;padding:36px 20px 6px }
-  .logo{ font-family:Anton, sans-serif; font-size:48px; letter-spacing:1px }
-  .logo span{ color:var(--accent) }
-  .container{ max-width:var(--container); margin:28px auto; padding:0 20px 80px; }
+/* Container */
+.container { max-width:var(--container); margin:26px auto; padding:0 20px 80px; }
 
-  /* Article card */
-  .article-card{
-    background:var(--card-bg);
-    padding:44px;
-    border-radius:16px;
-    box-shadow: 0 6px 30px rgba(0,0,0,0.05);
-    border: 1px solid rgba(0,0,0,0.03);
-    overflow:visible;
-  }
+/* Article card */
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:44px;
+  box-shadow: 0 10px 30px rgba(12,12,12,0.06);
+  border: 1px solid rgba(0,0,0,0.03);
+  overflow:visible;
+}
 
-  .kicker{ color:var(--muted); font-size:13px; letter-spacing:1px; text-transform:uppercase; margin-bottom:10px }
-  h1{
-    font-family: "Playfair Display", serif;
-    font-size:36px;
-    margin:0 0 8px;
-    line-height:1.08;
-    color:#111;
-  }
-  .meta{ color:var(--muted); font-size:14px; margin-bottom:22px; display:flex; gap:12px; align-items:center }
+/* Kicker/meta */
+.kicker{ color:var(--muted); font-size:13px; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; }
 
-  .lede{
-    font-size:18px; color:#333; margin-bottom:18px; max-width:78ch;
-  }
+/* Title */
+.title {
+  font-family: "Playfair Display", serif;
+  font-size:36px;
+  line-height:1.06;
+  margin:0 0 10px;
+  color:var(--text);
+}
 
-  /* Share row (top & bottom) */
-  .share-row{ display:flex; gap:10px; align-items:center; margin:18px 0; flex-wrap:wrap }
-  .share-btn{
-    display:inline-flex; align-items:center; gap:8px; text-decoration:none; padding:10px 14px; border-radius:8px;
-    background:var(--accent); color:#fff; font-weight:600; font-size:14px;
-  }
-  .share-btn.ghost{ background:#fff; color:#111; border:1px solid #eee }
+/* meta row */
+.meta-row{ display:flex; gap:12px; color:var(--muted); align-items:center; font-size:14px; margin-bottom:20px; flex-wrap:wrap }
 
-  /* Article body */
-  .article-body{ margin-top:18px; font-size:17px; color:#222; line-height:1.8; }
-  .article-body p{ margin:0 0 16px; }
-  .question{
-    margin-top:26px;
-    font-family:"Playfair Display", serif;
-    font-size:20px;
-    font-weight:600;
-    color:#111;
-  }
-  .answer{ margin-top:10px; font-size:17px; color:#333 }
-  .answer strong{ font-weight:700; color:#111 }
+/* lede */
+.lede{ font-size:18px; color:#333; margin:0 0 20px; max-width:76ch; }
 
-  /* Smooth fade-up */
-  .fade-up{ opacity:0; transform:translateY(12px); transition: all .6s cubic-bezier(.22,.9,.36,1); }
-  .fade-up.visible{ opacity:1; transform:none; }
+/* article body */
+.article-body{ font-size:17px; line-height:1.8; color:#222; margin-top:6px; }
+.article-body p{ margin:0 0 18px; }
 
-  /* Donate box */
-  .donate{
-    background:linear-gradient(180deg, rgba(255,249,243,1), rgba(255,242,231,1));
-    border-left:4px solid var(--accent);
-    padding:18px;border-radius:10px;margin:28px 0;
-  }
-  .donate a{ display:inline-block; background:var(--accent); color:#111; padding:10px 16px; border-radius:8px; text-decoration:none; font-weight:700 }
+/* question / answer */
+.question{
+  margin-top:30px;
+  font-family:"Playfair Display", serif;
+  font-size:20px;
+  color:#111;
+  font-weight:600;
+}
+.answer{ margin-top:10px; font-size:17px; color:#333; }
+.answer strong{ font-weight:700; color:#111; }
 
-  /* Comments */
-  .comments{ margin-top:36px; }
+/* fade-up */
+.fade-up{ opacity:0; transform: translateY(10px); transition: transform .6s cubic-bezier(.22,.9,.36,1), opacity .5s ease; }
+.fade-up.visible{ opacity:1; transform:none; }
 
-  /* Bottom */
-  footer{ margin-top:36px; color:var(--muted); font-size:14px; text-align:center; padding:40px 0 }
+/* bottom share bar */
+.bottom-share{
+  display:flex; gap:10px; align-items:center; justify-content:center; margin-top:30px; flex-wrap:wrap;
+}
+.share-button{
+  background:var(--accent); color:#111; padding:10px 14px; border-radius:8px; font-weight:700; text-decoration:none; display:inline-block;
+}
+.share-ghost{ background:#fff; border:1px solid #eee; color:#111; padding:9px 12px; border-radius:8px; }
 
-  /* Responsive */
-  @media (max-width:720px){
-    .article-card{ padding:28px }
-    h1{ font-size:28px }
-    .logo{ font-size:38px }
-  }
+/* donate */
+.donate{
+  margin-top:28px; padding:18px; border-radius:10px; background: linear-gradient(180deg,#fff7f0,#fff5ec); border-left:4px solid var(--accent);
+}
+.donate a{ display:inline-block; margin-top:8px; background:var(--accent); color:#111; padding:10px 16px; border-radius:8px; font-weight:700; text-decoration:none; }
+
+/* top/home button */
+.top-left {
+  position: fixed; left:18px; top:18px; z-index:1400;
+}
+.home-btn{
+  background: #111; color:#fff; padding:10px 14px; border-radius:999px; text-decoration:none; font-weight:700; box-shadow:0 8px 22px rgba(0,0,0,0.12);
+  display:inline-block;
+}
+
+/* back-to-top floating */
+.fab{
+  position:fixed; right:18px; bottom:18px; z-index:1400;
+  background:#111; color:#fff; padding:12px 14px; border-radius:999px; text-decoration:none; font-weight:700; box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+/* footer */
+footer{ text-align:center; color:var(--muted); margin-top:36px; font-size:14px; padding:44px 0; }
+
+/* responsive */
+@media (max-width:720px){
+  .card{ padding:26px; border-radius:12px }
+  .title{ font-size:28px }
+  .brand{ font-size:38px }
+  .lede{ font-size:16px }
+  .meta-row{ font-size:13px }
+}
 </style>
 </head>
 <body>
 
-<div id="progress-bar" aria-hidden="true"></div>
+<div id="progress" aria-hidden="true"></div>
 
-<header>
-  <div class="logo">AJIVA<span>TALKS</span></div>
+<!-- Home button -->
+<div class="top-left">
+  <a class="home-btn" href="/" title="Back to Home">Home</a>
+</div>
+
+<header class="header" role="banner">
+  <div class="brand">AJIVA<span>TALKS</span></div>
+  <div class="hero-sub">Interviews · Literature · Culture</div>
 </header>
 
-<main class="container">
-  <article class="article-card" id="article">
+<main class="container" id="main">
 
-    <div class="kicker fade-up">Interviews · Literature · Culture</div>
+  <article class="card" id="article">
 
-    <h1 class="fade-up">Resilience, Partition & Human Spirit — A Conversation with Priya Hajela</h1>
+    <div class="kicker fade-up">Feature</div>
 
-    <div class="meta fade-up">
-      <div>By Ajiva Talks</div>
-      <div>•</div>
-      <div>Category: Literature / Author Interviews</div>
-      <div>•</div>
-      <div id="read-time">— min read</div>
+    <h1 class="title fade-up">Resilience, Partition & Human Spirit — A Conversation with Priya Hajela</h1>
+
+    <div class="meta-row fade-up">
+      <div>By Ajiva Talks</div><div>•</div>
+      <div>Literature / Author Interviews</div><div>•</div>
+      <div id="readTime">— min read</div>
     </div>
 
-    <p class="lede fade-up">
-      Priya Hajela’s writing is deeply influenced by her rich tapestry of experiences — a testament to the resilience she has cultivated as a mother, an immigrant navigating cultural transitions, and a professional thriving in the high-stakes worlds of telecom and IT. Her debut novel <em>Ladies’ Tailor</em> explores resilience, identity and human connection.
-    </p>
+    <p class="lede fade-up">Priya Hajela’s writing is deeply influenced by her rich tapestry of experiences — a testament to the resilience she has cultivated as a mother, an immigrant navigating cultural transitions, and a professional thriving in the high-stakes worlds of telecom and IT. Her debut novel <em>Ladies’ Tailor</em> explores resilience, identity and human connection.</p>
 
-    <!-- SHARE (top) -->
-    <div class="share-row fade-up" aria-label="Share this article">
-      <a class="share-btn" id="share-twitter" href="#" target="_blank" rel="noopener">Share on Twitter</a>
-      <a class="share-btn" id="share-whatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>
-      <a class="share-btn ghost" id="back-home" href="/" title="Back to home">Back to Home</a>
-    </div>
+    <section class="article-body" id="article-body">
 
-    <!-- ARTICLE BODY (full text) -->
-    <section class="article-body">
+      <!-- Full article paragraphs & Q&A (unchanged full text) -->
+      <p class="fade-up">
+      Priya Hajela’s writing is deeply influenced by her rich tapestry of experiences — a testament to the resilience she has cultivated as a mother, an immigrant navigating cultural transitions, and a professional thriving in the high-stakes worlds of telecom and IT. Born in Ludhiana, India, Priya’s early years were shaped by her time in northern Indian boarding schools, an experience that likely sowed the seeds of independence and adaptability. Her journey took her to the United States, where she pursued higher education and built a career, only to return to India nearly two decades later, bringing with her a wealth of diverse perspectives.
+      </p>
 
-      <p class="fade-up">Priya Hajela’s writing is deeply influenced by her rich tapestry of experiences — a testament to the resilience she has cultivated as a mother, an immigrant navigating cultural transitions, and a professional thriving in the high-stakes worlds of telecom and IT. Born in Ludhiana, India, Priya’s early years were shaped by her time in northern Indian boarding schools, an experience that likely sowed the seeds of independence and adaptability. Her journey took her to the United States, where she pursued higher education and built a career, only to return to India nearly two decades later, bringing with her a wealth of diverse perspectives.</p>
+      <p class="fade-up">
+      In 2014, Priya began exploring her passion for storytelling, setting an ambitious goal to write a novel-length piece in just a month. This commitment marked the beginning of her serious engagement with writing. To hone her craft, she enrolled in online writing classes and, after realizing her deep love for the written word, pursued an MFA in Creative Writing at Goddard College in Vermont, graduating in 2017.
+      Priya’s work reflects her journey and the complex interplay of identity, belonging, and resilience. Her short stories have been featured in various online publications, showcasing her nuanced voice. Her debut novel, Ladies’ Tailor, published by HarperCollins India, is a culmination of her efforts — a narrative that likely carries the essence of her own multifaceted experiences. Through her writing, Priya Hajela continues to explore and celebrate the resilience of the human spirit.
+      </p>
 
-      <p class="fade-up">In 2014, Priya began exploring her passion for storytelling, setting an ambitious goal to write a novel-length piece in just a month. This commitment marked the beginning of her serious engagement with writing. To hone her craft, she enrolled in online writing classes and, after realizing her deep love for the written word, pursued an MFA in Creative Writing at Goddard College in Vermont, graduating in 2017. Priya’s work reflects her journey and the complex interplay of identity, belonging, and resilience. Her short stories have been featured in various online publications, showcasing her nuanced voice. Her debut novel, Ladies’ Tailor, published by HarperCollins India, is a culmination of her efforts — a narrative that likely carries the essence of her own multifaceted experiences. Through her writing, Priya Hajela continues to explore and celebrate the resilience of the human spirit.</p>
+      <div class="question fade-up">1. Can you please give us brief description about your book “Ladies’ Tailor”?</div>
+      <div class="answer fade-up"><strong>Priya Hajela:</strong> Ladies’ Tailor is a story about the human spirit in all its glory. It is about losing everything and rebuilding, about loss and friendship, about love and tragedy. It begins with partition and the effects of that ill-conceived event on masses of humanity but it quickly moves into recovering and rebuilding. Gurdev, the main protagonist is a strong character. It is his actions and decisions that keep the story moving forward. He is well supported by Simrat, his wife, Noor, a friend, Nirmal and Sangat, his two partners and Jagat, his supplier of khadi. The story takes a turn for the dramatic when Gurdev and Noor decide to go into Pakistan and bring back two embroidery boys. Many surprises await them in Lahore and the action picks up considerably as Noor and Gurdev figure out how to do the job they’ve come to do and make it back home safe.</div>
 
-      <div class="fade-up question">1. Can you please give us brief description about your book “Ladies’ Tailor”?</div>
-      <div class="fade-up answer"><strong>Priya Hajela:</strong> Ladies’ Tailor is a story about the human spirit in all its glory. It is about losing everything and rebuilding, about loss and friendship, about love and tragedy. It begins with partition and the effects of that ill-conceived event on masses of humanity but it quickly moves into recovering and rebuilding. Gurdev, the main protagonist is a strong character. It is his actions and decisions that keep the story moving forward. He is well supported by Simrat, his wife, Noor, a friend, Nirmal and Sangat, his two partners and Jagat, his supplier of khadi. The story takes a turn for the dramatic when Gurdev and Noor decide to go into Pakistan and bring back two embroidery boys. Many surprises await them in Lahore and the action picks up considerably as Noor and Gurdev figure out how to do the job they’ve come to do and make it back home safe.</div>
+      <div class="question fade-up">2. In India special in Bihar mainly local women garments seller is male which maybe make women feel uncomfortable . So what you think about it?</div>
+      <div class="answer fade-up"><strong>Priya Hajela:</strong> I think clothing tailors and sellers can be any gender. It is a profession like any other and in most cases, the men are just doing their jobs. They have no reason to make their biggest clients, women, uncomfortable and women shouldn’t feel so either.</div>
 
-      <div class="fade-up question">2. In India special in Bihar mainly local women garments seller is male which maybe make women feel uncomfortable . So what you think about it?</div>
-      <div class="fade-up answer"><strong>Priya Hajela:</strong> I think clothing tailors and sellers can be any gender. It is a profession like any other and in most cases, the men are just doing their jobs. They have no reason to make their biggest clients, women, uncomfortable and women shouldn’t feel so either.</div>
+      <div class="question fade-up">3. Are you inspired by an incident that inspired you to write this book?</div>
+      <div class="answer fade-up"><strong>Priya Hajela:</strong> Not any particular incident. I was interested in partition because my grandparents were partition refugees. I am more interested in the motivations that drive people to face difficulties and work through them. It is an important lesson to always keep striving in life, to keep making improvements, both for yourself and the people around you.</div>
 
-      <div class="fade-up question">3. Are you inspired by an incident that inspired you to write this book?</div>
-      <div class="fade-up answer"><strong>Priya Hajela:</strong> Not any particular incident. I was interested in partition because my grandparents were partition refugees. I am more interested in the motivations that drive people to face difficulties and work through them. It is an important lesson to always keep striving in life, to keep making improvements, both for yourself and the people around you.</div>
+      <div class="question fade-up">4. How do you select names for your characters ?</div>
+      <div class="answer fade-up"><strong>Priya Hajela:</strong> Since I was writing about Sikhs of a particular time, I looked for names of characters amongst my grandparents’ friends. Most names are of other refugees who moved during partition along with my grandparents. I have also used my own grandparents’ names in the book.</div>
 
-      <div class="fade-up question">4. How do you select names for your characters ?</div>
-      <div class="fade-up answer"><strong>Priya Hajela:</strong> Since I was writing about Sikhs of a particular time, I looked for names of characters amongst my grandparents’ friends. Most names are of other refugees who moved during partition along with my grandparents. I have also used my own grandparents’ names in the book.</div>
+      <div class="question fade-up">5. If you get two options Self help or Emotional in which field do you put your book?</div>
+      <div class="answer fade-up"><strong>Priya Hajela:</strong> It is interesting you ask this question. I had not considered Ladies’ Tailor to be a self-help book but I can see how it might be — to women who are married to inconsiderate men, to people who feel life has no meaning and to people who have lost everything but regain their sense of humor and their appreciation of life. The book is also emotional to quite a degree, particularly when it comes to Gurdev’s relationship and later reunion with his parents.</div>
 
-      <div class="fade-up question">5. If you get two options Self help or Emotional in which field do you put your book?</div>
-      <div class="fade-up answer"><strong>Priya Hajela:</strong> It is interesting you ask this question. I had not considered Ladies’ Tailor to be a self-help book but I can see how it might be — to women who are married to inconsiderate men, to people who feel life has no meaning and to people who have lost everything but regain their sense of humor and their appreciation of life. The book is also emotional to quite a degree, particularly when it comes to Gurdev’s relationship and later reunion with his parents.</div>
+      <div class="question fade-up">6. If your book turns into a Bollywood movie, which actor would you cast for the role?</div>
+      <div class="answer fade-up"><strong>Priya Hajela:</strong> So, for the three main roles — Gurdev, Simrat and Noor, I would probably cast Rajat Kapoor, Vidya Balan and Tabu.</div>
 
-      <div class="fade-up question">6. If your book turns into a Bollywood movie, which actor would you cast for the role?</div>
-      <div class="fade-up answer"><strong>Priya Hajela:</strong> So, for the three main roles — Gurdev, Simrat and Noor, I would probably cast Rajat Kapoor, Vidya Balan and Tabu.</div>
+      <div class="question fade-up">7. Which part is most exiting part of Ladies’ Tailor according to you?</div>
+      <div class="answer fade-up"><strong>Priya Hajela:</strong> The moment when Gurdev realizes that the latch on the back door to his old house is very high and he walks inside is the most exciting and moving part of the book. The reunion with his parents was not something I had originally envisaged but it came to me in a later version. In all the changes that took place in Gurdev after his wife leaves him, this probably resulted in the biggest one.</div>
 
-      <div class="fade-up question">7. Which part is most exiting part of Ladies’ Tailor according to you?</div>
-      <div class="fade-up answer"><strong>Priya Hajela:</strong> The moment when Gurdev realizes that the latch on the back door to his old house is very high and he walks inside is the most exciting and moving part of the book. The reunion with his parents was not something I had originally envisaged but it came to me in a later version. In all the changes that took place in Gurdev after his wife leaves him, this probably resulted in the biggest one.</div>
+      <div class="question fade-up">8. What was your hardest scene to write?</div>
+      <div class="answer fade-up"><strong>Priya Hajela:</strong> The early scenes of partition were the hardest to write because those events have been written about a lot. I didn’t want to, inadvertently write something I had read. I spent a lot of time visualizing and then writing the scene where Gurdev and his family join the kafila and walk from Lahore to Amritsar.</div>
 
-      <div class="fade-up question">8. What was your hardest scene to write?</div>
-      <div class="fade-up answer"><strong>Priya Hajela:</strong> The early scenes of partition were the hardest to write because those events have been written about a lot. I didn’t want to, inadvertently write something I had read. I spent a lot of time visualizing and then writing the scene where Gurdev and his family join the kafila and walk from Lahore to Amritsar.</div>
+      <div class="question fade-up">9. How long on average does it take you to write this book?</div>
+      <div class="answer fade-up"><strong>Priya Hajela:</strong> It took me over three years to write Ladies’ Tailor.</div>
 
-      <div class="fade-up question">9. How long on average does it take you to write this book?</div>
-      <div class="fade-up answer"><strong>Priya Hajela:</strong> It took me over three years to write Ladies’ Tailor.</div>
-
-      <div class="fade-up question">10. What is your family reaction on your book?</div>
-      <div class="fade-up answer"><strong>Priya Hajela:</strong> My husband and children have all enjoyed the book and have been extremely supportive of my efforts to become a writer.</div>
+      <div class="question fade-up">10. What is your family reaction on your book?</div>
+      <div class="answer fade-up"><strong>Priya Hajela:</strong> My husband and children have all enjoyed the book and have been extremely supportive of my efforts to become a writer.</div>
 
     </section>
 
-    <!-- Bottom share + donate -->
-    <div class="share-row fade-up" style="margin-top:26px;">
-      <a class="share-btn" id="share-twitter-bottom" href="#" target="_blank">Share on Twitter</a>
-      <a class="share-btn" id="share-whatsapp-bottom" href="#" target="_blank">WhatsApp</a>
-      <a class="share-btn ghost" href="/" style="background:#fff;border:1px solid #eee;color:#111">Back to Home</a>
+    <!-- bottom share + donate -->
+    <div class="bottom-share fade-up" aria-hidden="false">
+      <a class="share-button" id="share-twitter-bottom" href="#" target="_blank" rel="noopener">Share on Twitter</a>
+      <a class="share-button" id="share-whatsapp-bottom" href="#" target="_blank" rel="noopener">Share on WhatsApp</a>
+      <a class="share-ghost" href="/" rel="noopener">Back to Home</a>
     </div>
 
-    <div class="donate fade-up">
+    <div class="donate fade-up" aria-hidden="false">
       <strong>Support Ajiva Talks</strong>
-      <p style="margin:.4rem 0 12px;color:var(--muted)">If you value longform conversations and independent storytelling, please consider supporting our work.</p>
-      <a href="https://razorpay.me/@cutitsbs" target="_blank" rel="noopener">Donate now</a>
-    </div>
-
-    <!-- Comments (Giscus) -->
-    <div class="comments fade-up" id="comments">
-      <!-- giscus placeholder -->
-      <div id="giscus_container"></div>
+      <p style="margin:.4rem 0 0;color:var(--muted)">Help keep longform conversations and interviews alive.</p>
+      <a href="https://razorpay.me/@cutitsbs" target="_blank" rel="noopener">Donate</a>
     </div>
 
   </article>
 </main>
 
-<!-- floating top controls -->
-<div class="top-controls" aria-hidden="false">
-  <a class="control-btn secondary" id="back-to-top" href="#article" title="Back to top">↑ Top</a>
-  <a class="control-btn" id="home-btn" href="/" title="Home">Home</a>
-</div>
+<!-- floating back-to-top -->
+<a class="fab" id="toTop" href="#article" title="Back to top">↑ Top</a>
 
 <footer>
   © 2025 Ajiva Talks • Independent Interviews & Culture
 </footer>
 
-<!-- Scripts: fade-up observer, read time, progress, shares, copy protection, giscus embed -->
 <script>
-/* READ TIME */
+/* Read time */
 (function(){
-  const text = document.querySelector('.article-body').innerText.trim();
-  const words = text.split(/\s+/).length;
-  const mins = Math.max(1, Math.round(words / 200));
-  document.getElementById('read-time').innerText = mins + ' min read';
+  try{
+    const text = document.getElementById('article-body').innerText || '';
+    const words = text.trim().split(/\s+/).length;
+    const mins = Math.max(1, Math.round(words/200));
+    document.getElementById('readTime').innerText = mins + ' min read';
+  }catch(e){}
 })();
 
-/* PROGRESS BAR */
-window.addEventListener('scroll', () => {
+/* Progress */
+window.addEventListener('scroll',()=>{
   const total = document.body.scrollHeight - window.innerHeight;
-  const pct = (window.scrollY / total) * 100;
-  document.getElementById('progress-bar').style.width = Math.min(100, pct) + '%';
+  const pct = (window.scrollY/total)*100;
+  document.getElementById('progress').style.width = Math.min(100,pct) + '%';
 });
 
-/* FADE-UP ON SCROLL */
-const observer = new IntersectionObserver((entries)=>{
-  entries.forEach(entry => {
-    if(entry.isIntersecting) entry.target.classList.add('visible');
+/* Fade-up observer */
+const obs = new IntersectionObserver((ents)=>{
+  ents.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('visible');
   });
 },{threshold:0.12});
-document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
 
-/* BACK TO TOP SMOOTH */
-document.getElementById('back-to-top').addEventListener('click', function(e){
+/* Back to top smooth */
+document.getElementById('toTop').addEventListener('click', function(e){
   e.preventDefault();
-  window.scrollTo({top:0, behavior:'smooth'});
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-/* HOME BUTTON (already link) */
+/* Share links */
+const pageUrl = encodeURIComponent('https://ajivatalks.in/priya-hajela-interview');
+const pageTitle = encodeURIComponent('Resilience, Partition & Human Spirit — A Conversation with Priya Hajela');
+document.getElementById('share-twitter-bottom').href = `https://twitter.com/intent/tweet?text=${pageTitle}&url=${pageUrl}`;
+document.getElementById('share-whatsapp-bottom').href = `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`;
 
-/* SHARE LINKS (fill actual URLs) */
-const pageUrl = encodeURIComponent("https://ajivatalks.in/priya-hajela-interview");
-const pageTitle = encodeURIComponent("Resilience, Partition & Human Spirit — A Conversation with Priya Hajela");
-document.getElementById('share-twitter').href = `https://twitter.com/intent/tweet?text=${pageTitle}&url=${pageUrl}`;
-document.getElementById('share-whatsapp').href = `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`;
-document.getElementById('share-twitter-bottom').href = document.getElementById('share-twitter').href;
-document.getElementById('share-whatsapp-bottom').href = document.getElementById('share-whatsapp').href;
-
-/* COPY PROTECTION + AUTO-ATTRIBUTION */
-document.addEventListener('copy', function(e){
-  const selected = window.getSelection().toString();
-  if(!selected || selected.length < 40) return;
-  const extra = "\n\nRead more at Ajiva Talks — https://ajivatalks.in/priya-hajela-interview";
-  const newText = selected + extra;
-  e.clipboardData.setData('text/plain', newText);
+/* Copy protection with appended link */
+document.addEventListener('copy', (e)=>{
+  const sel = window.getSelection().toString();
+  if(!sel || sel.length < 40) return;
+  const addition = '\n\nRead more at Ajiva Talks — https://ajivatalks.in/priya-hajela-interview';
+  e.clipboardData.setData('text/plain', sel + addition);
   e.preventDefault();
 });
-
-/* Giscus comments (GitHub Discussions) */
-/* Requires Discussions to be enabled; replace data-repo if different */
-(function(){
-  const script = document.createElement('script');
-  script.src = 'https://giscus.app/client.js';
-  script.async = true;
-  script.crossOrigin = 'anonymous';
-  script.setAttribute('data-repo', 'shutupnitin/ajivatalks');
-  script.setAttribute('data-repo-id', '');
-  script.setAttribute('data-category', 'Comments');
-  script.setAttribute('data-category-id', '');
-  script.setAttribute('data-mapping', 'title');
-  script.setAttribute('data-reactions-enabled', '1');
-  script.setAttribute('data-emit-metadata', '0');
-  script.setAttribute('data-input-position', 'bottom');
-  script.setAttribute('data-theme', 'light');
-  document.getElementById('giscus_container').appendChild(script);
-})();
-
 </script>
 
 </body>
