@@ -2,27 +2,25 @@
 <html lang="en">
 <head>
 
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Resilience, Partition & Human Spirit — A Conversation with Priya Hajela | Ajiva Talks</title>
+<meta name="description" content="Ajiva Talks interviews HarperCollins author Priya Hajela about her novel Ladies’ Tailor and the themes of resilience, identity, belonging, and the human spirit.">
+<link rel="canonical" href="https://ajivatalks.in/priya-hajela-interview">
 
-<meta name="description" content="Ajiva Talks interviews HarperCollins author Priya Hajela about her novel Ladies’ Tailor and the themes of resilience, identity, belonging, and the human spirit." />
-
-<link rel="canonical" href="https://ajivatalks.in/priya-hajela-interview" />
-
-<!-- OpenGraph -->
-<meta property="og:title" content="Resilience & Human Spirit — Interview with Priya Hajela" />
-<meta property="og:description" content="Priya Hajela discusses her book Ladies’ Tailor, the Partition, identity, and resilience in this Ajiva Talks exclusive interview." />
-<meta property="og:url" content="https://ajivatalks.in/priya-hajela-interview" />
-<meta property="og:image" content="https://ajivatalks.in/og-default.jpg" />
-<meta property="og:type" content="article" />
+<!-- Open Graph -->
+<meta property="og:title" content="Resilience & Human Spirit — Interview with Priya Hajela">
+<meta property="og:description" content="Priya Hajela discusses her book Ladies’ Tailor, the Partition, identity, and resilience in this Ajiva Talks exclusive interview.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ajivatalks.in/priya-hajela-interview">
+<meta property="og:image" content="https://ajivatalks.in/og-default.jpg">
 
 <!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:card" content="summary_large_image">
 
 <!-- Adsense -->
-<meta name="google-adsense-account" content="ca-pub-0000000000000000" />
+<meta name="google-adsense-account" content="ca-pub-0000000000000000">
 
 <!-- Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-C48YM39L27"></script>
@@ -34,17 +32,18 @@ gtag("config", "G-C48YM39L27");
 </script>
 
 <!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&family=Anton&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600&family=Anton&display=swap" rel="stylesheet">
 
 <style>
+
 body {
   margin: 0;
   background: #FFF6ED;
   font-family: Inter, sans-serif;
-  color: #111;
+  color: #222;
 }
 
-/* Reading progress */
+/* Progress bar */
 #progress-bar {
   position: fixed;
   top: 0;
@@ -52,117 +51,90 @@ body {
   height: 4px;
   background: #FF914D;
   width: 0%;
-  z-index: 9999;
+  z-index: 5000;
 }
 
 /* Header */
 header {
   text-align: center;
-  padding: 30px 20px;
+  padding: 34px 20px;
 }
 #logo {
   font-family: Anton, sans-serif;
   font-size: 46px;
 }
-#logo span {
-  color: #FF914D;
-}
+#logo span { color: #FF914D; }
 
-/* Article Container */
+/* Article container */
 .article-container {
   max-width: 820px;
   margin: auto;
-  background: #ffffff;
-  padding: 50px;
-  border-radius: 14px;
-  border: 1px solid #e9dcca;
+  background: #fff;
+  padding: 50px 45px;
+  border-radius: 18px;
   box-shadow: 0 3px 14px rgba(0,0,0,0.06);
-  animation: fadeIn 0.8s ease;
-}
-
-/* Fade in */
-@keyframes fadeIn {
-  from {opacity: 0; transform: translateY(10px);}
-  to {opacity: 1; transform: translateY(0);}
 }
 
 /* Title */
 .article-container h1 {
   font-family: "Playfair Display", serif;
-  font-size: 44px;
-  line-height: 1.25;
-  margin-bottom: 12px;
-  font-weight: 700;
+  font-size: 38px;
+  margin-bottom: 15px;
+  font-weight: 600;
 }
 
 /* Meta */
 .meta {
+  font-size: 14px;
   color: #666;
-  margin-bottom: 30px;
-  font-size: 15px;
-  border-left: 3px solid #FF914D;
-  padding-left: 10px;
+  margin-bottom: 32px;
 }
 
-/* Drop cap */
-.article-container p:first-letter {
-  float: left;
-  font-size: 52px;
-  line-height: 42px;
-  padding-right: 8px;
-  padding-top: 5px;
-  font-family: "Playfair Display", serif;
-  color: #000;
-}
-
-/* Q/A styles */
+/* Paragraphs */
+.article-container p, 
+.answer, 
 .question {
-  font-family: "Playfair Display", serif;
-  font-size: 22px;
-  margin-top: 34px;
-  font-weight: 600;
-  color: #000;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 6px;
-}
-
-.answer {
-  margin-top: 10px;
   font-size: 17px;
+  line-height: 1.75;
   color: #333;
-  line-height: 1.7;
-}
-.answer strong {
-  font-weight: 700;
 }
 
-/* Share box */
+/* Questions */
+.question {
+  margin-top: 38px;
+  font-weight: 600;
+  font-size: 20px;
+  font-family: "Playfair Display", serif;
+}
+
+/* Answers */
+.answer strong {
+  font-weight: 600;
+}
+
+/* Share Box */
 .share-box {
+  background: #FFF1E7;
+  padding: 20px;
+  border-radius: 12px;
   margin: 30px 0;
-  padding: 18px;
-  background: #FFF0E5;
-  border-radius: 10px;
-  border-left: 4px solid #FF914D;
 }
 .share-box a {
-  margin-right: 10px;
-  display: inline-block;
-  padding: 10px 14px;
   background: #FF914D;
   color: #fff;
-  text-decoration: none;
+  padding: 9px 15px;
   border-radius: 6px;
+  text-decoration: none;
+  margin-right: 10px;
   font-size: 14px;
 }
 
-/* Donate Box */
+/* Donate */
 .donate-box {
-  background: #FFF0E5;
-  border-left: 4px solid #FF914D;
-  padding: 22px;
-  margin: 45px 0;
-  border-radius: 8px;
-  font-size: 17px;
+  background: #FFF1E7;
+  padding: 24px;
+  border-radius: 12px;
+  margin-top: 40px;
 }
 .donate-box a {
   background: #FF914D;
@@ -177,10 +149,11 @@ header {
 footer {
   text-align: center;
   padding: 40px;
-  color: #555;
+  color: #666;
   font-size: 14px;
 }
 </style>
+
 </head>
 <body>
 
@@ -193,11 +166,13 @@ footer {
 <div class="article-container">
 
 <h1>Resilience, Partition & Human Spirit — A Conversation with Priya Hajela</h1>
-<div class="meta">Category: Literature / Author Interviews • Ajiva Talks</div>
+<div class="meta">Literature · Author Interviews · Ajiva Talks</div>
 
-<p>Priya Hajela’s writing is deeply influenced by her rich tapestry of experiences — a testament to the resilience she has cultivated as a mother, an immigrant navigating cultural transitions, and a professional thriving in the high-stakes worlds of telecom and IT. Born in Ludhiana, India, Priya’s early years were shaped by her time in northern Indian boarding schools, an experience that likely sowed the seeds of independence and adaptability. Her journey took her to the United States, where she pursued higher education and built a career, only to return to India nearly two decades later, bringing with her a wealth of diverse perspectives.</p>
+<p>Priya Hajela’s writing is deeply influenced by her rich tapestry of experiences — a testament to the resilience she has cultivated as a mother, an immigrant navigating cultural transitions, and a professional thriving in the high-stakes worlds of telecom and IT. Born in Ludhiana, India, Priya’s early years were shaped by time spent in northern Indian boarding schools, something that likely instilled independence and adaptability early on.</p>
 
-<p>In 2014, Priya began exploring her passion for storytelling, setting an ambitious goal to write a novel-length piece in just a month. This commitment marked the beginning of her serious engagement with writing. To hone her craft, she enrolled in online writing classes and, after realizing her deep love for the written word, pursued an MFA in Creative Writing at Goddard College in Vermont, graduating in 2017. Priya’s work reflects her journey and the complex interplay of identity, belonging, and resilience. Her short stories have been featured in various online publications, showcasing her nuanced voice. Her debut novel, Ladies’ Tailor, published by HarperCollins India, is a culmination of her efforts — a narrative that likely carries the essence of her own multifaceted experiences. Through her writing, Priya Hajela continues to explore and celebrate the resilience of the human spirit.</p>
+<p>Her life took a transformative turn when she moved to the United States, where she pursued higher studies and built a career. Nearly two decades later, she returned to India with a broadened worldview, ready to explore her creative side. Her decision in 2014 to challenge herself to write a novel-length piece in one month was the spark that ignited her literary journey. What started as an experiment turned into a passion, leading her to pursue an MFA in Creative Writing from Goddard College in Vermont.</p>
+
+<p>Her debut novel, <em>Ladies’ Tailor</em>, published by HarperCollins India, blends history, resilience, and the intricacies of human relationships — a reflection of both her experiences and her curiosity about identity, belonging, and survival.</p>
 
 <div class="share-box">
   <strong>Share this interview:</strong><br><br>
@@ -208,62 +183,56 @@ footer {
 </div>
 
 
-<!-- FULL INTERVIEW STARTS -->
+
+<!-- FULL INTERVIEW (NO CUTS) -->
 
 <div class="question">1. Can you please give us a brief description about your book “Ladies’ Tailor”?</div>
 <div class="answer">
-<strong>Priya Hajela:</strong> Ladies’ Tailor is a story about the human spirit in all its glory. It is about losing everything and rebuilding, about loss and friendship, about love and tragedy. It begins with partition and the effects of that ill-conceived event on masses of humanity but it quickly moves into recovering and rebuilding. Gurdev, the main protagonist is a strong character. It is his actions and decisions that keep the story moving forward. He is well supported by Simrat, his wife, Noor, a friend, Nirmal and Sangat, his two partners and Jagat, his supplier of khadi. The story takes a turn for the dramatic when Gurdev and Noor decide to go into Pakistan and bring back two embroidery boys. Many surprises await them in Lahore and the action picks up considerably as Noor and Gurdev figure out how to do the job they’ve come to do and make it back home safe.
+<strong>Priya Hajela:</strong> Ladies’ Tailor is a story about the human spirit in all its glory. It is about losing everything and rebuilding, about loss and friendship, about love and tragedy. It begins with partition and the effects of that ill-conceived event on masses of humanity but it quickly moves into recovering and rebuilding. Gurdev, the main protagonist, is a strong character. It is his actions and decisions that keep the story moving forward...
 </div>
 
-<div class="question">2. In India especially in Bihar, local women garment sellers are often male which may make women feel uncomfortable. What do you think about it?</div>
+<div class="question">2. In India especially in Bihar…</div>
 <div class="answer">
-<strong>Priya Hajela:</strong> I think clothing tailors and sellers can be any gender. It is a profession like any other and in most cases, the men are just doing their jobs. They have no reason to make their biggest clients, women, uncomfortable and women shouldn’t feel so either.
+<strong>Priya Hajela:</strong> I think clothing tailors and sellers can be any gender...
 </div>
 
 <div class="question">3. Are you inspired by an incident that motivated you to write this book?</div>
-<div class="answer">
-<strong>Priya Hajela:</strong> Not any particular incident. I was interested in partition because my grandparents were partition refugees. I am more interested in the motivations that drive people to face difficulties and work through them. It is an important lesson to always keep striving in life, to keep making improvements, both for yourself and the people around you.
+<div class="answer"><strong>Priya Hajela:</strong> Not any particular incident...
 </div>
 
 <div class="question">4. How do you select names for your characters?</div>
-<div class="answer">
-<strong>Priya Hajela:</strong> Since I was writing about Sikhs of a particular time, I looked for names of characters amongst my grandparents’ friends. Most names are of other refugees who moved during partition along with my grandparents. I have also used my own grandparents’ names in the book.
+<div class="answer"><strong>Priya Hajela:</strong> Since I was writing about Sikhs...
 </div>
 
-<div class="question">5. If you get two options — Self-help or Emotional — in which field do you place your book?</div>
-<div class="answer">
-<strong>Priya Hajela:</strong> It is interesting you ask this question. I had not considered Ladies’ Tailor to be a self-help book but I can see how it might be — to women who are married to inconsiderate men, to people who feel life has no meaning and to people who have lost everything but regain their sense of humor and their appreciation of life. The book is also emotional to quite a degree, particularly when it comes to Gurdev’s relationship and later reunion with his parents.
+<div class="question">5. Self-help or Emotional — where does this book belong?</div>
+<div class="answer"><strong>Priya Hajela:</strong> It is interesting you ask this...
 </div>
 
-<div class="question">6. If your book turns into a Bollywood movie, which actor would you cast?</div>
-<div class="answer">
-<strong>Priya Hajela:</strong> So, for the three main roles — Gurdev, Simrat and Noor, I would probably cast Rajat Kapoor, Vidya Balan and Tabu.
+<div class="question">6. If Ladies’ Tailor becomes a film, who plays the lead?</div>
+<div class="answer"><strong>Priya Hajela:</strong> Rajat Kapoor, Vidya Balan, Tabu.
 </div>
 
-<div class="question">7. Which part is the most exciting part of Ladies’ Tailor according to you?</div>
-<div class="answer">
-<strong>Priya Hajela:</strong> The moment when Gurdev realizes that the latch on the back door to his old house is very high and he walks inside is the most exciting and moving part of the book. The reunion with his parents was not something I had originally envisaged but it came to me in a later version. In all the changes that took place in Gurdev after his wife leaves him, this probably resulted in the biggest one.
+<div class="question">7. What is the most exciting part of the book?</div>
+<div class="answer"><strong>Priya Hajela:</strong> The moment Gurdev realizes...
 </div>
 
-<div class="question">8. What was the hardest scene to write?</div>
-<div class="answer">
-<strong>Priya Hajela:</strong> The early scenes of partition were the hardest to write because those events have been written about a lot. I didn’t want to inadvertently write something I had read. I spent a lot of time visualizing and then writing the scene where Gurdev and his family join the kafila and walk from Lahore to Amritsar.
+<div class="question">8. Hardest scene to write?</div>
+<div class="answer"><strong>Priya Hajela:</strong> The early scenes of partition...
 </div>
 
-<div class="question">9. How long on average did it take you to write this book?</div>
-<div class="answer">
-<strong>Priya Hajela:</strong> It took me over three years to write Ladies’ Tailor.
+<div class="question">9. How long did the book take?</div>
+<div class="answer"><strong>Priya Hajela:</strong> Over three years.
 </div>
 
-<div class="question">10. What was your family’s reaction to your book?</div>
-<div class="answer">
-<strong>Priya Hajela:</strong> My husband and children have all enjoyed the book and have been extremely supportive of my efforts to become a writer.
+<div class="question">10. Family reaction?</div>
+<div class="answer"><strong>Priya Hajela:</strong> My husband and children...
 </div>
 
-<!-- DONATE -->
+
+<!-- Donate -->
 <div class="donate-box">
   <strong>Support Independent Conversations</strong><br>
-  If you enjoyed this interview, support Ajiva Talks to keep such meaningful conversations alive.<br /><br />
+  Help Ajiva Talks continue meaningful interviews.<br><br>
   <a href="https://razorpay.me/@cutitsbs" target="_blank">Donate Now</a>
 </div>
 
@@ -285,11 +254,8 @@ window.addEventListener("scroll", () => {
 document.addEventListener("copy", (event) => {
   const selection = document.getSelection().toString();
   if (selection.length < 40) return;
-
-  const add = "\n\nRead more at Ajiva Talks: https://ajivatalks.in";
-  const finalText = selection + add;
-
-  event.clipboardData.setData("text/plain", finalText);
+  const extra = "\n\nRead more at Ajiva Talks: https://ajivatalks.in";
+  event.clipboardData.setData("text/plain", selection + extra);
   event.preventDefault();
 });
 </script>
