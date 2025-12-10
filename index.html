@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- BASIC META -->
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Ajiva Talks – Interviews, Literature & Culture</title>
 
-<!-- DESCRIPTION -->
 <meta name="description" content="Ajiva Talks brings deep conversations, author interviews, literature insights and cultural stories. Independent. Thoughtful. Meaningful.">
 
-<!-- CANONICAL -->
 <link rel="canonical" href="https://ajivatalks.in">
 
 <!-- GOOGLE ANALYTICS -->
@@ -37,27 +36,10 @@
 <meta name="twitter:description" content="Independent conversations with authors, thinkers, and cultural voices.">
 <meta name="twitter:image" content="https://ajivatalks.in/cover.jpg">
 
-<!-- FONTS -->
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-<!-- SCHEMA MARKUP (SEO MASTER) -->
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@type": "WebSite",
- "url": "https://ajivatalks.in",
- "name": "Ajiva Talks",
- "description": "Independent interviews, literature insights, and cultural conversations.",
- "publisher": {
-   "@type": "Organization",
-   "name": "Ajiva Talks",
-   "url": "https://ajivatalks.in"
- }
-}
-</script>
-
 <style>
-/* GLOBAL */
+
 body {
     margin: 0;
     background: #FFF6ED;
@@ -65,7 +47,7 @@ body {
     color: #111;
 }
 
-/* Fade Animation */
+/* FADE */
 .fade {
     opacity: 0;
     transform: translateY(20px);
@@ -93,14 +75,40 @@ header {
 
 /* HERO */
 .hero {
+    position: relative;
     text-align: center;
-    padding: 80px 20px;
+    padding: 100px 20px;
     background: #fff;
     margin: 20px auto;
     max-width: 900px;
     border-radius: 14px;
     border: 1px solid #f2e3d5;
+    overflow: hidden;
 }
+
+/* Floating Emojis */
+.float-emoji {
+    position: absolute;
+    font-size: 38px;
+    opacity: 0.45;
+    animation: floaty 6s ease-in-out infinite alternate;
+    user-select: none;
+}
+
+.emoji1 { top: 20px; left: 20px; animation-duration: 5s; }
+.emoji2 { top: 60px; right: 20px; animation-duration: 6s; }
+.emoji3 { bottom: 40px; left: 10%; animation-duration: 7s; }
+.emoji4 { bottom: 60px; right: 15%; animation-duration: 5.5s; }
+
+@keyframes floaty {
+    0% { transform: translateY(0px) rotate(0deg); }
+    100% { transform: translateY(-18px) rotate(6deg); }
+}
+
+@media (max-width: 600px) {
+    .float-emoji { font-size: 30px; opacity: 0.33; }
+}
+
 .hero h1 {
     font-family: "Playfair Display", serif;
     font-size: 50px;
@@ -124,7 +132,7 @@ header {
     text-align: center;
 }
 
-/* GRID & CARDS */
+/* GRID/CARDS */
 .grid {
     display: grid;
     gap: 22px;
@@ -146,9 +154,7 @@ header {
     height: 200px;
     object-fit: cover;
 }
-.card-content {
-    padding: 18px;
-}
+.card-content { padding: 18px; }
 .card-title {
     font-family: "Playfair Display", serif;
     font-size: 20px;
@@ -206,6 +212,7 @@ footer .copyright {
     opacity: .8;
 }
 </style>
+
 </head>
 
 <body>
@@ -217,6 +224,11 @@ footer .copyright {
 
 <!-- HERO -->
 <section class="hero fade">
+    <div class="float-emoji emoji1">📚</div>
+    <div class="float-emoji emoji2">✒️</div>
+    <div class="float-emoji emoji3">📖</div>
+    <div class="float-emoji emoji4">📝</div>
+
     <h1>Bold Ideas.<br>Powerful Conversations.</h1>
     <p>Dive into deep, meaningful interviews with authors, creators, and thinkers shaping culture.</p>
 </section>
@@ -271,8 +283,8 @@ footer .copyright {
 
 <!-- TESTIMONIAL -->
 <div class="testimonial fade">
-    “Your article helped me a lot before my podcast with Malcolm.  
-    It was very informative.”  
+    “Your article helped me a lot before my podcast with Malcolm.
+    It was very informative.”
     <br>— <strong>Naghma, Founder of The Author’s Nest</strong>
 </div>
 
