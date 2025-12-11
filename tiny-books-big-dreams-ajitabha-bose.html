@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Tiny Books, Big Dreams — A Conversation with Ajitabha Bose | Ajiva Talks</title>
+<meta name="description" content="Ajiva Talks speaks with Ajitabha Bose — bestselling author, filmmaker and publisher — about pocketbooks, compact storytelling, and building a creative life." />
+<link rel="canonical" href="https://ajivatalks.in/tiny-books-big-dreams-ajitabha-bose" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="Tiny Books, Big Dreams — A Conversation with Ajitabha Bose" />
+<meta property="og:description" content="Ajitabha Bose on pocketbooks, compact storytelling, filmmaking and the creative path that led him from Jamshedpur to the Limca Book of Records." />
+<meta property="og:url" content="https://ajivatalks.in/tiny-books-big-dreams-ajitabha-bose" />
+<meta property="og:image" content="https://ajivatalks.in/og-default.jpg" />
+<meta property="og:type" content="article" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C48YM39L27"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-C48YM39L27');
+</script>
+
+<!-- Adsense placeholder -->
+<meta name="google-adsense-account" content="ca-pub-0000000000000000">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#FFF6ED;
+  --text:#111;
+  --muted:#6b6b6b;
+  --accent:#FF914D;
+  --card:#fff;
+  --container:920px;
+  --radius:14px;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Progress bar */
+#progress{position:fixed;top:0;left:0;height:4px;width:0%;background:var(--accent);z-index:1400;transition:width .12s linear}
+
+/* Home button */
+.home-btn{
+  position:fixed;left:18px;top:18px;z-index:1500;
+  background:#111;color:#fff;padding:10px 14px;border-radius:999px;font-weight:700;text-decoration:none;
+}
+
+/* Header */
+.header{text-align:center;padding:56px 20px 20px}
+.brand{font-family:Anton,sans-serif;font-size:46px}
+.brand span{color:var(--accent)}
+.hero-sub{color:var(--muted);margin-top:6px}
+
+/* Container */
+.container{max-width:var(--container);margin:28px auto;padding:0 20px 80px}
+
+/* Card */
+.card{
+  background:var(--card);
+  padding:44px;
+  border-radius:var(--radius);
+  box-shadow:0 8px 28px rgba(0,0,0,0.06);
+  border:1px solid rgba(0,0,0,0.04);
+}
+
+/* Text */
+.kicker{text-transform:uppercase;color:var(--muted);font-size:13px;letter-spacing:1px;margin-bottom:10px}
+.title{
+  font-family:"Playfair Display",serif;
+  font-size:36px;line-height:1.06;margin:0 0 12px;
+}
+.meta{display:flex;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:14px;margin-bottom:20px}
+.lede{font-size:18px;color:#333;margin-bottom:20px;max-width:75ch}
+
+/* Body */
+.article-body{font-size:17px;line-height:1.8;color:#222}
+.article-body p{margin-bottom:18px}
+
+/* Q&A */
+.question{
+  margin-top:30px;
+  font-size:20px;
+  font-family:"Playfair Display",serif;
+  font-weight:600;
+}
+.answer{margin-top:10px;font-size:17px;color:#333}
+.answer strong{color:#111;font-weight:700}
+
+/* Fade */
+.fade-up{opacity:0;transform:translateY(10px);transition:all .6s cubic-bezier(.22,.9,.36,1)}
+.fade-up.visible{opacity:1;transform:none}
+
+/* bottom share */
+.bottom-share{
+  margin-top:30px;
+  display:flex;justify-content:center;flex-wrap:wrap;gap:10px;
+}
+.share-btn{
+  background:var(--accent);
+  color:#111;
+  padding:10px 14px;
+  border-radius:8px;
+  font-weight:700;
+  text-decoration:none;
+}
+.share-ghost{
+  background:#fff;
+  border:1px solid #eee;
+  padding:9px 12px;
+  border-radius:8px;
+  text-decoration:none;
+  color:#111;
+}
+
+/* donate */
+.donate{
+  margin-top:26px;
+  padding:18px;
+  border-radius:10px;
+  background:linear-gradient(180deg,#fff8f2,#fff4e9);
+  border-left:4px solid var(--accent);
+}
+.donate a{
+  display:inline-block;
+  margin-top:6px;
+  background:var(--accent);
+  padding:10px 14px;
+  color:#111;
+  font-weight:700;
+  text-decoration:none;
+  border-radius:8px;
+}
+
+/* back to top */
+.fab{position:fixed;right:18px;bottom:18px;z-index:1500;background:#111;color:#fff;padding:12px 14px;border-radius:999px;text-decoration:none;font-weight:700;}
+
+/* Footer */
+footer{text-align:center;color:var(--muted);font-size:14px;margin-top:30px;padding:40px 0}
+
+/* Responsive */
+@media(max-width:700px){
+  .card{padding:26px}
+  .title{font-size:28px}
+  .brand{font-size:38px}
+  .lede{font-size:16px}
+}
+</style>
+</head>
+<body>
+
+<div id="progress" aria-hidden="true"></div>
+
+<a href="/" class="home-btn">Home</a>
+
+<header class="header" role="banner">
+  <div class="brand">AJIVA<span>TALKS</span></div>
+  <div class="hero-sub">Interviews · Literature · Culture</div>
+</header>
+
+<main class="container">
+  <article class="card" id="article">
+
+    <div class="kicker fade-up">Feature</div>
+
+    <h1 class="title fade-up">Tiny Books, Big Dreams — A Conversation with Ajitabha Bose</h1>
+
+    <div class="meta fade-up">
+      <span>By Ajiva Talks</span> •
+      <span>Author Interviews</span> •
+      <span id="read-time">— min read</span>
+    </div>
+
+    <p class="lede fade-up">Ajitabha Bose is a bestselling author, filmmaker and publisher known for compact storytelling and creative entrepreneurship. Hailing from Jamshedpur and now based in Delhi, he introduced the pocketbook concept to India and holds a national record for publishing the smallest love storybook. With nine books and over a million readers, his work spans fiction, filmmaking and publishing.</p>
+
+    <section class="article-body" id="article-body">
+
+      <p class="fade-up">Ajitabha Bose is a celebrated Indian bestselling author, filmmaker, and publisher who has made a notable mark across literature and media. He holds a national record for publishing the smallest love storybook in India. Originally from Jamshedpur, he studied at Gulmohur High School and later at the Institute of Management Studies, Ghaziabad. Today he is based in Delhi and runs creative and publishing ventures including Ajitabha Publishers and BDL Studios.</p>
+
+      <p class="fade-up">Ajitabha introduced pocketbooks to the Indian market — a compact storytelling format aimed at readers who prefer shorter reads. He has authored nine books including <em>It’s A Love Story</em> (2013), <em>The Pocket Love Story</em> (2015), <em>In Love with Shah Rukh Khan</em> (2016), <em>The Bestseller</em> (2017), <em>It’s My Love Story</em> (2018), <em>Until We Meet Again</em> (2019), <em>Love in Jamshedpur</em> (2020), and <em>The YouTube Stars of India</em> (2021). His recent work <em>Ye Baarish, Ishq aur Tum…</em> (2021) continues his focus on love and contemporary culture. His authorized profile of Indian digital creators in <em>The YouTube Stars of India</em> includes CarryMinati, Amit Bhadana, Ashish Chanchlani, Technical Guruji, Prajakta Koli and others.</p>
+
+      <div class="question fade-up">1. When did you first realize you wanted to be a writer?</div>
+      <div class="answer fade-up"><strong>Ajitabha Bose:</strong> I grew up in a Bengali home where stories and Tagore’s poems were always part of life. I wrote essays and poems in school and contributed to the school magazine. The first time I thought, “Yes, I can write a book” was in college around 2010 — and in 2013 I finally published my first book.</div>
+
+      <div class="question fade-up">2. Why choose to write small books?</div>
+      <div class="answer fade-up"><strong>Ajitabha Bose:</strong> I got the idea while traveling to Jamshedpur for Dussehra. On the train I met a girl named Neha who asked how I could read a “fat book.” She suggested people might prefer shorter books. That stuck with me. Back in Delhi I had a short story ready but publishers turned it down. A week or ten days later I thought — why not a pocket book? We have pocket diaries and pocket dictionaries; why not pocket books? That was the start of the pocket-book idea.</div>
+
+      <div class="question fade-up">3. Where do you get ideas for your books?</div>
+      <div class="answer fade-up"><strong>Ajitabha Bose:</strong> I write fiction, but fiction draws from life. Everyone has a story — a CEO, a watchman — you only have to look and listen. I find inspiration in people and everyday moments, and then reshape them into stories.</div>
+
+      <div class="question fade-up">4. When did you write your first book and how old were you?</div>
+      <div class="answer fade-up"><strong>Ajitabha Bose:</strong> I wrote my first book in 2013 during my third year of college. I was 21. I never imagined I would become a bestselling author — it happened gradually.</div>
+
+      <div class="question fade-up">5. What does your family think of your writing?</div>
+      <div class="answer fade-up"><strong>Ajitabha Bose:</strong> My family has always supported me. My grandfather was a theatre artist and my father still performs and directs plays across India. They were proud when I started writing and remain proud of the work I do in books and film.</div>
+
+      <div class="question fade-up">6. What surprised you most about publishing?</div>
+      <div class="answer fade-up"><strong>Ajitabha Bose:</strong> I was surprised — and a little shocked — to learn that writing a good book doesn’t guarantee sales. Marketing matters a lot. A strong book without a marketing plan or budget can struggle. That lesson changed how I approach publishing and promotion.</div>
+
+      <div class="question fade-up">7. In childhood, what did you want to be when you grew up?</div>
+      <div class="answer fade-up"><strong>Ajitabha Bose:</strong> When I was very young I wanted to be a software engineer — I was good with computers. Later, inspired by my father and theatre, I wanted to make films. Writing wasn’t my first plan, but it came to me and I embraced it. I’m glad it did.</div>
+
+    </section>
+
+    <!-- Bottom share -->
+    <div class="bottom-share fade-up">
+      <a class="share-btn" id="twitter-share" target="_blank" rel="noopener">Share on Twitter</a>
+      <a class="share-btn" id="whatsapp-share" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="share-ghost" href="/">Back to Home</a>
+    </div>
+
+    <!-- Donate -->
+    <div class="donate fade-up">
+      <strong>Support Ajiva Talks</strong>
+      <p style="margin:.4rem 0;color:var(--muted)">If you enjoy longform conversations, please consider supporting our work.</p>
+      <a href="https://razorpay.me/@cutitsbs" target="_blank" rel="noopener">Donate</a>
+    </div>
+
+  </article>
+</main>
+
+<a class="fab" id="toTop" href="#article" title="Back to top">↑ Top</a>
+
+<footer>© 2025 Ajiva Talks • Independent Interviews & Culture</footer>
+
+<script>
+/* Read Time */
+(function(){
+  try{
+    const text = document.getElementById('article-body').innerText || '';
+    const words = text.trim().split(/\s+/).length;
+    const mins = Math.max(1, Math.round(words/200));
+    document.getElementById('read-time').innerText = mins + ' min read';
+  }catch(e){}
+})();
+
+/* Progress */
+window.addEventListener('scroll',()=>{
+  const total = document.body.scrollHeight - window.innerHeight;
+  const pct = (window.scrollY/total)*100;
+  document.getElementById('progress').style.width = Math.min(100,pct) + '%';
+});
+
+/* Fade-up observer */
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
+},{threshold:0.12});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+/* Back to top smooth */
+document.getElementById('toTop').addEventListener('click', function(e){
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+/* Share links */
+const pageUrl = encodeURIComponent('https://ajivatalks.in/tiny-books-big-dreams-ajitabha-bose');
+const pageTitle = encodeURIComponent('Tiny Books, Big Dreams — A Conversation with Ajitabha Bose');
+document.getElementById('twitter-share').href = `https://twitter.com/intent/tweet?text=${pageTitle}&url=${pageUrl}`;
+document.getElementById('whatsapp-share').href = `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`;
+
+/* Copy protection with appended link */
+document.addEventListener('copy', function(e){
+  const sel = window.getSelection().toString();
+  if(!sel || sel.length < 40) return;
+  const addition = '\n\nRead more at Ajiva Talks — https://ajivatalks.in/tiny-books-big-dreams-ajitabha-bose';
+  e.clipboardData.setData('text/plain', sel + addition);
+  e.preventDefault();
+});
+</script>
+
+</body>
+</html>
