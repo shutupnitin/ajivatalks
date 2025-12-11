@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Fear, Satire & Truth — A Conversation with Manjul | Ajiva Talks</title>
+<meta name="description" content="Ajiva Talks interviews political cartoonist Manjul on satire, press freedom, and the role of cartoons in contemporary India." />
+<link rel="canonical" href="https://ajivatalks.in/manjul-interview" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="Fear, Satire & Truth — Interview with Manjul">
+<meta property="og:description" content="Manjul speaks about satire, safety, and the evolving media landscape in India." />
+<meta property="og:url" content="https://ajivatalks.in/manjul-interview">
+<meta property="og:image" content="https://ajivatalks.in/og-default.jpg">
+<meta property="og:type" content="article">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C48YM39L27"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-C48YM39L27');
+</script>
+
+<!-- Adsense placeholder -->
+<meta name="google-adsense-account" content="ca-pub-0000000000000000">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#FFF6ED;
+  --text:#111;
+  --muted:#6b6b6b;
+  --accent:#FF914D;
+  --card:#fff;
+  --container:920px;
+  --radius:14px;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Progress bar */
+#progress{position:fixed;top:0;left:0;height:4px;width:0%;background:var(--accent);z-index:1400;transition:width .12s linear}
+
+/* Home button */
+.home-btn{
+  position:fixed;left:18px;top:18px;z-index:1500;
+  background:#111;color:#fff;padding:10px 14px;border-radius:999px;font-weight:700;text-decoration:none;
+}
+
+/* Header */
+.header{text-align:center;padding:56px 20px 20px}
+.brand{font-family:Anton,sans-serif;font-size:46px}
+.brand span{color:var(--accent)}
+.hero-sub{color:var(--muted);margin-top:6px}
+
+/* Container */
+.container{max-width:var(--container);margin:28px auto;padding:0 20px 80px}
+
+/* Card */
+.card{
+  background:var(--card);
+  padding:44px;
+  border-radius:var(--radius);
+  box-shadow:0 8px 28px rgba(0,0,0,0.06);
+  border:1px solid rgba(0,0,0,0.04);
+}
+
+/* Text */
+.kicker{text-transform:uppercase;color:var(--muted);font-size:13px;letter-spacing:1px;margin-bottom:10px}
+.title{
+  font-family:"Playfair Display",serif;
+  font-size:36px;line-height:1.06;margin:0 0 12px;
+}
+.meta{display:flex;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:14px;margin-bottom:20px}
+.lede{font-size:18px;color:#333;margin-bottom:20px;max-width:75ch}
+
+/* Body */
+.article-body{font-size:17px;line-height:1.8;color:#222}
+.article-body p{margin-bottom:18px}
+
+/* Q&A */
+.question{
+  margin-top:30px;
+  font-size:20px;
+  font-family:"Playfair Display",serif;
+  font-weight:600;
+}
+.answer{margin-top:10px;font-size:17px;color:#333}
+.answer strong{color:#111;font-weight:700}
+
+/* Fade */
+.fade-up{opacity:0;transform:translateY(10px);transition:all .6s cubic-bezier(.22,.9,.36,1)}
+.fade-up.visible{opacity:1;transform:none}
+
+/* bottom share */
+.bottom-share{
+  margin-top:30px;
+  display:flex;justify-content:center;flex-wrap:wrap;gap:10px;
+}
+.share-btn{
+  background:var(--accent);
+  color:#111;
+  padding:10px 14px;
+  border-radius:8px;
+  font-weight:700;
+  text-decoration:none;
+}
+.share-ghost{
+  background:#fff;
+  border:1px solid #eee;
+  padding:9px 12px;
+  border-radius:8px;
+  text-decoration:none;
+  color:#111;
+}
+
+/* donate */
+.donate{
+  margin-top:26px;
+  padding:18px;
+  border-radius:10px;
+  background:linear-gradient(180deg,#fff8f2,#fff4e9);
+  border-left:4px solid var(--accent);
+}
+.donate a{
+  display:inline-block;
+  margin-top:6px;
+  background:var(--accent);
+  padding:10px 14px;
+  color:#111;
+  font-weight:700;
+  text-decoration:none;
+  border-radius:8px;
+}
+
+/* back to top */
+.fab{position:fixed;right:18px;bottom:18px;z-index:1500;background:#111;color:#fff;padding:12px 14px;border-radius:999px;text-decoration:none;font-weight:700;}
+
+/* Footer */
+footer{text-align:center;color:var(--muted);font-size:14px;margin-top:30px;padding:40px 0}
+
+/* Responsive */
+@media(max-width:700px){
+  .card{padding:26px}
+  .title{font-size:28px}
+  .brand{font-size:38px}
+  .lede{font-size:16px}
+}
+</style>
+</head>
+<body>
+
+<div id="progress" aria-hidden="true"></div>
+
+<a href="/" class="home-btn">Home</a>
+
+<header class="header" role="banner">
+  <div class="brand">AJIVA<span>TALKS</span></div>
+  <div class="hero-sub">Interviews · Literature · Culture</div>
+</header>
+
+<main class="container">
+  <article class="card" id="article">
+
+    <div class="kicker fade-up">Feature</div>
+
+    <h1 class="title fade-up">Fear, Satire & Truth — A Conversation with Manjul</h1>
+
+    <div class="meta fade-up">
+      <span>By Ajiva Talks</span> •
+      <span>Author Interviews / Cartooning</span> •
+      <span id="read-time">— min read</span>
+    </div>
+
+    <p class="lede fade-up">Manjul is a prominent Indian political cartoonist whose sharp and witty cartoons have made him a significant voice in contemporary journalism. A Maya Kamath Memorial Award winner (2009), his work blends humor, critique and artistry — often touching sensitive topics and challenging power. Below, he speaks candidly about safety, satire and the media landscape.</p>
+
+    <section class="article-body" id="article-body">
+
+      <p class="fade-up">Manjul began cartooning in 1989 and has contributed to Dainik Jagran, Rashtriya Sahara, Financial Express, India Today, The Economic Times, DNA and various digital platforms. His cartoons have sometimes caused friction with editors and governments, but he continues to produce thought-provoking work that sparks public conversation.</p>
+
+      <div class="question fade-up">1. Do you ever feel unsafe or threaten to be satire in country where criticizing government become unwritten crime.</div>
+      <div class="answer fade-up"><strong>Manjul:</strong> Yes. It has become very unsafe for anyone who has a critical opinion about the govt. There is an atmosphere of constant fear and self-censorship.</div>
+
+      <div class="question fade-up">2. Where do you see Indian TV news channel after 5 years ?</div>
+      <div class="answer fade-up"><strong>Manjul:</strong> TV news channels have already become propaganda tools for the govt. They will keep doing the same no matter who is in power.</div>
+
+      <div class="question fade-up">3. If you have to make your party what will be it's Name & Symbol</div>
+      <div class="answer fade-up"><strong>Manjul:</strong> I am not interested in joining politics or working for any political party.</div>
+
+      <div class="question fade-up">4. What is most shocking fake news you come through?</div>
+      <div class="answer fade-up"><strong>Manjul:</strong> There are so many of them on a daily basis. I am usually shocked if I get any real news these days.</div>
+
+      <div class="question fade-up">5. What is your opinion on the increasing of depression and suicidal rate among teenagers. And who is responsible and how can we tackle it.</div>
+      <div class="answer fade-up"><strong>Manjul:</strong> I'm sorry but I am not the right person to answer this question. Depression is a very serious issue. So is suicide. I doubt I have the knowledge or the ability to comment upon the subject.</div>
+
+    </section>
+
+    <!-- Bottom share -->
+    <div class="bottom-share fade-up">
+      <a class="share-btn" id="twitter-share" target="_blank" rel="noopener">Share on Twitter</a>
+      <a class="share-btn" id="whatsapp-share" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="share-ghost" href="/">Back to Home</a>
+    </div>
+
+    <!-- Donate -->
+    <div class="donate fade-up">
+      <strong>Support Ajiva Talks</strong>
+      <p style="margin:.4rem 0;color:var(--muted)">If you value independent journalism and longform conversations, please consider supporting our work.</p>
+      <a href="https://razorpay.me/@cutitsbs" target="_blank" rel="noopener">Donate</a>
+    </div>
+
+  </article>
+</main>
+
+<a class="fab" id="toTop" href="#article" title="Back to top">↑ Top</a>
+
+<footer>© 2025 Ajiva Talks • Independent Interviews & Culture</footer>
+
+<script>
+/* Read Time */
+(function(){
+  try{
+    const text = document.getElementById('article-body').innerText || '';
+    const words = text.trim().split(/\s+/).length;
+    const mins = Math.max(1, Math.round(words/200));
+    document.getElementById('read-time').innerText = mins + ' min read';
+  }catch(e){}
+})();
+
+/* Progress */
+window.addEventListener('scroll',()=>{
+  const total = document.body.scrollHeight - window.innerHeight;
+  const pct = (window.scrollY/total)*100;
+  document.getElementById('progress').style.width = Math.min(100,pct) + '%';
+});
+
+/* Fade-up observer */
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
+},{threshold:0.12});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+/* Back to top smooth */
+document.getElementById('toTop').addEventListener('click', function(e){
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+/* Share links */
+const pageUrl = encodeURIComponent('https://ajivatalks.in/manjul-interview');
+const pageTitle = encodeURIComponent('Fear, Satire & Truth — A Conversation with Manjul');
+document.getElementById('twitter-share').href = `https://twitter.com/intent/tweet?text=${pageTitle}&url=${pageUrl}`;
+document.getElementById('whatsapp-share').href = `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`;
+
+/* Copy protection with appended link */
+document.addEventListener('copy', function(e){
+  const sel = window.getSelection().toString();
+  if(!sel || sel.length < 40) return;
+  const addition = '\n\nRead more at Ajiva Talks — https://ajivatalks.in/manjul-interview';
+  e.clipboardData.setData('text/plain', sel + addition);
+  e.preventDefault();
+});
+</script>
+
+</body>
+</html>
