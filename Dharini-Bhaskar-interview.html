@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Adsense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7479266047074322"
+     crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dharini Bhaskar — Interview | #AJIVATALKS</title>
+  <meta name="description" content="Dharini Bhaskar on Like Being Alive Twice — love, privilege, political urgency, and the novel’s split narrative of fact and possibility." />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-C48YM39L27"></script>
+  <script>
+  window.dataLayer = window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-C48YM39L27');
+  </script>
+
+  <style>
+  :root{
+    --bg:#FFF6ED;
+    --card:#fff;
+    --text:#111;
+    --muted:#6b6b6b;
+    --accent:#FF914D;
+    --container:920px;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+
+  /* Progress */
+  #progressWrap{position:fixed;top:0;left:0;width:100%;height:5px;background:transparent;z-index:1600}
+  #progressBar{height:5px;width:0;background:var(--accent);transition:width .12s linear}
+
+  /* Header / Logo */
+  .header{
+    padding:28px 20px 12px;
+    text-align:center;
+  }
+  .logo{
+    font-family:Anton, sans-serif;
+    font-size:42px;
+    letter-spacing:1px;
+    line-height:1;
+    display:inline-block;
+  }
+  .logo .a { color:#000 }
+  .logo .b { color:var(--accent) }
+  .sub { color:var(--muted); margin-top:6px; font-size:14px }
+
+  /* Container */
+  .container{max-width:var(--container);margin:26px auto;padding:0 20px 80px}
+
+  /* Article card */
+  .card{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:38px;
+    box-shadow:0 10px 30px rgba(12,12,12,0.06);
+    border:1px solid rgba(0,0,0,0.03);
+  }
+
+  /* Titles & meta */
+  .kicker{ color:var(--muted); font-size:13px; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px}
+  .title{ font-family:"Playfair Display", serif; font-size:34px; margin:0 0 10px; line-height:1.05 }
+  .meta{ color:var(--muted); font-size:14px; margin-bottom:18px; display:flex; gap:10px; flex-wrap:wrap}
+
+  /* lede */
+  .lede{ font-size:18px; color:#333; margin-bottom:22px; max-width:78ch }
+
+  /* Q&A */
+  .question{ margin-top:26px; font-family:"Playfair Display", serif; font-size:19px; font-weight:600 }
+  .answer{ margin-top:10px; font-size:17px; color:#222; background:#fff; padding:16px 18px; border-radius:10px; border-left:4px solid var(--accent); box-shadow:0 6px 18px rgba(0,0,0,0.03) }
+  .answer strong{ color:var(--accent); font-weight:700; display:block; margin-bottom:8px; }
+
+  /* hero pull */
+  .hero-pull{ float:right; width:260px; margin-left:18px; background:#fff; padding:16px; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.04); border:1px solid rgba(0,0,0,0.03) }
+  .hero-pull h4{ margin:0 0 8px; font-size:15px; color:#111 }
+  .hero-pull p{ margin:0; color:var(--muted); font-size:14px }
+  .hero-pull .muted{ color:var(--muted); font-size:13px; margin-top:8px }
+
+  /* share / donate */
+  .bottom-bar{ display:flex; gap:10px; align-items:center; justify-content:center; margin-top:30px; flex-wrap:wrap }
+  .btn{ background:var(--accent); color:#111; padding:10px 14px; border-radius:10px; font-weight:700; text-decoration:none; }
+  .btn-ghost{ background:#fff; border:1px solid #eee; padding:9px 12px; border-radius:8px; color:#111; text-decoration:none }
+
+  /* footer */
+  .site-foot{
+    margin-top:34px;
+    padding:55px 20px;
+    text-align:center;
+    color:#666;
+    font-size:14px;
+    background:transparent;
+  }
+  .site-foot nav{ margin-bottom:28px; display:flex; flex-wrap:wrap; justify-content:center; gap:18px; }
+  .site-foot nav a{ font-size:14px; text-decoration:none; color:#555; font-weight:500; }
+  .site-foot .tagline{ max-width:650px; margin:0 auto 30px; font-size:14px; color:#666; line-height:1.7; font-style:italic; }
+  .site-foot .brand{ margin-bottom:12px; font-size:22px; font-family:Anton, sans-serif; letter-spacing:1px; color:#333; }
+  .site-foot .copyright{ font-size:13px; color:#999; }
+
+  /* back to top */
+  .fab{ position:fixed; right:18px; bottom:18px; z-index:1600; background:#111; color:#fff; padding:12px 14px; border-radius:999px; text-decoration:none; font-weight:700; box-shadow:0 10px 30px rgba(0,0,0,.15) }
+
+  /* responsive */
+  @media(max-width:900px){
+    .hero-pull{ display:none }
+    .logo{ font-size:36px }
+    .title{ font-size:28px }
+    .card{ padding:26px }
+  }
+  @media(max-width:520px){
+    .logo{ font-size:28px }
+    .lede{ font-size:16px }
+    .answer{ padding:14px }
+  }
+  </style>
+</head>
+<body>
+
+<!-- Progress -->
+<div id="progressWrap"><div id="progressBar"></div></div>
+
+<!-- Header -->
+<header class="header">
+  <div class="logo"><span class="a">#AJIVA</span><span class="b">TALKS</span></div>
+  <div class="sub">Interviews · Culture · Literature</div>
+</header>
+
+<main class="container">
+
+  <article class="card" id="article">
+
+    <div class="kicker">Feature</div>
+    <h1 class="title">Dharini Bhaskar — Like Being Alive Twice: Love, Privilege & Possibility</h1>
+
+    <div class="meta">
+      <div>By Ajiva Talks</div><div>•</div><div>Fiction / Interviews</div><div>•</div><div id="readTime">— min read</div>
+    </div>
+
+    <p class="lede">
+      Dharini Bhaskar’s <em>Like Being Alive Twice</em> alternates reality and imagined possibilities to investigate love, privilege and political rupture. We spoke about the novel’s origin, its split narrative, and why stories must hold both fact and what-ifs.
+    </p>
+
+    <!-- hero pull -->
+    <aside class="hero-pull" aria-hidden="true">
+      <h4>Quick facts</h4>
+      <p><strong>Book:</strong> Like Being Alive Twice</p>
+      <p><strong>Themes:</strong> Love, privilege, political urgency, alternate possibilities</p>
+      <p><strong>Role:</strong> Novelist</p>
+      <p class="muted">Fiction, narrative experiment, social conscience</p>
+      <p style="margin-top:10px"><a class="btn" href="https://razorpay.me/@cutitsbs" target="_blank" rel="noopener">Donate</a></p>
+    </aside>
+
+    <!-- content -->
+    <section id="content">
+
+      <div class="question">1. What inspired you to write "Like Being Alive Twice"? Was there a specific event or experience that sparked the idea for this story?</div>
+      <div class="answer"><strong>Dharini Bhaskar:</strong> For me, all stories begin with a word—a word I can wed myself to. For this novel, the word is poppy. I love the sound and what it signifies—John McCrae's poem about poppies in Flanders Fields: delicate red flowers growing against rivers of blood. That contrast — possibility set against violence — held a rich promise and around it the story grew.</div>
+
+      <div class="question">2. The novel explores love, privilege and political turmoil. Why choose these themes and what makes them urgent now?</div>
+      <div class="answer"><strong>Dharini Bhaskar:</strong> The story chose them. We can’t ignore the world we live in when we write. As Marwan Makhoul and Neruda remind us, one cannot pretend the world isn’t political when blood fills the streets. These themes reflect the reality many live in and the book tries to hold that urgency rather than look away.</div>
+
+      <div class="question">3. You alternate between actual events and potential outcomes. What motivated that structure and what effect did you want?</div>
+      <div class="answer"><strong>Dharini Bhaskar:</strong> At some level we all yearn to know whether changing a moment changes everything. A split narrative allows each possibility to be followed and witnessed for what it harbours. The structure felt like an honest way to explore choice, chance and consequence.</div>
+
+      <div class="question">4. Poppy and Tariq’s love happens in a nation on the brink. Why place their relationship in such a fraught environment?</div>
+      <div class="answer"><strong>Dharini Bhaskar:</strong> I don’t see a world that is gentle right now—glaciers melt, people rage, and violence is present. If I want writing to mirror what is or speak of tomorrow, love must take root in dark, merciless ground. The fragility and resilience of love are therefore shown most starkly against that backdrop.</div>
+
+      <div class="question">5. How did you approach portraying privilege through Poppy and Tariq’s relationship?</div>
+      <div class="answer"><strong>Dharini Bhaskar:</strong> Focusing on privilege was deliberate. Privilege often brings an illusion of safety and immunity—the belief that the outside world cannot intrude on one’s comfortable sphere. I wanted to test that assumption through Poppy: would her birthright of safety hold against a rampaging state? The moral question—does privilege protect or isolate?—is central to the book.</div>
+
+      <div class="question">6. How did you weave fact and possibility together—what was your process?</div>
+      <div class="answer"><strong>Dharini Bhaskar:</strong> I imagined moments and then reimagined them—like drawing in charcoal: sketch, blow it off, and sketch again on the same sheet. That iterative, layered process let me explore multiple trajectories without losing the book’s emotional core.</div>
+
+      <div class="question">7. The novel pursues meaning in turbulent times. What, if anything, do you hope readers take away?</div>
+      <div class="answer"><strong>Dharini Bhaskar:</strong> I don’t write to hand readers messages. I hope readers find a sentence they can hold, a word they carry in their pockets, and perhaps rediscover poetry. Each reader’s conversation with a book is private and transformative; I trust those conversations to happen.</div>
+
+      <div class="question">8. What challenges did you face writing about such sensitive and urgent topics?</div>
+      <div class="answer"><strong>Dharini Bhaskar:</strong> My main challenge has been time—especially with small children who need constant care. Carving short snatches of time to world-build and word-hunt has been the toughest part. Creatively, the challenge is finding those pockets where a sentence can sing and grow.</div>
+
+      <div class="question">9. The book is described as politically urgent and stylistically intrepid. How did you balance storytelling with social concerns?</div>
+      <div class="answer"><strong>Dharini Bhaskar:</strong> I let the story lead. It’s dangerous to let topical issues steer fiction at the cost of character and voice. The political themes emerge naturally from the characters’ lives—Poppy, Tariq, Fatima, Mariam, Mitali remain the heart of the book; the politics extend from them, not the other way around.</div>
+
+      <div class="question">10. Finally, what would you like readers to remember after finishing "Like Being Alive Twice"?</div>
+      <div class="answer"><strong>Dharini Bhaskar:</strong> I hope they find a sentence to hold or a word to carry. I hope they are reminded of poetry. Beyond that, reading is a pact between book and reader—an active, transformative act—and I hope the book becomes part of that private, vital conversation.</div>
+
+    </section>
+
+    <!-- bottom actions -->
+    <div class="bottom-bar">
+      <a class="btn" href="https://razorpay.me/@cutitsbs" target="_blank" rel="noopener">Donate</a>
+      <a class="btn-ghost" href="https://ajivatalks.in/">Back to Home</a>
+    </div>
+
+  </article>
+
+  <!-- footer (approved premium footer) -->
+  <footer class="site-foot" role="contentinfo">
+
+    <nav style="margin-bottom:28px; display:flex; flex-wrap:wrap; justify-content:center; gap:18px;">
+      <a href="/privacy-policy.html" style="font-size:14px; text-decoration:none; color:#555; font-weight:500;">Privacy Policy</a>
+      <a href="/terms-and-conditions.html" style="font-size:14px; text-decoration:none; color:#555; font-weight:500;">Terms & Conditions</a>
+      <a href="/dmca.html" style="font-size:14px; text-decoration:none; color:#555; font-weight:500;">DMCA</a>
+      <a href="/disclaimer.html" style="font-size:14px; text-decoration:none; color:#555; font-weight:500;">Disclaimer</a>
+      <a href="/about.html" style="font-size:14px; text-decoration:none; color:#555; font-weight:500;">About</a>
+      <a href="/contact.html" style="font-size:14px; text-decoration:none; color:#555; font-weight:500;">Contact</a>
+    </nav>
+
+    <div class="tagline" style="max-width:650px; margin:0 auto 30px; font-size:14px; color:#666; line-height:1.7; font-style:italic;">
+      Your trusted space for thoughtful conversations, meaningful interviews, literary voices, and cultural storytelling.
+    </div>
+
+    <div class="brand" style="margin-bottom:12px; font-size:22px; font-family:Anton, sans-serif; letter-spacing:1px; color:#333;">
+      #AJIVATALKS
+    </div>
+
+    <div class="copyright" style="font-size:13px; color:#999;">© 2025 AJIVATALKS. All Rights Reserved.</div>
+
+  </footer>
+
+</main>
+
+<!-- Back to top FAB -->
+<a class="fab" id="toTop" href="#article" title="Back to top">↑ Top</a>
+
+<!-- small scripts -->
+<script>
+/* Read time */
+(function(){
+  try{
+    const text = document.getElementById('content').innerText || '';
+    const words = text.trim().split(/\s+/).length;
+    const mins = Math.max(1, Math.round(words/200));
+    document.getElementById('readTime').innerText = mins + ' min read';
+  }catch(e){}
+})();
+
+/* progress bar */
+window.addEventListener('scroll', function(){
+  const total = document.body.scrollHeight - window.innerHeight;
+  const pct = (window.scrollY/total)*100 || 0;
+  document.getElementById('progressBar').style.width = Math.min(100,pct) + '%';
+});
+
+/* fade-up (light) */
+const obs = new IntersectionObserver((ents)=>{
+  ents.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('visible');
+  });
+},{threshold:0.12});
+document.querySelectorAll('.question, .answer, .kicker, .title, .lede').forEach(el=>obs.observe(el));
+
+/* back to top smooth */
+document.getElementById('toTop').addEventListener('click', function(e){
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+/* copy protection: append link */
+document.addEventListener('copy', function(e){
+  const sel = window.getSelection().toString();
+  if(!sel || sel.length < 40) return;
+  const add = '\n\nRead more at Ajiva Talks — https://ajivatalks.in';
+  e.clipboardData.setData('text/plain', sel + add);
+  e.preventDefault();
+});
+</script>
+
+</body>
+</html>
