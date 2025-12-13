@@ -7,8 +7,8 @@
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Puneet Sikka — Interview | #AJIVATALKS</title>
-  <meta name="description" content="Puneet Sikka on Take No. 2020, Bollywood, identity, grief, humour, and storytelling during the pandemic." />
+  <title>Kamini Kusum — Interview | #AJIVATALKS</title>
+  <meta name="description" content="Kamini Kusum on 'Dare to Shine: Inspiring Stories of 20 Women Changemakers', research, storytelling and celebrating women's resilience." />
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -42,17 +42,30 @@
     -moz-osx-font-smoothing:grayscale;
   }
 
+  /* Progress */
   #progressWrap{position:fixed;top:0;left:0;width:100%;height:5px;background:transparent;z-index:1600}
   #progressBar{height:5px;width:0;background:var(--accent);transition:width .12s linear}
 
-  .header{padding:28px 20px 12px;text-align:center}
-  .logo{font-family:Anton,sans-serif;font-size:42px;letter-spacing:1px;line-height:1;display:inline-block}
-  .logo .a{color:#000}
-  .logo .b{color:var(--accent)}
-  .sub{color:var(--muted);margin-top:6px;font-size:14px}
+  /* Header / Logo */
+  .header{
+    padding:28px 20px 12px;
+    text-align:center;
+  }
+  .logo{
+    font-family:Anton, sans-serif;
+    font-size:42px;
+    letter-spacing:1px;
+    line-height:1;
+    display:inline-block;
+  }
+  .logo .a { color:#000 }
+  .logo .b { color:var(--accent) }
+  .sub { color:var(--muted); margin-top:6px; font-size:14px }
 
+  /* Container */
   .container{max-width:var(--container);margin:26px auto;padding:0 20px 80px}
 
+  /* Article card */
   .card{
     background:var(--card);
     border-radius:var(--radius);
@@ -61,40 +74,67 @@
     border:1px solid rgba(0,0,0,0.03);
   }
 
-  .kicker{color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
-  .title{font-family:"Playfair Display",serif;font-size:34px;margin:0 0 10px;line-height:1.05}
-  .meta{color:var(--muted);font-size:14px;margin-bottom:18px;display:flex;gap:10px;flex-wrap:wrap}
+  /* Titles & meta */
+  .kicker{ color:var(--muted); font-size:13px; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px}
+  .title{ font-family:"Playfair Display", serif; font-size:34px; margin:0 0 10px; line-height:1.05 }
+  .meta{ color:var(--muted); font-size:14px; margin-bottom:18px; display:flex; gap:10px; flex-wrap:wrap}
 
-  .lede{font-size:18px;color:#333;margin-bottom:22px;max-width:78ch}
+  /* lede */
+  .lede{ font-size:18px; color:#333; margin-bottom:22px; max-width:78ch }
 
-  .question{margin-top:26px;font-family:"Playfair Display",serif;font-size:19px;font-weight:600}
-  .answer{margin-top:10px;font-size:17px;color:#222;background:#fff;padding:16px 18px;border-radius:10px;border-left:4px solid var(--accent);box-shadow:0 6px 18px rgba(0,0,0,0.03)}
-  .answer strong{color:var(--accent);font-weight:700}
+  /* Q&A */
+  .question{ margin-top:26px; font-family:"Playfair Display", serif; font-size:19px; font-weight:600 }
+  .answer{ margin-top:10px; font-size:17px; color:#222; background:#fff; padding:16px 18px; border-radius:10px; border-left:4px solid var(--accent); box-shadow:0 6px 18px rgba(0,0,0,0.03) }
+  .answer strong{ color:var(--accent); font-weight:700; }
 
-  .hero-pull{float:right;width:260px;margin-left:18px;background:#fff;padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.03)}
-  .hero-pull h4{margin:0 0 8px;font-size:15px;color:#111}
-  .hero-pull p{margin:0;color:var(--muted);font-size:14px}
+  /* hero pull */
+  .hero-pull{ float:right; width:260px; margin-left:18px; background:#fff; padding:16px; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.04); border:1px solid rgba(0,0,0,0.03) }
+  .hero-pull h4{ margin:0 0 8px; font-size:15px; color:#111 }
+  .hero-pull p{ margin:0; color:var(--muted); font-size:14px }
 
-  .bottom-bar{display:flex;gap:10px;align-items:center;justify-content:center;margin-top:30px;flex-wrap:wrap}
-  .btn{background:var(--accent);color:#111;padding:10px 14px;border-radius:10px;font-weight:700;text-decoration:none}
-  .btn-ghost{background:#fff;border:1px solid #eee;padding:9px 12px;border-radius:8px;color:#111;text-decoration:none}
+  /* share / donate */
+  .bottom-bar{ display:flex; gap:10px; align-items:center; justify-content:center; margin-top:30px; flex-wrap:wrap }
+  .btn{ background:var(--accent); color:#111; padding:10px 14px; border-radius:10px; font-weight:700; text-decoration:none; }
+  .btn-ghost{ background:#fff; border:1px solid #eee; padding:9px 12px; border-radius:8px; color:#111; text-decoration:none }
 
-  .site-foot{margin-top:34px;padding:55px 20px;text-align:center;color:#666;font-size:14px;background:transparent}
+  /* footer */
+  .site-foot{
+    margin-top:34px;
+    padding:55px 20px;
+    text-align:center;
+    color:#666;
+    font-size:14px;
+    background:transparent;
+  }
+  .site-foot nav{ margin-bottom:28px; display:flex; flex-wrap:wrap; justify-content:center; gap:18px; }
+  .site-foot nav a{ font-size:14px; text-decoration:none; color:#555; font-weight:500; }
+  .site-foot .tagline{ max-width:650px; margin:0 auto 30px; font-size:14px; color:#666; line-height:1.7; font-style:italic; }
+  .site-foot .brand{ margin-bottom:12px; font-size:22px; font-family:Anton, sans-serif; letter-spacing:1px; color:#333; }
+  .site-foot .copyright{ font-size:13px; color:#999; }
 
-  .fab{position:fixed;right:18px;bottom:18px;z-index:1600;background:#111;color:#fff;padding:12px 14px;border-radius:999px;text-decoration:none;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.15)}
+  /* back to top */
+  .fab{ position:fixed; right:18px; bottom:18px; z-index:1600; background:#111; color:#fff; padding:12px 14px; border-radius:999px; text-decoration:none; font-weight:700; box-shadow:0 10px 30px rgba(0,0,0,.15) }
 
+  /* responsive */
   @media(max-width:900px){
-    .hero-pull{display:none}
-    .logo{font-size:36px}
-    .title{font-size:28px}
-    .card{padding:26px}
+    .hero-pull{ display:none }
+    .logo{ font-size:36px }
+    .title{ font-size:28px }
+    .card{ padding:26px }
+  }
+  @media(max-width:520px){
+    .logo{ font-size:28px }
+    .lede{ font-size:16px }
+    .answer{ padding:14px }
   }
   </style>
 </head>
 <body>
 
+<!-- Progress -->
 <div id="progressWrap"><div id="progressBar"></div></div>
 
+<!-- Header -->
 <header class="header">
   <div class="logo"><span class="a">#AJIVA</span><span class="b">TALKS</span></div>
   <div class="sub">Interviews · Culture · Literature</div>
@@ -102,95 +142,141 @@
 
 <main class="container">
 
-<article class="card" id="article">
+  <article class="card" id="article">
 
-<div class="kicker">Feature</div>
-<h1 class="title">Puneet Sikka — Take No. 2020, Bollywood & Stories from the In-Between</h1>
+    <div class="kicker">Feature</div>
+    <h1 class="title">Kamini Kusum — Dare to Shine, Women Changemakers & Research-Driven Storytelling</h1>
 
-<div class="meta">
-  <div>By Ajiva Talks</div><div>•</div><div>Author Interview</div><div>•</div><div id="readTime">— min read</div>
-</div>
+    <div class="meta">
+      <div>By Ajiva Talks</div><div>•</div><div>Profiles / Women's Leadership</div><div>•</div><div id="readTime">— min read</div>
+    </div>
 
-<p class="lede">
-Puneet Sikka is a versatile media professional whose journey spans across writing, acting, and a profound understanding of the entertainment industry. With a background that includes working as a writer in both the news and advertising sectors, Puneet has honed her storytelling skills through various mediums.
-</p>
+    <p class="lede">
+      Kamini Kusum’s new book <em>Dare to Shine: Inspiring Stories of 20 Women Changemakers</em> showcases powerful biographical sketches of women who broke barriers — from Droupadi Murmu to P.V. Sindhu. In this interview she discusses research, selection, narrative technique and the driving message behind the collection.
+    </p>
 
-<aside class="hero-pull">
-  <h4>Quick facts</h4>
-  <p><strong>Book:</strong> Take No. 2020</p>
-  <p><strong>Education:</strong> LSR College, SIMC Pune</p>
-  <p><strong>Fields:</strong> Writing, Acting, Media</p>
-</aside>
+    <!-- hero pull -->
+    <aside class="hero-pull" aria-hidden="true">
+      <h4>Quick facts</h4>
+      <p><strong>Book:</strong> Dare to Shine — 20 Women Changemakers</p>
+      <p><strong>Other works:</strong> Difficult Girls series, Gunpoint Groom, Honey & the Moon</p>
+      <p><strong>Interests:</strong> Yoga, food, cinema</p>
+      <p style="margin-top:8px"><a class="btn" href="https://razorpay.me/@cutitsbs" target="_blank" rel="noopener">Donate</a></p>
+    </aside>
 
-<section id="content">
+    <!-- content -->
+    <section id="content">
 
-<div class="question">1. What inspired you to write Take No. 2020 and focus on the intersecting lives of characters like Meera, Dabloo, Jayesh, and Micky Taneja?</div>
-<div class="answer"><strong>Puneet Sikka:</strong> More than inspired, I felt compelled to tell a story that had been brewing within for quite some time. Especially, after I’d moved to Bombay and had been auditioning for roles as an actor. I’m a sponge as far as ideas and feelings are concerned, and the best way for me to process all that stimuli is to put pen to paper. By the time the year 2020 hit, I had to discard all the fanciful plots in my head, and reimagine a storyline in tune with the reality around me and the world. Meera, Dabloo, Jayesh and Mickey Taneja had been my companions from 2019 itself, so to speak, who represented a sample size of the hundred-thousands of aspiring actors from different socio-economic and linguistic backgrounds coming to Bombay to find their foothold in Bollywood. Isolating them from each other’s storylines did not feel natural, especially in the year when most people were forced to live in isolation. Intersecting the lives of these characters helped to bring out the starkness in the challenges faced by each set of people during the pandemic.</div>
+      <div class="question">1. Can you tell us about the inspiration behind your latest book, "Dare to Shine: Inspiring Stories of 20 Women Changemakers"? What prompted you to embark on this project?</div>
+      <div class="answer"><strong>Kamini Kusum:</strong> Dare to Shine is my 7th paperback apart from 32 digital books I’ve written across series. Women have always held prominent roles in my fiction and non-fiction. The idea for this book came from my publisher — when we discussed the concept I was excited. Writing about strong women is close to my heart. This was my first non-fiction project in this vein and it demanded deep primary and secondary research. I don’t write without giving full effort to research the subject, characters, locations and the arc of the narrative.</div>
 
-<div class="question">2. The book delves deeply into the struggles and complexities of the Bollywood industry. How much of this is drawn from real-life experiences or observations?</div>
-<div class="answer"><strong>Puneet Sikka:</strong> Most creative work draws from life, eventually. And so, Take No. 2020 being my first book is largely auto-fictional, in that, I’ve drawn few references from my direct and personal experience as well from those of actor friends and acquaintances I met along the way, as well as stories one hears, watches and absorbs around themselves.</div>
+      <div class="question">2. The book features twenty remarkable women from diverse fields. How did you go about selecting these women, and what criteria did you consider?</div>
+      <div class="answer"><strong>Kamini Kusum:</strong> I kept several criteria in mind. The women had to come from diverse fields, span across time (history and present), and have truly inspiring lives. They needed to have broken glass ceilings or defied stereotypes. I also wanted to include women who have achieved great things but remain under-recognized. The purpose was to bring a mix of known and lesser-known changemakers into the spotlight.</div>
 
-<div class="question">3. Your characters face a range of personal and professional challenges. How did you develop their individual arcs, and what was the most challenging aspect of their development?</div>
-<div class="answer"><strong>Puneet Sikka:</strong> Each character was wildly different as far as preparation and development was concerned. As cliche as it may sound, the characters were writing their own arcs through me. Most part of 2020 went in scribbling post-it notes of plot points and sub plots as and when ideas came through. Not to say that I was sitting idle, but there is a subtle dance between one’s imagination at play and actually going to the playground and waiting actively, watching with a hawk’s eye, at any thought that can become the character’s motivation to take the story forward. The bizarreness of real life stories become fodder too. Once I’d gotten to the point where I knew the beginning-middle-and-end of the story and broadly the characters’ arcs, it was a jump off the cliff. Then it was mostly about adhering to the task of filling the blanks. The most challenging part was writing from the perspective of characters I did not agree with or even ‘like’ as people for that matter. Had I met them in real life, we wouldn’t have gone beyond pleasantries at the most. But in the story, they had to feel like the heroes in their own minds, which meant I had to empathise with their dark sides too.</div>
+      <div class="question">3. Could you share some of the most memorable or impactful stories from the book? What sets these women apart?</div>
+      <div class="answer"><strong>Kamini Kusum:</strong> I was deeply moved by President Droupadi Murmu’s story — the first tribal person and second woman to hold the office. Her early life, educational struggles and personal tragedies were immense, yet she persisted. Another striking story is Neera Arya — a spy in the Indian National Army — whose sacrifices and resilience were harrowing and inspiring. Each woman in the book has a distinct bravery and a story that deserves wider recognition.</div>
 
-<div class="question">4. The theme of identity, both public and private, is central to your book. How do you think your characters' journeys reflect broader societal issues?</div>
-<div class="answer"><strong>Puneet Sikka:</strong> Self-identity and finding one’s place in the world is central to our existence as humans, in any case. And it’s perhaps even more amplified with actors, given that they are donning new, fictional identities as part of the their professional duty on a regular basis. Being self-absorbed as most of humankind at present generally is, the characters are no different, until their circumstances throw them for a loop. In trying to understand their role in the larger scheme of events, and in desperately seeking their answers, my sense was that the characters would act as a mirror to the societal issues. And one that hopefully the reader would be able to find resonance with. After all, it is about the collective human unconscious, which is why storytelling is never about telling a story; but always about re-telling a story.</div>
+      <div class="question">4. What challenges did you encounter while researching and presenting these women's lives authentically?</div>
+      <div class="answer"><strong>Kamini Kusum:</strong> Some subjects, like Neera Arya and Sarla Thukral, had limited accessible content. Finding facts meant combing archives and visiting libraries. I wanted the book to convey not just facts but emotions, pains and struggles — elements that truly impact readers and inspire them. Gathering authentic material required extra effort.</div>
 
-<div class="question">5. Humor and grief are intertwined throughout the narrative. How did you balance these two elements to create a compelling and relatable story?</div>
-<div class="answer"><strong>Puneet Sikka:</strong> I saw the entire story as a classic case of ‘one man’s tragedy is another man’s comedy’. It’s not to mock or ridicule anyone’s circumstances but present them as they are. Of course, I have an opinion as a writer and I did take a stand with choosing one out of many options available, to bail or find closure as the characters’ journeys unfolded. But my aim was also for the characters to find their own humour or grief in their respective situations, while simultaneously leaving it open for the reader to interpret it as per their own mindset. For instance, some people may genuinely not find any humour in a Chinese app being banned by the Indian government! Though I will admit that I let my instincts guide me at many points when it came to tempering the light and dark aspects of the events and the characters’ mindsets.</div>
+      <div class="question">5. Across these stories, what common traits did you notice and how can these narratives inspire others?</div>
+      <div class="answer"><strong>Kamini Kusum:</strong> Many of these women came from patriarchal societies and still pursued paths considered “men’s domains”: science, mountaineering, aviation, politics, even detective work. Their common trait is resilience — they refused to buckle under pressure and pursued their dreams with determination. Their stories show readers that with hard work and courage, nothing is impossible.</div>
 
-<div class="question">6. #MeToo allegations and the casting couch are sensitive and powerful topics. What motivated you to incorporate these into your narrative, and what message do you hope to convey?</div>
-<div class="answer"><strong>Puneet Sikka:</strong> Sensitive and powerful aside, these topics are also, unfortunately, relevant to showbiz. Or at least, made more prominent because of the industry being in the spotlight. By virtue of being subjected to film news in our country, even the most far removed from it, find themselves aware of the shady elements at play. And so incorporating these topics into the narrative was a no-brainer. I didn’t intend to dole out any advice or proselytise, but yes, I’ve always been fascinated with themes of human endurance and personal growth in challenging circumstances in stories and in life and that may have unconsciously seeped into mine as well.</div>
+      <div class="question">6. How did your background in fiction influence the way you told these non-fiction lives?</div>
+      <div class="answer"><strong>Kamini Kusum:</strong> My fiction writing taught me to reveal suspense and emotion gradually, and I applied similar storytelling techniques to non-fiction. Non-fiction can be more compelling when it doesn’t read like a list of facts — by revealing emotions and challenges bit by bit, the chapters feel like real-life thrillers and keep readers engaged.</div>
 
-<div class="question">7. The concept of a "story within a story" plays a significant role in Take No. 2020. Can you elaborate on how you utilized this technique and its significance to the overall narrative?</div>
-<div class="answer"><strong>Puneet Sikka:</strong> As I mentioned earlier, after a while the story was writing itself. And honestly, I discovered this happy coincidence of a ‘story within a story’ only once I had finished writing the book. I could say more, but for that, I’ll have to give out spoilers which I would like to avoid at this stage. The book is easy to visualise and it made sense to adopt that style of writing since the setting and theme is film-based.</div>
+      <div class="question">7. Given your corporate and management background, how do these stories resonate with professionals and leaders?</div>
+      <div class="answer"><strong>Kamini Kusum:</strong> My management and HR experience helped me understand people’s motivations and psychology. That perspective helps me present characters and situations in a way professionals can relate to. Leaders can draw lessons on resilience, empathy, and the human side of decision-making from these narratives.</div>
 
-<div class="question">8. How do you think the setting of Bollywood, with its glamour and darker sides, enhances the themes and conflicts in your book?</div>
-<div class="answer"><strong>Puneet Sikka:</strong> Between Bollywood having a low entry barrier for newcomers, to them finding a foothold as a performer or creator and to then thriving in the industry, the journey is replete with challenges and oddities that has often been the raw material for countless tales already. Each character is caught somewhere in this spectrum which is the primary plot. And then comes the year of the most – 2020, which only intensifies The Hunger Games like situation. The characters are furiously doggy-paddling to keep their heads above water, where only time will be the judge of who floats and who drowns. I can only say that the proof of the pudding is in the eating, which in this case means, reading the book to find out exactly how that happens. :)</div>
+      <div class="question">8. The title "Dare to Shine" carries a strong message. What do you hope young women and girls take away?</div>
+      <div class="answer"><strong>Kamini Kusum:</strong> I want girls with dreams in their eyes to know there’s nothing they can’t accomplish. With determination, hard work and passion, women can succeed in any field. Fortune favors the brave.</div>
 
-<div class="question">9. What was your research process like for this book, particularly regarding the intricacies of the film industry and the personal struggles of your characters?</div>
-<div class="answer"><strong>Puneet Sikka:</strong> As far as the film industry is concerned, a lot of the research came from observations and my own lived experience. I’ve come to understand that no amount of formal training and certified education can give as much insight into the industry as working in the system and learning on the job does. This knowledge helped me create the framework within which Meera, Dabloo, Jayesh and Mickey would operate. But for the purpose of their individual graphs, especially which required more specialised understanding, I consulted experts – like doctors for instance. Even casual but intentional conversations with actor-friends, casting agents and even a television news anchor were helpful.</div>
+      <div class="question">9. Many featured women have multifaceted lives. How did you balance portraying their identities with focusing on achievements?</div>
+      <div class="answer"><strong>Kamini Kusum:</strong> Balance is about strategic writing. Whether fiction or non-fiction, I ensure emotions and facts are paced so readers don’t get fatigued. Years of writing across genres helped me shape each chapter so it highlights achievements while respecting the subject’s full humanity.</div>
 
-<div class="question">10. Looking at the journey of your characters, do you believe they find redemption or resolution by the end of the book? How important was it for you to leave some aspects open to interpretation?</div>
-<div class="answer"><strong>Puneet Sikka:</strong> There is no definitive answer to this question, not just in context of my book, but for life in general too. Many times, redemption itself ‘is’ the resolution or is ‘in’ the resolution. To be a little cheeky and quote the character Sarita’s dialogue from my book, “Sometimes there’s a disconnect between what we want from life and what we resign ourselves to”. From some initial feedback I had gotten on the book, the readers had mentioned that they found themselves playing a guessing game at various junctures at which the characters found themselves. Few that they had foreseen and few that they hadn’t and a different resolution to the one they had imagined ended up surprising them. Even if Take NO. 2020 is a story within a story, to me it is as real as life gets. And real life is experienced in the in-between, which is always open to interpretation by whomsoever we allow to participate in it. The year 2020 proved that fact is stranger than fiction, and the book is only an extension of that.</div>
+      <div class="question">10. What impact do you envision "Dare to Shine" having on conversations about women’s empowerment and leadership?</div>
+      <div class="answer"><strong>Kamini Kusum:</strong> This book is ambitious and the result of extensive research and interviews. Its aims are multifold: to spotlight inspiring stories, to preserve lesser-known facts, and to give recognition where due. I hope it fuels conversations about courage, leadership, and the many ways women have contributed to society. Ultimately, it’s about celebrating courage and a ‘come-what-may, I will do it’ spirit.</div>
 
-</section>
+    </section>
 
-<div class="bottom-bar">
-  <a class="btn" href="https://ajivatalks.in/">Back to Home</a>
-</div>
+    <!-- bottom actions -->
+    <div class="bottom-bar">
+      <a class="btn" href="https://razorpay.me/@cutitsbs" target="_blank" rel="noopener">Donate</a>
+      <a class="btn-ghost" href="https://ajivatalks.in/">Back to Home</a>
+    </div>
 
-</article>
+  </article>
 
-<footer class="site-foot">
-<nav>
-<a href="/privacy-policy.html">Privacy Policy</a>
-<a href="/terms-and-conditions.html">Terms & Conditions</a>
-<a href="/dmca.html">DMCA</a>
-<a href="/disclaimer.html">Disclaimer</a>
-<a href="/about.html">About</a>
-<a href="/contact.html">Contact</a>
-</nav>
+  <!-- footer (approved premium footer) -->
+  <footer class="site-foot" role="contentinfo">
 
-<div class="tagline">
-Your trusted space for thoughtful conversations, meaningful interviews, literary voices, and cultural storytelling.
-</div>
+    <nav style="margin-bottom:28px; display:flex; flex-wrap:wrap; justify-content:center; gap:18px;">
+      <a href="/privacy-policy.html" style="font-size:14px; text-decoration:none; color:#555; font-weight:500;">Privacy Policy</a>
+      <a href="/terms-and-conditions.html" style="font-size:14px; text-decoration:none; color:#555; font-weight:500;">Terms & Conditions</a>
+      <a href="/dmca.html" style="font-size:14px; text-decoration:none; color:#555; font-weight:500;">DMCA</a>
+      <a href="/disclaimer.html" style="font-size:14px; text-decoration:none; color:#555; font-weight:500;">Disclaimer</a>
+      <a href="/about.html" style="font-size:14px; text-decoration:none; color:#555; font-weight:500;">About</a>
+      <a href="/contact.html" style="font-size:14px; text-decoration:none; color:#555; font-weight:500;">Contact</a>
+    </nav>
 
-<div class="brand">#AJIVATALKS</div>
-<div class="copyright">© 2025 AJIVATALKS. All Rights Reserved.</div>
-</footer>
+    <div class="tagline" style="max-width:650px; margin:0 auto 30px; font-size:14px; color:#666; line-height:1.7; font-style:italic;">
+      Your trusted space for thoughtful conversations, meaningful interviews, literary voices, and cultural storytelling.
+    </div>
+
+    <div class="brand" style="margin-bottom:12px; font-size:22px; font-family:Anton, sans-serif; letter-spacing:1px; color:#333;">
+      #AJIVATALKS
+    </div>
+
+    <div class="copyright" style="font-size:13px; color:#999;">© 2025 AJIVATALKS. All Rights Reserved.</div>
+
+  </footer>
 
 </main>
 
-<a class="fab" href="#article">↑ Top</a>
+<!-- Back to top FAB -->
+<a class="fab" id="toTop" href="#article" title="Back to top">↑ Top</a>
 
+<!-- small scripts -->
 <script>
+/* Read time */
 (function(){
-const text=document.getElementById('content').innerText||'';
-const words=text.trim().split(/\s+/).length;
-document.getElementById('readTime').innerText=Math.max(1,Math.round(words/200))+' min read';
+  try{
+    const text = document.getElementById('content').innerText || '';
+    const words = text.trim().split(/\s+/).length;
+    const mins = Math.max(1, Math.round(words/200));
+    document.getElementById('readTime').innerText = mins + ' min read';
+  }catch(e){}
 })();
-window.addEventListener('scroll',()=>{const t=document.body.scrollHeight-innerHeight;progressBar.style.width=(scrollY/t)*100+'%';});
+
+/* progress bar */
+window.addEventListener('scroll', function(){
+  const total = document.body.scrollHeight - window.innerHeight;
+  const pct = (window.scrollY/total)*100 || 0;
+  document.getElementById('progressBar').style.width = Math.min(100,pct) + '%';
+});
+
+/* fade-up (light) */
+const obs = new IntersectionObserver((ents)=>{
+  ents.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('visible');
+  });
+},{threshold:0.12});
+document.querySelectorAll('.question, .answer, .kicker, .title, .lede').forEach(el=>obs.observe(el));
+
+/* back to top smooth */
+document.getElementById('toTop').addEventListener('click', function(e){
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+/* copy protection: append link */
+document.addEventListener('copy', function(e){
+  const sel = window.getSelection().toString();
+  if(!sel || sel.length < 40) return;
+  const add = '\n\nRead more at Ajiva Talks — https://ajivatalks.in';
+  e.clipboardData.setData('text/plain', sel + add);
+  e.preventDefault();
+});
 </script>
 
 </body>
