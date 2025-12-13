@@ -7,8 +7,8 @@
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Puneet Sikka — Take No. 2020 | #AJIVATALKS</title>
-  <meta name="description" content="Puneet Sikka discusses her debut novel Take No. 2020, Bollywood realities, identity, humour, grief, and the story within a story." />
+  <title>Puneet Sikka — Interview | #AJIVATALKS</title>
+  <meta name="description" content="Puneet Sikka on Take No. 2020, Bollywood, identity, grief, humour, and storytelling during the pandemic." />
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -16,203 +16,181 @@
   <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-C48YM39L27"></script>
   <script>
-    window.dataLayer = window.dataLayer||[];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-C48YM39L27');
+  window.dataLayer = window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-C48YM39L27');
   </script>
 
   <style>
-    :root{
-      --bg:#FFF6ED;
-      --card:#fff;
-      --text:#111;
-      --muted:#6b6b6b;
-      --accent:#FF914D;
-      --container:920px;
-      --radius:14px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--text);
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
-    }
+  :root{
+    --bg:#FFF6ED;
+    --card:#fff;
+    --text:#111;
+    --muted:#6b6b6b;
+    --accent:#FF914D;
+    --container:920px;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
 
-    /* Progress */
-    #progressWrap{position:fixed;top:0;left:0;width:100%;height:5px;z-index:1600}
-    #progressBar{height:5px;width:0;background:var(--accent)}
+  #progressWrap{position:fixed;top:0;left:0;width:100%;height:5px;background:transparent;z-index:1600}
+  #progressBar{height:5px;width:0;background:var(--accent);transition:width .12s linear}
 
-    header{text-align:center;padding:28px 20px 12px}
-    .logo{font-family:Anton,sans-serif;font-size:42px;letter-spacing:1px}
-    .logo .b{color:var(--accent)}
-    .sub{font-size:14px;color:var(--muted);margin-top:6px}
+  .header{padding:28px 20px 12px;text-align:center}
+  .logo{font-family:Anton,sans-serif;font-size:42px;letter-spacing:1px;line-height:1;display:inline-block}
+  .logo .a{color:#000}
+  .logo .b{color:var(--accent)}
+  .sub{color:var(--muted);margin-top:6px;font-size:14px}
 
-    .container{max-width:var(--container);margin:26px auto;padding:0 20px 80px}
-    .card{
-      background:#fff;
-      padding:38px;
-      border-radius:var(--radius);
-      box-shadow:0 10px 30px rgba(0,0,0,.06);
-    }
+  .container{max-width:var(--container);margin:26px auto;padding:0 20px 80px}
 
-    .kicker{text-transform:uppercase;font-size:13px;letter-spacing:1px;color:var(--muted)}
-    .title{font-family:"Playfair Display",serif;font-size:34px;margin:6px 0}
-    .meta{font-size:14px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap}
+  .card{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:38px;
+    box-shadow:0 10px 30px rgba(12,12,12,0.06);
+    border:1px solid rgba(0,0,0,0.03);
+  }
 
-    .lede{font-size:18px;margin:20px 0 26px;max-width:78ch}
+  .kicker{color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+  .title{font-family:"Playfair Display",serif;font-size:34px;margin:0 0 10px;line-height:1.05}
+  .meta{color:var(--muted);font-size:14px;margin-bottom:18px;display:flex;gap:10px;flex-wrap:wrap}
 
-    .hero-pull{
-      float:right;
-      width:260px;
-      margin-left:18px;
-      background:#fff;
-      padding:16px;
-      border-radius:12px;
-      border:1px solid #eee;
-      box-shadow:0 6px 18px rgba(0,0,0,.04);
-    }
-    .hero-pull h4{margin:0 0 8px;font-size:15px}
-    .hero-pull p{margin:4px 0;font-size:14px;color:var(--muted)}
-    .btn{background:var(--accent);padding:10px 14px;border-radius:10px;font-weight:700;text-decoration:none;color:#111;display:inline-block;margin-top:10px}
+  .lede{font-size:18px;color:#333;margin-bottom:22px;max-width:78ch}
 
-    .question{margin-top:28px;font-family:"Playfair Display",serif;font-size:19px;font-weight:600}
-    .answer{
-      margin-top:10px;
-      font-size:17px;
-      background:#fff;
-      padding:16px 18px;
-      border-left:4px solid var(--accent);
-      border-radius:10px;
-      box-shadow:0 6px 18px rgba(0,0,0,.03);
-    }
-    .answer strong{display:block;color:var(--accent);margin-bottom:6px}
+  .question{margin-top:26px;font-family:"Playfair Display",serif;font-size:19px;font-weight:600}
+  .answer{margin-top:10px;font-size:17px;color:#222;background:#fff;padding:16px 18px;border-radius:10px;border-left:4px solid var(--accent);box-shadow:0 6px 18px rgba(0,0,0,0.03)}
+  .answer strong{color:var(--accent);font-weight:700}
 
-    .bottom-bar{display:flex;gap:12px;justify-content:center;margin-top:36px;flex-wrap:wrap}
-    .btn-ghost{border:1px solid #eee;padding:10px 14px;border-radius:10px;text-decoration:none;color:#111}
+  .hero-pull{float:right;width:260px;margin-left:18px;background:#fff;padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.03)}
+  .hero-pull h4{margin:0 0 8px;font-size:15px;color:#111}
+  .hero-pull p{margin:0;color:var(--muted);font-size:14px}
 
-    footer.site-foot{
-      margin-top:40px;
-      padding:55px 20px;
-      text-align:center;
-      background:transparent;
-    }
+  .bottom-bar{display:flex;gap:10px;align-items:center;justify-content:center;margin-top:30px;flex-wrap:wrap}
+  .btn{background:var(--accent);color:#111;padding:10px 14px;border-radius:10px;font-weight:700;text-decoration:none}
+  .btn-ghost{background:#fff;border:1px solid #eee;padding:9px 12px;border-radius:8px;color:#111;text-decoration:none}
 
-    footer nav{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;margin-bottom:28px}
-    footer nav a{text-decoration:none;color:#555;font-size:14px;font-weight:500}
-    footer .tagline{max-width:650px;margin:0 auto 30px;font-style:italic;color:#666}
-    footer .brand{font-family:Anton,sans-serif;font-size:22px;letter-spacing:1px;color:#333;margin-bottom:10px}
-    footer .copyright{font-size:13px;color:#999}
+  .site-foot{margin-top:34px;padding:55px 20px;text-align:center;color:#666;font-size:14px;background:transparent}
 
-    @media(max-width:900px){
-      .hero-pull{display:none}
-      .title{font-size:28px}
-      .card{padding:26px}
-    }
+  .fab{position:fixed;right:18px;bottom:18px;z-index:1600;background:#111;color:#fff;padding:12px 14px;border-radius:999px;text-decoration:none;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.15)}
+
+  @media(max-width:900px){
+    .hero-pull{display:none}
+    .logo{font-size:36px}
+    .title{font-size:28px}
+    .card{padding:26px}
+  }
   </style>
 </head>
-
 <body>
 
 <div id="progressWrap"><div id="progressBar"></div></div>
 
-<header>
-  <div class="logo">#AJIVA<span class="b">TALKS</span></div>
+<header class="header">
+  <div class="logo"><span class="a">#AJIVA</span><span class="b">TALKS</span></div>
   <div class="sub">Interviews · Culture · Literature</div>
 </header>
 
 <main class="container">
-  <article class="card" id="article">
 
-    <div class="kicker">Author Interview</div>
-    <h1 class="title">Puneet Sikka — Take No. 2020</h1>
-    <div class="meta">By Ajiva Talks • Fiction • <span id="readTime">— min read</span></div>
+<article class="card" id="article">
 
-    <p class="lede">
-      Puneet Sikka speaks about her debut novel <em>Take No. 2020</em>, an unfiltered look at ambition,
-      identity, humour and grief in Bollywood — set against the chaos of a year that changed everything.
-    </p>
+<div class="kicker">Feature</div>
+<h1 class="title">Puneet Sikka — Take No. 2020, Bollywood & Stories from the In-Between</h1>
 
-    <aside class="hero-pull">
-      <h4>Quick facts</h4>
-      <p><strong>Debut:</strong> Take No. 2020</p>
-      <p><strong>Genres:</strong> Literary fiction</p>
-      <p><strong>Background:</strong> Media, acting, writing</p>
-      <p><strong>Education:</strong> LSR, SIMC Pune</p>
-      <a href="https://razorpay.me/@cutitsbs" target="_blank" class="btn">Donate</a>
-    </aside>
+<div class="meta">
+  <div>By Ajiva Talks</div><div>•</div><div>Author Interview</div><div>•</div><div id="readTime">— min read</div>
+</div>
 
-    <section id="content">
+<p class="lede">
+Puneet Sikka is a versatile media professional whose journey spans across writing, acting, and a profound understanding of the entertainment industry. With a background that includes working as a writer in both the news and advertising sectors, Puneet has honed her storytelling skills through various mediums.
+</p>
 
-      <div class="question">1. What inspired you to write Take No. 2020?</div>
-      <div class="answer"><strong>Puneet Sikka:</strong> I felt compelled to tell a story that had been brewing for a while, especially after moving to Bombay and auditioning as an actor. By 2020, reality forced me to reimagine everything. These characters represented thousands of aspirants navigating Bollywood, and intersecting their lives reflected the isolation and intensity of the pandemic year.</div>
+<aside class="hero-pull">
+  <h4>Quick facts</h4>
+  <p><strong>Book:</strong> Take No. 2020</p>
+  <p><strong>Education:</strong> LSR College, SIMC Pune</p>
+  <p><strong>Fields:</strong> Writing, Acting, Media</p>
+</aside>
 
-      <div class="question">2. How much of the book is drawn from real-life experiences?</div>
-      <div class="answer"><strong>Puneet Sikka:</strong> Most creative work eventually draws from life. Take No. 2020 is largely auto-fictional, inspired by my own experiences and those of actor friends, acquaintances, and stories absorbed from the world around me.</div>
+<section id="content">
 
-      <div class="question">3. How did you develop the characters and their arcs?</div>
-      <div class="answer"><strong>Puneet Sikka:</strong> The characters wrote their own arcs through me. Much of 2020 went into scribbling plot points. The hardest part was empathising with characters I didn’t agree with — but they had to feel like heroes in their own minds.</div>
+<div class="question">1. What inspired you to write Take No. 2020 and focus on the intersecting lives of characters like Meera, Dabloo, Jayesh, and Micky Taneja?</div>
+<div class="answer"><strong>Puneet Sikka:</strong> More than inspired, I felt compelled to tell a story that had been brewing within for quite some time. Especially, after I’d moved to Bombay and had been auditioning for roles as an actor. I’m a sponge as far as ideas and feelings are concerned, and the best way for me to process all that stimuli is to put pen to paper. By the time the year 2020 hit, I had to discard all the fanciful plots in my head, and reimagine a storyline in tune with the reality around me and the world. Meera, Dabloo, Jayesh and Mickey Taneja had been my companions from 2019 itself, so to speak, who represented a sample size of the hundred-thousands of aspiring actors from different socio-economic and linguistic backgrounds coming to Bombay to find their foothold in Bollywood. Isolating them from each other’s storylines did not feel natural, especially in the year when most people were forced to live in isolation. Intersecting the lives of these characters helped to bring out the starkness in the challenges faced by each set of people during the pandemic.</div>
 
-      <div class="question">4. Identity plays a central role in the novel. Why?</div>
-      <div class="answer"><strong>Puneet Sikka:</strong> Actors constantly navigate multiple identities, which mirrors broader human struggles of belonging and self-definition. The characters act as mirrors to societal issues and collective human unconscious.</div>
+<div class="question">2. The book delves deeply into the struggles and complexities of the Bollywood industry. How much of this is drawn from real-life experiences or observations?</div>
+<div class="answer"><strong>Puneet Sikka:</strong> Most creative work draws from life, eventually. And so, Take No. 2020 being my first book is largely auto-fictional, in that, I’ve drawn few references from my direct and personal experience as well from those of actor friends and acquaintances I met along the way, as well as stories one hears, watches and absorbs around themselves.</div>
 
-      <div class="question">5. How did you balance humour and grief?</div>
-      <div class="answer"><strong>Puneet Sikka:</strong> I viewed the story as “one person’s tragedy is another’s comedy.” I allowed characters to find humour or grief organically, leaving interpretation open to the reader.</div>
+<div class="question">3. Your characters face a range of personal and professional challenges. How did you develop their individual arcs, and what was the most challenging aspect of their development?</div>
+<div class="answer"><strong>Puneet Sikka:</strong> Each character was wildly different as far as preparation and development was concerned. As cliche as it may sound, the characters were writing their own arcs through me. Most part of 2020 went in scribbling post-it notes of plot points and sub plots as and when ideas came through. Not to say that I was sitting idle, but there is a subtle dance between one’s imagination at play and actually going to the playground and waiting actively, watching with a hawk’s eye, at any thought that can become the character’s motivation to take the story forward. The bizarreness of real life stories become fodder too. Once I’d gotten to the point where I knew the beginning-middle-and-end of the story and broadly the characters’ arcs, it was a jump off the cliff. Then it was mostly about adhering to the task of filling the blanks. The most challenging part was writing from the perspective of characters I did not agree with or even ‘like’ as people for that matter. Had I met them in real life, we wouldn’t have gone beyond pleasantries at the most. But in the story, they had to feel like the heroes in their own minds, which meant I had to empathise with their dark sides too.</div>
 
-      <div class="question">6. Why include themes like #MeToo and the casting couch?</div>
-      <div class="answer"><strong>Puneet Sikka:</strong> These themes are unfortunately relevant to showbiz. I didn’t intend to moralise but was drawn to human endurance and growth in difficult circumstances.</div>
+<div class="question">4. The theme of identity, both public and private, is central to your book. How do you think your characters' journeys reflect broader societal issues?</div>
+<div class="answer"><strong>Puneet Sikka:</strong> Self-identity and finding one’s place in the world is central to our existence as humans, in any case. And it’s perhaps even more amplified with actors, given that they are donning new, fictional identities as part of the their professional duty on a regular basis. Being self-absorbed as most of humankind at present generally is, the characters are no different, until their circumstances throw them for a loop. In trying to understand their role in the larger scheme of events, and in desperately seeking their answers, my sense was that the characters would act as a mirror to the societal issues. And one that hopefully the reader would be able to find resonance with. After all, it is about the collective human unconscious, which is why storytelling is never about telling a story; but always about re-telling a story.</div>
 
-      <div class="question">7. Can you explain the “story within a story” structure?</div>
-      <div class="answer"><strong>Puneet Sikka:</strong> I discovered this structure only after finishing the book. It suited the film-based setting perfectly — and saying more would mean spoilers.</div>
+<div class="question">5. Humor and grief are intertwined throughout the narrative. How did you balance these two elements to create a compelling and relatable story?</div>
+<div class="answer"><strong>Puneet Sikka:</strong> I saw the entire story as a classic case of ‘one man’s tragedy is another man’s comedy’. It’s not to mock or ridicule anyone’s circumstances but present them as they are. Of course, I have an opinion as a writer and I did take a stand with choosing one out of many options available, to bail or find closure as the characters’ journeys unfolded. But my aim was also for the characters to find their own humour or grief in their respective situations, while simultaneously leaving it open for the reader to interpret it as per their own mindset. For instance, some people may genuinely not find any humour in a Chinese app being banned by the Indian government! Though I will admit that I let my instincts guide me at many points when it came to tempering the light and dark aspects of the events and the characters’ mindsets.</div>
 
-      <div class="question">8. How does Bollywood as a setting intensify the narrative?</div>
-      <div class="answer"><strong>Puneet Sikka:</strong> Bollywood’s low entry barrier and brutal survival curve already create conflict. Add 2020 to that, and it became a Hunger Games–like situation.</div>
+<div class="question">6. #MeToo allegations and the casting couch are sensitive and powerful topics. What motivated you to incorporate these into your narrative, and what message do you hope to convey?</div>
+<div class="answer"><strong>Puneet Sikka:</strong> Sensitive and powerful aside, these topics are also, unfortunately, relevant to showbiz. Or at least, made more prominent because of the industry being in the spotlight. By virtue of being subjected to film news in our country, even the most far removed from it, find themselves aware of the shady elements at play. And so incorporating these topics into the narrative was a no-brainer. I didn’t intend to dole out any advice or proselytise, but yes, I’ve always been fascinated with themes of human endurance and personal growth in challenging circumstances in stories and in life and that may have unconsciously seeped into mine as well.</div>
 
-      <div class="question">9. What was your research process like?</div>
-      <div class="answer"><strong>Puneet Sikka:</strong> Much came from lived experience. For specialised aspects, I consulted experts and had intentional conversations with industry professionals.</div>
+<div class="question">7. The concept of a "story within a story" plays a significant role in Take No. 2020. Can you elaborate on how you utilized this technique and its significance to the overall narrative?</div>
+<div class="answer"><strong>Puneet Sikka:</strong> As I mentioned earlier, after a while the story was writing itself. And honestly, I discovered this happy coincidence of a ‘story within a story’ only once I had finished writing the book. I could say more, but for that, I’ll have to give out spoilers which I would like to avoid at this stage. The book is easy to visualise and it made sense to adopt that style of writing since the setting and theme is film-based.</div>
 
-      <div class="question">10. Do the characters find redemption?</div>
-      <div class="answer"><strong>Puneet Sikka:</strong> Redemption itself can be the resolution. Life exists in the in-between, and so does this story — open to interpretation.</div>
+<div class="question">8. How do you think the setting of Bollywood, with its glamour and darker sides, enhances the themes and conflicts in your book?</div>
+<div class="answer"><strong>Puneet Sikka:</strong> Between Bollywood having a low entry barrier for newcomers, to them finding a foothold as a performer or creator and to then thriving in the industry, the journey is replete with challenges and oddities that has often been the raw material for countless tales already. Each character is caught somewhere in this spectrum which is the primary plot. And then comes the year of the most – 2020, which only intensifies The Hunger Games like situation. The characters are furiously doggy-paddling to keep their heads above water, where only time will be the judge of who floats and who drowns. I can only say that the proof of the pudding is in the eating, which in this case means, reading the book to find out exactly how that happens. :)</div>
 
-    </section>
+<div class="question">9. What was your research process like for this book, particularly regarding the intricacies of the film industry and the personal struggles of your characters?</div>
+<div class="answer"><strong>Puneet Sikka:</strong> As far as the film industry is concerned, a lot of the research came from observations and my own lived experience. I’ve come to understand that no amount of formal training and certified education can give as much insight into the industry as working in the system and learning on the job does. This knowledge helped me create the framework within which Meera, Dabloo, Jayesh and Mickey would operate. But for the purpose of their individual graphs, especially which required more specialised understanding, I consulted experts – like doctors for instance. Even casual but intentional conversations with actor-friends, casting agents and even a television news anchor were helpful.</div>
 
-    <div class="bottom-bar">
-      <a href="https://razorpay.me/@cutitsbs" target="_blank" class="btn">Donate</a>
-      <a href="/" class="btn-ghost">Back to Home</a>
-    </div>
+<div class="question">10. Looking at the journey of your characters, do you believe they find redemption or resolution by the end of the book? How important was it for you to leave some aspects open to interpretation?</div>
+<div class="answer"><strong>Puneet Sikka:</strong> There is no definitive answer to this question, not just in context of my book, but for life in general too. Many times, redemption itself ‘is’ the resolution or is ‘in’ the resolution. To be a little cheeky and quote the character Sarita’s dialogue from my book, “Sometimes there’s a disconnect between what we want from life and what we resign ourselves to”. From some initial feedback I had gotten on the book, the readers had mentioned that they found themselves playing a guessing game at various junctures at which the characters found themselves. Few that they had foreseen and few that they hadn’t and a different resolution to the one they had imagined ended up surprising them. Even if Take NO. 2020 is a story within a story, to me it is as real as life gets. And real life is experienced in the in-between, which is always open to interpretation by whomsoever we allow to participate in it. The year 2020 proved that fact is stranger than fiction, and the book is only an extension of that.</div>
 
-  </article>
+</section>
 
-  <footer class="site-foot">
-    <nav>
-      <a href="/privacy-policy.html">Privacy Policy</a>
-      <a href="/terms-and-conditions.html">Terms & Conditions</a>
-      <a href="/dmca.html">DMCA</a>
-      <a href="/disclaimer.html">Disclaimer</a>
-      <a href="/about.html">About</a>
-      <a href="/contact.html">Contact</a>
-    </nav>
+<div class="bottom-bar">
+  <a class="btn" href="https://ajivatalks.in/">Back to Home</a>
+</div>
 
-    <div class="tagline">
-      Your trusted space for thoughtful conversations, meaningful interviews, literary voices, and cultural storytelling.
-    </div>
+</article>
 
-    <div class="brand">#AJIVATALKS</div>
-    <div class="copyright">© 2025 AJIVATALKS. All Rights Reserved.</div>
-  </footer>
+<footer class="site-foot">
+<nav>
+<a href="/privacy-policy.html">Privacy Policy</a>
+<a href="/terms-and-conditions.html">Terms & Conditions</a>
+<a href="/dmca.html">DMCA</a>
+<a href="/disclaimer.html">Disclaimer</a>
+<a href="/about.html">About</a>
+<a href="/contact.html">Contact</a>
+</nav>
+
+<div class="tagline">
+Your trusted space for thoughtful conversations, meaningful interviews, literary voices, and cultural storytelling.
+</div>
+
+<div class="brand">#AJIVATALKS</div>
+<div class="copyright">© 2025 AJIVATALKS. All Rights Reserved.</div>
+</footer>
 
 </main>
 
-<script>
-  const text=document.getElementById('content').innerText||'';
-  const mins=Math.max(1,Math.round(text.split(/\s+/).length/200));
-  document.getElementById('readTime').innerText=mins+' min read';
+<a class="fab" href="#article">↑ Top</a>
 
-  window.addEventListener('scroll',()=>{
-    const total=document.body.scrollHeight-window.innerHeight;
-    document.getElementById('progressBar').style.width=(window.scrollY/total*100)+'%';
-  });
+<script>
+(function(){
+const text=document.getElementById('content').innerText||'';
+const words=text.trim().split(/\s+/).length;
+document.getElementById('readTime').innerText=Math.max(1,Math.round(words/200))+' min read';
+})();
+window.addEventListener('scroll',()=>{const t=document.body.scrollHeight-innerHeight;progressBar.style.width=(scrollY/t)*100+'%';});
 </script>
 
 </body>
