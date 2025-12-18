@@ -14,7 +14,7 @@
   --text:#111;
   --muted:#666;
   --line:#e5e5e5;
-  --wrap:clamp(20px,5vw,80px);
+  --wrap:clamp(24px,6vw,96px);
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -27,7 +27,6 @@ body{
 
 a{color:inherit;text-decoration:none}
 
-/* ---------- LAYOUT ---------- */
 .wrapper{
   max-width:1200px;
   margin:0 auto;
@@ -43,17 +42,17 @@ a{color:inherit;text-decoration:none}
   display:flex;
   flex-direction:column;
   align-items:center;
-  padding:40px 0 30px;
+  padding:44px 0 32px;
 }
 
 .logo img{
-  height:54px;
-  margin-bottom:24px;
+  height:56px;
+  margin-bottom:26px;
 }
 
 .menu{
   display:flex;
-  gap:clamp(22px,4vw,44px);
+  gap:clamp(22px,4vw,46px);
 }
 
 .menu a{
@@ -71,7 +70,7 @@ a{color:inherit;text-decoration:none}
   height:1px;
   background:var(--text);
   transform:translateX(-50%);
-  transition:.3s ease;
+  transition:.35s ease;
 }
 
 .menu a:hover::after,
@@ -81,49 +80,50 @@ a{color:inherit;text-decoration:none}
 
 /* ---------- HERO ---------- */
 .hero{
-  padding:90px 0 70px;
+  padding:96px 0 84px;
   text-align:center;
 }
 
 .hero h1{
   font-family:"Playfair Display",serif;
-  font-size:clamp(36px,6vw,72px);
+  font-size:clamp(38px,6vw,74px);
   font-weight:600;
-  margin-bottom:22px;
+  margin-bottom:24px;
 }
 
 .hero p{
-  max-width:720px;
+  max-width:760px;
   margin:0 auto;
   font-size:17px;
   color:var(--muted);
 }
 
-/* ---------- FEATURED ---------- */
+/* ---------- SECTIONS ---------- */
 .section{
-  padding:80px 0;
+  padding:96px 0;
 }
 
 .section-title{
   font-family:"Playfair Display",serif;
-  font-size:28px;
-  margin-bottom:40px;
+  font-size:30px;
+  margin-bottom:48px;
 }
 
+/* ---------- FEATURED ---------- */
 .feature-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:40px;
+  gap:44px;
 }
 
 .feature{
   border-top:1px solid var(--line);
-  padding-top:24px;
+  padding-top:26px;
   transition:.3s ease;
 }
 
 .feature:hover{
-  transform:translateY(-4px);
+  transform:translateY(-5px);
 }
 
 .feature h3{
@@ -137,14 +137,33 @@ a{color:inherit;text-decoration:none}
   color:var(--muted);
 }
 
+/* ---------- EDITORIAL STRIP ---------- */
+.editorial-strip{
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:60px 0;
+  margin:40px 0;
+}
+
+.editorial-strip p{
+  max-width:820px;
+  font-size:16px;
+  color:var(--muted);
+}
+
 /* ---------- LATEST ---------- */
+.latest{
+  max-width:900px;
+  margin:0 auto;
+}
+
 .latest-item{
-  padding:24px 0;
+  padding:28px 0;
   border-top:1px solid var(--line);
 }
 
 .latest-item h4{
-  font-size:18px;
+  font-size:19px;
   font-weight:500;
   margin-bottom:6px;
 }
@@ -157,12 +176,12 @@ a{color:inherit;text-decoration:none}
 /* ---------- CTA ---------- */
 .read-all{
   text-align:center;
-  margin-top:60px;
+  margin-top:64px;
 }
 
 .read-all a{
   display:inline-block;
-  padding:14px 36px;
+  padding:15px 40px;
   border:1px solid var(--text);
   font-size:14px;
   transition:.3s ease;
@@ -176,36 +195,46 @@ a{color:inherit;text-decoration:none}
 /* ---------- FOOTER ---------- */
 footer{
   border-top:1px solid var(--line);
-  padding:60px 0;
+  padding:88px 0 64px;
 }
 
 .footer-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:40px;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:60px;
+}
+
+.footer-about p{
+  font-size:14px;
+  color:var(--muted);
+  max-width:420px;
 }
 
 .footer-col h5{
   font-size:14px;
-  margin-bottom:14px;
+  margin-bottom:16px;
 }
 
 .footer-col a{
   display:block;
   font-size:13px;
   color:var(--muted);
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
 
 .footer-bottom{
-  margin-top:40px;
+  margin-top:56px;
+  padding-top:24px;
+  border-top:1px solid var(--line);
   font-size:12px;
   color:var(--muted);
 }
 
 /* ---------- MOBILE ---------- */
-@media(max-width:600px){
-  .menu{flex-wrap:wrap;justify-content:center}
+@media(max-width:800px){
+  .footer-grid{
+    grid-template-columns:1fr;
+  }
 }
 </style>
 </head>
@@ -229,36 +258,46 @@ footer{
 <section class="hero wrapper">
   <h1>Long Conversations.<br>Real Voices.</h1>
   <p>
-    In-depth interviews with writers, thinkers, and cultural voices across Asia —
-    exploring identity, craft, resilience, and the stories behind the stories.
+    In-depth conversations with writers, thinkers, and cultural voices across Asia,
+    exploring identity, creativity, resilience, and the human condition.
   </p>
 </section>
 
 <section class="section wrapper">
-  <h2 class="section-title">Featured Conversations</h2>
+  <h2 class="section-title">Featured Interviews</h2>
   <div class="feature-grid">
     <a class="feature" href="emily-lim-leh.html">
       <h3>Emily Lim-Leh</h3>
-      <p>From losing her voice to becoming an award-winning children’s author.</p>
+      <p>Finding a new voice through children’s literature after losing her own.</p>
     </a>
     <a class="feature" href="jin-young-lim.html">
       <h3>Jin Young Lim</h3>
-      <p>Daoism, flow, and finding harmony through embodied philosophy.</p>
+      <p>Daoist flow, embodied wisdom, and modern contemplative life.</p>
     </a>
   </div>
 </section>
 
+<div class="editorial-strip wrapper">
+  <p>
+    These conversations are slow journalism. We prioritize depth over speed,
+    lived experience over soundbites, and voices that challenge how we think
+    about culture, identity, and creative life.
+  </p>
+</div>
+
 <section class="section wrapper">
   <h2 class="section-title">Latest Conversations</h2>
 
-  <div class="latest-item">
-    <h4><a href="nusrat-fatima-jafri.html">Nusrat Fatima Jafri</a></h4>
-    <p>On caste, conversion, memory, and belonging in modern India.</p>
-  </div>
+  <div class="latest">
+    <div class="latest-item">
+      <h4><a href="nusrat-fatima-jafri.html">Nusrat Fatima Jafri</a></h4>
+      <p>Caste, conversion, and the search for dignity across generations.</p>
+    </div>
 
-  <div class="latest-item">
-    <h4><a href="larry-nyanti.html">Larry Nyanti</a></h4>
-    <p>Love, loss, and the supernatural in a coming-of-age novel.</p>
+    <div class="latest-item">
+      <h4><a href="larry-nyanti.html">Larry Nyanti</a></h4>
+      <p>Love, memory, and supernatural reckonings in contemporary fiction.</p>
+    </div>
   </div>
 
   <div class="read-all">
@@ -268,32 +307,38 @@ footer{
 
 <footer>
   <div class="wrapper footer-grid">
-    <div class="footer-col">
-      <h5>About</h5>
-      <a href="#">Our Mission</a>
-      <a href="#">Editorial Values</a>
+    <div class="footer-about">
+      <h5>About This Project</h5>
+      <p>
+        Conversations is an independent editorial platform dedicated to thoughtful,
+        long-form interviews with writers, artists, and thinkers shaping culture
+        across Asia and beyond.
+      </p>
     </div>
+
     <div class="footer-col">
       <h5>Explore</h5>
       <a href="all-interviews.html">All Interviews</a>
       <a href="#">Featured</a>
+      <a href="#">Latest</a>
     </div>
+
     <div class="footer-col">
       <h5>Connect</h5>
       <a href="#">Instagram</a>
       <a href="#">Twitter</a>
     </div>
   </div>
+
   <div class="wrapper footer-bottom">
-    © 2025 · All Rights Reserved
+    © 2025 Conversations · All rights reserved
   </div>
 </footer>
 
 <script>
 document.querySelectorAll('.menu a').forEach(link=>{
   link.addEventListener('click',()=>{
-    document.querySelectorAll('.menu a')
-      .forEach(l=>l.classList.remove('active'));
+    document.querySelectorAll('.menu a').forEach(l=>l.classList.remove('active'));
     link.classList.add('active');
   });
 });
