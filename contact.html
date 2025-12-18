@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Ajiva Talks</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --bg-card: #0f0f0f;
+  --text: #e8e8e8;
+  --text-dim: #999999;
+  --border: #1f1f1f;
+  --accent: #ffffff;
+  --accent-subtle: rgba(255,255,255,0.05);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 300;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 60px);
+}
+
+/* ===== ANIMATED BACKGROUND ===== */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.03) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+  animation: subtleShift 20s ease-in-out infinite;
+}
+
+@keyframes subtleShift {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+/* ===== HEADER ===== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 32px 0;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+  opacity: 0.7;
+}
+
+nav {
+  display: flex;
+  gap: 48px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+nav a {
+  position: relative;
+  transition: opacity 0.3s ease;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+nav a:hover {
+  opacity: 0.6;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* ===== CONTACT HERO ===== */
+.contact-hero {
+  position: relative;
+  z-index: 1;
+  padding: clamp(100px, 15vh, 140px) 0 clamp(60px, 10vh, 80px);
+}
+
+.contact-hero-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--text-dim);
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out 0.2s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.contact-hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(64px, 10vw, 96px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.3s forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== CONTENT SECTIONS ===== */
+.content-section {
+  position: relative;
+  z-index: 1;
+  padding: clamp(40px, 8vh, 80px) 0;
+}
+
+.content-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.content-block {
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.content-block:nth-child(1) { animation-delay: 0.4s; }
+.content-block:nth-child(2) { animation-delay: 0.5s; }
+.content-block:nth-child(3) { animation-delay: 0.6s; }
+.content-block:nth-child(4) { animation-delay: 0.7s; }
+.content-block:nth-child(5) { animation-delay: 0.8s; }
+.content-block:nth-child(6) { animation-delay: 0.9s; }
+
+.content-block p {
+  font-size: clamp(17px, 2vw, 19px);
+  line-height: 1.85;
+  color: var(--text);
+  margin-bottom: 0;
+  font-weight: 300;
+}
+
+.content-block.emphasis p {
+  font-size: clamp(22px, 2.8vw, 28px);
+  line-height: 1.65;
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+/* ===== DECORATIVE ELEMENTS ===== */
+.decorative-line {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  margin: 80px auto;
+  opacity: 0;
+  animation: expandLine 1.2s ease-out 0.5s forwards;
+}
+
+@keyframes expandLine {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 80px;
+    opacity: 0.3;
+  }
+}
+
+/* ===== INTERESTS LIST ===== */
+.interests-section {
+  position: relative;
+  z-index: 1;
+  padding: clamp(60px, 10vh, 100px) 0;
+}
+
+.interests-header {
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.5s forwards;
+}
+
+.interests-label {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+}
+
+.interests-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(38px, 6vw, 48px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.interests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--border);
+}
+
+.interest-item {
+  padding: 32px 16px;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.interest-item:nth-child(1) { animation-delay: 0.6s; }
+.interest-item:nth-child(2) { animation-delay: 0.7s; }
+.interest-item:nth-child(3) { animation-delay: 0.8s; }
+.interest-item:nth-child(4) { animation-delay: 0.9s; }
+.interest-item:nth-child(5) { animation-delay: 1s; }
+
+.interest-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0%;
+  height: 100%;
+  background: rgba(255,255,255,0.04);
+  transition: width 0.5s ease;
+  z-index: -1;
+}
+
+.interest-item:hover::before {
+  width: 100%;
+}
+
+.interest-item:hover {
+  padding-left: 32px;
+}
+
+.interest-text {
+  font-size: 22px;
+  color: var(--text);
+  transition: transform 0.4s ease;
+}
+
+.interest-item:hover .interest-text {
+  transform: translateX(6px);
+}
+
+/* ===== EMAIL BOX ===== */
+.email-section {
+  position: relative;
+  z-index: 1;
+  padding: clamp(80px, 12vh, 120px) 0;
+}
+
+.email-box {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: clamp(60px, 8vw, 100px) clamp(40px, 6vw, 80px);
+  background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+  border-left: 2px solid rgba(255,255,255,0.15);
+  position: relative;
+  transition: all 0.6s ease;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.6s forwards;
+}
+
+.email-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 0;
+  background: linear-gradient(180deg, var(--accent), transparent);
+  transition: height 0.8s ease;
+}
+
+.email-box:hover::before {
+  height: 100%;
+}
+
+.email-box:hover {
+  transform: translateX(12px);
+  border-left-color: var(--accent);
+}
+
+.email-label {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--text-dim);
+  margin-bottom: 32px;
+}
+
+.email-content p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 32px;
+}
+
+.email-address {
+  display: inline-block;
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(28px, 4vw, 42px);
+  letter-spacing: -0.015em;
+  font-weight: 400;
+  color: var(--accent);
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.email-address::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.email-address:hover::after {
+  width: 100%;
+}
+
+.email-address:hover {
+  opacity: 0.8;
+}
+
+/* ===== GUIDELINES ===== */
+.guidelines-section {
+  position: relative;
+  z-index: 1;
+  padding: clamp(40px, 8vh, 80px) 0;
+}
+
+.guidelines-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.guidelines-header {
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.7s forwards;
+}
+
+.guidelines-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(32px, 5vw, 40px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.guidelines-list {
+  list-style: none;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.8s forwards;
+}
+
+.guidelines-list li {
+  padding: 20px 0 20px 40px;
+  border-bottom: 1px solid var(--border);
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--text);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.guidelines-list li:first-child {
+  border-top: 1px solid var(--border);
+}
+
+.guidelines-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--text-dim);
+  font-weight: 300;
+}
+
+.guidelines-list li:hover {
+  padding-left: 48px;
+  color: var(--accent);
+}
+
+/* ===== CLOSING NOTE ===== */
+.closing-section {
+  position: relative;
+  z-index: 1;
+  padding: clamp(60px, 10vh, 100px) 0;
+}
+
+.closing-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.closing-text {
+  font-size: clamp(17px, 2vw, 19px);
+  line-height: 1.85;
+  color: var(--text-dim);
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.9s forwards;
+}
+
+.closing-emphasis {
+  display: block;
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(22px, 2.8vw, 28px);
+  font-style: italic;
+  color: var(--text);
+  margin-top: 32px;
+  letter-spacing: -0.01em;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  position: relative;
+  z-index: 1;
+  margin-top: 100px;
+  padding: 100px 0 50px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 80px;
+}
+
+.footer-brand h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.footer-brand p {
+  color: var(--text-dim);
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.footer-section h4 {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 24px;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-links a {
+  color: var(--text-dim);
+  font-size: 14px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.footer-bottom {
+  padding-top: 50px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  header {
+    padding: 24px 0;
+  }
+
+  nav {
+    gap: 28px;
+    font-size: 13px;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  
+  .email-box {
+    padding: 40px 28px;
+  }
+
+  .interest-item {
+    padding: 24px 12px;
+  }
+
+  .interest-item:hover {
+    padding-left: 20px;
+  }
+
+  .guidelines-list li {
+    padding-left: 32px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-content">
+      <a href="index.html" class="logo">Ajiva Talks</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html#latest">Latest</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="contact-hero">
+    <div class="container">
+      <span class="contact-hero-label">Get in Touch</span>
+      <h1>Contact</h1>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <div class="content-wrapper">
+        <div class="content-block">
+          <p>Ajiva Talks is open to thoughtful conversations.</p>
+        </div>
+
+        <div class="content-block">
+          <p>We interview writers, artists, editors, thinkers, founders, and entrepreneurs whose work is shaped by ideas, lived experience, and a clear point of view. Our focus is not on hype or visibility, but on substance — the thinking behind the work, the personal histories that inform it, and the questions that continue to shape it.</p>
+        </div>
+
+        <div class="content-block">
+          <p>If you are an author, creative practitioner, cultural worker, founder, or entrepreneur with a story grounded in craft, values, or long-term vision, we welcome you to reach out.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="interests-section">
+    <div class="container">
+      <div class="content-wrapper">
+        <div class="interests-header">
+          <div class="interests-label">We are particularly interested in</div>
+          <h2 class="interests-title">Areas of Focus</h2>
+        </div>
+
+        <div class="interests-list">
+          <div class="interest-item">
+            <div class="interest-text">Authors and poets</div>
+          </div>
+          <div class="interest-item">
+            <div class="interest-text">Editors, publishers, and translators</div>
+          </div>
+          <div class="interest-item">
+            <div class="interest-text">Artists, filmmakers, and cultural practitioners</div>
+          </div>
+          <div class="interest-item">
+            <div class="interest-text">Founders and entrepreneurs building thoughtful, values-driven work</div>
+          </div>
+          <div class="interest-item">
+            <div class="interest-text">Thinkers working at the intersection of culture, identity, philosophy, or technology</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <div class="content-wrapper">
+        <div class="decorative-line"></div>
+        
+        <div class="content-block">
+          <p>All interviews are long-form and editorially curated. We do not conduct promotional features, press releases, or sponsored content.</p>
+        </div>
+
+        <div class="decorative-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="email-section">
+    <div class="container">
+      <div class="email-box">
+        <div class="email-label">How to reach us</div>
+        <div class="email-content">
+          <p>For interview requests, editorial inquiries, or general correspondence, please email:</p>
+          <a href="mailto:hello@ajivatalks.in" class="email-address">hello@ajivatalks.in</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="guidelines-section">
+    <div class="container">
+      <div class="guidelines-wrapper">
+        <div class="guidelines-header">
+          <h3 class="guidelines-title">If you are pitching yourself or someone else for an interview, include:</h3>
+        </div>
+
+        <ul class="guidelines-list">
+          <li>A brief introduction</li>
+          <li>Relevant work or background</li>
+          <li>Why you believe the conversation would be meaningful for Ajiva Talks</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing-section">
+    <div class="container">
+      <div class="closing-wrapper">
+        <div class="closing-text">
+          We read every message, though replies may take time. Ajiva Talks operates independently and prioritizes careful curation over volume.
+          <span class="closing-emphasis">Thank you for your interest in thoughtful dialogue.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Ajiva Talks</h3>
+        <p>An independent editorial platform dedicated to long-form cultural conversations with thinkers, creators, and changemakers from around the world.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Explore</h4>
+        <div class="footer-links">
+          <a href="#">All Interviews</a>
+          <a href="#">Featured</a>
+          <a href="#">Archive</a>
+          <a href="#">Submit</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>About</h4>
+        <div class="footer-links">
+          <a href="#">Our Mission</a>
+          <a href="#">Team</a>
+          <a href="#">Press</a>
+          <a href="#">Support</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="footer-links">
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 Ajiva Talks — All Rights Reserved
+    </div>
+  </div>
+</footer>
+
+<script>
+// Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
