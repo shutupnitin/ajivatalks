@@ -1,53 +1,115 @@
-body {
+/* ================================
+   AJIVA TALKS — PREMIUM NEWSPAPER
+   NYT / Washington Post inspired
+   ================================ */
+
+* {
   margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  background: #ffffff;
-  color: #111;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  background: #ffffff;
+  color: #111;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+/* LINKS */
+a {
+  color: #000;
+  text-decoration: underline;
+}
+a:hover {
+  text-decoration: none;
+}
+
+/* HEADER */
 .site-header {
+  max-width: 900px;
+  margin: 30px auto 0;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #000;
   text-align: center;
-  padding: 30px 0;
-  border-bottom: 3px solid #000;
 }
 
 .site-logo {
-  max-width: 320px;
-  height: auto;
+  max-width: 260px;
 }
 
+/* CONTENT AREA */
 .content {
-  max-width: 700px;
-  margin: 40px auto;
+  max-width: 680px;   /* THIS is the NYT secret */
+  margin: 48px auto;
   padding: 0 16px;
-  font-size: 20px;
-  line-height: 1.8;
 }
-/* ARTICLE STYLES */
 
+/* ARTICLE */
 .post {
-  border-bottom: 2px solid #000;
-  padding-bottom: 40px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid #ddd;
 }
 
+/* HEADLINE */
 .post-title {
+  font-family: "Times New Roman", Georgia, serif;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 18px;
+}
+
+/* META */
+.post-meta {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 36px;
-  font-weight: 900;
-  letter-spacing: -0.7px;
-  margin-bottom: 16px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #666;
+  margin-bottom: 28px;
 }
 
+/* BODY TEXT */
 .post-body {
-  font-size: 21px;
-  line-height: 1.9;
+  font-size: 20px;
+  line-height: 1.85;
 }
 
+/* FIRST PARAGRAPH — VERY IMPORTANT */
 .post-body .lead {
-  font-size: 22px;
+  font-size: 21px;
   margin-bottom: 1.6em;
 }
 
+/* PARAGRAPHS */
 .post-body p {
-  margin-bottom: 1.4em;
+  margin-bottom: 1.45em;
+}
+
+/* QUESTIONS */
+.post-body strong {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+}
+
+/* FOOTER */
+.site-footer {
+  max-width: 900px;
+  margin: 64px auto 40px;
+  padding-top: 20px;
+  border-top: 1px solid #000;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  color: #555;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .post-title {
+    font-size: 30px;
+  }
+  .post-body {
+    font-size: 18px;
+  }
 }
