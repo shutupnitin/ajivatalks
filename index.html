@@ -5,76 +5,87 @@
 <title>Ajiva</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --black:#111;
-  --gray:#777;
-  --light:#e6e6e6;
+  --black:#0f0f0f;
+  --gray:#6f6f6f;
+  --light:#e5e5e5;
 }
 
 *{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
 body{
   margin:0;
-  font-family:Inter, sans-serif;
+  font-family:Inter,sans-serif;
   color:var(--black);
   background:#fff;
 }
 
-/* GLOBAL */
 a{text-decoration:none;color:inherit;}
+img{max-width:100%;}
+
+/* CONTAINER */
 .container{
-  max-width:1200px;
+  max-width:1280px;
   margin:auto;
   padding:0 24px;
 }
 
-/* HEADER */
-header{
+/* NAV */
+nav{
+  position:sticky;
+  top:0;
+  background:#fff;
   border-bottom:1px solid var(--light);
+  z-index:100;
 }
-.header-inner{
-  padding:56px 0 40px;
+.nav-inner{
   display:flex;
-  justify-content:center;
+  justify-content:space-between;
+  align-items:center;
+  height:76px;
 }
-.header-inner img{
-  height:44px;
+.nav-inner img{
+  height:42px;
 }
+.nav-links a{
+  margin-left:28px;
+  font-size:14px;
+  color:var(--gray);
+}
+.nav-links a:hover{color:var(--black);}
 
 /* HERO */
 .hero{
   padding:120px 0 140px;
-  text-align:center;
 }
 .hero h1{
-  font-family:"Libre Baskerville", serif;
-  font-weight:400;
-  font-size:52px;
+  font-family:"Libre Baskerville",serif;
+  font-size:56px;
   max-width:900px;
-  margin:0 auto 24px;
+  line-height:1.25;
 }
 .hero p{
+  margin-top:24px;
   font-size:18px;
   color:var(--gray);
+  max-width:600px;
 }
 
 /* MARQUEE */
 .marquee{
+  overflow:hidden;
   border-top:1px solid var(--light);
   border-bottom:1px solid var(--light);
-  overflow:hidden;
-  white-space:nowrap;
 }
 .marquee span{
   display:inline-block;
-  padding:16px 0;
-  font-size:13px;
+  padding:18px 0;
+  font-size:12px;
   letter-spacing:2px;
   text-transform:uppercase;
-  animation:scroll 30s linear infinite;
+  animation:scroll 25s linear infinite;
 }
 @keyframes scroll{
   from{transform:translateX(0);}
@@ -83,30 +94,25 @@ header{
 
 /* FEATURED */
 .featured{
-  padding:140px 0;
   display:grid;
-  grid-template-columns:1.4fr 1fr;
+  grid-template-columns:2fr 1fr;
   gap:80px;
+  padding:140px 0;
 }
-.feature{
-  transition:transform .4s ease;
-}
-.feature:hover{transform:translateY(-4px);}
 .feature small{
-  font-size:11px;
-  letter-spacing:1.4px;
+  font-size:12px;
+  letter-spacing:1.5px;
   text-transform:uppercase;
   color:var(--gray);
 }
-.feature h2, .feature h3{
-  font-family:"Libre Baskerville", serif;
-  font-weight:400;
+.feature h2{
+  font-family:"Libre Baskerville",serif;
+  font-size:44px;
+  margin:16px 0;
 }
-.feature h2{font-size:44px;}
-.feature h3{font-size:28px;}
 .feature p{color:var(--gray);}
 
-/* SECTION */
+/* GRID */
 .section{
   padding-bottom:140px;
 }
@@ -115,10 +121,8 @@ header{
   letter-spacing:2px;
   text-transform:uppercase;
   color:var(--gray);
-  margin-bottom:48px;
+  margin-bottom:56px;
 }
-
-/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -127,36 +131,24 @@ header{
 .card{
   border-top:1px solid var(--light);
   padding-top:24px;
-  transition:transform .3s ease;
 }
-.card:hover{transform:translateY(-3px);}
-.card h4{
-  font-family:"Libre Baskerville", serif;
-  font-weight:400;
+.card h3{
+  font-family:"Libre Baskerville",serif;
   font-size:22px;
-  margin:10px 0;
 }
 .card p{
-  font-size:14px;
   color:var(--gray);
+  font-size:14px;
 }
 
 /* RECENT */
-.recent{
-  display:grid;
-  gap:24px;
-}
 .recent a{
   display:flex;
   justify-content:space-between;
-  padding:18px 0;
+  padding:20px 0;
   border-bottom:1px solid var(--light);
-  transition:opacity .3s;
 }
-.recent a:hover{opacity:.6;}
-.recent span{
-  font-size:14px;
-}
+.recent span{font-size:15px;}
 .recent em{
   font-style:normal;
   color:var(--gray);
@@ -170,21 +162,20 @@ footer{
 .footer-inner{
   display:grid;
   grid-template-columns:2fr 1fr;
-  gap:60px;
+  gap:80px;
 }
 .footer-inner p{
-  font-family:"Libre Baskerville", serif;
+  font-family:"Libre Baskerville",serif;
   max-width:420px;
 }
 .footer-links a{
   display:block;
   font-size:13px;
   color:var(--gray);
-  margin-bottom:14px;
+  margin-bottom:16px;
 }
 .copy{
-  text-align:center;
-  margin-top:60px;
+  margin-top:64px;
   font-size:11px;
   color:var(--gray);
 }
@@ -193,49 +184,59 @@ footer{
 @media(max-width:900px){
   .featured,.grid,.footer-inner{grid-template-columns:1fr;}
   .hero h1{font-size:40px;}
+  .nav-links{display:none;}
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="container header-inner">
+<nav>
+  <div class="container nav-inner">
     <img src="images/logo.png" alt="Ajiva">
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Interviews</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </div>
   </div>
-</header>
+</nav>
 
 <section class="hero container">
   <h1>
-    Conversations on identity, literature, memory, power,
-    and the lives that shape our world.
+    Long-form conversations with writers, thinkers,
+    and cultural voices shaping our time.
   </h1>
-  <p>Independent interviews with writers, thinkers, and cultural voices.</p>
+  <p>
+    Ajiva publishes in-depth interviews on identity,
+    literature, power, memory, and belonging.
+  </p>
 </section>
 
 <div class="marquee">
   <span>
-    CULTURE &nbsp; IDENTITY &nbsp; LITERATURE &nbsp; POWER &nbsp;
-    MEMORY &nbsp; BELONGING &nbsp; JUSTICE &nbsp;
+    CULTURE &nbsp; IDENTITY &nbsp; LITERATURE &nbsp; JUSTICE &nbsp;
+    MEMORY &nbsp; BELONGING &nbsp;
   </span>
 </div>
 
 <section class="featured container">
   <a href="nusrat-fatima-jafri.html" class="feature">
-    <small>Featured Interview</small>
+    <small>Featured</small>
     <h2>This Land We Call Home</h2>
     <p>
-      Nusrat Fatima Jafri on caste, conversion, faith, and
-      the search for dignity across generations.
+      Nusrat Fatima Jafri on caste, conversion,
+      faith, and dignity across generations.
     </p>
   </a>
 
   <a href="jin-young-lim.html" class="feature">
     <small>In Focus</small>
-    <h3>The Dao of Flow</h3>
+    <h2>The Dao of Flow</h2>
     <p>
-      Jin Young Lim on Daoism, water, and living
-      with intention in a chaotic world.
+      Jin Young Lim on water, Daoism,
+      and living with intention.
     </p>
   </a>
 </section>
@@ -244,22 +245,22 @@ footer{
   <div class="section-title">Voices</div>
   <div class="grid">
     <a href="mica-de-leon.html" class="card">
-      <h4>Mica De Leon</h4>
-      <p>Romance, feminism, and Filipino publishing culture.</p>
+      <h3>Mica De Leon</h3>
+      <p>Romance, feminism, and Filipino publishing.</p>
     </a>
     <a href="larry-nyanti.html" class="card">
-      <h4>Larry Nyanti</h4>
-      <p>Love, loss, and the supernatural across cultures.</p>
+      <h3>Larry Nyanti</h3>
+      <p>Love, loss, and the supernatural.</p>
     </a>
     <a href="sylvia-yu-friedman.html" class="card">
-      <h4>Sylvia Yu Friedman</h4>
-      <p>Fearlessness, justice, and confronting modern slavery.</p>
+      <h3>Sylvia Yu Friedman</h3>
+      <p>Justice, courage, and human rights.</p>
     </a>
   </div>
 </section>
 
 <section class="section container">
-  <div class="section-title">Recently Published</div>
+  <div class="section-title">Recent</div>
   <div class="recent">
     <a href="justine-camacho-tajonera.html">
       <span>Steady Sarah</span>
@@ -279,8 +280,8 @@ footer{
 <footer>
   <div class="container footer-inner">
     <p>
-      Ajiva is an independent editorial platform publishing
-      long-form interviews that value depth over noise.
+      Ajiva is an independent editorial platform
+      dedicated to depth, clarity, and cultural dialogue.
     </p>
     <div class="footer-links">
       <a href="#">Instagram</a>
@@ -289,7 +290,7 @@ footer{
       <a href="#">Privacy</a>
     </div>
   </div>
-  <div class="copy">© 2025 Ajiva</div>
+  <div class="container copy">© 2025 Ajiva</div>
 </footer>
 
 </body>
