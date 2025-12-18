@@ -1,6 +1,6 @@
 /* ================================
-   AJIVA TALKS — PREMIUM NEWSPAPER
-   NYT / Washington Post inspired
+   AJIVA TALKS — CLASSIC NEWSPAPER
+   New York Times inspired
    ================================ */
 
 * {
@@ -27,63 +27,63 @@ a:hover {
 /* HEADER */
 .site-header {
   max-width: 900px;
-  margin: 30px auto 0;
-  padding-bottom: 16px;
+  margin: 36px auto 0;
+  padding-bottom: 14px;
   border-bottom: 1px solid #000;
   text-align: center;
 }
 
 .site-logo {
-  max-width: 260px;
+  max-width: 240px;
 }
 
-/* CONTENT AREA */
+/* CONTENT */
 .content {
-  max-width: 680px;   /* THIS is the NYT secret */
-  margin: 48px auto;
+  max-width: 640px;   /* tighter column = classic */
+  margin: 56px auto;
   padding: 0 16px;
 }
 
 /* ARTICLE */
 .post {
-  padding-bottom: 48px;
-  border-bottom: 1px solid #ddd;
+  padding-bottom: 56px;
+  border-bottom: 1px solid #e0e0e0;
 }
 
-/* HEADLINE */
+/* HEADLINE — SERIOUS, NOT LOUD */
 .post-title {
   font-family: "Times New Roman", Georgia, serif;
-  font-size: 40px;
-  font-weight: 700;
-  line-height: 1.15;
-  margin-bottom: 18px;
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 20px;
 }
 
 /* META */
 .post-meta {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.8px;
   color: #666;
-  margin-bottom: 28px;
+  margin-bottom: 30px;
 }
 
 /* BODY TEXT */
 .post-body {
-  font-size: 20px;
-  line-height: 1.85;
+  font-size: 19px;
+  line-height: 1.9;
 }
 
-/* FIRST PARAGRAPH — VERY IMPORTANT */
+/* OPENING PARAGRAPH */
 .post-body .lead {
-  font-size: 21px;
-  margin-bottom: 1.6em;
+  font-size: 20px;
+  margin-bottom: 1.7em;
 }
 
 /* PARAGRAPHS */
 .post-body p {
-  margin-bottom: 1.45em;
+  margin-bottom: 1.5em;
 }
 
 /* QUESTIONS */
@@ -95,21 +95,21 @@ a:hover {
 /* FOOTER */
 .site-footer {
   max-width: 900px;
-  margin: 64px auto 40px;
-  padding-top: 20px;
+  margin: 72px auto 44px;
+  padding-top: 18px;
   border-top: 1px solid #000;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 13px;
-  color: #555;
+  font-size: 12px;
+  color: #666;
 }
 
 /* MOBILE */
 @media (max-width: 768px) {
   .post-title {
-    font-size: 30px;
+    font-size: 28px;
   }
   .post-body {
-    font-size: 18px;
+    font-size: 17px;
   }
 }
