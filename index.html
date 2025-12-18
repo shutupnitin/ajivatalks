@@ -1,335 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Conversations</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
 <style>
-/* ---------------- DESIGN SYSTEM ---------------- */
-:root {
-  --bg: #ffffff;
-  --text: #111;
-  --muted: #6b6b6b;
-  --line: #e8e8e8;
-
-  --max: 1200px;
-  --pad: clamp(20px, 4vw, 48px);
-  --section: clamp(64px, 10vw, 120px);
+:root{
+  --bg:#fafafa;
+  --text:#111;
+  --muted:#666;
+  --line:#e5e5e5;
+  --wrap:clamp(20px,5vw,80px);
 }
 
-/* ---------------- RESET ---------------- */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-/* ---------------- BODY ---------------- */
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: Georgia, "Times New Roman", serif;
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui,sans-serif;
+  line-height:1.7;
 }
 
-/* ---------------- WRAPPER ---------------- */
-.wrapper {
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 0 var(--pad);
+a{color:inherit;text-decoration:none}
+
+/* ---------- LAYOUT ---------- */
+.wrapper{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 var(--wrap);
 }
 
-/* ---------------- HEADER ---------------- */
-header {
-  border-bottom: 1px solid var(--line);
+/* ---------- HEADER ---------- */
+.site-header{
+  border-bottom:1px solid var(--line);
 }
 
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 28px 0;
+.header-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:40px 0 30px;
 }
 
-.logo img {
-  height: 40px;
+.logo img{
+  height:54px;
+  margin-bottom:24px;
 }
 
-.menu {
-  display: flex;
-  gap: clamp(20px, 4vw, 40px);
+.menu{
+  display:flex;
+  gap:clamp(22px,4vw,44px);
 }
 
-.menu a {
-  font-size: 15px;
-  color: var(--text);
-  text-decoration: none;
-  position: relative;
+.menu a{
+  font-size:15px;
+  position:relative;
+  padding:6px 0;
 }
 
-.menu a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 0;
-  height: 1px;
-  background: var(--text);
-  transition: width .25s ease;
+.menu a::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-6px;
+  width:0;
+  height:1px;
+  background:var(--text);
+  transform:translateX(-50%);
+  transition:.3s ease;
 }
 
-.menu a:hover::after {
-  width: 100%;
+.menu a:hover::after,
+.menu a.active::after{
+  width:100%;
 }
 
-/* ---------------- HERO ---------------- */
-.hero {
-  padding: var(--section) 0;
-  max-width: 900px;
+/* ---------- HERO ---------- */
+.hero{
+  padding:90px 0 70px;
+  text-align:center;
 }
 
-.hero h1 {
-  font-size: clamp(38px, 6vw, 68px);
-  font-weight: 400;
-  letter-spacing: -0.02em;
+.hero h1{
+  font-family:"Playfair Display",serif;
+  font-size:clamp(36px,6vw,72px);
+  font-weight:600;
+  margin-bottom:22px;
 }
 
-.hero p {
-  margin-top: 24px;
-  font-size: clamp(16px, 2.4vw, 19px);
-  color: var(--muted);
-  max-width: 720px;
+.hero p{
+  max-width:720px;
+  margin:0 auto;
+  font-size:17px;
+  color:var(--muted);
 }
 
-/* ---------------- SECTION ---------------- */
-section {
-  padding: var(--section) 0;
+/* ---------- FEATURED ---------- */
+.section{
+  padding:80px 0;
 }
 
-.section-head {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 48px;
+.section-title{
+  font-family:"Playfair Display",serif;
+  font-size:28px;
+  margin-bottom:40px;
 }
 
-.section-head span {
-  font-size: 14px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--muted);
+.feature-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:40px;
 }
 
-.section-head::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--line);
+.feature{
+  border-top:1px solid var(--line);
+  padding-top:24px;
+  transition:.3s ease;
 }
 
-/* ---------------- GRID ---------------- */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: clamp(32px, 5vw, 64px);
+.feature:hover{
+  transform:translateY(-4px);
 }
 
-/* ---------------- CARD ---------------- */
-.card {
-  animation: fadeUp .6s ease both;
+.feature h3{
+  font-family:"Playfair Display",serif;
+  font-size:22px;
+  margin-bottom:12px;
 }
 
-.card h3 {
-  font-size: 24px;
-  font-weight: 400;
+.feature p{
+  font-size:15px;
+  color:var(--muted);
 }
 
-.card p {
-  margin: 16px 0 20px;
-  font-size: 15px;
-  color: var(--muted);
+/* ---------- LATEST ---------- */
+.latest-item{
+  padding:24px 0;
+  border-top:1px solid var(--line);
 }
 
-.card a {
-  font-size: 14px;
-  color: var(--text);
-  text-decoration: none;
-  border-bottom: 1px solid var(--text);
-  padding-bottom: 2px;
+.latest-item h4{
+  font-size:18px;
+  font-weight:500;
+  margin-bottom:6px;
 }
 
-/* ---------------- MARQUEE ---------------- */
-.marquee {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  overflow: hidden;
+.latest-item p{
+  font-size:14px;
+  color:var(--muted);
 }
 
-.marquee-track {
-  display: flex;
-  gap: 72px;
-  padding: 18px 0;
-  animation: move 32s linear infinite;
+/* ---------- CTA ---------- */
+.read-all{
+  text-align:center;
+  margin-top:60px;
 }
 
-.marquee span {
-  white-space: nowrap;
-  font-size: 14px;
-  color: var(--muted);
+.read-all a{
+  display:inline-block;
+  padding:14px 36px;
+  border:1px solid var(--text);
+  font-size:14px;
+  transition:.3s ease;
 }
 
-/* ---------------- FOOTER ---------------- */
-footer {
-  border-top: 1px solid var(--line);
-  padding: var(--section) 0 48px;
+.read-all a:hover{
+  background:var(--text);
+  color:#fff;
 }
 
-.footer-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 48px;
+/* ---------- FOOTER ---------- */
+footer{
+  border-top:1px solid var(--line);
+  padding:60px 0;
 }
 
-footer h4 {
-  font-size: 14px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  margin-bottom: 16px;
+.footer-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:40px;
 }
 
-footer a {
-  display: block;
-  font-size: 14px;
-  color: var(--muted);
-  text-decoration: none;
-  margin-bottom: 10px;
+.footer-col h5{
+  font-size:14px;
+  margin-bottom:14px;
 }
 
-footer a:hover { color: var(--text); }
-
-.footer-bottom {
-  margin-top: 64px;
-  font-size: 13px;
-  color: var(--muted);
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
+.footer-col a{
+  display:block;
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:8px;
 }
 
-/* ---------------- ANIMATION ---------------- */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: translateY(0); }
+.footer-bottom{
+  margin-top:40px;
+  font-size:12px;
+  color:var(--muted);
 }
 
-@keyframes move {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+/* ---------- MOBILE ---------- */
+@media(max-width:600px){
+  .menu{flex-wrap:wrap;justify-content:center}
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="wrapper nav">
+<header class="site-header">
+  <div class="wrapper header-inner">
     <div class="logo">
       <img src="images/logo.png" alt="Logo">
     </div>
     <nav class="menu">
-      <a href="#">Home</a>
-      <a href="#">Conversations</a>
+      <a href="#" class="active">Home</a>
+      <a href="all-interviews.html">Interviews</a>
       <a href="#">About</a>
       <a href="#">Contact</a>
     </nav>
   </div>
 </header>
 
-<main class="wrapper">
+<section class="hero wrapper">
+  <h1>Long Conversations.<br>Real Voices.</h1>
+  <p>
+    In-depth interviews with writers, thinkers, and cultural voices across Asia —
+    exploring identity, craft, resilience, and the stories behind the stories.
+  </p>
+</section>
 
-  <!-- HERO -->
-  <div class="hero">
-    <h1>Long-form conversations with writers, thinkers, and cultural voices.</h1>
-    <p>
-      Carefully edited interviews exploring literature, identity, power, memory,
-      and the inner lives that shape our world.
-    </p>
+<section class="section wrapper">
+  <h2 class="section-title">Featured Conversations</h2>
+  <div class="feature-grid">
+    <a class="feature" href="emily-lim-leh.html">
+      <h3>Emily Lim-Leh</h3>
+      <p>From losing her voice to becoming an award-winning children’s author.</p>
+    </a>
+    <a class="feature" href="jin-young-lim.html">
+      <h3>Jin Young Lim</h3>
+      <p>Daoism, flow, and finding harmony through embodied philosophy.</p>
+    </a>
+  </div>
+</section>
+
+<section class="section wrapper">
+  <h2 class="section-title">Latest Conversations</h2>
+
+  <div class="latest-item">
+    <h4><a href="nusrat-fatima-jafri.html">Nusrat Fatima Jafri</a></h4>
+    <p>On caste, conversion, memory, and belonging in modern India.</p>
   </div>
 
-  <!-- FEATURED -->
-  <section>
-    <div class="section-head"><span>Featured</span></div>
-    <div class="grid">
-      <div class="card">
-        <h3>Mica De Leon</h3>
-        <p>On love as equality, publishing romance, and Filipino cultural identity.</p>
-        <a href="mica-de-leon.html">Read →</a>
-      </div>
-      <div class="card">
-        <h3>Nusrat Fatima Jafri</h3>
-        <p>Caste, conversion, belonging, and the long road to dignity.</p>
-        <a href="nusrat-fatima-jafri.html">Read →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- LATEST -->
-  <section>
-    <div class="section-head"><span>Latest</span></div>
-    <div class="grid" id="latest"></div>
-  </section>
-
-</main>
-
-<!-- MARQUEE -->
-<div class="marquee">
-  <div class="wrapper marquee-track">
-    <span>Identity</span><span>Literature</span><span>Memory</span>
-    <span>Culture</span><span>Belonging</span><span>Power</span>
-    <span>Identity</span><span>Literature</span>
+  <div class="latest-item">
+    <h4><a href="larry-nyanti.html">Larry Nyanti</a></h4>
+    <p>Love, loss, and the supernatural in a coming-of-age novel.</p>
   </div>
-</div>
+
+  <div class="read-all">
+    <a href="all-interviews.html">Read all interviews →</a>
+  </div>
+</section>
 
 <footer>
   <div class="wrapper footer-grid">
-    <div>
-      <h4>About</h4>
-      <a href="#">Mission</a>
-      <a href="#">Editorial Policy</a>
+    <div class="footer-col">
+      <h5>About</h5>
+      <a href="#">Our Mission</a>
+      <a href="#">Editorial Values</a>
     </div>
-    <div>
-      <h4>Connect</h4>
+    <div class="footer-col">
+      <h5>Explore</h5>
+      <a href="all-interviews.html">All Interviews</a>
+      <a href="#">Featured</a>
+    </div>
+    <div class="footer-col">
+      <h5>Connect</h5>
       <a href="#">Instagram</a>
-      <a href="#">Twitter / X</a>
-    </div>
-    <div>
-      <h4>Legal</h4>
-      <a href="#">Terms</a>
-      <a href="#">Privacy</a>
+      <a href="#">Twitter</a>
     </div>
   </div>
-
   <div class="wrapper footer-bottom">
-    <span>© 2025 Conversations</span>
-    <span>Independent editorial project</span>
+    © 2025 · All Rights Reserved
   </div>
 </footer>
 
 <script>
-const data = [
-  { t: "Larry Nyanti", e: "Love, regret, and the quiet pull of the supernatural.", u: "larry-nyanti.html" },
-  { t: "Jin Young Lim", e: "Daoist flow, mindfulness, and harmony in uncertainty.", u: "jin-young-lim.html" },
-  { t: "Justine Camacho-Tajonera", e: "Waterfalls, resilience, and choosing your own path.", u: "justine-camacho-tajonera.html" }
-];
-
-const box = document.getElementById("latest");
-data.forEach(d => {
-  box.innerHTML += `
-    <div class="card">
-      <h3>${d.t}</h3>
-      <p>${d.e}</p>
-      <a href="${d.u}">Read →</a>
-    </div>
-  `;
+document.querySelectorAll('.menu a').forEach(link=>{
+  link.addEventListener('click',()=>{
+    document.querySelectorAll('.menu a')
+      .forEach(l=>l.classList.remove('active'));
+    link.classList.add('active');
+  });
 });
 </script>
 
