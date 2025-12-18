@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>All Interviews — Ajiva Talks</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --bg-card: #0f0f0f;
+  --text: #e8e8e8;
+  --text-dim: #999999;
+  --border: #1f1f1f;
+  --accent: #ffffff;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 300;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 60px);
+}
+
+/* ===== ANIMATED BACKGROUND ===== */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.03) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+  animation: subtleShift 20s ease-in-out infinite;
+}
+
+@keyframes subtleShift {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+/* ===== HEADER ===== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 32px 0;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+  opacity: 0.7;
+}
+
+nav {
+  display: flex;
+  gap: 48px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+nav a {
+  position: relative;
+  transition: opacity 0.3s ease;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+nav a:hover {
+  opacity: 0.6;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* ===== PAGE HERO ===== */
+.page-hero {
+  position: relative;
+  z-index: 1;
+  padding: clamp(100px, 15vh, 140px) 0 clamp(60px, 10vh, 80px);
+  border-bottom: 1px solid var(--border);
+}
+
+.page-hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(48px, 8vw, 84px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.2s forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-subtitle {
+  font-size: clamp(18px, 2.2vw, 21px);
+  color: var(--text-dim);
+  max-width: 600px;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.4s forwards;
+}
+
+/* ===== INTERVIEWS GRID ===== */
+.interviews-section {
+  position: relative;
+  z-index: 1;
+  padding: clamp(80px, 12vh, 120px) 0;
+}
+
+.interviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 40px;
+}
+
+.interview-card {
+  position: relative;
+  border: 1px solid var(--border);
+  padding: 32px;
+  transition: all 0.4s ease;
+  background: rgba(15, 15, 15, 0.5);
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.interview-card:nth-child(1) { animation-delay: 0.1s; }
+.interview-card:nth-child(2) { animation-delay: 0.15s; }
+.interview-card:nth-child(3) { animation-delay: 0.2s; }
+.interview-card:nth-child(4) { animation-delay: 0.25s; }
+.interview-card:nth-child(5) { animation-delay: 0.3s; }
+.interview-card:nth-child(6) { animation-delay: 0.35s; }
+.interview-card:nth-child(7) { animation-delay: 0.4s; }
+.interview-card:nth-child(8) { animation-delay: 0.45s; }
+.interview-card:nth-child(9) { animation-delay: 0.5s; }
+.interview-card:nth-child(10) { animation-delay: 0.55s; }
+.interview-card:nth-child(11) { animation-delay: 0.6s; }
+.interview-card:nth-child(12) { animation-delay: 0.65s; }
+
+.interview-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 0;
+  background: linear-gradient(180deg, var(--accent), transparent);
+  transition: height 0.4s ease;
+}
+
+.interview-card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateX(8px);
+}
+
+.interview-card:hover::before {
+  height: 100%;
+}
+
+.interview-meta {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.meta-tag {
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+}
+
+.interview-card h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+
+.interview-excerpt {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+
+.interview-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  transition: all 0.3s ease;
+}
+
+.interview-link::after {
+  content: '→';
+  transition: transform 0.3s ease;
+}
+
+.interview-card:hover .interview-link::after {
+  transform: translateX(4px);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  position: relative;
+  z-index: 1;
+  margin-top: 100px;
+  padding: 100px 0 50px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 80px;
+}
+
+.footer-brand h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.footer-brand p {
+  color: var(--text-dim);
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.footer-section h4 {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 24px;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-links a {
+  color: var(--text-dim);
+  font-size: 14px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.footer-bottom {
+  padding-top: 50px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  header {
+    padding: 24px 0;
+  }
+
+  nav {
+    gap: 28px;
+    font-size: 13px;
+  }
+
+  .interviews-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-content">
+      <a href="index.html" class="logo">Ajiva Talks</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="all-interviews.html">Latest</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <h1>All Interviews</h1>
+      <p class="page-subtitle">Conversations that honor depth, nuance, and the complexity of creative life.</p>
+    </div>
+  </section>
+
+  <section class="interviews-section">
+    <div class="container">
+      <div class="interviews-grid">
+
+        <a href="deborah-wong-interview.html" class="interview-card">
+          <div class="interview-meta">
+            <span class="meta-tag">Poet</span>
+            <span class="meta-tag">Novelist</span>
+            <span class="meta-tag">Malaysia</span>
+          </div>
+          <h3>Deborah Wong on Music, Memory, and Emotional Storytelling</h3>
+          <p class="interview-excerpt">A Malaysian poet and author whose work blends lyrical storytelling with deep emotional resonance, exploring love, loss, and self-discovery.</p>
+          <span class="interview-link">Read Interview</span>
+        </a>
+
+        <a href="emily-lim-leh-interview.html" class="interview-card">
+          <div class="interview-meta">
+            <span class="meta-tag">Children's Author</span>
+            <span class="meta-tag">Singapore</span>
+          </div>
+          <h3>Emily Lim-Leh on Voice, Resilience, and Writing for Children</h3>
+          <p class="interview-excerpt">A celebrated children's book author who found her voice through storytelling after losing her voice to a rare neurological condition.</p>
+          <span class="interview-link">Read Interview</span>
+        </a>
+
+        <a href="jin-young-lim-interview.html" class="interview-card">
+          <div class="interview-meta">
+            <span class="meta-tag">Author</span>
+            <span class="meta-tag">Philosophy</span>
+          </div>
+          <h3>Jin Young Lim on The Dao of Flow, Water, and Living in Harmony</h3>
+          <p class="interview-excerpt">A multifaceted thinker whose work bridges ancient Daoist philosophy, contemplative practices, and modern challenges.</p>
+          <span class="interview-link">Read Interview</span>
+        </a>
+
+        <a href="justine-camacho-tajonera-interview.html" class="interview-card">
+          <div class="interview-meta">
+            <span class="meta-tag">Author</span>
+            <span class="meta-tag">Philippines</span>
+          </div>
+          <h3>Justine Camacho-Tajonera on Steady Sarah, Waterfalls, and Self-Discovery</h3>
+          <p class="interview-excerpt">A Filipino author and poet whose romance novel follows a woman navigating upheavals by exploring waterfalls across the Philippines.</p>
+          <span class="interview-link">Read Interview</span>
+        </a>
+
+        <a href="kantarin-leelahuta-interview.html" class="interview-card">
+          <div class="interview-meta">
+            <span class="meta-tag">Novelist</span>
+            <span class="meta-tag">Thailand</span>
+          </div>
+          <h3>Kantarin Leelahuta on Storytelling, Fame, and a Lifetime of Writing</h3>
+          <p class="interview-excerpt">A prolific Thai novelist who began writing at age 12 and has since published over 70 titles, many adapted into television dramas.</p>
+          <span class="interview-link">Read Interview</span>
+        </a>
+
+        <a href="larry-nyanti-interview.html" class="interview-card">
+          <div class="interview-meta">
+            <span class="meta-tag">Author</span>
+            <span class="meta-tag">Fiction</span>
+          </div>
+          <h3>Larry Nyanti on A Rei of Sunshine, Love, Loss, and the Supernatural</h3>
+          <p class="interview-excerpt">A doctor and writer from Borneo whose debut novel masterfully intertwines themes of love, loss, and the supernatural.</p>
+          <span class="interview-link">Read Interview</span>
+        </a>
+
+        <a href="malcolm-mejin-interview.html" class="interview-card">
+          <div class="interview-meta">
+            <span class="meta-tag">Author</span>
+            <span class="meta-tag">Malaysia</span>
+          </div>
+          <h3>Malcolm Mejin on Diary of a Rich Kid, Mount Hantu, and Writing for Young Readers</h3>
+          <p class="interview-excerpt">A Malaysian author known for his popular Diary of a Rich Kid series, blending humor, suspense, and relatable characters.</p>
+          <span class="interview-link">Read Interview</span>
+        </a>
+
+        <a href="malcom-seah-interview.html" class="interview-card">
+          <div class="interview-meta">
+            <span class="meta-tag">Writer</span>
+            <span class="meta-tag">Singapore</span>
+          </div>
+          <h3>Malcom Seah on Swimming Lessons, Grief, and the Surreal</h3>
+          <p class="interview-excerpt">A Singapore-based writer whose debut novel weaves memory, myth, and mystery into a haunting coming-of-age story.</p>
+          <span class="interview-link">Read Interview</span>
+        </a>
+
+        <a href="marga-ortigas-interview.html" class="interview-card">
+          <div class="interview-meta">
+            <span class="meta-tag">Journalist</span>
+            <span class="meta-tag">Author</span>
+            <span class="meta-tag">Philippines</span>
+          </div>
+          <h3>Marga Ortigas on Journalism, Conflict, and Storytelling Across Borders</h3>
+          <p class="interview-excerpt">A seasoned journalist whose three-decade career covering war and humanitarian crises spans five continents and two global news networks.</p>
+          <span class="interview-link">Read Interview</span>
+        </a>
+
+        <a href="mica-de-leon-interview.html" class="interview-card">
+          <div class="interview-meta">
+            <span class="meta-tag">Author</span>
+            <span class="meta-tag">Philippines</span>
+          </div>
+          <h3>Mica De Leon on Love on the Second Read, Publishing, and Writing Across Genres</h3>
+          <p class="interview-excerpt">A celebrated Filipino author known for romance-comedy and speculative fiction novels that blend humor, heart, and imaginative storytelling.</p>
+          <span class="interview-link">Read Interview</span>
+        </a>
+
+        <a href="nusrat-fatima-jafri-interview.html" class="interview-card">
+          <div class="interview-meta">
+            <span class="meta-tag">Memoir</span>
+            <span class="meta-tag">History</span>
+          </div>
+          <h3>Nusrat Fatima Jafri on This Land We Call Home, Identity, and Belonging</h3>
+          <p class="interview-excerpt">A cinematographer and writer whose memoir traces her family's journey from the Bhantu tribe through India's complex caste and religious landscape.</p>
+          <span class="interview-link">Read Interview</span>
+        </a>
+
+        <a href="aaron-pang-interview.html" class="interview-card">
+          <div class="interview-meta">
+            <span class="meta-tag">Author</span>
+            <span class="meta-tag">Speaker</span>
+            <span class="meta-tag">Asia</span>
+          </div>
+          <h3>Aaron Pang on The Unstuck Mindset and Empowering Introverts</h3>
+          <p class="interview-excerpt">A transformational leader and host of Asia's No. 1 Purpose Podcast, empowering introverts to discover their unique strengths.</p>
+          <span class="interview-link">Read Interview</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Ajiva Talks</h3>
+        <p>An independent editorial platform dedicated to long-form cultural conversations with thinkers, creators, and changemakers from around the world.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Explore</h4>
+        <div class="footer-links">
+          <a href="all-interviews.html">All Interviews</a>
+          <a href="#">Featured</a>
+          <a href="#">Archive</a>
+          <a href="#">Submit</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>About</h4>
+        <div class="footer-links">
+          <a href="about.html">Our Mission</a>
+          <a href="#">Team</a>
+          <a href="#">Press</a>
+          <a href="#">Support</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="footer-links">
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 Ajiva Talks — All Rights Reserved
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
