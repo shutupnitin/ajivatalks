@@ -195,3 +195,86 @@ a:hover {
     font-size: 24px;
   }
 }
+/* ================================
+   VOGUE-INSPIRED HOMEPAGE
+   ================================ */
+
+.vogue-home {
+  max-width: 900px;
+  margin: 80px auto;
+  padding: 0 18px;
+}
+
+/* HERO */
+.vogue-hero {
+  max-width: 760px;
+  margin: 0 auto 120px;
+}
+
+.vogue-hero h1 {
+  font-family: "Times New Roman", Georgia, serif;
+  font-size: 64px;
+  font-weight: 500;
+  line-height: 1.05;
+  margin-bottom: 26px;
+}
+
+.vogue-hero p {
+  font-size: 20px;
+  line-height: 1.7;
+  max-width: 520px;
+}
+
+/* LABEL */
+.vogue-label {
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  color: #555;
+}
+
+/* FEATURE */
+.vogue-feature {
+  max-width: 720px;
+  margin-bottom: 120px;
+}
+
+.vogue-feature h2 {
+  font-family: "Times New Roman", Georgia, serif;
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.vogue-feature p {
+  font-size: 19px;
+  line-height: 1.7;
+  max-width: 520px;
+}
+
+/* LIST */
+.vogue-list p {
+  font-family: "Times New Roman", Georgia, serif;
+  font-size: 26px;
+  line-height: 1.3;
+  margin-bottom: 24px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .vogue-hero h1 {
+    font-size: 40px;
+  }
+
+  .vogue-feature h2 {
+    font-size: 30px;
+  }
+
+  .vogue-list p {
+    font-size: 22px;
+  }
+}
