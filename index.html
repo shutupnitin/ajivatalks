@@ -19,6 +19,7 @@
   --text-dim: #999999;
   --border: #1f1f1f;
   --accent: #ffffff;
+  --accent-subtle: rgba(255,255,255,0.05);
 }
 
 body {
@@ -41,7 +42,7 @@ a {
   padding: 0 clamp(24px, 5vw, 60px);
 }
 
-/* ===== SUBTLE BACKGROUND GRADIENT ===== */
+/* ===== ANIMATED BACKGROUND ===== */
 body::before {
   content: '';
   position: fixed;
@@ -49,9 +50,17 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.03) 0%, transparent 50%);
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.03) 0%, transparent 40%);
   pointer-events: none;
   z-index: 0;
+  animation: subtleShift 20s ease-in-out infinite;
+}
+
+@keyframes subtleShift {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
 }
 
 /* ===== HEADER ===== */
@@ -213,50 +222,65 @@ section {
   animation: fadeInUp 0.8s ease-out 0.2s forwards;
 }
 
-/* ===== FEATURED CARDS ===== */
+/* ===== FEATURED CARDS - NOW WITH 2 COLUMNS ===== */
 .featured-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 32px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
   margin-bottom: 80px;
 }
 
 .featured-card {
   position: relative;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 2px;
-  padding: 56px 48px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+  border-left: 2px solid transparent;
+  padding: 60px 50px;
   overflow: hidden;
   transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
   opacity: 0;
   animation: fadeInUp 0.8s ease-out forwards;
+  backdrop-filter: blur(10px);
 }
 
 .featured-card:nth-child(1) { animation-delay: 0.3s; }
 .featured-card:nth-child(2) { animation-delay: 0.4s; }
-.featured-card:nth-child(3) { animation-delay: 0.5s; }
 
 .featured-card::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
+  width: 2px;
+  height: 0;
+  background: linear-gradient(180deg, var(--accent), transparent);
+  transition: height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.featured-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
   right: 0;
-  height: 1px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  bottom: 0;
+  left: 0;
+  background: radial-gradient(circle at top left, rgba(255,255,255,0.08) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
 }
 
 .featured-card:hover {
-  transform: translateY(-12px);
-  border-color: rgba(255,255,255,0.3);
-  background: rgba(15,15,15,0.8);
+  transform: translateX(12px);
+  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+  border-left-color: var(--accent);
 }
 
 .featured-card:hover::before {
-  transform: scaleX(1);
+  height: 100%;
+}
+
+.featured-card:hover::after {
+  opacity: 1;
 }
 
 .card-meta {
@@ -270,7 +294,7 @@ section {
 
 .featured-card h3 {
   font-family: 'Instrument Serif', serif;
-  font-size: 36px;
+  font-size: 42px;
   font-weight: 400;
   margin-bottom: 20px;
   letter-spacing: -0.015em;
@@ -278,7 +302,7 @@ section {
 }
 
 .featured-card:hover h3 {
-  transform: translateX(4px);
+  transform: translateX(6px);
 }
 
 .featured-card p {
@@ -312,69 +336,126 @@ section {
   transform: translateX(4px);
 }
 
-/* ===== INTERVIEWS GRID ===== */
-.interviews-container {
-  opacity: 0;
-  animation: fadeInUp 0.8s ease-out 0.3s forwards;
-}
-
-.interviews-grid {
+/* ===== EDITORIAL PICKS - MASONRY STYLE ===== */
+.editorial-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1px;
-  background: var(--border);
-  border-radius: 1px;
-  overflow: hidden;
-  margin-bottom: 60px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-bottom: 80px;
 }
 
-.interview-card {
-  background: var(--bg-card);
-  padding: 40px 36px;
-  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+.editorial-card {
   position: relative;
+  padding: 40px 36px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 100%);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   cursor: pointer;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+  border-bottom: 1px solid transparent;
 }
 
-.interview-card::before {
+.editorial-card:nth-child(1) { animation-delay: 0.3s; }
+.editorial-card:nth-child(2) { animation-delay: 0.4s; }
+.editorial-card:nth-child(3) { animation-delay: 0.5s; }
+.editorial-card:nth-child(4) { animation-delay: 0.6s; }
+.editorial-card:nth-child(5) { animation-delay: 0.7s; }
+.editorial-card:nth-child(6) { animation-delay: 0.8s; }
+
+.editorial-card::before {
   content: '';
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
-  width: 100%;
+  width: 0;
   height: 1px;
   background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.interview-card:hover {
-  background: var(--bg);
-  transform: translateY(-6px) scale(1.02);
-  z-index: 10;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+.editorial-card:hover {
+  transform: translateY(-8px);
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+  border-bottom-color: rgba(255,255,255,0.1);
 }
 
-.interview-card:hover::before {
-  transform: scaleX(1);
+.editorial-card:hover::before {
+  width: 100%;
 }
 
-.interview-name {
+.editorial-name {
   font-family: 'Instrument Serif', serif;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 400;
   margin-bottom: 14px;
   letter-spacing: -0.01em;
   transition: all 0.4s ease;
 }
 
-.interview-card:hover .interview-name {
-  transform: translateX(6px);
+.editorial-card:hover .editorial-name {
+  transform: translateX(4px);
 }
 
-.interview-desc {
+.editorial-desc {
   font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+/* ===== LATEST INTERVIEWS - STAGGERED LAYOUT ===== */
+.latest-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2px;
+  margin-bottom: 60px;
+}
+
+.latest-card {
+  position: relative;
+  padding: 50px 40px;
+  background: var(--accent-subtle);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.latest-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
+  transition: left 0.6s ease;
+}
+
+.latest-card:hover::before {
+  left: 100%;
+}
+
+.latest-card:hover {
+  background: rgba(255,255,255,0.08);
+  transform: scale(1.03);
+  z-index: 10;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+}
+
+.latest-name {
+  font-family: 'Instrument Serif', serif;
+  font-size: 26px;
+  font-weight: 400;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+  transition: all 0.4s ease;
+}
+
+.latest-card:hover .latest-name {
+  transform: translateY(-4px);
+}
+
+.latest-desc {
+  font-size: 15px;
   color: var(--text-dim);
   line-height: 1.7;
 }
@@ -390,32 +471,31 @@ section {
   margin: 0 auto;
   text-align: center;
   padding: 80px 60px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 2px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 100%);
+  border-left: 2px solid rgba(255,255,255,0.1);
   position: relative;
   transition: all 0.6s ease;
 }
 
 .testimonial:hover {
-  border-color: rgba(255,255,255,0.2);
-  transform: translateY(-4px);
+  border-left-color: var(--accent);
+  transform: translateX(8px);
 }
 
 .testimonial::before {
   content: '';
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  opacity: 0;
-  transition: opacity 0.6s ease;
+  width: 2px;
+  height: 0;
+  background: linear-gradient(180deg, transparent, var(--accent), transparent);
+  transform: translateY(-50%);
+  transition: height 0.6s ease;
 }
 
 .testimonial:hover::before {
-  opacity: 1;
+  height: 80%;
 }
 
 .testimonial blockquote {
@@ -528,7 +608,11 @@ footer {
     grid-template-columns: 1fr;
   }
   
-  .interviews-grid {
+  .editorial-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .latest-grid {
     grid-template-columns: 1fr;
   }
   
@@ -555,7 +639,7 @@ footer {
       <a href="#" class="logo">Ajiva Talks</a>
       <nav>
         <a href="#">Home</a>
-        <a href="#interviews">Interviews</a>
+        <a href="#latest">Latest</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -591,89 +675,98 @@ footer {
           <p>Children's literature, loss of voice, and reclaiming expression</p>
           <span class="card-link">Read Interview</span>
         </a>
-        <a href="#" class="featured-card">
-          <div class="card-meta">Interview 03</div>
-          <h3>Jin Young Lim</h3>
-          <p>Daoist flow, embodied wisdom, and modern contemplative life</p>
-          <span class="card-link">Read Interview</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Curated</span>
+        <h2 class="section-title">Editorial Picks</h2>
+        <p class="section-desc">Handpicked conversations that showcase diverse perspectives</p>
+      </div>
+      <div class="editorial-grid">
+        <a href="#" class="editorial-card">
+          <div class="editorial-name">Jin Young Lim</div>
+          <div class="editorial-desc">Daoist flow, embodied wisdom, and modern contemplative life</div>
+        </a>
+        <a href="#" class="editorial-card">
+          <div class="editorial-name">Nusrat Fatima Jafri</div>
+          <div class="editorial-desc">Caste, conversion, faith, and dignity</div>
+        </a>
+        <a href="#" class="editorial-card">
+          <div class="editorial-name">Larry Nyanti</div>
+          <div class="editorial-desc">Love, memory, and supernatural reckonings</div>
+        </a>
+        <a href="#" class="editorial-card">
+          <div class="editorial-name">Marga Ortigas</div>
+          <div class="editorial-desc">Journalism in the age of disinformation</div>
+        </a>
+        <a href="#" class="editorial-card">
+          <div class="editorial-name">Mica de Leon</div>
+          <div class="editorial-desc">Cinema and social consciousness</div>
+        </a>
+        <a href="#" class="editorial-card">
+          <div class="editorial-name">Sarah Kushairi</div>
+          <div class="editorial-desc">Poetry and postcolonial narratives</div>
         </a>
       </div>
     </div>
   </section>
 
-  <section id="interviews">
+  <section id="latest">
     <div class="container">
       <div class="section-header">
-        <span class="section-label">Archive</span>
-        <h2 class="section-title">All Interviews</h2>
+        <span class="section-label">Recent</span>
+        <h2 class="section-title">Latest Interviews</h2>
+        <p class="section-desc">Fresh conversations from our most recent publications</p>
       </div>
-      <div class="interviews-container">
-        <div class="interviews-grid">
-          <a href="#" class="interview-card">
-            <div class="interview-name">Aaron Pang</div>
-            <div class="interview-desc">Technology, ethics, and building for humanity</div>
-          </a>
-          <a href="#" class="interview-card">
-            <div class="interview-name">Amos Bamboo-Decade</div>
-            <div class="interview-desc">Environmental art and sustainable futures</div>
-          </a>
-          <a href="#" class="interview-card">
-            <div class="interview-name">Deborah Wong</div>
-            <div class="interview-desc">Music, identity, and cultural memory</div>
-          </a>
-          <a href="#" class="interview-card">
-            <div class="interview-name">Justine Camacho-Tajonera</div>
-            <div class="interview-desc">Social justice through storytelling</div>
-          </a>
-          <a href="#" class="interview-card">
-            <div class="interview-name">Kantarin Leelahuta</div>
-            <div class="interview-desc">Design thinking and creative innovation</div>
-          </a>
-          <a href="#" class="interview-card">
-            <div class="interview-name">Larry Nyanti</div>
-            <div class="interview-desc">Love, memory, and supernatural reckonings</div>
-          </a>
-          <a href="#" class="interview-card">
-            <div class="interview-name">Malcom Seah</div>
-            <div class="interview-desc">Entrepreneurship and digital transformation</div>
-          </a>
-          <a href="#" class="interview-card">
-            <div class="interview-name">Marga Ortigas</div>
-            <div class="interview-desc">Journalism in the age of disinformation</div>
-          </a>
-          <a href="#" class="interview-card">
-            <div class="interview-name">Mica de Leon</div>
-            <div class="interview-desc">Cinema and social consciousness</div>
-          </a>
-          <a href="#" class="interview-card">
-            <div class="interview-name">Nusrat Fatima Jafri</div>
-            <div class="interview-desc">Caste, conversion, faith, and dignity</div>
-          </a>
-          <a href="#" class="interview-card">
-            <div class="interview-name">Ong Chin Huat</div>
-            <div class="interview-desc">Democracy and political reform in Asia</div>
-          </a>
-          <a href="#" class="interview-card">
-            <div class="interview-name">Sammon Isaree Siriwankulthon</div>
-            <div class="interview-desc">Thai literature and cultural identity</div>
-          </a>
-          <a href="#" class="interview-card">
-            <div class="interview-name">Sarah Kushairi</div>
-            <div class="interview-desc">Poetry and postcolonial narratives</div>
-          </a>
-          <a href="#" class="interview-card">
-            <div class="interview-name">Sylvia Yu Friedman</div>
-            <div class="interview-desc">Technology policy and digital rights</div>
-          </a>
-          <a href="#" class="interview-card">
-            <div class="interview-name">Thammika Songkaeo</div>
-            <div class="interview-desc">Gender studies and feminist activism</div>
-          </a>
-          <a href="#" class="interview-card">
-            <div class="interview-name">Tutu Dutta</div>
-            <div class="interview-desc">Performance art and cultural resistance</div>
-          </a>
-        </div>
+      <div class="latest-grid">
+        <a href="#" class="latest-card scroll-reveal">
+          <div class="latest-name">Aaron Pang</div>
+          <div class="latest-desc">Technology, ethics, and building for humanity</div>
+        </a>
+        <a href="#" class="latest-card scroll-reveal">
+          <div class="latest-name">Amos Bamboo-Decade</div>
+          <div class="latest-desc">Environmental art and sustainable futures</div>
+        </a>
+        <a href="#" class="latest-card scroll-reveal">
+          <div class="latest-name">Deborah Wong</div>
+          <div class="latest-desc">Music, identity, and cultural memory</div>
+        </a>
+        <a href="#" class="latest-card scroll-reveal">
+          <div class="latest-name">Justine Camacho-Tajonera</div>
+          <div class="latest-desc">Social justice through storytelling</div>
+        </a>
+        <a href="#" class="latest-card scroll-reveal">
+          <div class="latest-name">Kantarin Leelahuta</div>
+          <div class="latest-desc">Design thinking and creative innovation</div>
+        </a>
+        <a href="#" class="latest-card scroll-reveal">
+          <div class="latest-name">Malcom Seah</div>
+          <div class="latest-desc">Entrepreneurship and digital transformation</div>
+        </a>
+        <a href="#" class="latest-card scroll-reveal">
+          <div class="latest-name">Ong Chin Huat</div>
+          <div class="latest-desc">Democracy and political reform in Asia</div>
+        </a>
+        <a href="#" class="latest-card scroll-reveal">
+          <div class="latest-name">Sammon Isaree Siriwankulthon</div>
+          <div class="latest-desc">Thai literature and cultural identity</div>
+        </a>
+        <a href="#" class="latest-card scroll-reveal">
+          <div class="latest-name">Sylvia Yu Friedman</div>
+          <div class="latest-desc">Technology policy and digital rights</div>
+        </a>
+        <a href="#" class="latest-card scroll-reveal">
+          <div class="latest-name">Thammika Songkaeo</div>
+          <div class="latest-desc">Gender studies and feminist activism</div>
+        </a>
+        <a href="#" class="latest-card scroll-reveal">
+          <div class="latest-name">Tutu Dutta</div>
+          <div class="latest-desc">Performance art and cultural resistance</div>
+        </a>
       </div>
     </div>
   </section>
@@ -741,7 +834,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Scroll reveal for interview cards
+// Scroll reveal for latest cards
 const observerOptions = {
   threshold: 0.15,
   rootMargin: '0px 0px -80px 0px'
@@ -758,8 +851,7 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, observerOptions);
 
-document.querySelectorAll('.interview-card').forEach(card => {
-  card.classList.add('scroll-reveal');
+document.querySelectorAll('.scroll-reveal').forEach(card => {
   observer.observe(card);
 });
 </script>
