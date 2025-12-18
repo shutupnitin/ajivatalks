@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sarah Kushairi on Writing, Failure, and Finding Her Voice — Ajiva Talks</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --bg-card: #0f0f0f;
+  --text: #e8e8e8;
+  --text-dim: #999999;
+  --border: #1f1f1f;
+  --accent: #ffffff;
+  --accent-subtle: rgba(255,255,255,0.05);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 300;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 60px);
+}
+
+/* ===== ANIMATED BACKGROUND ===== */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.03) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+  animation: subtleShift 20s ease-in-out infinite;
+}
+
+@keyframes subtleShift {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+/* ===== HEADER ===== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 32px 0;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+  opacity: 0.7;
+}
+
+nav {
+  display: flex;
+  gap: 48px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+nav a {
+  position: relative;
+  transition: opacity 0.3s ease;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+nav a:hover {
+  opacity: 0.6;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* ===== INTERVIEW HERO ===== */
+.interview-hero {
+  position: relative;
+  z-index: 1;
+  padding: clamp(100px, 15vh, 140px) 0 clamp(60px, 10vh, 80px);
+  border-bottom: 1px solid var(--border);
+}
+
+.interview-meta {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out 0.2s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.meta-tag {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+}
+
+.interview-hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(42px, 7vw, 72px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: 32px;
+  max-width: 1000px;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.3s forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== INTERVIEW CONTENT ===== */
+.interview-content {
+  position: relative;
+  z-index: 1;
+  padding: clamp(80px, 12vh, 120px) 0;
+}
+
+.interview-wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.interview-intro {
+  font-size: clamp(18px, 2.2vw, 21px);
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.5s forwards;
+}
+
+.interview-intro p {
+  margin-bottom: 24px;
+}
+
+.decorative-line {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  margin: 80px 0;
+  opacity: 0;
+  animation: expandLine 1.2s ease-out 0.6s forwards;
+}
+
+@keyframes expandLine {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 80px;
+    opacity: 0.3;
+  }
+}
+
+/* ===== Q&A SECTIONS ===== */
+.qa-section {
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.qa-section:nth-child(1) { animation-delay: 0.7s; }
+.qa-section:nth-child(2) { animation-delay: 0.75s; }
+.qa-section:nth-child(3) { animation-delay: 0.8s; }
+.qa-section:nth-child(4) { animation-delay: 0.85s; }
+.qa-section:nth-child(5) { animation-delay: 0.9s; }
+
+.question {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text);
+  margin-bottom: 24px;
+  padding-left: 32px;
+  position: relative;
+}
+
+.question::before {
+  content: 'Q';
+  position: absolute;
+  left: 0;
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  color: var(--text-dim);
+}
+
+.answer {
+  padding-left: 32px;
+  position: relative;
+}
+
+.answer::before {
+  content: 'A';
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  color: var(--text-dim);
+}
+
+.answer-intro {
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.answer p {
+  font-size: 18px;
+  line-height: 1.85;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.answer a {
+  color: var(--accent);
+  text-decoration: underline;
+  transition: opacity 0.3s ease;
+}
+
+.answer a:hover {
+  opacity: 0.7;
+}
+
+/* ===== SHARE SECTION ===== */
+.share-section {
+  position: relative;
+  z-index: 1;
+  padding: clamp(80px, 12vh, 120px) 0;
+  border-top: 1px solid var(--border);
+}
+
+.share-wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.share-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 32px;
+  letter-spacing: -0.01em;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 1.2s forwards;
+}
+
+.share-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 1.3s forwards;
+}
+
+.share-btn {
+  padding: 14px 32px;
+  border: 1px solid var(--border);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 400;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text);
+}
+
+.share-btn:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ===== BACK LINK ===== */
+.back-section {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  transition: all 0.4s ease;
+}
+
+.back-link::before {
+  content: '←';
+  transition: transform 0.4s ease;
+}
+
+.back-link:hover {
+  color: var(--accent);
+  gap: 16px;
+}
+
+.back-link:hover::before {
+  transform: translateX(-4px);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  position: relative;
+  z-index: 1;
+  margin-top: 100px;
+  padding: 100px 0 50px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 80px;
+}
+
+.footer-brand h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.footer-brand p {
+  color: var(--text-dim);
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.footer-section h4 {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 24px;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-links a {
+  color: var(--text-dim);
+  font-size: 14px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.footer-bottom {
+  padding-top: 50px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  header {
+    padding: 24px 0;
+  }
+
+  nav {
+    gap: 28px;
+    font-size: 13px;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  
+  .question,
+  .answer {
+    padding-left: 24px;
+  }
+
+  .share-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .share-btn {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-content">
+      <a href="index.html" class="logo">Ajiva Talks</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html#latest">Latest</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="interview-hero">
+    <div class="container">
+      <div class="interview-meta">
+        <span class="meta-tag">Interview</span>
+        <span class="meta-tag">Author</span>
+        <span class="meta-tag">Malaysia</span>
+      </div>
+      <h1>Sarah Kushairi on Writing, Failure, and Finding Her Voice</h1>
+    </div>
+  </section>
+
+  <section class="interview-content">
+    <div class="container">
+      <div class="interview-wrapper">
+        
+        <div class="interview-intro">
+          <p>Sarah Kushairi is a clinical pharmacist and lecturer from Malaysia who never quite shook off her childhood dream of becoming a writer. Armed with a Bachelor of Pharmacy (Honours) from International Islamic University Malaysia (IIUM) and an MSc in Clinical Pharmacy from University College London (UCL), she splits her time between the world of pharmaceuticals and storytelling.</p>
+
+          <p>At twelve, Sarah ambitiously started her first Harry Potter-inspired novel. Two chapters in, she decided to "come back to it later"—she never did. But her love for writing found other outlets. Her health and beauty articles have appeared in Malaysian newspapers, and she's shared her expertise on TV and radio.</p>
+
+          <p>Her personal piece "Tudung Mana?" was featured in the anthology Hijab: Everyday Stories of Muslim Women from Singapore and Beyond (Helang Books, 2023).</p>
+
+          <p>When Master's coursework at UCL became overwhelming, Sarah turned stress into creativity, self-publishing her first travelogue Snippets of Travels: Musings and Travelogues across 5 Countries (Amazon KDP, 2024). Her upcoming non-fiction book The Art of Embracing Failure (Karangkraf, 2025) explores finding strength in setbacks.</p>
+
+          <p>Jannah is ^NOT Average marks her return to fiction—her debut novel inspired by true stories from her days as a science stream student in 2006–2007 Malaysia. Sometimes the best stories come from writers who've taken the long way around.</p>
+        </div>
+
+        <div class="decorative-line"></div>
+
+        <div class="qa-section">
+          <div class="question">Sarah, you're a clinical pharmacist, lecturer, and now an author—how do you balance science and storytelling in your life?</div>
+          <div class="answer">
+            <p class="answer-intro">Sarah Kushairi:</p>
+            <p>I would like to say "I don't. I'm really tired!"—just like that one famous interview on the internet. Hahahah.</p>
+            <p>Okay, let's get serious. For me, after-working hours, weekends, and public holidays are very precious. I try not to bring work matters home. I optimise my working hours towards doing only work stuff. Once I'm home, I dedicate my time to my passions—reading, writing, crafting, playing musical instruments, or just relaxing and watching Netflix.</p>
+            <p>I feel it's important to create a barrier between your "profession" and "passion" hours, so you can really focus on each in their specific time.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">What role did your late grandmother's words, "Be someone who'll make me proud," play in shaping your journey?</div>
+          <div class="answer">
+            <p class="answer-intro">Sarah Kushairi:</p>
+            <p>In Jannah is ^NOT Average, it was her late grandmother who inspired her. In my own journey, it was my late mother.</p>
+            <p>Growing up, I never really felt immense pressure to make her proud. She wasn't too strict or harsh on me or my siblings—and yet we turned out well. I think she had always been proud of us, no matter how small the achievement.</p>
+            <p>Even when she's no longer here, I'll try my best to make her proud. That means continuing to do my best and being resilient when facing adversities.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">You started writing at 12 with a Harry Potter-inspired novel. How did that early spark influence your later writing?</div>
+          <div class="answer">
+            <p class="answer-intro">Sarah Kushairi:</p>
+            <p>When I was a teenager, I loved fantasy and magical stories. But later I realised that life isn't easy—especially as an adult with responsibilities.</p>
+            <p>I wanted to write something that could comfort or motivate people, something that makes them feel seen and heard. Doing this heals me as well. I believe that when you help others, you're also helping yourself.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Your upcoming book, The Art of Embracing Failure, explores setbacks. What led you to this theme?</div>
+          <div class="answer">
+            <p class="answer-intro">Sarah Kushairi:</p>
+            <p>A friend once told me, "It's nice being you," and I was puzzled.</p>
+            <p>People only see what we choose to display publicly. They don't see the hurdles and setbacks we've had to overcome. The reason people appear successful is because they managed to win their unseen battles.</p>
+            <p>This book is my way of helping others embrace failure and move forward, and to live life to its fullest.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Looking ahead, do you see yourself focusing more on fiction or non-fiction?</div>
+          <div class="answer">
+            <p class="answer-intro">Sarah Kushairi:</p>
+            <p>Both, of course! Fiction and non-fiction are equally important. Fiction teaches us things that non-fiction can't. So I have to write both.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="share-section">
+    <div class="container">
+      <div class="share-wrapper">
+        <h3 class="share-title">Share this conversation</h3>
+        <div class="share-buttons">
+          <button class="share-btn" onclick="shareOnTwitter()">Twitter</button>
+          <button class="share-btn" onclick="shareOnLinkedIn()">LinkedIn</button>
+          <button class="share-btn" onclick="copyLink()">Copy Link</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="back-section">
+    <div class="container">
+      <a href="index.html" class="back-link">Back to Interviews</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Ajiva Talks</h3>
+        <p>An independent editorial platform dedicated to long-form cultural conversations with thinkers, creators, and changemakers from around the world.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Explore</h4>
+        <div class="footer-links">
+          <a href="#">All Interviews</a>
+          <a href="#">Featured</a>
+          <a href="#">Archive</a>
+          <a href="#">Submit</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>About</h4>
+        <div class="footer-links">
+          <a href="about.html">Our Mission</a>
+          <a href="#">Team</a>
+          <a href="#">Press</a>
+          <a href="#">Support</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="footer-links">
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 Ajiva Talks — All Rights Reserved
+    </div>
+  </div>
+</footer>
+
+<script>
+function shareOnTwitter() {
+  const url = encodeURIComponent(window.location.href);
+  const text = encodeURIComponent('Sarah Kushairi on Writing, Failure, and Finding Her Voice — Ajiva Talks');
+  window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+}
+
+function shareOnLinkedIn() {
+  const url = encodeURIComponent(window.location.href);
+  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+}
+
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    alert('Link copied to clipboard!');
+  });
+}
+</script>
+
+</body>
+</html>
