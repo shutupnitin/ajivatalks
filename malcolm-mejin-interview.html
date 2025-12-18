@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Malcolm Mejin on Diary of a Rich Kid, Mount Hantu, and Writing for Young Readers — Ajiva Talks</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --bg-card: #0f0f0f;
+  --text: #e8e8e8;
+  --text-dim: #999999;
+  --border: #1f1f1f;
+  --accent: #ffffff;
+  --accent-subtle: rgba(255,255,255,0.05);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 300;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 60px);
+}
+
+/* ===== ANIMATED BACKGROUND ===== */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.03) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+  animation: subtleShift 20s ease-in-out infinite;
+}
+
+@keyframes subtleShift {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+/* ===== HEADER ===== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 32px 0;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+  opacity: 0.7;
+}
+
+nav {
+  display: flex;
+  gap: 48px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+nav a {
+  position: relative;
+  transition: opacity 0.3s ease;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+nav a:hover {
+  opacity: 0.6;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* ===== INTERVIEW HERO ===== */
+.interview-hero {
+  position: relative;
+  z-index: 1;
+  padding: clamp(100px, 15vh, 140px) 0 clamp(60px, 10vh, 80px);
+  border-bottom: 1px solid var(--border);
+}
+
+.interview-meta {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out 0.2s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.meta-tag {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+}
+
+.interview-hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(42px, 7vw, 72px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: 32px;
+  max-width: 1000px;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.3s forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== INTERVIEW CONTENT ===== */
+.interview-content {
+  position: relative;
+  z-index: 1;
+  padding: clamp(80px, 12vh, 120px) 0;
+}
+
+.interview-wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.interview-intro {
+  font-size: clamp(18px, 2.2vw, 21px);
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.5s forwards;
+}
+
+.interview-intro p {
+  margin-bottom: 24px;
+}
+
+.decorative-line {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  margin: 80px 0;
+  opacity: 0;
+  animation: expandLine 1.2s ease-out 0.6s forwards;
+}
+
+@keyframes expandLine {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 80px;
+    opacity: 0.3;
+  }
+}
+
+/* ===== Q&A SECTIONS ===== */
+.qa-section {
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.qa-section:nth-child(1) { animation-delay: 0.7s; }
+.qa-section:nth-child(2) { animation-delay: 0.75s; }
+.qa-section:nth-child(3) { animation-delay: 0.8s; }
+.qa-section:nth-child(4) { animation-delay: 0.85s; }
+.qa-section:nth-child(5) { animation-delay: 0.9s; }
+.qa-section:nth-child(6) { animation-delay: 0.95s; }
+.qa-section:nth-child(7) { animation-delay: 1s; }
+.qa-section:nth-child(8) { animation-delay: 1.05s; }
+.qa-section:nth-child(9) { animation-delay: 1.1s; }
+.qa-section:nth-child(10) { animation-delay: 1.15s; }
+
+.question {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text);
+  margin-bottom: 24px;
+  padding-left: 32px;
+  position: relative;
+}
+
+.question::before {
+  content: 'Q';
+  position: absolute;
+  left: 0;
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  color: var(--text-dim);
+}
+
+.answer {
+  padding-left: 32px;
+  position: relative;
+}
+
+.answer::before {
+  content: 'A';
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  color: var(--text-dim);
+}
+
+.answer-intro {
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.answer p {
+  font-size: 18px;
+  line-height: 1.85;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+/* ===== SHARE SECTION ===== */
+.share-section {
+  position: relative;
+  z-index: 1;
+  padding: clamp(80px, 12vh, 120px) 0;
+  border-top: 1px solid var(--border);
+}
+
+.share-wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.share-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 32px;
+  letter-spacing: -0.01em;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 1.2s forwards;
+}
+
+.share-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 1.3s forwards;
+}
+
+.share-btn {
+  padding: 14px 32px;
+  border: 1px solid var(--border);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 400;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text);
+}
+
+.share-btn:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ===== BACK LINK ===== */
+.back-section {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  transition: all 0.4s ease;
+}
+
+.back-link::before {
+  content: '←';
+  transition: transform 0.4s ease;
+}
+
+.back-link:hover {
+  color: var(--accent);
+  gap: 16px;
+}
+
+.back-link:hover::before {
+  transform: translateX(-4px);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  position: relative;
+  z-index: 1;
+  margin-top: 100px;
+  padding: 100px 0 50px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 80px;
+}
+
+.footer-brand h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.footer-brand p {
+  color: var(--text-dim);
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.footer-section h4 {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 24px;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-links a {
+  color: var(--text-dim);
+  font-size: 14px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.footer-bottom {
+  padding-top: 50px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  header {
+    padding: 24px 0;
+  }
+
+  nav {
+    gap: 28px;
+    font-size: 13px;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  
+  .question,
+  .answer {
+    padding-left: 24px;
+  }
+
+  .share-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .share-btn {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-content">
+      <a href="index.html" class="logo">Ajiva Talks</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html#latest">Latest</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="interview-hero">
+    <div class="container">
+      <div class="interview-meta">
+        <span class="meta-tag">Interview</span>
+        <span class="meta-tag">Author</span>
+        <span class="meta-tag">Malaysia</span>
+      </div>
+      <h1>Malcolm Mejin on Diary of a Rich Kid, Mount Hantu, and Writing for Young Readers</h1>
+    </div>
+  </section>
+
+  <section class="interview-content">
+    <div class="container">
+      <div class="interview-wrapper">
+        
+        <div class="interview-intro">
+          <p>Malcolm Mejin is a Malaysian author best known for his popular Diary of a Rich Kid series. The series, which he began writing in 2017 purely for fun, unexpectedly evolved into a self-publishing success after a friend encouraged him to share his work with the world. Initially comprising three self-published books, the series gained further recognition when Lost in Space, the first book of the series, was published by Penguin Random House SEA.</p>
+
+          <p>Among Malcolm's captivating works is Mount Hantu, a thrilling tale set against the backdrop of a glamping trip gone horribly wrong. When Robin and his schoolmates venture to the luxurious yet eerie Mount Hantu campsite, what starts as an extravagant adventure quickly descends into terror. Amid unsettling disappearances and an ominous presence lurking in the shadows, Robin must unravel the dark secrets of Mount Hantu before it's too late.</p>
+
+          <p>Malcolm's journey as a writer began at the tender age of six, when he crafted a short fantasy story and turned it into a homemade book. This early spark ignited a lifelong passion for storytelling that continues to drive his creative endeavors.</p>
+
+          <p>Beyond writing, Malcolm Mejin is dedicated to inspiring the next generation. As a frequent guest at public and international schools during his school tours, he shares his experiences and insights to empower youths. Through these interactions, he aims to ignite a love for writing and storytelling in young minds, proving that dreams can be turned into reality with perseverance and creativity.</p>
+
+          <p>Malcolm's unique ability to weave humor, suspense, and relatable characters into his stories has earned him a devoted following. Whether it's through the humorous escapades of Diary of a Rich Kid or the spine-chilling thrills of Mount Hantu, Malcolm Mejin's works continue to captivate readers of all ages.</p>
+        </div>
+
+        <div class="decorative-line"></div>
+
+        <div class="qa-section">
+          <div class="question">From writing your first fantasy story at six to creating the Diary of a Rich Kid series, how has your writing journey evolved over the years?</div>
+          <div class="answer">
+            <p class="answer-intro">Malcolm Mejin:</p>
+            <p>When I was six, I wrote comic-strip-style adventure stories that were simple and imaginative—complete with tiny grammatical errors, of course! As I grew into my teens and adulthood, my writing matured. I could articulate my ideas more clearly, whether it was exploring fantasy worlds or deeply personal themes like love and betrayal. In my teens, I even wrote a serious novel tackling these heavy topics. But with Diary of a Rich Kid, I wanted to focus on humor, adventure, and suspense—something more lighthearted. Writing this series brought me joy, and I realized that versatility is what keeps me passionate about storytelling.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">What inspired you to create the Diary of a Rich Kid series, and how did you come up with the concept for the first book, Lost in Space?</div>
+          <div class="answer">
+            <p class="answer-intro">Malcolm Mejin:</p>
+            <p>I wrote Diary of a Rich Kid in 2017 purely for fun—it was an outlet to destress and channel my creativity. Publishing it wasn't on my mind until a friend encouraged me, and in 2018, I decided to share it with the world. For Lost in Space, I wanted to push my creative boundaries. My previous books were all Earth-based, so I thought, why not go beyond? Writing about space felt like a fun challenge, and it allowed me to explore a whole new imaginative realm.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">You mentioned that the series started as a fun project. At what point did you realize it had the potential to reach a wider audience, and how did self-publishing shape your journey as an author?</div>
+          <div class="answer">
+            <p class="answer-intro">Malcolm Mejin:</p>
+            <p>Self-publishing was an eye-opener. It taught me perseverance, patience, and the nuts and bolts of bringing a book to life—things I might not have learned otherwise. The moment I realized the series had potential was during a school visit. Seeing students' excitement and enthusiasm for my book made me realize it wasn't just fun for me—it resonated with them too.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">How did your partnership with Penguin Random House SEA come about, and how has working with them impacted your career?</div>
+          <div class="answer">
+            <p class="answer-intro">Malcolm Mejin:</p>
+            <p>In 2021, I submitted my manuscript to Penguin Random House SEA, not expecting much because they receive so many submissions. When they reached out to publish my work, I was over the moon! Working with Penguin has been incredible. Their global presence has allowed me to reach a wider audience, and I've gained valuable insight into traditional publishing.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Your school tours are a significant part of your engagement with young readers. What do you enjoy most about these interactions, and what lessons do you hope to impart to the students?</div>
+          <div class="answer">
+            <p class="answer-intro">Malcolm Mejin:</p>
+            <p>I love meeting readers and hearing how my books have impacted them. Their stories inspire me just as much as mine inspire them. Through these interactions, I hope to encourage students to pursue their dreams, no matter how big or small, and to believe in themselves.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">What challenges did you face while transitioning from self-publishing to working with a major publishing house?</div>
+          <div class="answer">
+            <p class="answer-intro">Malcolm Mejin:</p>
+            <p>One difference is creative control—self-publishing gives you full control but also means you handle everything yourself, from marketing to distribution. With a major publisher, some of that workload is lifted, which lets me focus more on writing. For me, it's a win-win situation.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">The Diary of a Rich Kid series has a humorous and relatable tone. How do you ensure your stories connect with young readers on a deeper level?</div>
+          <div class="answer">
+            <p class="answer-intro">Malcolm Mejin:</p>
+            <p>While the stories are lighthearted, I make sure each book has life lessons woven in—whether it's about friendship, kindness, or courage. These lessons add depth and make the stories more meaningful to readers.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">What role did your friends and family play in encouraging you to publish your work, and how important is their support in your creative process?</div>
+          <div class="answer">
+            <p class="answer-intro">Malcolm Mejin:</p>
+            <p>At first, my friends and family didn't push me to publish, but they saw how passionate I was and eventually gave me their full support. Their encouragement means the world to me—it's a reminder that I'm not alone on this journey.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Are there any authors or books that have greatly influenced your writing style or inspired the Diary of a Rich Kid series?</div>
+          <div class="answer">
+            <p class="answer-intro">Malcolm Mejin:</p>
+            <p>Definitely! The Hardy Boys and Nancy Drew series, along with R.L. Stine's middle-grade horror books, have been big influences. Their mix of mystery, suspense, and adventure shaped the way I approach storytelling.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">What advice would you give to aspiring authors, especially young writers, who dream of publishing their stories one day?</div>
+          <div class="answer">
+            <p class="answer-intro">Malcolm Mejin:</p>
+            <p>Don't give up. Stay consistent. And don't let anyone tell you your dream is too small—because even a tiny seed can grow into a big, beautiful tree.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="share-section">
+    <div class="container">
+      <div class="share-wrapper">
+        <h3 class="share-title">Share this conversation</h3>
+        <div class="share-buttons">
+          <button class="share-btn" onclick="shareOnTwitter()">Twitter</button>
+          <button class="share-btn" onclick="shareOnLinkedIn()">LinkedIn</button>
+          <button class="share-btn" onclick="copyLink()">Copy Link</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="back-section">
+    <div class="container">
+      <a href="index.html" class="back-link">Back to Interviews</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Ajiva Talks</h3>
+        <p>An independent editorial platform dedicated to long-form cultural conversations with thinkers, creators, and changemakers from around the world.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Explore</h4>
+        <div class="footer-links">
+          <a href="#">All Interviews</a>
+          <a href="#">Featured</a>
+          <a href="#">Archive</a>
+          <a href="#">Submit</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>About</h4>
+        <div class="footer-links">
+          <a href="about.html">Our Mission</a>
+          <a href="#">Team</a>
+          <a href="#">Press</a>
+          <a href="#">Support</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="footer-links">
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 Ajiva Talks — All Rights Reserved
+    </div>
+  </div>
+</footer>
+
+<script>
+function shareOnTwitter() {
+  const url = encodeURIComponent(window.location.href);
+  const text = encodeURIComponent('Malcolm Mejin on Diary of a Rich Kid, Mount Hantu, and Writing for Young Readers — Ajiva Talks');
+  window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+}
+
+function shareOnLinkedIn() {
+  const url = encodeURIComponent(window.location.href);
+  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+}
+
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    alert('Link copied to clipboard!');
+  });
+}
+</script>
+
+</body>
+</html>
