@@ -1,7 +1,15 @@
-/* ================================
-   AJIVA TALKS — CLASSIC NEWSPAPER
-   New York Times inspired
-   ================================ */
+/* =========================================
+   AJIVA TALKS — MODERN MAGAZINE SYSTEM
+   Premium UI / UX
+   ========================================= */
+
+:root {
+  --serif: "Playfair Display", Georgia, serif;
+  --body: "Inter", Arial, sans-serif;
+  --text: #111;
+  --muted: #666;
+  --border: #e5e5e5;
+}
 
 * {
   margin: 0;
@@ -10,271 +18,163 @@
 }
 
 body {
-  background: #ffffff;
-  color: #111;
-  font-family: Georgia, "Times New Roman", serif;
+  background: #fff;
+  color: var(--text);
+  font-family: var(--body);
 }
 
 /* LINKS */
 a {
-  color: #000;
-  text-decoration: underline;
+  color: inherit;
+  text-decoration: none;
 }
 a:hover {
-  text-decoration: none;
+  opacity: 0.75;
 }
 
 /* HEADER */
 .site-header {
-  max-width: 900px;
-  margin: 36px auto 0;
-  padding-bottom: 14px;
-  border-bottom: 1px solid #000;
+  max-width: 1200px;
+  margin: 40px auto 0;
+  padding: 0 24px 24px;
+  border-bottom: 1px solid var(--border);
   text-align: center;
 }
 
 .site-logo {
-  max-width: 240px;
+  max-width: 220px;
 }
 
-/* CONTENT */
-.content {
-  max-width: 640px;   /* tighter column = classic */
-  margin: 56px auto;
-  padding: 0 16px;
-}
-
-/* ARTICLE */
-.post {
-  padding-bottom: 56px;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-/* HEADLINE — SERIOUS, NOT LOUD */
-.post-title {
-  font-family: "Times New Roman", Georgia, serif;
-  font-size: 36px;
-  font-weight: 600;
-  line-height: 1.2;
-  margin-bottom: 20px;
-}
-
-/* META */
-.post-meta {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: #666;
-  margin-bottom: 30px;
-}
-
-/* BODY TEXT */
-.post-body {
-  font-size: 19px;
-  line-height: 1.9;
-}
-
-/* OPENING PARAGRAPH */
-.post-body .lead {
-  font-size: 20px;
-  margin-bottom: 1.7em;
-}
-
-/* PARAGRAPHS */
-.post-body p {
-  margin-bottom: 1.5em;
-}
-
-/* QUESTIONS */
-.post-body strong {
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 700;
-}
-
-/* FOOTER */
-.site-footer {
-  max-width: 900px;
-  margin: 72px auto 44px;
-  padding-top: 18px;
-  border-top: 1px solid #000;
-  text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  color: #666;
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-  .post-title {
-    font-size: 28px;
-  }
-  .post-body {
-    font-size: 17px;
-  }
-}
-/* ================================
-   HOMEPAGE — MODERN EDITORIAL
-   ================================ */
+/* ======================
+   HOMEPAGE (MAGAZINE)
+   ====================== */
 
 .home {
-  max-width: 900px;
-  margin: 60px auto;
-  padding: 0 16px;
+  max-width: 1200px;
+  margin: 80px auto;
+  padding: 0 24px;
 }
 
 /* HERO */
 .home-hero {
-  max-width: 720px;
-  margin: 0 auto 80px;
-  text-align: center;
+  max-width: 800px;
+  margin-bottom: 120px;
 }
 
 .home-hero h1 {
-  font-family: "Times New Roman", Georgia, serif;
-  font-size: 42px;
-  font-weight: 600;
-  line-height: 1.15;
-  margin-bottom: 18px;
+  font-family: var(--serif);
+  font-size: 72px;
+  line-height: 1.05;
+  font-weight: 500;
+  margin-bottom: 24px;
 }
 
 .home-hero p {
   font-size: 20px;
-  line-height: 1.7;
-  color: #333;
-}
-
-/* SECTIONS */
-.home-section {
-  margin-bottom: 80px;
-}
-
-.home-section h2 {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 13px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  border-bottom: 1px solid #000;
-  padding-bottom: 8px;
-  margin-bottom: 30px;
+  max-width: 520px;
+  color: var(--muted);
 }
 
 /* FEATURE */
-.home-feature h3 {
-  font-family: "Times New Roman", Georgia, serif;
-  font-size: 30px;
-  line-height: 1.2;
-  margin-bottom: 14px;
+.home-feature {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 120px;
+}
+
+.home-feature h2 {
+  font-family: var(--serif);
+  font-size: 42px;
+  line-height: 1.15;
+  font-weight: 500;
 }
 
 .home-feature p {
   font-size: 18px;
   line-height: 1.7;
-  margin-bottom: 12px;
-}
-
-.home-meta {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  color: #666;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
+  color: var(--muted);
 }
 
 /* LIST */
-.home-list p {
-  margin-bottom: 26px;
+.home-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
 }
 
-@media (max-width: 768px) {
-  .home-hero h1 {
-    font-size: 32px;
-  }
-
-  .home-feature h3 {
-    font-size: 24px;
-  }
-}
-/* ================================
-   VOGUE-INSPIRED HOMEPAGE
-   ================================ */
-
-.vogue-home {
-  max-width: 900px;
-  margin: 80px auto;
-  padding: 0 18px;
-}
-
-/* HERO */
-.vogue-hero {
-  max-width: 760px;
-  margin: 0 auto 120px;
-}
-
-.vogue-hero h1 {
-  font-family: "Times New Roman", Georgia, serif;
-  font-size: 64px;
-  font-weight: 500;
-  line-height: 1.05;
-  margin-bottom: 26px;
-}
-
-.vogue-hero p {
-  font-size: 20px;
-  line-height: 1.7;
-  max-width: 520px;
-}
-
-/* LABEL */
-.vogue-label {
-  display: block;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  margin-bottom: 18px;
-  color: #555;
-}
-
-/* FEATURE */
-.vogue-feature {
-  max-width: 720px;
-  margin-bottom: 120px;
-}
-
-.vogue-feature h2 {
-  font-family: "Times New Roman", Georgia, serif;
-  font-size: 42px;
-  font-weight: 500;
-  line-height: 1.15;
-  margin-bottom: 20px;
-}
-
-.vogue-feature p {
-  font-size: 19px;
-  line-height: 1.7;
-  max-width: 520px;
-}
-
-/* LIST */
-.vogue-list p {
-  font-family: "Times New Roman", Georgia, serif;
-  font-size: 26px;
+.home-list h3 {
+  font-family: var(--serif);
+  font-size: 24px;
   line-height: 1.3;
-  margin-bottom: 24px;
+}
+
+/* ======================
+   ARTICLE PAGES
+   ====================== */
+
+.content {
+  max-width: 680px;
+  margin: 80px auto;
+  padding: 0 24px;
+}
+
+.post-title {
+  font-family: var(--serif);
+  font-size: 44px;
+  line-height: 1.15;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.post-meta {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 40px;
+}
+
+.post-body {
+  font-size: 19px;
+  line-height: 1.9;
+}
+
+.post-body p {
+  margin-bottom: 1.6em;
+}
+
+.post-body .lead {
+  font-size: 21px;
+}
+
+.post-body strong {
+  font-weight: 600;
+}
+
+/* FOOTER */
+.site-footer {
+  max-width: 1200px;
+  margin: 120px auto 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
 }
 
 /* MOBILE */
-@media (max-width: 768px) {
-  .vogue-hero h1 {
-    font-size: 40px;
+@media (max-width: 900px) {
+  .home-feature {
+    grid-template-columns: 1fr;
   }
-
-  .vogue-feature h2 {
-    font-size: 30px;
+  .home-list {
+    grid-template-columns: 1fr;
   }
-
-  .vogue-list p {
-    font-size: 22px;
+  .home-hero h1 {
+    font-size: 44px;
+  }
+  .post-title {
+    font-size: 32px;
   }
 }
