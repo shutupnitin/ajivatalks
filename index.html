@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ajiva Talks — Conversations That Matter</title>
+<title>Ajiva Talks — Voices That Shape Culture</title>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 * {
@@ -14,11 +14,11 @@
 
 :root {
   --bg: #0a0a0a;
+  --bg-card: #0f0f0f;
   --text: #e8e8e8;
-  --text-dim: #a0a0a0;
-  --accent: #f4f4f4;
-  --border: #1a1a1a;
-  --highlight: #2a2a2a;
+  --text-dim: #999999;
+  --border: #1f1f1f;
+  --accent: #ffffff;
 }
 
 body {
@@ -26,35 +26,55 @@ body {
   color: var(--text);
   font-family: 'Inter', -apple-system, sans-serif;
   font-weight: 300;
-  line-height: 1.7;
+  line-height: 1.75;
   overflow-x: hidden;
 }
 
 a {
   color: inherit;
   text-decoration: none;
-  transition: opacity 0.3s ease;
-}
-
-a:hover {
-  opacity: 0.6;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 clamp(20px, 5vw, 60px);
+  padding: 0 clamp(24px, 5vw, 60px);
+}
+
+/* ===== SUBTLE BACKGROUND GRADIENT ===== */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* ===== HEADER ===== */
 header {
-  padding: 40px 0;
-  border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
-  background: rgba(10, 10, 10, 0.9);
-  backdrop-filter: blur(20px);
-  z-index: 100;
+  z-index: 1000;
+  padding: 32px 0;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .header-content {
@@ -65,282 +85,77 @@ header {
 
 .logo {
   font-family: 'Instrument Serif', serif;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 400;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
+  transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+  opacity: 0.7;
 }
 
 nav {
   display: flex;
-  gap: 40px;
+  gap: 48px;
   font-size: 14px;
   font-weight: 400;
+}
+
+nav a {
+  position: relative;
+  transition: opacity 0.3s ease;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+nav a:hover {
+  opacity: 0.6;
+}
+
+nav a:hover::after {
+  width: 100%;
 }
 
 /* ===== HERO ===== */
 .hero {
-  padding: clamp(100px, 20vh, 180px) 0;
-  text-align: center;
   position: relative;
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
-  pointer-events: none;
+  z-index: 1;
+  padding: clamp(140px, 20vh, 200px) 0 clamp(120px, 18vh, 180px);
+  text-align: center;
 }
 
 .hero h1 {
   font-family: 'Instrument Serif', serif;
-  font-size: clamp(48px, 8vw, 92px);
+  font-size: clamp(56px, 9vw, 104px);
   font-weight: 400;
-  line-height: 1.1;
+  line-height: 1.05;
   letter-spacing: -0.03em;
   margin-bottom: 32px;
-  position: relative;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.2s forwards;
 }
 
-.hero p {
-  font-size: clamp(16px, 2vw, 20px);
+.hero-subtitle {
+  font-size: clamp(17px, 2.2vw, 21px);
   color: var(--text-dim);
-  max-width: 600px;
+  max-width: 680px;
   margin: 0 auto;
   font-weight: 300;
-}
-
-/* ===== SECTION ===== */
-section {
-  padding: clamp(80px, 12vh, 140px) 0;
-}
-
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 60px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--border);
-}
-
-.section-title {
-  font-family: 'Instrument Serif', serif;
-  font-size: clamp(28px, 4vw, 42px);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-}
-
-.view-all {
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-dim);
-  transition: color 0.3s ease;
-}
-
-.view-all:hover {
-  color: var(--accent);
-  opacity: 1;
-}
-
-/* ===== FEATURED ===== */
-.featured-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 40px;
-}
-
-.featured-card {
-  background: var(--highlight);
-  border: 1px solid var(--border);
-  padding: 48px;
-  border-radius: 2px;
-  transition: all 0.4s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.featured-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  line-height: 1.7;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  animation: fadeInUp 1s ease-out 0.4s forwards;
 }
 
-.featured-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--accent);
-}
-
-.featured-card:hover::before {
-  opacity: 1;
-}
-
-.featured-card h3 {
-  font-family: 'Instrument Serif', serif;
-  font-size: 32px;
-  font-weight: 400;
-  margin-bottom: 16px;
-  letter-spacing: -0.01em;
-}
-
-.featured-card p {
-  color: var(--text-dim);
-  font-size: 15px;
-  line-height: 1.8;
-  margin-bottom: 24px;
-}
-
-.read-more {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-weight: 500;
-}
-
-.read-more::after {
-  content: '→';
-  transition: transform 0.3s ease;
-}
-
-.featured-card:hover .read-more::after {
-  transform: translateX(4px);
-}
-
-/* ===== INTERVIEWS LIST ===== */
-.interviews-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  background: var(--border);
-}
-
-.interview-item {
-  background: var(--bg);
-  padding: 40px 48px;
-  display: grid;
-  grid-template-columns: 1fr 2fr auto;
-  gap: 40px;
-  align-items: center;
-  transition: background 0.3s ease;
-}
-
-.interview-item:hover {
-  background: var(--highlight);
-}
-
-.interview-name {
-  font-family: 'Instrument Serif', serif;
-  font-size: 24px;
-  font-weight: 400;
-}
-
-.interview-desc {
-  color: var(--text-dim);
-  font-size: 15px;
-}
-
-.interview-arrow {
-  font-size: 20px;
-  opacity: 0;
-  transition: all 0.3s ease;
-}
-
-.interview-item:hover .interview-arrow {
-  opacity: 1;
-  transform: translateX(4px);
-}
-
-/* ===== TESTIMONIAL ===== */
-.testimonial {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 80px 60px;
-  background: var(--highlight);
-  border: 1px solid var(--border);
-  border-radius: 2px;
-  text-align: center;
-}
-
-.testimonial blockquote {
-  font-family: 'Instrument Serif', serif;
-  font-size: clamp(24px, 3vw, 36px);
-  line-height: 1.5;
-  font-style: italic;
-  margin-bottom: 32px;
-  letter-spacing: -0.01em;
-}
-
-.testimonial cite {
-  font-style: normal;
-  font-size: 14px;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-}
-
-/* ===== FOOTER ===== */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 80px 0 40px;
-  margin-top: 120px;
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 80px;
-  margin-bottom: 60px;
-}
-
-.footer-about h4,
-.footer-section h4 {
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  margin-bottom: 20px;
-  font-weight: 500;
-}
-
-.footer-about p {
-  color: var(--text-dim);
-  font-size: 15px;
-  line-height: 1.8;
-}
-
-.footer-links {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.footer-links a {
-  color: var(--text-dim);
-  font-size: 14px;
-}
-
-.footer-bottom {
-  padding-top: 40px;
-  border-top: 1px solid var(--border);
-  text-align: center;
-  color: var(--text-dim);
-  font-size: 13px;
-}
-
-/* ===== ANIMATIONS ===== */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -352,18 +167,360 @@ footer {
   }
 }
 
-.hero h1, .hero p {
-  animation: fadeInUp 0.8s ease-out backwards;
+/* ===== SECTIONS ===== */
+section {
+  position: relative;
+  z-index: 1;
+  padding: clamp(80px, 12vh, 140px) 0;
 }
 
-.hero p {
-  animation-delay: 0.2s;
+.section-header {
+  margin-bottom: 80px;
+}
+
+.section-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.section-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(38px, 6vw, 56px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.1s forwards;
+}
+
+.section-desc {
+  font-size: 18px;
+  color: var(--text-dim);
+  max-width: 600px;
+  line-height: 1.7;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.2s forwards;
+}
+
+/* ===== FEATURED CARDS ===== */
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 32px;
+  margin-bottom: 80px;
+}
+
+.featured-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 56px 48px;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.featured-card:nth-child(1) { animation-delay: 0.3s; }
+.featured-card:nth-child(2) { animation-delay: 0.4s; }
+.featured-card:nth-child(3) { animation-delay: 0.5s; }
+
+.featured-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.featured-card:hover {
+  transform: translateY(-12px);
+  border-color: rgba(255,255,255,0.3);
+  background: rgba(15,15,15,0.8);
+}
+
+.featured-card:hover::before {
+  transform: scaleX(1);
+}
+
+.card-meta {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.featured-card h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  letter-spacing: -0.015em;
+  transition: all 0.4s ease;
+}
+
+.featured-card:hover h3 {
+  transform: translateX(4px);
+}
+
+.featured-card p {
+  font-size: 16px;
+  color: var(--text-dim);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: gap 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.card-link::after {
+  content: '→';
+  transition: transform 0.4s ease;
+}
+
+.featured-card:hover .card-link {
+  gap: 16px;
+}
+
+.featured-card:hover .card-link::after {
+  transform: translateX(4px);
+}
+
+/* ===== INTERVIEWS GRID ===== */
+.interviews-container {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.3s forwards;
+}
+
+.interviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border-radius: 1px;
+  overflow: hidden;
+  margin-bottom: 60px;
+}
+
+.interview-card {
+  background: var(--bg-card);
+  padding: 40px 36px;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  cursor: pointer;
+}
+
+.interview-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.interview-card:hover {
+  background: var(--bg);
+  transform: translateY(-6px) scale(1.02);
+  z-index: 10;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.interview-card:hover::before {
+  transform: scaleX(1);
+}
+
+.interview-name {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+  transition: all 0.4s ease;
+}
+
+.interview-card:hover .interview-name {
+  transform: translateX(6px);
+}
+
+.interview-desc {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+/* ===== TESTIMONIAL ===== */
+.testimonial-section {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.4s forwards;
+}
+
+.testimonial {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 80px 60px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  position: relative;
+  transition: all 0.6s ease;
+}
+
+.testimonial:hover {
+  border-color: rgba(255,255,255,0.2);
+  transform: translateY(-4px);
+}
+
+.testimonial::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.testimonial:hover::before {
+  opacity: 1;
+}
+
+.testimonial blockquote {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(24px, 3.2vw, 38px);
+  font-style: italic;
+  line-height: 1.5;
+  margin-bottom: 36px;
+  letter-spacing: -0.01em;
+}
+
+.testimonial cite {
+  font-style: normal;
+  font-size: 14px;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  position: relative;
+  z-index: 1;
+  margin-top: 140px;
+  padding: 100px 0 50px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 80px;
+}
+
+.footer-brand h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.footer-brand p {
+  color: var(--text-dim);
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.footer-section h4 {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 24px;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-links a {
+  color: var(--text-dim);
+  font-size: 14px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.footer-bottom {
+  padding-top: 50px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+/* ===== SCROLL REVEAL ===== */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
+  header {
+    padding: 24px 0;
+  }
+
   nav {
-    gap: 24px;
+    gap: 28px;
     font-size: 13px;
   }
   
@@ -371,14 +528,8 @@ footer {
     grid-template-columns: 1fr;
   }
   
-  .interview-item {
+  .interviews-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
-    padding: 32px 24px;
-  }
-  
-  .interview-arrow {
-    opacity: 1;
   }
   
   .footer-grid {
@@ -387,7 +538,11 @@ footer {
   }
   
   .testimonial {
-    padding: 40px 30px;
+    padding: 50px 32px;
+  }
+
+  .featured-card {
+    padding: 40px 32px;
   }
 }
 </style>
@@ -397,7 +552,7 @@ footer {
 <header>
   <div class="container">
     <div class="header-content">
-      <div class="logo">Ajiva Talks</div>
+      <a href="#" class="logo">Ajiva Talks</a>
       <nav>
         <a href="#">Home</a>
         <a href="#interviews">Interviews</a>
@@ -412,30 +567,35 @@ footer {
   <section class="hero">
     <div class="container">
       <h1>Conversations<br>That Matter</h1>
-      <p>Deep dialogues with writers, artists, philosophers, and cultural voices from around the world</p>
+      <p class="hero-subtitle">Deep dialogues with writers, artists, philosophers, and cultural voices from around the world</p>
     </div>
   </section>
 
   <section>
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title">Featured Conversations</h2>
+        <span class="section-label">Featured</span>
+        <h2 class="section-title">Essential Conversations</h2>
+        <p class="section-desc">Our most impactful interviews that have resonated deeply with readers</p>
       </div>
       <div class="featured-grid">
         <a href="#" class="featured-card">
+          <div class="card-meta">Interview 01</div>
           <h3>Malcolm Mejin</h3>
           <p>Exploring humor, fear, and imagination in contemporary children's fiction</p>
-          <span class="read-more">Read Interview</span>
+          <span class="card-link">Read Interview</span>
         </a>
         <a href="#" class="featured-card">
+          <div class="card-meta">Interview 02</div>
           <h3>Emily Lim-Leh</h3>
           <p>Children's literature, loss of voice, and reclaiming expression</p>
-          <span class="read-more">Read Interview</span>
+          <span class="card-link">Read Interview</span>
         </a>
         <a href="#" class="featured-card">
+          <div class="card-meta">Interview 03</div>
           <h3>Jin Young Lim</h3>
           <p>Daoist flow, embodied wisdom, and modern contemplative life</p>
-          <span class="read-more">Read Interview</span>
+          <span class="card-link">Read Interview</span>
         </a>
       </div>
     </div>
@@ -444,35 +604,81 @@ footer {
   <section id="interviews">
     <div class="container">
       <div class="section-header">
+        <span class="section-label">Archive</span>
         <h2 class="section-title">All Interviews</h2>
-        <a href="#" class="view-all">View All →</a>
       </div>
-      <div class="interviews-list">
-        <a href="#" class="interview-item">
-          <div class="interview-name">Nusrat Fatima Jafri</div>
-          <div class="interview-desc">Caste, conversion, faith, and dignity across generations</div>
-          <div class="interview-arrow">→</div>
-        </a>
-        <a href="#" class="interview-item">
-          <div class="interview-name">Larry Nyanti</div>
-          <div class="interview-desc">Love, memory, and supernatural reckonings</div>
-          <div class="interview-arrow">→</div>
-        </a>
-        <a href="#" class="interview-item">
-          <div class="interview-name">Sarah Chen</div>
-          <div class="interview-desc">Digital art, identity, and the future of creative expression</div>
-          <div class="interview-arrow">→</div>
-        </a>
-        <a href="#" class="interview-item">
-          <div class="interview-name">Marcus Johnson</div>
-          <div class="interview-desc">Entrepreneurship, resilience, and building communities</div>
-          <div class="interview-arrow">→</div>
-        </a>
+      <div class="interviews-container">
+        <div class="interviews-grid">
+          <a href="#" class="interview-card">
+            <div class="interview-name">Aaron Pang</div>
+            <div class="interview-desc">Technology, ethics, and building for humanity</div>
+          </a>
+          <a href="#" class="interview-card">
+            <div class="interview-name">Amos Bamboo-Decade</div>
+            <div class="interview-desc">Environmental art and sustainable futures</div>
+          </a>
+          <a href="#" class="interview-card">
+            <div class="interview-name">Deborah Wong</div>
+            <div class="interview-desc">Music, identity, and cultural memory</div>
+          </a>
+          <a href="#" class="interview-card">
+            <div class="interview-name">Justine Camacho-Tajonera</div>
+            <div class="interview-desc">Social justice through storytelling</div>
+          </a>
+          <a href="#" class="interview-card">
+            <div class="interview-name">Kantarin Leelahuta</div>
+            <div class="interview-desc">Design thinking and creative innovation</div>
+          </a>
+          <a href="#" class="interview-card">
+            <div class="interview-name">Larry Nyanti</div>
+            <div class="interview-desc">Love, memory, and supernatural reckonings</div>
+          </a>
+          <a href="#" class="interview-card">
+            <div class="interview-name">Malcom Seah</div>
+            <div class="interview-desc">Entrepreneurship and digital transformation</div>
+          </a>
+          <a href="#" class="interview-card">
+            <div class="interview-name">Marga Ortigas</div>
+            <div class="interview-desc">Journalism in the age of disinformation</div>
+          </a>
+          <a href="#" class="interview-card">
+            <div class="interview-name">Mica de Leon</div>
+            <div class="interview-desc">Cinema and social consciousness</div>
+          </a>
+          <a href="#" class="interview-card">
+            <div class="interview-name">Nusrat Fatima Jafri</div>
+            <div class="interview-desc">Caste, conversion, faith, and dignity</div>
+          </a>
+          <a href="#" class="interview-card">
+            <div class="interview-name">Ong Chin Huat</div>
+            <div class="interview-desc">Democracy and political reform in Asia</div>
+          </a>
+          <a href="#" class="interview-card">
+            <div class="interview-name">Sammon Isaree Siriwankulthon</div>
+            <div class="interview-desc">Thai literature and cultural identity</div>
+          </a>
+          <a href="#" class="interview-card">
+            <div class="interview-name">Sarah Kushairi</div>
+            <div class="interview-desc">Poetry and postcolonial narratives</div>
+          </a>
+          <a href="#" class="interview-card">
+            <div class="interview-name">Sylvia Yu Friedman</div>
+            <div class="interview-desc">Technology policy and digital rights</div>
+          </a>
+          <a href="#" class="interview-card">
+            <div class="interview-name">Thammika Songkaeo</div>
+            <div class="interview-desc">Gender studies and feminist activism</div>
+          </a>
+          <a href="#" class="interview-card">
+            <div class="interview-name">Tutu Dutta</div>
+            <div class="interview-desc">Performance art and cultural resistance</div>
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <section>
+  <section class="testimonial-section">
     <div class="container">
       <div class="testimonial">
         <blockquote>"Your article helped me a lot before my podcast with Malcolm. It was very informative."</blockquote>
@@ -485,8 +691,8 @@ footer {
 <footer id="about">
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-about">
-        <h4>About Ajiva Talks</h4>
+      <div class="footer-brand">
+        <h3>Ajiva Talks</h3>
         <p>An independent editorial platform dedicated to long-form cultural conversations with thinkers, creators, and changemakers from around the world.</p>
       </div>
       <div class="footer-section">
@@ -496,6 +702,15 @@ footer {
           <a href="#">Featured</a>
           <a href="#">Archive</a>
           <a href="#">Submit</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>About</h4>
+        <div class="footer-links">
+          <a href="#">Our Mission</a>
+          <a href="#">Team</a>
+          <a href="#">Press</a>
+          <a href="#">Support</a>
         </div>
       </div>
       <div class="footer-section" id="contact">
@@ -513,6 +728,41 @@ footer {
     </div>
   </div>
 </footer>
+
+<script>
+// Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// Scroll reveal for interview cards
+const observerOptions = {
+  threshold: 0.15,
+  rootMargin: '0px 0px -80px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, index) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('revealed');
+      }, index * 50);
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.interview-card').forEach(card => {
+  card.classList.add('scroll-reveal');
+  observer.observe(card);
+});
+</script>
 
 </body>
 </html>
