@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Larry Nyanti on A Rei of Sunshine, Love, Loss, and the Supernatural — Ajiva Talks</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --bg-card: #0f0f0f;
+  --text: #e8e8e8;
+  --text-dim: #999999;
+  --border: #1f1f1f;
+  --accent: #ffffff;
+  --accent-subtle: rgba(255,255,255,0.05);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 300;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 60px);
+}
+
+/* ===== ANIMATED BACKGROUND ===== */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.03) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+  animation: subtleShift 20s ease-in-out infinite;
+}
+
+@keyframes subtleShift {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+/* ===== HEADER ===== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 32px 0;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+  opacity: 0.7;
+}
+
+nav {
+  display: flex;
+  gap: 48px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+nav a {
+  position: relative;
+  transition: opacity 0.3s ease;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+nav a:hover {
+  opacity: 0.6;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* ===== INTERVIEW HERO ===== */
+.interview-hero {
+  position: relative;
+  z-index: 1;
+  padding: clamp(100px, 15vh, 140px) 0 clamp(60px, 10vh, 80px);
+  border-bottom: 1px solid var(--border);
+}
+
+.interview-meta {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out 0.2s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.meta-tag {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+}
+
+.interview-hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(42px, 7vw, 72px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: 32px;
+  max-width: 1000px;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.3s forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== INTERVIEW CONTENT ===== */
+.interview-content {
+  position: relative;
+  z-index: 1;
+  padding: clamp(80px, 12vh, 120px) 0;
+}
+
+.interview-wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.interview-intro {
+  font-size: clamp(18px, 2.2vw, 21px);
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.5s forwards;
+}
+
+.interview-intro p {
+  margin-bottom: 24px;
+}
+
+.decorative-line {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  margin: 80px 0;
+  opacity: 0;
+  animation: expandLine 1.2s ease-out 0.6s forwards;
+}
+
+@keyframes expandLine {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 80px;
+    opacity: 0.3;
+  }
+}
+
+/* ===== Q&A SECTIONS ===== */
+.qa-section {
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.qa-section:nth-child(1) { animation-delay: 0.7s; }
+.qa-section:nth-child(2) { animation-delay: 0.75s; }
+.qa-section:nth-child(3) { animation-delay: 0.8s; }
+.qa-section:nth-child(4) { animation-delay: 0.85s; }
+.qa-section:nth-child(5) { animation-delay: 0.9s; }
+.qa-section:nth-child(6) { animation-delay: 0.95s; }
+.qa-section:nth-child(7) { animation-delay: 1s; }
+.qa-section:nth-child(8) { animation-delay: 1.05s; }
+.qa-section:nth-child(9) { animation-delay: 1.1s; }
+.qa-section:nth-child(10) { animation-delay: 1.15s; }
+
+.question {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text);
+  margin-bottom: 24px;
+  padding-left: 32px;
+  position: relative;
+}
+
+.question::before {
+  content: 'Q';
+  position: absolute;
+  left: 0;
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  color: var(--text-dim);
+}
+
+.answer {
+  padding-left: 32px;
+  position: relative;
+}
+
+.answer::before {
+  content: 'A';
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  color: var(--text-dim);
+}
+
+.answer-intro {
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.answer p {
+  font-size: 18px;
+  line-height: 1.85;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+/* ===== SHARE SECTION ===== */
+.share-section {
+  position: relative;
+  z-index: 1;
+  padding: clamp(80px, 12vh, 120px) 0;
+  border-top: 1px solid var(--border);
+}
+
+.share-wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.share-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 32px;
+  letter-spacing: -0.01em;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 1.2s forwards;
+}
+
+.share-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 1.3s forwards;
+}
+
+.share-btn {
+  padding: 14px 32px;
+  border: 1px solid var(--border);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 400;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text);
+}
+
+.share-btn:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ===== BACK LINK ===== */
+.back-section {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  transition: all 0.4s ease;
+}
+
+.back-link::before {
+  content: '←';
+  transition: transform 0.4s ease;
+}
+
+.back-link:hover {
+  color: var(--accent);
+  gap: 16px;
+}
+
+.back-link:hover::before {
+  transform: translateX(-4px);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  position: relative;
+  z-index: 1;
+  margin-top: 100px;
+  padding: 100px 0 50px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 80px;
+}
+
+.footer-brand h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.footer-brand p {
+  color: var(--text-dim);
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.footer-section h4 {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 24px;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-links a {
+  color: var(--text-dim);
+  font-size: 14px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.footer-bottom {
+  padding-top: 50px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  header {
+    padding: 24px 0;
+  }
+
+  nav {
+    gap: 28px;
+    font-size: 13px;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  
+  .question,
+  .answer {
+    padding-left: 24px;
+  }
+
+  .share-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .share-btn {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-content">
+      <a href="index.html" class="logo">Ajiva Talks</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html#latest">Latest</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="interview-hero">
+    <div class="container">
+      <div class="interview-meta">
+        <span class="meta-tag">Interview</span>
+        <span class="meta-tag">Author</span>
+        <span class="meta-tag">Fiction / Literary</span>
+      </div>
+      <h1>Larry Nyanti on A Rei of Sunshine, Love, Loss, and the Supernatural</h1>
+    </div>
+  </section>
+
+  <section class="interview-content">
+    <div class="container">
+      <div class="interview-wrapper">
+        
+        <div class="interview-intro">
+          <p>Larry Nyanti, the brilliant mind behind A Rei of Sunshine, hails from the lush landscapes of Borneo. His early years were spent in Baton Rouge, a city known for its vibrant culture, before a brief yet transformative stint studying creative writing in Dublin.</p>
+
+          <p>Currently residing in sunny Kota Kinabalu, Larry balances the art of storytelling with his practice and teaching in the field of medicine. His multifaceted experiences and rich cultural background shine through in his debut novel.</p>
+
+          <p>A Rei of Sunshine is a compelling coming-of-age tale that masterfully intertwines themes of love, loss, and the supernatural. The story follows Ari, a recently divorced man, who receives a surprising wedding invitation from Fyra, a former lover from his past.</p>
+
+          <p>Eager to reconnect and make sense of their shared history, Ari attends the wedding, only to find himself thrust into a world more intricate and enigmatic than he ever imagined.</p>
+
+          <p>At the heart of the narrative is Rei, Fyra's daughter, whose mysterious connection to a dream world adds a layer of supernatural intrigue. As strange occurrences surround Rei, Ari must navigate a labyrinth of emotions and unexpected challenges, unraveling secrets that bridge the gaps between reality and fantasy.</p>
+
+          <p>Nyanti's vivid prose and deeply human storytelling create a resonant exploration of relationships, second chances, and the complexities of destiny. A Rei of Sunshine is a poignant debut that captures the beauty and chaos of life, leaving readers both enchanted and contemplative.</p>
+        </div>
+
+        <div class="decorative-line"></div>
+
+        <div class="qa-section">
+          <div class="question">Your journey spans multiple cultures and countries—Borneo, Baton Rouge, Dublin, and now Kota Kinabalu. How have these diverse experiences shaped your storytelling and the themes in A Rei of Sunshine?</div>
+          <div class="answer">
+            <p class="answer-intro">Larry Nyanti:</p>
+            <p>I'd like to think that the novel's themes are defined by tension and duality. Malaysian Borneo, with its diverse cultures, is fertile ground for storytelling. Personally, being of mixed ethnicity, I had to reconcile my heritage to others and myself.</p>
+            <p>I grew up exposed to not only two different languages, but also two varying life philosophies. Neither culture truly embraced me, and hence I could not embrace both in full. In a way, it was a useful form of intellectual isolation, a sort of standing apart to observe and decide for myself what I would eventually grow up to be, a sort of tension and duality.</p>
+            <p>Baton Rouge holds a special place in my storytelling journey because it was where I first learned to write poems (credits to Mrs. Susan Trott, wherever she may be). There, I had my earliest memory of visiting a public library. Oh, the smell of books, the shuffling of shoes and chairs, the soft murmurs of hushed conversation!</p>
+            <p>And then, there were the friendships – diverse friends from all sorts of cultures made me feel completely at home, the small Malaysian boy in an American public school in the 90s. Sure, there were birthday parties and trips to Chuck E. Cheese, but what I remember most about my friends were their life stories.</p>
+            <p>Strangely, I remembered certain stories vividly – like the school bus friend who had a chaotic time dealing with his parent's divorce despite living an idyllic existence in a beautiful mansion along a leafy lane, or two pretty girls from senior year who cut their palms and stuck them together in a friendship pact. These were moments of tension and duality for me.</p>
+            <p>Dublin was my home for three years, as a medical student. There was, of course, life outside of studying; eating good food, listening to new music, falling in and out of love, going out for events, and best of all, travelling.</p>
+            <p>I watched a lot of movies, especially in the cold winter months – the Before trilogy by Richard Linklater was largely influential in the conversations between Ari and Fyra.</p>
+            <p>I also travelled a lot, often living in people's homes around Europe as a way to save money. At the time, there was a website called Couchsurfing, where a guest could apply to stay at a host's home, often for no fee, but in return would spend time with the host, cooking, shopping, doing daily activities together.</p>
+            <p>It was a great way to listen to people's life stories and experience a different way of living. From a little home on the French Riviera, to the hilltop house on the edge of the Sardinian coastline, to the top of a Saharan dune, I could be free to listen and breathe and experience, before returning to my life as a medical student – this was, yet another duality and tension.</p>
+            <p>Kota Kinabalu didn't influence this work particularly as "A Rei of Sunshine" was written before I moved here.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Medicine and creative writing are two seemingly contrasting fields. How do you balance your work as a doctor and your passion for writing?</div>
+          <div class="answer">
+            <p class="answer-intro">Larry Nyanti:</p>
+            <p>I do find parallels between medicine and creative writing, in that both are disciplined acts of creation and destruction.</p>
+            <p>In medicine, you create opportunities for patients to heal, destroy disease, or at least keep it at bay. In creative writing, the catharsis of creating a tale is partly matched with a destruction of self-ego and inflated fleeting ideas.</p>
+            <p>On a more literal note, I don't see the two as different aspects of my life – I'd argue that medicine feeds my creative writing in the many personalities and stories I encounter at work.</p>
+            <p>In terms of work-writing balance, I do take inspiration from notable doctors who've made the leap into creative writing yet still maintain their careers, like Oliver Sacks and Abraham Verghese.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">In A Rei of Sunshine, the relationship between Ari and Fyra is central to the story. What inspired you to explore such a deeply personal and complex dynamic?</div>
+          <div class="answer">
+            <p class="answer-intro">Larry Nyanti:</p>
+            <p>I'll tread carefully when I answer this because so much has been written, filmed, sang, and debated about this idea of a lost love.</p>
+            <p>I think we all have that experience of "the one that got away". Without giving away any spoilers, my idea of Ari and Fyra was that they wouldn't necessarily have the typical Hollywood happy ending.</p>
+            <p>I wanted them to be flawed, immature and deal with things as they coped with growing up and growing apart – duality and tension.</p>
+            <p>I had missed a friend's wedding, weeks before the first pandemic lockdown. At the time, the uncertainty and doom surrounding COVID-19 and caring for dying patients made my decision to skip the wedding a glaring regret.</p>
+            <p>My colleagues and I felt a sense of dissociation from the outside world, as we trudged for hours in our hot sweaty protective suits, and yet, there inside those plastic covered spaces, I found stories.</p>
+            <p>As healthcare workers, we were often the last point of contact between patients and their loved ones outside. I'd hear of personal regrets, missed moments, and last wishes.</p>
+            <p>Again, there it was, tension and duality, in conversations surrounding money, inheritance, and hidden spouses and mistresses.</p>
+            <p>It was in this environment that I had a thought: "When faced with the prospect of death, what would someone regret most?"</p>
+            <p>I put these two things together; a dark time (COVID), and a happy time (the years of collecting stories). And that's how this book came about.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">The novel delves into a mysterious dream world and supernatural elements. What drew you to incorporate these fantastical aspects, and how do they enhance the story?</div>
+          <div class="answer">
+            <p class="answer-intro">Larry Nyanti:</p>
+            <p>Well, it was almost accidental in a sense that the novel was initially drafted for a horror/noir novel competition, which obviously it didn't make the cut.</p>
+            <p>But in retrospect, I'd always asked myself, if a person were to die with regret or unfinished business, how would their soul respond to that? Would it seek justice and peace?</p>
+            <p>I coupled that with an important twist (no spoilers!), and that formed the supernatural background of the story.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Rei, Fyra's daughter, is a pivotal character in the novel. Can you tell us more about her role in the story and how she connects the supernatural to the human?</div>
+          <div class="answer">
+            <p class="answer-intro">Larry Nyanti:</p>
+            <p>I wanted to emphasise the innocence of children, and how they might be able to see and experience things that adults can't.</p>
+            <p>In a way, this was also metaphorical, in that children often see through the many layers or disguises that adults put on themselves. I don't think I can say more without spoiling it for potential readers.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Your background includes a stint studying creative writing in Dublin. How did that experience influence your approach to crafting A Rei of Sunshine?</div>
+          <div class="answer">
+            <p class="answer-intro">Larry Nyanti:</p>
+            <p>The university where I studied made it mandatory for us to take an extra elective subject, so I took up: French language, photography, Irish history and Creative Writing.</p>
+            <p>The latter was where I found the confidence to "fail and try again" at writing – I say this because our professor did not mince his words in giving us assignment feedback.</p>
+            <p>If I had to choose, the greatest lesson he taught us was to be efficient with words. Many of our assignments carried a word limit, and he taught us how to create tempo and emotion in a restricted domain. It was eye-opening, to say the least.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Themes of love, separation, and rediscovery are universal, yet you've added a supernatural twist. What challenges did you face in weaving these elements together?</div>
+          <div class="answer">
+            <p class="answer-intro">Larry Nyanti:</p>
+            <p>I had this idea that love would be eternal, even stretching beyond death.</p>
+            <p>It was challenging to incorporate some aspects, as I didn't want it to go beyond magical realism. I most certainly feared the reader who, due to the supernatural, would disconnect from the story for its ludicrous nature. I hope I did it justice.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Kota Kinabalu, where you currently reside, is known for its natural beauty. Did the city or its surroundings inspire any aspects of the novel's setting or atmosphere?</div>
+          <div class="answer">
+            <p class="answer-intro">Larry Nyanti:</p>
+            <p>No, I wrote the novel before I moved to Kota Kinabalu.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">As a debut novelist, what has been the most rewarding part of bringing A Rei of Sunshine to life, and what advice would you give aspiring authors?</div>
+          <div class="answer">
+            <p class="answer-intro">Larry Nyanti:</p>
+            <p>So far, the most rewarding part has been to get feedback from others about the novel, how it made them feel, and what they liked or disliked about it. I love the process of getting feedback because it's a form of self-auditing.</p>
+            <p>Another rewarding part has been the chance to get a look into the publishing world of fiction books. Interacting with the Penguin team has been an amazing experience, one that I would not have ever imagined.</p>
+            <p>I wake up feeling a huge sense of gratitude, not only to the publisher, but also to various friends and editors who've played a part in bringing this novel to life.</p>
+            <p>For aspiring authors, I'd advise them to look out for moments of serendipity when it comes to crafting your story – often, these moments are in everyday life and everyday people.</p>
+            <p>Secondly, I'd advise them to get as much feedback as possible about their writing, from both acquaintances and strangers. Differing views, are always beneficial for growth.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">What can readers expect from your future work? Are you planning to delve further into the supernatural, or explore new themes and genres?</div>
+          <div class="answer">
+            <p class="answer-intro">Larry Nyanti:</p>
+            <p>I've started work on a second novel, although, given the length of time it took to get "A Rei of Sunshine" published, I can't promise that this one will be out anytime soon.</p>
+            <p>My best friend tells me my next book should leave out the supernatural, so I'll probably heed his advice! My current interests in writing are anchored in relationships, socioeconomic hierarchy and perhaps a tad of science fiction.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="share-section">
+    <div class="container">
+      <div class="share-wrapper">
+        <h3 class="share-title">Share this conversation</h3>
+        <div class="share-buttons">
+          <button class="share-btn" onclick="shareOnTwitter()">Twitter</button>
+          <button class="share-btn" onclick="shareOnLinkedIn()">LinkedIn</button>
+          <button class="share-btn" onclick="copyLink()">Copy Link</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="back-section">
+    <div class="container">
+      <a href="index.html" class="back-link">Back to Interviews</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Ajiva Talks</h3>
+        <p>An independent editorial platform dedicated to long-form cultural conversations with thinkers, creators, and changemakers from around the world.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Explore</h4>
+        <div class="footer-links">
+          <a href="#">All Interviews</a>
+          <a href="#">Featured</a>
+          <a href="#">Archive</a>
+          <a href="#">Submit</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>About</h4>
+        <div class="footer-links">
+          <a href="about.html">Our Mission</a>
+          <a href="#">Team</a>
+          <a href="#">Press</a>
+          <a href="#">Support</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="footer-links">
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 Ajiva Talks — All Rights Reserved
+    </div>
+  </div>
+</footer>
+
+<script>
+function shareOnTwitter() {
+  const url = encodeURIComponent(window.location.href);
+  const text = encodeURIComponent('Larry Nyanti on A Rei of Sunshine, Love, Loss, and the Supernatural — Ajiva Talks');
+  window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+}
+
+function shareOnLinkedIn() {
+  const url = encodeURIComponent(window.location.href);
+  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+}
+
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    alert('Link copied to clipboard!');
+  });
+}
+</script>
+
+</body>
+</html>
