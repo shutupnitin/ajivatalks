@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Ajiva Talks</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -12,28 +11,27 @@
 :root{
   --text:#111;
   --muted:#666;
-  --border:#e5e5e5;
-  --bg:#ffffff;
-  --accent:#000;
+  --border:#e6e6e6;
+  --bg:#fff;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
   font-family:'Inter',sans-serif;
-  color:var(--text);
   background:var(--bg);
-  line-height:1.6;
+  color:var(--text);
+  line-height:1.7;
 }
 
-/* ---------- LAYOUT ---------- */
-.container{
-  max-width:1200px;
+/* GLOBAL SPACING */
+.wrap{
+  max-width:1180px;
   margin:auto;
-  padding:0 24px;
+  padding:0 40px;
 }
 
-/* ---------- HEADER ---------- */
+/* HEADER */
 header{
   position:sticky;
   top:0;
@@ -43,168 +41,203 @@ header{
 }
 
 .nav{
+  height:76px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  height:72px;
+  align-items:center;
 }
 
-.nav img{
-  height:34px;
-}
+.nav img{height:36px;}
 
-.nav a{
+.menu a{
+  margin-left:32px;
   text-decoration:none;
   color:var(--text);
   font-size:14px;
-  margin-left:28px;
-  letter-spacing:.04em;
+  letter-spacing:.08em;
+  position:relative;
 }
 
-/* ---------- HERO ---------- */
+.menu a::after{
+  content:'';
+  position:absolute;
+  left:0;
+  bottom:-6px;
+  width:0;
+  height:1px;
+  background:#000;
+  transition:.3s;
+}
+
+.menu a:hover::after{
+  width:100%;
+}
+
+/* HERO */
 .hero{
-  padding:120px 0 90px;
-  border-bottom:1px solid var(--border);
+  padding:140px 0 100px;
 }
 
 .hero h1{
   font-family:'Playfair Display',serif;
-  font-size:64px;
-  font-weight:700;
-  max-width:800px;
-  line-height:1.1;
-  margin-bottom:24px;
+  font-size:66px;
+  max-width:820px;
+  line-height:1.08;
+  margin-bottom:26px;
 }
 
 .hero p{
-  max-width:640px;
+  max-width:620px;
   font-size:18px;
   color:var(--muted);
 }
 
-/* ---------- FEATURED ---------- */
+/* FEATURED */
 .featured{
-  padding:80px 0;
+  padding:90px 0;
   display:grid;
   grid-template-columns:2fr 1fr;
-  gap:60px;
+  gap:70px;
+  border-top:1px solid var(--border);
 }
 
-.main-feature h2{
+.main h2{
   font-family:'Playfair Display',serif;
-  font-size:40px;
-  margin-bottom:16px;
-}
-
-.main-feature p{
-  color:var(--muted);
+  font-size:42px;
   margin-bottom:18px;
 }
 
-.main-feature a{
-  text-decoration:none;
+.main p{
+  color:var(--muted);
+  margin-bottom:22px;
+}
+
+.main a{
   font-weight:600;
-  color:var(--accent);
+  text-decoration:none;
+  color:#000;
 }
 
-/* ---------- SIDE FEATURES ---------- */
-.side-feature{
+/* SIDE */
+.side article{
   border-top:1px solid var(--border);
-  padding-top:20px;
-  margin-bottom:32px;
+  padding-top:22px;
+  margin-bottom:36px;
 }
 
-.side-feature h3{
+.side h3{
   font-family:'Playfair Display',serif;
   font-size:22px;
   margin-bottom:8px;
 }
 
-.side-feature p{
+.side p{
   font-size:14px;
   color:var(--muted);
 }
 
-/* ---------- MOVING TEXT ---------- */
+/* MARQUEE */
 .marquee{
   border-top:1px solid var(--border);
   border-bottom:1px solid var(--border);
-  padding:18px 0;
   overflow:hidden;
-  white-space:nowrap;
+  padding:18px 0;
 }
 
 .marquee span{
   display:inline-block;
   padding-left:100%;
-  animation:marquee 25s linear infinite;
+  animation:scroll 22s linear infinite;
+  letter-spacing:.12em;
   font-weight:500;
-  letter-spacing:.08em;
 }
 
-@keyframes marquee{
-  from{transform:translateX(0);}
+@keyframes scroll{
   to{transform:translateX(-100%);}
 }
 
-/* ---------- LATEST GRID ---------- */
+/* LATEST */
 .latest{
-  padding:80px 0;
+  padding:100px 0;
 }
 
 .latest h2{
   font-family:'Playfair Display',serif;
-  font-size:36px;
-  margin-bottom:40px;
+  font-size:38px;
+  margin-bottom:50px;
 }
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:40px;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:50px;
+}
+
+.card{
+  animation:fadeUp .8s ease both;
 }
 
 .card h3{
   font-family:'Playfair Display',serif;
-  font-size:22px;
-  margin-bottom:10px;
+  font-size:24px;
+  margin-bottom:12px;
 }
 
 .card p{
-  font-size:14px;
+  font-size:15px;
   color:var(--muted);
 }
 
-/* ---------- FOOTER ---------- */
+/* FOOTER (EDITORIAL, NOT BORING) */
 footer{
   border-top:1px solid var(--border);
-  padding:50px 0;
-  margin-top:80px;
+  padding:80px 0 60px;
 }
 
-.footer-grid{
+.footer-top{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:40px;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:60px;
+  margin-bottom:50px;
 }
 
-footer a{
+.footer-top h4{
+  font-size:13px;
+  letter-spacing:.12em;
+  margin-bottom:16px;
+}
+
+.footer-top a{
+  display:block;
   text-decoration:none;
   color:var(--muted);
-  margin-right:20px;
+  margin-bottom:10px;
   font-size:14px;
+}
+
+.footer-quote{
+  font-family:'Playfair Display',serif;
+  font-size:22px;
+  max-width:420px;
 }
 
 .copy{
-  margin-top:20px;
   font-size:13px;
   color:var(--muted);
 }
 
-/* ---------- RESPONSIVE ---------- */
+/* ANIMATIONS */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:none;}
+}
+
+/* RESPONSIVE */
 @media(max-width:768px){
+  .wrap{padding:0 24px;}
   .hero h1{font-size:44px;}
   .featured{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -212,77 +245,81 @@ footer a{
 <body>
 
 <header>
-  <div class="container nav">
-    <img src="images/logo.png" alt="Ajiva Talks">
-    <div>
+  <div class="wrap nav">
+    <img src="images/logo.png" alt="Logo">
+    <nav class="menu">
       <a href="#">Home</a>
       <a href="#">Interviews</a>
       <a href="#">About</a>
       <a href="#">Contact</a>
-    </div>
+    </nav>
   </div>
 </header>
 
-<section class="hero container">
-  <h1>Conversations with thinkers, writers, and cultural voices shaping Asia.</h1>
-  <p>Ajiva Talks is an editorial platform featuring long-form interviews with authors, philosophers, and creative minds.</p>
+<section class="hero wrap">
+  <h1>Long-form conversations with writers, thinkers, and cultural voices shaping Asia.</h1>
+  <p>Ajiva Talks curates in-depth interviews exploring identity, literature, philosophy, and the human condition.</p>
 </section>
 
-<section class="featured container">
-  <div class="main-feature">
+<section class="featured wrap">
+  <div class="main">
     <h2>Featured Interview</h2>
-    <p>Exploring identity, memory, and literature with leading contemporary voices across Asia.</p>
-    <a href="sammon-isaree-siriwankulthon.html">Read the interview →</a>
+    <p>From crime fiction to medical realism, Sammon reflects on truth, love, and listening to the dead.</p>
+    <a href="sammon-isaree-siriwankulthon.html">Read the full conversation →</a>
   </div>
-
-  <div>
-    <div class="side-feature">
+  <div class="side">
+    <article>
       <h3>Deborah Wong</h3>
-      <p>On music, heartbreak, and writing emotional truth.</p>
-    </div>
-    <div class="side-feature">
+      <p>On music as memory, poetry as confession, and writing grief honestly.</p>
+    </article>
+    <article>
       <h3>Jin Young Lim</h3>
-      <p>Daoism, flow, and modern life.</p>
-    </div>
+      <p>Why Daoism, tea, and flow matter in a restless modern world.</p>
+    </article>
   </div>
 </section>
 
 <div class="marquee">
-  <span>INTERVIEWS • LITERATURE • CULTURE • IDENTITY • PHILOSOPHY • ASIA •</span>
+  <span>INTERVIEWS • LITERATURE • CULTURE • MEMORY • PHILOSOPHY • ASIA •</span>
 </div>
 
-<section class="latest container">
+<section class="latest wrap">
   <h2>Latest Conversations</h2>
   <div class="grid">
     <div class="card">
       <h3>Mica De Leon</h3>
-      <p>Romance, feminism, and Filipino storytelling.</p>
+      <p>“Love is equality.” On romance, feminism, and writing Filipino stories that travel beyond borders.</p>
     </div>
     <div class="card">
       <h3>Larry Nyanti</h3>
-      <p>Love, memory, and the supernatural.</p>
+      <p>A meditation on lost love, regret, and the quiet supernatural threads that bind memory.</p>
     </div>
     <div class="card">
       <h3>Nusrat Fatima Jafri</h3>
-      <p>Identity, caste, and belonging.</p>
+      <p>A family history shaped by caste, conversion, and the search for dignity in modern India.</p>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="container footer-grid">
-    <div>
-      <a href="#">About</a>
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
+  <div class="wrap footer-top">
+    <div class="footer-quote">
+      Stories preserve what history forgets.
     </div>
     <div>
+      <h4>ABOUT</h4>
+      <a href="#">Mission</a>
+      <a href="#">Editorial</a>
+      <a href="#">Privacy</a>
+    </div>
+    <div>
+      <h4>CONNECT</h4>
       <a href="#">Instagram</a>
       <a href="#">Twitter</a>
     </div>
   </div>
-  <div class="container copy">
-    © 2025 Ajiva Talks. All rights reserved.
+  <div class="wrap copy">
+    © 2025 Ajiva Talks. Independent editorial platform.
   </div>
 </footer>
 
