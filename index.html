@@ -3,276 +3,515 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ajiva Talks</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
-
+<title>Ajiva Talks — Conversations That Matter</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-
-body{
-  background:#fff;
-  color:#111;
-  font-family:Inter,system-ui,sans-serif;
-  line-height:1.9;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-a{color:inherit;text-decoration:none}
+:root {
+  --bg: #0a0a0a;
+  --text: #e8e8e8;
+  --text-dim: #a0a0a0;
+  --accent: #f4f4f4;
+  --border: #1a1a1a;
+  --highlight: #2a2a2a;
+}
 
-.wrapper{
-  max-width:760px;
-  margin:0 auto;
-  padding:0 clamp(24px,8vw,120px);
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+a:hover {
+  opacity: 0.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 60px);
 }
 
 /* ===== HEADER ===== */
-header{
-  padding:80px 0 100px;
-  text-align:center;
+header {
+  padding: 40px 0;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: rgba(10, 10, 10, 0.9);
+  backdrop-filter: blur(20px);
+  z-index: 100;
 }
 
-.logo img{
-  height:46px;
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-nav{
-  margin-top:48px;
-  display:flex;
-  justify-content:center;
-  gap:42px;
-  font-size:12px;
-  letter-spacing:.2em;
-  text-transform:uppercase;
+.logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
 }
 
-nav a{
-  position:relative;
+nav {
+  display: flex;
+  gap: 40px;
+  font-size: 14px;
+  font-weight: 400;
 }
-
-nav a::after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:-6px;
-  width:0;
-  height:1px;
-  background:#111;
-  transition:.3s ease;
-}
-
-nav a:hover::after{width:100%}
 
 /* ===== HERO ===== */
-.hero{
-  padding:140px 0;
-  text-align:center;
+.hero {
+  padding: clamp(100px, 20vh, 180px) 0;
+  text-align: center;
+  position: relative;
 }
 
-.hero h1{
-  font-family:"Playfair Display",serif;
-  font-size:clamp(42px,6vw,68px);
-  font-weight:500;
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+  pointer-events: none;
 }
 
-.hero p{
-  margin-top:36px;
-  font-size:16px;
-  color:#555;
+.hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(48px, 8vw, 92px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.hero p {
+  font-size: clamp(16px, 2vw, 20px);
+  color: var(--text-dim);
+  max-width: 600px;
+  margin: 0 auto;
+  font-weight: 300;
 }
 
 /* ===== SECTION ===== */
-section{
-  padding:140px 0;
+section {
+  padding: clamp(80px, 12vh, 140px) 0;
 }
 
-h2{
-  font-family:"Playfair Display",serif;
-  font-size:34px;
-  font-weight:500;
-  margin-bottom:80px;
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 60px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
 }
 
-/* ===== ARTICLE LIST ===== */
-.article{
-  margin-bottom:72px;
+.section-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
 }
 
-.article h3{
-  font-family:"Playfair Display",serif;
-  font-size:26px;
-  font-weight:500;
+.view-all {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  transition: color 0.3s ease;
 }
 
-.article p{
-  margin-top:14px;
-  color:#555;
+.view-all:hover {
+  color: var(--accent);
+  opacity: 1;
 }
 
-.read{
-  display:inline-block;
-  margin-top:18px;
-  font-size:13px;
-  letter-spacing:.15em;
-  text-transform:uppercase;
+/* ===== FEATURED ===== */
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
 }
 
-/* ===== CTA ===== */
-.center{
-  text-align:center;
-  margin-top:120px;
+.featured-card {
+  background: var(--highlight);
+  border: 1px solid var(--border);
+  padding: 48px;
+  border-radius: 2px;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.center a{
-  font-size:14px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
+.featured-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.featured-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+
+.featured-card:hover::before {
+  opacity: 1;
+}
+
+.featured-card h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+
+.featured-card p {
+  color: var(--text-dim);
+  font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+
+.read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+}
+
+.read-more::after {
+  content: '→';
+  transition: transform 0.3s ease;
+}
+
+.featured-card:hover .read-more::after {
+  transform: translateX(4px);
+}
+
+/* ===== INTERVIEWS LIST ===== */
+.interviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--border);
+}
+
+.interview-item {
+  background: var(--bg);
+  padding: 40px 48px;
+  display: grid;
+  grid-template-columns: 1fr 2fr auto;
+  gap: 40px;
+  align-items: center;
+  transition: background 0.3s ease;
+}
+
+.interview-item:hover {
+  background: var(--highlight);
+}
+
+.interview-name {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.interview-desc {
+  color: var(--text-dim);
+  font-size: 15px;
+}
+
+.interview-arrow {
+  font-size: 20px;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.interview-item:hover .interview-arrow {
+  opacity: 1;
+  transform: translateX(4px);
 }
 
 /* ===== TESTIMONIAL ===== */
-blockquote{
-  font-family:"Playfair Display",serif;
-  font-size:28px;
-  text-align:center;
+.testimonial {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px 60px;
+  background: var(--highlight);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  text-align: center;
 }
 
-blockquote span{
-  display:block;
-  margin-top:24px;
-  font-family:Inter,sans-serif;
-  font-size:14px;
-  color:#666;
+.testimonial blockquote {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(24px, 3vw, 36px);
+  line-height: 1.5;
+  font-style: italic;
+  margin-bottom: 32px;
+  letter-spacing: -0.01em;
+}
+
+.testimonial cite {
+  font-style: normal;
+  font-size: 14px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
 }
 
 /* ===== FOOTER ===== */
-footer{
-  padding:160px 0 100px;
-  border-top:1px solid #eee;
-  margin-top:160px;
+footer {
+  border-top: 1px solid var(--border);
+  padding: 80px 0 40px;
+  margin-top: 120px;
 }
 
-.footer-inner{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:80px;
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 60px;
 }
 
-footer h4{
-  font-size:12px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  margin-bottom:24px;
+.footer-about h4,
+.footer-section h4 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 20px;
+  font-weight: 500;
 }
 
-footer p, footer a{
-  font-size:14px;
-  color:#666;
+.footer-about p {
+  color: var(--text-dim);
+  font-size: 15px;
+  line-height: 1.8;
 }
 
-footer a{display:block;margin-bottom:12px}
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
-.copy{
-  margin-top:80px;
-  text-align:center;
-  font-size:12px;
-  color:#999;
+.footer-links a {
+  color: var(--text-dim);
+  font-size: 14px;
+}
+
+.footer-bottom {
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero h1, .hero p {
+  animation: fadeInUp 0.8s ease-out backwards;
+}
+
+.hero p {
+  animation-delay: 0.2s;
 }
 
 /* ===== MOBILE ===== */
-@media(max-width:700px){
-  nav{flex-wrap:wrap;gap:28px}
-  section{padding:100px 0}
-  footer{padding:120px 0}
-  .footer-inner{grid-template-columns:1fr}
+@media (max-width: 768px) {
+  nav {
+    gap: 24px;
+    font-size: 13px;
+  }
+  
+  .featured-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .interview-item {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 32px 24px;
+  }
+  
+  .interview-arrow {
+    opacity: 1;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  
+  .testimonial {
+    padding: 40px 30px;
+  }
 }
 </style>
 </head>
-
 <body>
 
-<header class="wrapper">
-  <div class="logo">
-    <img src="images/logo.png" alt="Ajiva Talks">
+<header>
+  <div class="container">
+    <div class="header-content">
+      <div class="logo">Ajiva Talks</div>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#interviews">Interviews</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </div>
-  <nav>
-    <a href="#">Home</a>
-    <a href="interviews.html">Interviews</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
-  </nav>
 </header>
 
-<main class="wrapper">
+<main>
+  <section class="hero">
+    <div class="container">
+      <h1>Conversations<br>That Matter</h1>
+      <p>Deep dialogues with writers, artists, philosophers, and cultural voices from around the world</p>
+    </div>
+  </section>
 
-<section class="hero">
-  <h1>Long-form conversations with people who think deeply.</h1>
-  <p>Writers, artists, philosophers, and cultural voices — explored with patience and care.</p>
-</section>
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Featured Conversations</h2>
+      </div>
+      <div class="featured-grid">
+        <a href="#" class="featured-card">
+          <h3>Malcolm Mejin</h3>
+          <p>Exploring humor, fear, and imagination in contemporary children's fiction</p>
+          <span class="read-more">Read Interview</span>
+        </a>
+        <a href="#" class="featured-card">
+          <h3>Emily Lim-Leh</h3>
+          <p>Children's literature, loss of voice, and reclaiming expression</p>
+          <span class="read-more">Read Interview</span>
+        </a>
+        <a href="#" class="featured-card">
+          <h3>Jin Young Lim</h3>
+          <p>Daoist flow, embodied wisdom, and modern contemplative life</p>
+          <span class="read-more">Read Interview</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
-<section>
-  <h2>Editor’s Pick</h2>
-  <div class="article">
-    <h3><a href="malcolm-mejin.html">Malcolm Mejin</a></h3>
-    <p>Humor, fear, and imagination in contemporary children’s fiction.</p>
-    <a class="read" href="malcolm-mejin.html">Read Interview →</a>
-  </div>
-</section>
+  <section id="interviews">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">All Interviews</h2>
+        <a href="#" class="view-all">View All →</a>
+      </div>
+      <div class="interviews-list">
+        <a href="#" class="interview-item">
+          <div class="interview-name">Nusrat Fatima Jafri</div>
+          <div class="interview-desc">Caste, conversion, faith, and dignity across generations</div>
+          <div class="interview-arrow">→</div>
+        </a>
+        <a href="#" class="interview-item">
+          <div class="interview-name">Larry Nyanti</div>
+          <div class="interview-desc">Love, memory, and supernatural reckonings</div>
+          <div class="interview-arrow">→</div>
+        </a>
+        <a href="#" class="interview-item">
+          <div class="interview-name">Sarah Chen</div>
+          <div class="interview-desc">Digital art, identity, and the future of creative expression</div>
+          <div class="interview-arrow">→</div>
+        </a>
+        <a href="#" class="interview-item">
+          <div class="interview-name">Marcus Johnson</div>
+          <div class="interview-desc">Entrepreneurship, resilience, and building communities</div>
+          <div class="interview-arrow">→</div>
+        </a>
+      </div>
+    </div>
+  </section>
 
-<section>
-  <h2>Featured Interviews</h2>
-
-  <div class="article">
-    <h3><a href="emily-lim-leh.html">Emily Lim-Leh</a></h3>
-    <p>Children’s literature, loss of voice, and reclaiming expression.</p>
-    <a class="read" href="emily-lim-leh.html">Read Interview →</a>
-  </div>
-
-  <div class="article">
-    <h3><a href="jin-young-lim.html">Jin Young Lim</a></h3>
-    <p>Daoist flow, embodied wisdom, and modern contemplative life.</p>
-    <a class="read" href="jin-young-lim.html">Read Interview →</a>
-  </div>
-
-  <div class="center">
-    <a href="interviews.html">Read All Interviews →</a>
-  </div>
-</section>
-
-<section>
-  <h2>Latest Conversations</h2>
-
-  <div class="article">
-    <h3><a href="nusrat-fatima-jafri.html">Nusrat Fatima Jafri</a></h3>
-    <p>Caste, conversion, faith, and dignity across generations.</p>
-  </div>
-
-  <div class="article">
-    <h3><a href="larry-nyanti.html">Larry Nyanti</a></h3>
-    <p>Love, memory, and supernatural reckonings.</p>
-  </div>
-</section>
-
-<section>
-  <blockquote>
-    “Your article helped me a lot before my podcast with Malcolm. It was very informative.”
-    <span>— Naghma, Founder of The Author’s Nest</span>
-  </blockquote>
-</section>
-
+  <section>
+    <div class="container">
+      <div class="testimonial">
+        <blockquote>"Your article helped me a lot before my podcast with Malcolm. It was very informative."</blockquote>
+        <cite>— Naghma, Founder of The Author's Nest</cite>
+      </div>
+    </div>
+  </section>
 </main>
 
-<footer class="wrapper">
-  <div class="footer-inner">
-    <div>
-      <h4>About</h4>
-      <p>Ajiva Talks is an independent editorial platform focused on long-form cultural conversations.</p>
+<footer id="about">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <h4>About Ajiva Talks</h4>
+        <p>An independent editorial platform dedicated to long-form cultural conversations with thinkers, creators, and changemakers from around the world.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Explore</h4>
+        <div class="footer-links">
+          <a href="#">All Interviews</a>
+          <a href="#">Featured</a>
+          <a href="#">Archive</a>
+          <a href="#">Submit</a>
+        </div>
+      </div>
+      <div class="footer-section" id="contact">
+        <h4>Connect</h4>
+        <div class="footer-links">
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Email</a>
+        </div>
+      </div>
     </div>
-    <div>
-      <h4>Connect</h4>
-      <a href="#">Instagram</a>
-      <a href="#">Twitter</a>
+    <div class="footer-bottom">
+      © 2025 Ajiva Talks — All Rights Reserved
     </div>
   </div>
-  <div class="copy">© 2025 Ajiva Talks</div>
 </footer>
 
 </body>
