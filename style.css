@@ -23,3 +23,31 @@ body {
   font-size: 20px;
   line-height: 1.8;
 }
+/* ARTICLE STYLES */
+
+.post {
+  border-bottom: 2px solid #000;
+  padding-bottom: 40px;
+}
+
+.post-title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 36px;
+  font-weight: 900;
+  letter-spacing: -0.7px;
+  margin-bottom: 16px;
+}
+
+.post-body {
+  font-size: 21px;
+  line-height: 1.9;
+}
+
+.post-body .lead {
+  font-size: 22px;
+  margin-bottom: 1.6em;
+}
+
+.post-body p {
+  margin-bottom: 1.4em;
+}
