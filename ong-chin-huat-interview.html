@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ong Chin Huat on Society, Secrecy, and Writing Harmony Heights — Ajiva Talks</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --bg-card: #0f0f0f;
+  --text: #e8e8e8;
+  --text-dim: #999999;
+  --border: #1f1f1f;
+  --accent: #ffffff;
+  --accent-subtle: rgba(255,255,255,0.05);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 300;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 60px);
+}
+
+/* ===== ANIMATED BACKGROUND ===== */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.03) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+  animation: subtleShift 20s ease-in-out infinite;
+}
+
+@keyframes subtleShift {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+/* ===== HEADER ===== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 32px 0;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+  opacity: 0.7;
+}
+
+nav {
+  display: flex;
+  gap: 48px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+nav a {
+  position: relative;
+  transition: opacity 0.3s ease;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+nav a:hover {
+  opacity: 0.6;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* ===== INTERVIEW HERO ===== */
+.interview-hero {
+  position: relative;
+  z-index: 1;
+  padding: clamp(100px, 15vh, 140px) 0 clamp(60px, 10vh, 80px);
+  border-bottom: 1px solid var(--border);
+}
+
+.interview-meta {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out 0.2s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.meta-tag {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+}
+
+.interview-hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(42px, 7vw, 72px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: 32px;
+  max-width: 1000px;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.3s forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== INTERVIEW CONTENT ===== */
+.interview-content {
+  position: relative;
+  z-index: 1;
+  padding: clamp(80px, 12vh, 120px) 0;
+}
+
+.interview-wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.interview-intro {
+  font-size: clamp(18px, 2.2vw, 21px);
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.5s forwards;
+}
+
+.interview-intro p {
+  margin-bottom: 24px;
+}
+
+.decorative-line {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  margin: 80px 0;
+  opacity: 0;
+  animation: expandLine 1.2s ease-out 0.6s forwards;
+}
+
+@keyframes expandLine {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 80px;
+    opacity: 0.3;
+  }
+}
+
+/* ===== Q&A SECTIONS ===== */
+.qa-section {
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.qa-section:nth-child(1) { animation-delay: 0.7s; }
+.qa-section:nth-child(2) { animation-delay: 0.75s; }
+.qa-section:nth-child(3) { animation-delay: 0.8s; }
+.qa-section:nth-child(4) { animation-delay: 0.85s; }
+.qa-section:nth-child(5) { animation-delay: 0.9s; }
+.qa-section:nth-child(6) { animation-delay: 0.95s; }
+.qa-section:nth-child(7) { animation-delay: 1s; }
+.qa-section:nth-child(8) { animation-delay: 1.05s; }
+
+.question {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text);
+  margin-bottom: 24px;
+  padding-left: 32px;
+  position: relative;
+}
+
+.question::before {
+  content: 'Q';
+  position: absolute;
+  left: 0;
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  color: var(--text-dim);
+}
+
+.answer {
+  padding-left: 32px;
+  position: relative;
+}
+
+.answer::before {
+  content: 'A';
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  color: var(--text-dim);
+}
+
+.answer-intro {
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.answer p {
+  font-size: 18px;
+  line-height: 1.85;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.answer a {
+  color: var(--accent);
+  text-decoration: underline;
+  transition: opacity 0.3s ease;
+}
+
+.answer a:hover {
+  opacity: 0.7;
+}
+
+/* ===== SHARE SECTION ===== */
+.share-section {
+  position: relative;
+  z-index: 1;
+  padding: clamp(80px, 12vh, 120px) 0;
+  border-top: 1px solid var(--border);
+}
+
+.share-wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.share-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 32px;
+  letter-spacing: -0.01em;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 1.2s forwards;
+}
+
+.share-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 1.3s forwards;
+}
+
+.share-btn {
+  padding: 14px 32px;
+  border: 1px solid var(--border);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 400;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text);
+}
+
+.share-btn:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ===== BACK LINK ===== */
+.back-section {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  transition: all 0.4s ease;
+}
+
+.back-link::before {
+  content: '←';
+  transition: transform 0.4s ease;
+}
+
+.back-link:hover {
+  color: var(--accent);
+  gap: 16px;
+}
+
+.back-link:hover::before {
+  transform: translateX(-4px);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  position: relative;
+  z-index: 1;
+  margin-top: 100px;
+  padding: 100px 0 50px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 80px;
+}
+
+.footer-brand h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.footer-brand p {
+  color: var(--text-dim);
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.footer-section h4 {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 24px;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-links a {
+  color: var(--text-dim);
+  font-size: 14px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.footer-bottom {
+  padding-top: 50px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  header {
+    padding: 24px 0;
+  }
+
+  nav {
+    gap: 28px;
+    font-size: 13px;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  
+  .question,
+  .answer {
+    padding-left: 24px;
+  }
+
+  .share-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .share-btn {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-content">
+      <a href="index.html" class="logo">Ajiva Talks</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html#latest">Latest</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="interview-hero">
+    <div class="container">
+      <div class="interview-meta">
+        <span class="meta-tag">Interview</span>
+        <span class="meta-tag">Author</span>
+        <span class="meta-tag">Journalist</span>
+        <span class="meta-tag">Malaysia / Hong Kong</span>
+      </div>
+      <h1>Ong Chin Huat on Society, Secrecy, and Writing Harmony Heights</h1>
+    </div>
+  </section>
+
+  <section class="interview-content">
+    <div class="container">
+      <div class="interview-wrapper">
+        
+        <div class="interview-intro">
+          <p>Ong Chin Huat is a multifaceted individual with a remarkable career spanning law, journalism, public relations, fashion, and media. After graduating with a law degree from the prestigious London School of Economics and being called to the Bar in both the United Kingdom and Malaysia, he pivoted towards his passion for art and culture by studying the History of Art at the British Institute of Florence in Italy.</p>
+
+          <p>Driven by a love for storytelling, Ong transitioned into journalism, becoming the first Chinese Social Editor at Hong Kong Tatler. He later contributed as a columnist at the South China Morning Post before establishing his own PR consultancy specializing in fashion and luxury goods. His expertise and flair have made him a sought-after figure in the fashion and lifestyle industries, including serving as a judge for prestigious events like the Miss Asia Pageant in Hong Kong, Miss Charm de Chine in Shanghai, and the Mrs. International Global Grand Final in Kuala Lumpur.</p>
+
+          <p>Ong's talents extend into the realm of media, where he has hosted the TV show Hong Kong High Life on ATV Hong Kong and the talk show Driven on TheStarTV.com. He has also contributed to an array of renowned publications, including The Star, Life Inspired, Luxurious Magazine, Harper's Bazaar, Design Anthology, Elle, and Conde Nast Traveller.</p>
+
+          <p>An acclaimed fashion stylist and personality, Ong Chin Huat was voted one of Hong Kong's Best Dressed Personalities by the Hong Kong Fashion Designer's Association. Over the course of his career, he has met and interviewed a diverse array of high-profile figures, ranging from movie stars and business tycoons to politicians and world-class athletes. Currently, he continues to inspire and inform as a freelance writer, fashion stylist, and TV host, bringing his unique perspective and experience to everything he does.</p>
+
+          <p>With the release of Harmony Heights, Ong adds author to his list of accomplishments, bringing his distinct voice and insight to the literary world.</p>
+        </div>
+
+        <div class="decorative-line"></div>
+
+        <div class="qa-section">
+          <div class="question">What inspired you to write Harmony Heights? Was there a specific event or personal experience that sparked the idea for this story?</div>
+          <div class="answer">
+            <p class="answer-intro">Ong Chin Huat:</p>
+            <p>The true beginning of Harmony Heights started when I first returned to Malaysia from Hong Kong back in 2009 when I sketched out a very bare outline of a book. But life took over and I just shoved it away and forgot about it. Fast forward to 2021 at the height of the pandemic and I was at a friend's home for dinner and she asked me what have I been doing during the lockdown. At that point, Malaysia had imposed numerous lockdowns and we were in between one of them. I thought long and hard and couldn't really think about what I did apart from daily chores. My friend asked me if I had written a book during this time. That's what sparked my interest and I dug out the outline I had written years ago and took a look at it again. Although the plot and story of my book changed significantly from the original outline I had written, the skeleton of my book was there.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Harmony Heights paints a vivid picture of bourgeois Malaysian society. How much of the narrative is drawn from real-life observations, and how did your background influence the characters and setting?</div>
+          <div class="answer">
+            <p class="answer-intro">Ong Chin Huat:</p>
+            <p>As a writer, all we have to draw on are our personal experiences, unless of course you draw it from movies, books and what other people tell you which in a way are like second hand experiences because you didn't experience them yourself. It's just hearsay. Much of the narrative in Harmony Heights are from my personal experiences mixed in with my imagination plus a little bit of what I have heard or seen. It's a bit like a salad bowl where I put everything in and mixed it all up and came out with situations and characters which are brand new.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">If you were to live in Harmony Heights, which character do you think you'd relate to the most, and why?</div>
+          <div class="answer">
+            <p class="answer-intro">Ong Chin Huat:</p>
+            <p>I probably would relate to Candy Fong the most as she would be the one whom I would find the most interesting. She's a fashionista and I love fashion plus I find her relatable and simpatico. She moves in a social circle which I'm familiar with and we would probably know a lot of mutual friends.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">The novel reveals the hidden lives of its residents. If readers had access to just one character's private journal, whose would you suggest they read first and why?</div>
+          <div class="answer">
+            <p class="answer-intro">Ong Chin Huat:</p>
+            <p>Probably Lillian Gan, the retiree who is a caregiver to her ailing father who has dementia. As she's lived her life in the shadows of her two siblings and was the least favored child, it would be interesting to know what her thought processes were like in the midst of growing up and seeing her father show his favoritism toward her two siblings and at the same time showing his disdain towards her. How would a child or young adult process their feelings in the face of such unfairness and blatant exhibition of neglect?</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">If Harmony Heights were adapted into a movie or series, who would you cast to play some of the pivotal roles, such as the cheating husband or the ambitious homemaker?</div>
+          <div class="answer">
+            <p class="answer-intro">Ong Chin Huat:</p>
+            <p>I'm not sure about the cheating husband but I think Pooja Bhatt would be perfect for the role of Padma Ramakrishna, Alia Bhatt for Shivana and Gemma Chan as Candy Fong. Sidharth Malhotra would be great as Dinesh Lakliani.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Despite the chaos in Harmony Heights, were there moments while writing where you found yourself empathizing with a character who seemed unlikeable at first?</div>
+          <div class="answer">
+            <p class="answer-intro">Ong Chin Huat:</p>
+            <p>I empathized with all of them because I realised early on that most people behave in ways which they are taught as a child or observe when they were very young in life. Some might not possess the awareness of themselves and what their behaviour might be perceived by others as and so they carry on the way they do. And even if they have awareness, people are creatures of habit and might find it hard to change. I think all of us are a work in progress, learning and growing at different speeds. No one can say they have figured it all out and have the answer to everything.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">The novel delves into themes of secrecy and the disparity between public and private lives. Why did you choose to explore these themes, and what message do you hope readers take away?</div>
+          <div class="answer">
+            <p class="answer-intro">Ong Chin Huat:</p>
+            <p>I'm a keen observer of human nature and as I was formerly the social editor of the Hong Kong Tatler, my social net was cast wider than the average person and I had the opportunity to meet and in some cases, interview a large cross section of people – from the very famous and wealthy to normal folks just going about trying to make their way. This exposure afforded me a wonderful opportunity to study, observe and delve into their psyche. I also did a diploma course on social psychology which I found absolutely fascinating in understanding why people behave and react the way they do. I guess the message I hope my readers take away is that there is a lot more to people than what meets the eye. You really don't know what goes on in someone else's life, the challenges and struggles they face despite what it looks on the surface. Compassion and being not too judgmental are key in dealing with challenging people and situations they create.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Your career has spanned law, journalism, fashion, and now fiction. How do you think each of these experiences has equipped you to craft a world like Harmony Heights?</div>
+          <div class="answer">
+            <p class="answer-intro">Ong Chin Huat:</p>
+            <p>Most definitely! I'm very lucky to have been able to follow my interests and carve a career out of subjects which interested me. My experiences in my job and in life in general has given me a rich and fertile pool of material to draw upon when I write my book. Whether it was through osmosis, personal experiences or from whispers I get to hear, all this fueled my imagination and the result is Harmony Heights!</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="share-section">
+    <div class="container">
+      <div class="share-wrapper">
+        <h3 class="share-title">Share this conversation</h3>
+        <div class="share-buttons">
+          <button class="share-btn" onclick="shareOnTwitter()">Twitter</button>
+          <button class="share-btn" onclick="shareOnLinkedIn()">LinkedIn</button>
+          <button class="share-btn" onclick="copyLink()">Copy Link</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="back-section">
+    <div class="container">
+      <a href="index.html" class="back-link">Back to Interviews</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Ajiva Talks</h3>
+        <p>An independent editorial platform dedicated to long-form cultural conversations with thinkers, creators, and changemakers from around the world.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Explore</h4>
+        <div class="footer-links">
+          <a href="#">All Interviews</a>
+          <a href="#">Featured</a>
+          <a href="#">Archive</a>
+          <a href="#">Submit</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>About</h4>
+        <div class="footer-links">
+          <a href="about.html">Our Mission</a>
+          <a href="#">Team</a>
+          <a href="#">Press</a>
+          <a href="#">Support</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="footer-links">
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 Ajiva Talks — All Rights Reserved
+    </div>
+  </div>
+</footer>
+
+<script>
+function shareOnTwitter() {
+  const url = encodeURIComponent(window.location.href);
+  const text = encodeURIComponent('Ong Chin Huat on Society, Secrecy, and Writing Harmony Heights — Ajiva Talks');
+  window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+}
+
+function shareOnLinkedIn() {
+  const url = encodeURIComponent(window.location.href);
+  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+}
+
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    alert('Link copied to clipboard!');
+  });
+}
+</script>
+
+</body>
+</html>
