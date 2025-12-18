@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sammon on Medicine, Crime Fiction, and Manner of Death — Ajiva Talks</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --bg-card: #0f0f0f;
+  --text: #e8e8e8;
+  --text-dim: #999999;
+  --border: #1f1f1f;
+  --accent: #ffffff;
+  --accent-subtle: rgba(255,255,255,0.05);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 300;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 60px);
+}
+
+/* ===== ANIMATED BACKGROUND ===== */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.03) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+  animation: subtleShift 20s ease-in-out infinite;
+}
+
+@keyframes subtleShift {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+/* ===== HEADER ===== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 32px 0;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+  opacity: 0.7;
+}
+
+nav {
+  display: flex;
+  gap: 48px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+nav a {
+  position: relative;
+  transition: opacity 0.3s ease;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+nav a:hover {
+  opacity: 0.6;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* ===== INTERVIEW HERO ===== */
+.interview-hero {
+  position: relative;
+  z-index: 1;
+  padding: clamp(100px, 15vh, 140px) 0 clamp(60px, 10vh, 80px);
+  border-bottom: 1px solid var(--border);
+}
+
+.interview-meta {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out 0.2s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.meta-tag {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+}
+
+.interview-hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(42px, 7vw, 72px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: 32px;
+  max-width: 1000px;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.3s forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== INTERVIEW CONTENT ===== */
+.interview-content {
+  position: relative;
+  z-index: 1;
+  padding: clamp(80px, 12vh, 120px) 0;
+}
+
+.interview-wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.interview-intro {
+  font-size: clamp(18px, 2.2vw, 21px);
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.5s forwards;
+}
+
+.interview-intro p {
+  margin-bottom: 24px;
+}
+
+.decorative-line {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  margin: 80px 0;
+  opacity: 0;
+  animation: expandLine 1.2s ease-out 0.6s forwards;
+}
+
+@keyframes expandLine {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 80px;
+    opacity: 0.3;
+  }
+}
+
+/* ===== Q&A SECTIONS ===== */
+.qa-section {
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.qa-section:nth-child(1) { animation-delay: 0.7s; }
+.qa-section:nth-child(2) { animation-delay: 0.75s; }
+.qa-section:nth-child(3) { animation-delay: 0.8s; }
+.qa-section:nth-child(4) { animation-delay: 0.85s; }
+.qa-section:nth-child(5) { animation-delay: 0.9s; }
+.qa-section:nth-child(6) { animation-delay: 0.95s; }
+.qa-section:nth-child(7) { animation-delay: 1s; }
+.qa-section:nth-child(8) { animation-delay: 1.05s; }
+.qa-section:nth-child(9) { animation-delay: 1.1s; }
+.qa-section:nth-child(10) { animation-delay: 1.15s; }
+
+.question {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text);
+  margin-bottom: 24px;
+  padding-left: 32px;
+  position: relative;
+}
+
+.question::before {
+  content: 'Q';
+  position: absolute;
+  left: 0;
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  color: var(--text-dim);
+}
+
+.answer {
+  padding-left: 32px;
+  position: relative;
+}
+
+.answer::before {
+  content: 'A';
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  color: var(--text-dim);
+}
+
+.answer-intro {
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.answer p {
+  font-size: 18px;
+  line-height: 1.85;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.answer a {
+  color: var(--accent);
+  text-decoration: underline;
+  transition: opacity 0.3s ease;
+}
+
+.answer a:hover {
+  opacity: 0.7;
+}
+
+/* ===== SHARE SECTION ===== */
+.share-section {
+  position: relative;
+  z-index: 1;
+  padding: clamp(80px, 12vh, 120px) 0;
+  border-top: 1px solid var(--border);
+}
+
+.share-wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.share-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 32px;
+  letter-spacing: -0.01em;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 1.2s forwards;
+}
+
+.share-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 1.3s forwards;
+}
+
+.share-btn {
+  padding: 14px 32px;
+  border: 1px solid var(--border);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 400;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text);
+}
+
+.share-btn:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ===== BACK LINK ===== */
+.back-section {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  transition: all 0.4s ease;
+}
+
+.back-link::before {
+  content: '←';
+  transition: transform 0.4s ease;
+}
+
+.back-link:hover {
+  color: var(--accent);
+  gap: 16px;
+}
+
+.back-link:hover::before {
+  transform: translateX(-4px);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  position: relative;
+  z-index: 1;
+  margin-top: 100px;
+  padding: 100px 0 50px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 80px;
+}
+
+.footer-brand h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.footer-brand p {
+  color: var(--text-dim);
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.footer-section h4 {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 24px;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-links a {
+  color: var(--text-dim);
+  font-size: 14px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.footer-bottom {
+  padding-top: 50px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  header {
+    padding: 24px 0;
+  }
+
+  nav {
+    gap: 28px;
+    font-size: 13px;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  
+  .question,
+  .answer {
+    padding-left: 24px;
+  }
+
+  .share-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .share-btn {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-content">
+      <a href="index.html" class="logo">Ajiva Talks</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html#latest">Latest</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="interview-hero">
+    <div class="container">
+      <div class="interview-meta">
+        <span class="meta-tag">Interview</span>
+        <span class="meta-tag">Novelist</span>
+        <span class="meta-tag">Screenwriter</span>
+        <span class="meta-tag">Thailand</span>
+      </div>
+      <h1>Sammon on Medicine, Crime Fiction, and Manner of Death</h1>
+    </div>
+  </section>
+
+  <section class="interview-content">
+    <div class="container">
+      <div class="interview-wrapper">
+        
+        <div class="interview-intro">
+          <p>"Sam" Isaree Siriwankulthon, known by her pen name Sammon, is a Thai novelist, screenwriter, and family doctor from Chiang Mai. With a deep passion for storytelling, she has gained recognition for her compelling narratives, particularly in the crime and thriller genres. She is best known as the author of Manner of Death, a gripping medical crime novel that was later adapted into a popular television series.</p>
+
+          <p>Beyond her work as a writer, Sammon has contributed her medical expertise as a consultant for dramas such as Once a Doctor, Always a Doctor, ensuring accuracy in medical portrayals on screen. Balancing her careers in both medicine and literature, she continues to craft stories that captivate audiences with their rich detail and realism.</p>
+        </div>
+
+        <div class="decorative-line"></div>
+
+        <div class="qa-section">
+          <div class="question">Can you share what motivated your transition from being a family doctor to becoming a novelist and screenwriter?</div>
+          <div class="answer">
+            <p class="answer-intro">Sammon:</p>
+            <p>I have loved reading novels and comics since I was in elementary school. I started writing as a hobby at a young age, jotting down stories in notebooks for my close friends to read. In a way, I was passionate about writing even before I became a doctor. However, when I got into medical school, I had to put writing on hold due to the demanding coursework. I regained my inspiration during my psychiatry rotation, which led to my first novel, Diagnosis. It was my debut published work and turned out to be quite successful, paving the way for many more books. As for screenwriting, it started when my novels were adapted into TV series. I had the opportunity to serve as a medical consultant on set, which allowed me to learn about production from start to finish. That experience sparked my interest in screenwriting, so I took formal script writing courses, worked as an assistant scriptwriter, and eventually wrote my first solo screenplay, 4MINUTES.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">What inspired you to write Manner of Death, and how did your medical expertise shape the story?</div>
+          <div class="answer">
+            <p class="answer-intro">Sammon:</p>
+            <p>The inspiration came from my forensic medicine rotation during my fifth year of medical school. I found forensic science fascinating because it involves analyzing causes of death through the clues left on a body. Even though a victim can no longer speak, their body tells a story, and that story can bring them justice. I thought that was incredibly compelling. One experience that left a deep impression on me was performing an autopsy on a hanging case. That became the foundation for the death of Janejira, the schoolteacher in Manner of Death. It fascinated me that a single cause of death—hanging—could stem from multiple circumstances. That's why I built the story around the theme of "manner of death" and used the logline: A forensic doctor's duty is to listen to what the dead are trying to say.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">How did it feel seeing Manner of Death adapted into a drama? Were you closely involved in the adaptation process?</div>
+          <div class="answer">
+            <p class="answer-intro">Sammon:</p>
+            <p>Since Manner of Death was my first novel to be adapted into a series, I had very little experience in production at the time. My involvement was mostly limited to providing feedback on the script adaptation and assisting with medical scenes. I also worked with Tul Pakorn to help him portray a forensic doctor as realistically as possible.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">The characters in Manner of Death have such depth. How did you approach crafting Dr. Bunnakit and Tan's relationship?</div>
+          <div class="answer">
+            <p class="answer-intro">Sammon:</p>
+            <p>I intentionally designed their relationship to be built on suspicion and betrayal at the start. But as they spent more time together, their bond gradually deepened, growing into love amidst dangerous circumstances. They had to rely on each other to survive. This type of relationship development is something I personally enjoy and has become a signature style in my writing. I believe that when two people go through life-and-death situations together, their love and trust become even stronger. No matter what happens afterward, it becomes difficult to separate them. That's why I let Tan and Bunn prove their love for each other once again in the sequel novel, Transplant. No matter how dangerous the situation, they always think of each other first.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">As a consultant for medical dramas like Once a Doctor, Always a Doctor, how do you strike a balance between medical realism and engaging storytelling?</div>
+          <div class="answer">
+            <p class="answer-intro">Sammon:</p>
+            <p>It's a challenge that I'm still constantly evaluating. I've worked on projects where the medical accuracy was nearly perfect, but the result felt like watching a documentary—too technical and not engaging. It also made production more complicated and slow. On the other hand, when I tried reducing the realism and adding more drama for entertainment, some audiences criticized it for being unrealistic. So, I follow this principle: deep medical details don't always have to be 100% accurate if it serves the story's engagement. However, essential medical information that the public might remember and apply in real life—such as CPR, how to help someone choking, or emergency contact numbers—must always be correct.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">How has your experience as a family doctor influenced the way you write about human emotions and relationships?</div>
+          <div class="answer">
+            <p class="answer-intro">Sammon:</p>
+            <p>As a family doctor, I take care of patients holistically—physically, mentally, socially, and even spiritually. I don't just see individuals; I see families and communities as well. This exposure has allowed me to observe a wide variety of human behaviors, family dynamics, and societal influences. I incorporate these real-life observations into my writing, especially when crafting characters and storylines that involve family and social relationships. That's why my stories often reflect not just individual struggles but also broader systemic issues.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Manner of Death gained international recognition. Did the global response surprise you?</div>
+          <div class="answer">
+            <p class="answer-intro">Sammon:</p>
+            <p>I was both surprised and incredibly happy. Manner of Death is the novel that has been translated into the most foreign languages among my works, including English, Korean, Japanese, Traditional Chinese, Brazilian Portuguese, Burmese, and Italian. The series also gained international viewers, which was beyond what I had expected. I'm truly grateful and delighted.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">What challenges have you faced juggling your medical career with writing and screenwriting?</div>
+          <div class="answer">
+            <p class="answer-intro">Sammon:</p>
+            <p>Time management is the biggest challenge because both professions require a lot of time, energy, and mental effort. I have to be extremely disciplined in balancing my duties as a doctor, living my personal life, and meeting screenwriting deadlines. When I have to be on set, I also need to rearrange my patient appointments, swap shifts with other doctors, and manage my schedule carefully. It can be hectic, but there's also an advantage—if I weren't a doctor, I wouldn't have the inspiration to write. And if I didn't write, I might feel overwhelmed by the pressures of being a doctor. In a way, they balance each other out.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Are there any new projects or genres you're excited to explore in the future?</div>
+          <div class="answer">
+            <p class="answer-intro">Sammon:</p>
+            <p>I want to challenge myself by writing a deeply emotional coming-of-age story and improving my ability to write character-driven narratives. My strength has always been in plot development, but I recognize that character development is an area where I still have room to grow. I aim to refine that in my future works.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">What advice would you give to aspiring writers who want to break into screenwriting or novel writing while balancing another profession?</div>
+          <div class="answer">
+            <p class="answer-intro">Sammon:</p>
+            <p>I encourage everyone to be fearless in writing. Just write—without worrying about whether anyone will read it or how many comments you'll get. Focus on finding joy in the process, because that's how I started. In the beginning, I wrote in solitude, with no audience, but I still found happiness in reading my own work. When you genuinely enjoy what you write, that joy will naturally come through in your words and reach your readers.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="share-section">
+    <div class="container">
+      <div class="share-wrapper">
+        <h3 class="share-title">Share this conversation</h3>
+        <div class="share-buttons">
+          <button class="share-btn" onclick="shareOnTwitter()">Twitter</button>
+          <button class="share-btn" onclick="shareOnLinkedIn()">LinkedIn</button>
+          <button class="share-btn" onclick="copyLink()">Copy Link</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="back-section">
+    <div class="container">
+      <a href="index.html" class="back-link">Back to Interviews</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Ajiva Talks</h3>
+        <p>An independent editorial platform dedicated to long-form cultural conversations with thinkers, creators, and changemakers from around the world.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Explore</h4>
+        <div class="footer-links">
+          <a href="#">All Interviews</a>
+          <a href="#">Featured</a>
+          <a href="#">Archive</a>
+          <a href="#">Submit</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>About</h4>
+        <div class="footer-links">
+          <a href="about.html">Our Mission</a>
+          <a href="#">Team</a>
+          <a href="#">Press</a>
+          <a href="#">Support</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="footer-links">
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 Ajiva Talks — All Rights Reserved
+    </div>
+  </div>
+</footer>
+
+<script>
+function shareOnTwitter() {
+  const url = encodeURIComponent(window.location.href);
+  const text = encodeURIComponent('Sammon on Medicine, Crime Fiction, and Manner of Death — Ajiva Talks');
+  window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+}
+
+function shareOnLinkedIn() {
+  const url = encodeURIComponent(window.location.href);
+  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+}
+
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    alert('Link copied to clipboard!');
+  });
+}
+</script>
+
+</body>
+</html>
