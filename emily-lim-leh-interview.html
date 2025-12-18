@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emily Lim-Leh on Voice, Resilience, and Writing for Children — Ajiva Talks</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --bg-card: #0f0f0f;
+  --text: #e8e8e8;
+  --text-dim: #999999;
+  --border: #1f1f1f;
+  --accent: #ffffff;
+  --accent-subtle: rgba(255,255,255,0.05);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 300;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 60px);
+}
+
+/* ===== ANIMATED BACKGROUND ===== */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.03) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+  animation: subtleShift 20s ease-in-out infinite;
+}
+
+@keyframes subtleShift {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+/* ===== HEADER ===== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 32px 0;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+  opacity: 0.7;
+}
+
+nav {
+  display: flex;
+  gap: 48px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+nav a {
+  position: relative;
+  transition: opacity 0.3s ease;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+nav a:hover {
+  opacity: 0.6;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* ===== INTERVIEW HERO ===== */
+.interview-hero {
+  position: relative;
+  z-index: 1;
+  padding: clamp(100px, 15vh, 140px) 0 clamp(60px, 10vh, 80px);
+  border-bottom: 1px solid var(--border);
+}
+
+.interview-meta {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out 0.2s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.meta-tag {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+}
+
+.interview-hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(42px, 7vw, 72px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: 32px;
+  max-width: 1000px;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.3s forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== INTERVIEW CONTENT ===== */
+.interview-content {
+  position: relative;
+  z-index: 1;
+  padding: clamp(80px, 12vh, 120px) 0;
+}
+
+.interview-wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.interview-intro {
+  font-size: clamp(18px, 2.2vw, 21px);
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.5s forwards;
+}
+
+.interview-intro p {
+  margin-bottom: 24px;
+}
+
+.decorative-line {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  margin: 80px 0;
+  opacity: 0;
+  animation: expandLine 1.2s ease-out 0.6s forwards;
+}
+
+@keyframes expandLine {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 80px;
+    opacity: 0.3;
+  }
+}
+
+/* ===== Q&A SECTIONS ===== */
+.qa-section {
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.qa-section:nth-child(1) { animation-delay: 0.7s; }
+.qa-section:nth-child(2) { animation-delay: 0.75s; }
+.qa-section:nth-child(3) { animation-delay: 0.8s; }
+.qa-section:nth-child(4) { animation-delay: 0.85s; }
+.qa-section:nth-child(5) { animation-delay: 0.9s; }
+.qa-section:nth-child(6) { animation-delay: 0.95s; }
+.qa-section:nth-child(7) { animation-delay: 1s; }
+.qa-section:nth-child(8) { animation-delay: 1.05s; }
+.qa-section:nth-child(9) { animation-delay: 1.1s; }
+.qa-section:nth-child(10) { animation-delay: 1.15s; }
+
+.question {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text);
+  margin-bottom: 24px;
+  padding-left: 32px;
+  position: relative;
+}
+
+.question::before {
+  content: 'Q';
+  position: absolute;
+  left: 0;
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  color: var(--text-dim);
+}
+
+.answer {
+  padding-left: 32px;
+  position: relative;
+}
+
+.answer::before {
+  content: 'A';
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  color: var(--text-dim);
+}
+
+.answer-intro {
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.answer p {
+  font-size: 18px;
+  line-height: 1.85;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+/* ===== SHARE SECTION ===== */
+.share-section {
+  position: relative;
+  z-index: 1;
+  padding: clamp(80px, 12vh, 120px) 0;
+  border-top: 1px solid var(--border);
+}
+
+.share-wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.share-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 32px;
+  letter-spacing: -0.01em;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 1.2s forwards;
+}
+
+.share-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 1.3s forwards;
+}
+
+.share-btn {
+  padding: 14px 32px;
+  border: 1px solid var(--border);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 400;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text);
+}
+
+.share-btn:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ===== BACK LINK ===== */
+.back-section {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  transition: all 0.4s ease;
+}
+
+.back-link::before {
+  content: '←';
+  transition: transform 0.4s ease;
+}
+
+.back-link:hover {
+  color: var(--accent);
+  gap: 16px;
+}
+
+.back-link:hover::before {
+  transform: translateX(-4px);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  position: relative;
+  z-index: 1;
+  margin-top: 100px;
+  padding: 100px 0 50px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 80px;
+}
+
+.footer-brand h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.footer-brand p {
+  color: var(--text-dim);
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.footer-section h4 {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 24px;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-links a {
+  color: var(--text-dim);
+  font-size: 14px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.footer-bottom {
+  padding-top: 50px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  header {
+    padding: 24px 0;
+  }
+
+  nav {
+    gap: 28px;
+    font-size: 13px;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  
+  .question,
+  .answer {
+    padding-left: 24px;
+  }
+
+  .share-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .share-btn {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-content">
+      <a href="index.html" class="logo">Ajiva Talks</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html#latest">Latest</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="interview-hero">
+    <div class="container">
+      <div class="interview-meta">
+        <span class="meta-tag">Interview</span>
+        <span class="meta-tag">Children's Author</span>
+        <span class="meta-tag">Singapore</span>
+      </div>
+      <h1>Emily Lim-Leh on Voice, Resilience, and Writing for Children</h1>
+    </div>
+  </section>
+
+  <section class="interview-content">
+    <div class="container">
+      <div class="interview-wrapper">
+        
+        <div class="interview-intro">
+          <p>Emily Lim-Leh is a celebrated Singaporean children's book author whose journey into writing was shaped by an unexpected life challenge. In 1998, she lost her voice to a rare neurological condition called Spasmodic Dysphonia. However, in her quest to regain her voice, she discovered a new one through storytelling.</p>
+
+          <p>Her writing career took off in 2007 when she won the Singapore Book Council's Publishing Initiative for her debut picture book, Prince Bear & Pauper Bear. This book marked the beginning of her acclaimed Toys series, which has since been translated into four languages and published in six countries.</p>
+
+          <p>To date, Emily has authored over forty children's picture books, earning international recognition for her work. She is the first writer outside North America to win three Independent Publisher Book (IPPY) Awards in children's literature and the first Southeast Asian to receive the prestigious Moonbeam Children's Book Award.</p>
+
+          <p>Beyond her literary achievements, Emily has been honored for her contributions to the community. She was named a Mediacorp Singapore Woman Award Honoree for inspiring readers through her books. Additionally, she received the Covid-19 Public Service Medal from Singapore's Prime Minister's Office for her collaborative efforts in producing informational e-books during the pandemic.</p>
+
+          <p>Little Hero marks Emily's first foray into children's chapter books, drawing inspiration from her family's stories. Through her heartfelt and imaginative storytelling, she continues to empower and inspire young readers worldwide.</p>
+        </div>
+
+        <div class="decorative-line"></div>
+
+        <div class="qa-section">
+          <div class="question">Can you share how your journey as a writer began, particularly after losing your voice to Spasmodic Dysphonia?</div>
+          <div class="answer">
+            <p class="answer-intro">Emily:</p>
+            <p>After struggling with this voice disorder for almost ten years, I finally quit my job in 2005 – I had clung to it as a life buoy. Soon after, I came across an advertisement in the newspapers on an online writing course with Writers Bureau, UK, and signed up for it. In one of the modules, newbie writers were encouraged to actively seek out writing competitions. Providentially, I then read about our Singapore Book Council running a First Time Writers Publishing Initiative. I took part in 2007 and became a winner with my first picture book manuscript Prince Bear & Pauper Bear. Subconsciously, I wrote about a teddy bear without a mouth, who meets a boy who loved him and restored him. Just like Pauper Bear who found his voice, I too found my voice as a writer. From this one book, I went on to write over 40 picture books.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Having authored over forty picture books, what inspired you to venture into writing a children's chapter book like Little Hero?</div>
+          <div class="answer">
+            <p class="answer-intro">Emily:</p>
+            <p>I tried my hand in chapter book writing a few times through the years but never came to a story idea that I felt deeply for. During the pandemic, when we were cooped up at home, I interviewed my father on his childhood stories. I self-published his recollections into a small legacy book as a family keepsake. Some of those stories stuck with me for a few years. But there were gaps and not enough material for a non-fiction book. Then, one day, I thought: Why don't I weave those snippets together into a historical fiction book?</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Little Hero is based on your father's childhood experiences. What was it like diving into those personal family stories to craft this narrative?</div>
+          <div class="answer">
+            <p class="answer-intro">Emily:</p>
+            <p>There were a few highly dramatic anecdotes that clearly called out to be written into my book. My challenge was how I could fill the story gaps as authentically as possible and do justice to my family's historical narrative.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Ying Xiong's name means "hero," and the story explores what it means to be one. How did this theme resonate with you personally?</div>
+          <div class="answer">
+            <p class="answer-intro">Emily:</p>
+            <p>The post-war times that my grandparents and father lived through were tough times. I feel that people who survived that period are heroes. As such, I used the 'hero' theme to depict a range of heroes in the book – from the main character Xiong who navigated his childhood years alone in a gangster-infested neighbourhood, to Xiong's mother who eked a living resourcefully as a single-mum, to a young policeman who had the courage to do the right thing.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">The story is set in post-war Singapore, a time of significant historical and social change. What were some of the challenges you faced in capturing the essence of that era?</div>
+          <div class="answer">
+            <p class="answer-intro">Emily:</p>
+            <p>For starters, I needed to 'see' what it was like to live in 1940s Singapore. My father had very few photos from his childhood and sketchy memories of his kampung days as he was very young then. So, I spent time looking up historical photos of that era to help me set the scene for my main character who grows up in a dilapidated attap hut in a kampung. Secondly, communication between parents and children back then were very different. Children generally didn't talk back or question their elders. And with my grandparents grappling with poverty, their primary concerns would have to do with survival. I had to bear all this in mind in as I wrote the conversational scenes.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">How did you balance fiction with real-life inspiration when writing Little Hero?</div>
+          <div class="answer">
+            <p class="answer-intro">Emily:</p>
+            <p>I based the main character Ying Xiong on my father's childhood, so I was able to mine his memories on his emotions and fears from his childhood days. Xiong's mother was based on my grandmother. I had some memories of her being a tough-as-nails, feisty old lady. That guided how I developed her character in the story. And the key events in the book are based on my family's real-life drama. With most of the book based on true events, I used my imagination to fill in the story gaps and weave a consistent thread to bring it together.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Was writing Little Hero different from writing your picture books? If so, how?</div>
+          <div class="answer">
+            <p class="answer-intro">Emily:</p>
+            <p>Writing a chapter book is totally different from writing picture books. A picture book has around 500 words, and every word must count towards advancing the story from beginning to climax and to the end. The words also need to dovetail with the pictures. Little Hero is fifteen chapters, with 15,000 words. I spent quite some time fleshing out chapter outlines, building up the setting and scenes and developing my character arcs in a lot of detail, before I started writing. And when I wrote, I found it easier to to set myself a small target of handling one chapter at a time (ie. 1,000 words average).</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">As someone who has used storytelling to inform and inspire during crises, such as the Covid-19 pandemic, how do you see Little Hero contributing to the understanding of resilience and hope?</div>
+          <div class="answer">
+            <p class="answer-intro">Emily:</p>
+            <p>I've been very encouraged with how readers have taken away themes of resilience, grit and hope from the book. One reader feedback stands out for me. A mum tagged me in an IG post of her 7-year-old boy dressed up in singlet and shorts (exactly like my 7-year-old main character) for his school's Storybook Character Day. When asked why he chose Ying Xiong as his favourite character, he wrote that it was because Xiong faced big challenges but didn't give up. His understanding of Xiong's resilience trait and taking one step further to be in character (literally) is priceless. It showed me how Little Hero struck a deep chord with my young reader.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">What advice would you give to aspiring writers who wish to tell deeply personal or historical stories?</div>
+          <div class="answer">
+            <p class="answer-intro">Emily:</p>
+            <p>First, gather as many stories and anecdotes as you can from your elders. Then, ruminate on these to see which story ingredients come together well, and set aside those that don't need to be in your story. Spend time getting an understanding of the historical setting and how you wish to plate your scenes. Finally, take time to write your story. The best stories cannot be rushed. Like a slow brew soup, it takes hours to bring out your story's best essence.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">What message would you like to leave with young readers who pick up Little Hero?</div>
+          <div class="answer">
+            <p class="answer-intro">Emily:</p>
+            <p>Being a hero isn't about saving the world, like we often see in movies. A hero can simply be one who perseveres through difficult times or extends a hand to help others or has courage to do the right thing. And that is the heart of Little Hero.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="share-section">
+    <div class="container">
+      <div class="share-wrapper">
+        <h3 class="share-title">Share this conversation</h3>
+        <div class="share-buttons">
+          <button class="share-btn" onclick="shareOnTwitter()">Twitter</button>
+          <button class="share-btn" onclick="shareOnLinkedIn()">LinkedIn</button>
+          <button class="share-btn" onclick="copyLink()">Copy Link</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="back-section">
+    <div class="container">
+      <a href="index.html" class="back-link">Back to Interviews</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Ajiva Talks</h3>
+        <p>An independent editorial platform dedicated to long-form cultural conversations with thinkers, creators, and changemakers from around the world.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Explore</h4>
+        <div class="footer-links">
+          <a href="#">All Interviews</a>
+          <a href="#">Featured</a>
+          <a href="#">Archive</a>
+          <a href="#">Submit</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>About</h4>
+        <div class="footer-links">
+          <a href="about.html">Our Mission</a>
+          <a href="#">Team</a>
+          <a href="#">Press</a>
+          <a href="#">Support</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="footer-links">
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 Ajiva Talks — All Rights Reserved
+    </div>
+  </div>
+</footer>
+
+<script>
+function shareOnTwitter() {
+  const url = encodeURIComponent(window.location.href);
+  const text = encodeURIComponent('Emily Lim-Leh on Voice, Resilience, and Writing for Children — Ajiva Talks');
+  window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+}
+
+function shareOnLinkedIn() {
+  const url = encodeURIComponent(window.location.href);
+  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+}
+
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    alert('Link copied to clipboard!');
+  });
+}
+</script>
+
+</body>
+</html>
