@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jin Young Lim on The Dao of Flow, Water, and Living in Harmony — Ajiva Talks</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --bg-card: #0f0f0f;
+  --text: #e8e8e8;
+  --text-dim: #999999;
+  --border: #1f1f1f;
+  --accent: #ffffff;
+  --accent-subtle: rgba(255,255,255,0.05);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 300;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 60px);
+}
+
+/* ===== ANIMATED BACKGROUND ===== */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.03) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+  animation: subtleShift 20s ease-in-out infinite;
+}
+
+@keyframes subtleShift {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+/* ===== HEADER ===== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 32px 0;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+  opacity: 0.7;
+}
+
+nav {
+  display: flex;
+  gap: 48px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+nav a {
+  position: relative;
+  transition: opacity 0.3s ease;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+nav a:hover {
+  opacity: 0.6;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* ===== INTERVIEW HERO ===== */
+.interview-hero {
+  position: relative;
+  z-index: 1;
+  padding: clamp(100px, 15vh, 140px) 0 clamp(60px, 10vh, 80px);
+  border-bottom: 1px solid var(--border);
+}
+
+.interview-meta {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out 0.2s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.meta-tag {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+}
+
+.interview-hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(42px, 7vw, 72px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: 32px;
+  max-width: 1000px;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.3s forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== INTERVIEW CONTENT ===== */
+.interview-content {
+  position: relative;
+  z-index: 1;
+  padding: clamp(80px, 12vh, 120px) 0;
+}
+
+.interview-wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.interview-intro {
+  font-size: clamp(18px, 2.2vw, 21px);
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.5s forwards;
+}
+
+.interview-intro p {
+  margin-bottom: 24px;
+}
+
+.decorative-line {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  margin: 80px 0;
+  opacity: 0;
+  animation: expandLine 1.2s ease-out 0.6s forwards;
+}
+
+@keyframes expandLine {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 80px;
+    opacity: 0.3;
+  }
+}
+
+/* ===== Q&A SECTIONS ===== */
+.qa-section {
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.qa-section:nth-child(1) { animation-delay: 0.7s; }
+.qa-section:nth-child(2) { animation-delay: 0.75s; }
+.qa-section:nth-child(3) { animation-delay: 0.8s; }
+.qa-section:nth-child(4) { animation-delay: 0.85s; }
+.qa-section:nth-child(5) { animation-delay: 0.9s; }
+.qa-section:nth-child(6) { animation-delay: 0.95s; }
+.qa-section:nth-child(7) { animation-delay: 1s; }
+.qa-section:nth-child(8) { animation-delay: 1.05s; }
+.qa-section:nth-child(9) { animation-delay: 1.1s; }
+
+.question {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text);
+  margin-bottom: 24px;
+  padding-left: 32px;
+  position: relative;
+}
+
+.question::before {
+  content: 'Q';
+  position: absolute;
+  left: 0;
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  color: var(--text-dim);
+}
+
+.answer {
+  padding-left: 32px;
+  position: relative;
+}
+
+.answer::before {
+  content: 'A';
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  color: var(--text-dim);
+}
+
+.answer-intro {
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.answer p {
+  font-size: 18px;
+  line-height: 1.85;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.answer ol {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.answer li {
+  font-size: 18px;
+  line-height: 1.85;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+/* ===== SHARE SECTION ===== */
+.share-section {
+  position: relative;
+  z-index: 1;
+  padding: clamp(80px, 12vh, 120px) 0;
+  border-top: 1px solid var(--border);
+}
+
+.share-wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.share-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 32px;
+  letter-spacing: -0.01em;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 1.2s forwards;
+}
+
+.share-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 1.3s forwards;
+}
+
+.share-btn {
+  padding: 14px 32px;
+  border: 1px solid var(--border);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 400;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text);
+}
+
+.share-btn:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ===== BACK LINK ===== */
+.back-section {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  transition: all 0.4s ease;
+}
+
+.back-link::before {
+  content: '←';
+  transition: transform 0.4s ease;
+}
+
+.back-link:hover {
+  color: var(--accent);
+  gap: 16px;
+}
+
+.back-link:hover::before {
+  transform: translateX(-4px);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  position: relative;
+  z-index: 1;
+  margin-top: 100px;
+  padding: 100px 0 50px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 80px;
+}
+
+.footer-brand h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.footer-brand p {
+  color: var(--text-dim);
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.footer-section h4 {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 24px;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-links a {
+  color: var(--text-dim);
+  font-size: 14px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.footer-bottom {
+  padding-top: 50px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  header {
+    padding: 24px 0;
+  }
+
+  nav {
+    gap: 28px;
+    font-size: 13px;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  
+  .question,
+  .answer {
+    padding-left: 24px;
+  }
+
+  .share-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .share-btn {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-content">
+      <a href="index.html" class="logo">Ajiva Talks</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html#latest">Latest</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="interview-hero">
+    <div class="container">
+      <div class="interview-meta">
+        <span class="meta-tag">Interview</span>
+        <span class="meta-tag">Author</span>
+        <span class="meta-tag">Philosophy / Mindfulness</span>
+      </div>
+      <h1>Jin Young Lim on The Dao of Flow, Water, and Living in Harmony</h1>
+    </div>
+  </section>
+
+  <section class="interview-content">
+    <div class="container">
+      <div class="interview-wrapper">
+        
+        <div class="interview-intro">
+          <p>Jin Young Lim is a multifaceted thinker, practitioner, and author whose work bridges ancient philosophy, contemplative practices, and modern challenges. His book, The Dao of Flow, emerges from a deeply personal and philosophical exploration of his life and the wisdom he has encountered along the way.</p>
+
+          <p>Through incisive reflections and vivid anecdotes, Jin Young weaves together classical Daoist and Zen teachings with his rich, varied experiences from his humanitarian work in Fukushima to co-founding the Spawo Foundation in the Himalayas.</p>
+
+          <p>Jin Young's intellectual journey began with his undergraduate studies at Waseda University and Peking University, where he pursued dual degrees in liberal arts and international politics. His academic path led him to Beijing as a Schwarzman Scholar, and he is currently a PhD student in East Asian Languages and Cultural Studies at UC Santa Barbara.</p>
+
+          <p>Alongside his scholarly pursuits, Jin Young has immersed himself in practical and spiritual disciplines, becoming a yoga teacher, Taijiquan instructor, and mindfulness guide. He has also served as Program Coordinator at the Berggruen Institute's China Center.</p>
+
+          <p>In The Dao of Flow, Jin Young constructs a philosophical framework inspired by Daoist principles, focusing on three central tenets: embodying, flowing, and regulating water. These principles resonate across his encounters with a diverse array of scholars, artists, philosophers, farmers, and spiritual leaders. He dubs these individuals "walking flowers," whose lives epitomize the natural beauty and balance of living in harmony with the flow of life.</p>
+
+          <p>The book invites readers to explore a novel spiritual map toward deeper harmony with themselves and the world, drawing from Jin Young's insights into Taijiquan, Daoism and Zen, tea culture, sustainable agriculture, art, politics, and social economics.</p>
+
+          <p>Beyond his academic and literary contributions, Jin Young's passion for education, wellness, and sustainability shines through his leadership in mindfulness-based expeditions to the Himalayas and his work with the Spawo Foundation. In his leisure time, he continues to explore his interests as a writer, Pu'er tea enthusiast, and content creator, embodying the principles of flow he so eloquently advocates.</p>
+        </div>
+
+        <div class="decorative-line"></div>
+
+        <div class="qa-section">
+          <div class="question">Your book, The Dao of Flow, draws heavily on the philosophical implications of water. What inspired you to focus on water as a central metaphor for transformation and harmony? Having worked in diverse fields such as humanitarian aid, education, and contemplative practices, how have these experiences shaped your understanding of 'flow'?</div>
+          <div class="answer">
+            <p class="answer-intro">Jin Young Lim:</p>
+            <p>I believe humans learn best through storytelling. My journey across various cultures and regions introduced me to some of the most fascinating individuals whose real-life stories became a rich repository of inspiration for my philosophical inquiries. Whether it was a Japanese priest decontaminating Fukushima after the nuclear meltdown, an Indian monk building a holistic school on the roof of the Himalayas, or a female scientist conserving pandas and biodiversity hotspots in China, these individuals embodied a spirit of compassion and kizuna—"interconnectedness"—which enabled them, and many other figures in the book, to think from a macroscopic perspective, bring communities together, and skillfully navigate complex situations to restore harmony and peace to their surroundings.</p>
+            <p>Cross-cultural learning taught me the importance of mastering new languages to connect with others verbally, while also recognizing that on a subtle level, there is a "language of the heart"—our shared humanity and commonality that transcends religion, nationality, and social or political differences.</p>
+            <p>Additionally, my engagement in contemplative practices in these different places—particularly Taijiquan (a.k.a. Tai Chi Chuan), Aikido, calligraphy, meditation, and tea—provided an embodied pedagogy where my body became both the locus of learning and the lens through which I interpret Daoist philosophy.</p>
+            <p>All these practices require one to abandon preconceived notions or negative habits and continually work toward refining one's skill. The goal is to achieve a state that Daoists describe as "drifting clouds and flowing rivers" (xingyun liushui 行雲流水) or "the inexhaustible trickling water" (xishui changliu 細水長流)—an aesthetic in which life itself becomes an evolving artwork that reflects nature's pattern of flow.</p>
+            <p>"The Dao of Flow"—the idea of engaging water as a powerful metaphor—came to me during one of my Taijiquan practices. It was an aha moment. But just as a stonecutter might strike a rock a hundred times without a single crack appearing, splitting only on the hundred-and-first blow, it was the amalgamation of my diverse experiences that led to an eventual intuitive formulation of The Dao of Flow. This moment of breakthrough is not due to the "final strike" alone, but to all the diverse experiences that preceded it.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Could you share more about the concept of 'walking flowers' mentioned in your book and how it relates to your philosophy of embodying, flowing, and regulating life?</div>
+          <div class="answer">
+            <p class="answer-intro">Jin Young Lim:</p>
+            <p>The term "walking flower" was introduced to me during my first visit to Ladakh. Right before we left the Himalayas, my teacher, Venerable Sanghasena, asked: "Do you know what's the most beautiful thing on this planet?" After a brief pause, he answered: "Flowers. Flowers are the most beautiful because they naturally shine and bring happiness and beauty to their surroundings. Right? But flowers cannot speak; they cannot walk. Human beings—when our heart is purified and filled with compassion—we become walking flowers and talking flowers. I wish you to become a walking flower." This was Venerable Sanghasena's parting message to me.</p>
+            <p>When I was writing The Dao of Flow, I decided to play on this idea and define also those who do not just talk the flow but also walk the flow—making it a double entendre. Thus, a walking flower is someone who is skilled at embodying, flowing, and regulating their life like water for the happiness and well-being of oneself and others.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Your studies in ancient philosophy seem to weave seamlessly into modern-day practices such as yoga and Taijiquan. How do you bridge the ancient with the contemporary in your personal and professional life?</div>
+          <div class="answer">
+            <p class="answer-intro">Jin Young Lim:</p>
+            <p>Modern-day contemplative practices such as yoga and Taijiquan have deep roots in ancient philosophy: the Vedas, Tantra, or the Daodejing (aka Tao Te Ching). For instance, if you're practicing yoga without delving into yogic philosophy, then you're basically doing calisthenics or sports. It can still be healthy, but there's only so far you can go if you stay on the physical level.</p>
+            <p>Ultimately, you want to go deeper—to impact what yogis call layers of the body, or "koshas." If one takes every practice as an opportunity for bodily, energetic, emotional, mental, and spiritual transformation, then one's personal and professional life is naturally transformed. There is no need to "bridge."</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">You've co-founded the Spawo Foundation and led mindfulness expeditions to the Himalayas. How have these endeavors influenced your spiritual outlook and writing process?</div>
+          <div class="answer">
+            <p class="answer-intro">Jin Young Lim:</p>
+            <p>Through my experiences working with indigenous communities in Ladakh, and in leading mindfulness expeditions for students, I realized that optimal joy and fulfillment are found in experiences—in our consciousness, bodies, and creativity; in nature; in the mountains! In meaningful conversations, beautiful relationships, and meaningful endeavors—not in materialism.</p>
+            <p>These experiences have influenced me to see the world in a more holistic manner, and some of the stories I gathered in the Himalayas are included in this book. I was greatly inspired by the book Ancient Futures by Helena Norberg-Hodge. I highly recommend that all tourists read this book before visiting Ladakh.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">The Dao of Flow touches on a wide range of topics, from tea culture to social economics. How do you balance such diverse subjects while maintaining a coherent narrative?</div>
+          <div class="answer">
+            <p class="answer-intro">Jin Young Lim:</p>
+            <p>I stick to a narrative backbone. For me, that backbone is "the embodiment, flow, and regulation of water." No matter how disparate these topics may seem, they all can be interpreted through this Daoist worldview. I aim for a balance between explicitly connecting them back to the three esoteric principles and letting readers see the connections themselves.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">As someone deeply involved in contemplative practices, what role does mindfulness play in nurturing harmony with oneself and the environment?</div>
+          <div class="answer">
+            <p class="answer-intro">Jin Young Lim:</p>
+            <p>Someone who is mindful of their state of mind and energy knows when to rest and when to dash. Someone who is cognizant of the feelings of others knows when to speak, what to speak, and how to speak with wisdom and compassion in order to bring a sense of harmony to their relationships and community.</p>
+            <p>Someone who is mindful of their actions is also mindful of their environmental impact, minimizing harm. That is why the cultivation of mindfulness—clarity of mind—is so important. You don't meditate to be stuck in a cell all day; you meditate so you can come out into the world more mindful of your thoughts and actions.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Your work as a Pu'er tea enthusiast and content creator suggests a strong connection to rituals and traditions. How do these practices contribute to your understanding of the Dao?</div>
+          <div class="answer">
+            <p class="answer-intro">Jin Young Lim:</p>
+            <p>In Hikaru Okuizumi's award-winning novel, The Stones Cry Out, he wrote: "Even the smallest stone in a riverbed has the entire history of the universe inscribed upon it." The same applies to a simple cup of tea.</p>
+            <p>On a transcendental level, any cup of tea is born out of a network of intertwined causes—all nurtured by heaven and earth, cultivated and harvested by humans. On an artistic level, especially with Pu'er tea, one can compare the quality of the tea based on its taste and natural aging process to discern the quality of its initial growth environment.</p>
+            <p>Only dark tea that is harvested from highly biodiverse "tea forests"—where a mixture of tall tea trees and other species co-exist—in Yunnan that are ecologically preserved (without the use of pesticides or insecticides) can age well into the distant future.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">What are some of the key takeaways you hope readers will gain from exploring the wisdom of water through your book?</div>
+          <div class="answer">
+            <p class="answer-intro">Jin Young Lim:</p>
+            <p>Readers should approach this book not in search of a cookie-cutter answer, but for frameworks and inspiration rooted in Daoist wisdom, stories, and metaphors. I hope readers can overlay their own lived experiences onto the contours of mine—and those of others featured in the book—sparking a conversation with themselves to find their own Dao.</p>
+            <p>My mentor, the sinologist Roger T. Ames, translates Dao as "way-making," not simply "the Way," because Dao, based on its Chinese epistemology, is processual, gerundive, and dynamic—it invites every living being to carve out their own "way" forward. This text should serve as a mirror for self-reflection.</p>
+            <p>So, there are no definitive "key takeaways" from me, but if it inspires readers, I hope they will be keen to learn more about ancient or indigenous wisdom or pick up a contemplative practice—whether it's yoga, meditation, Taijiquan, or any form of artistic expression—so that they can discover their own key takeaways through embodied experiences.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">What advice would you give to individuals seeking to embrace the philosophy of flow in their daily lives, especially in an increasingly fast-paced and chaotic world?</div>
+          <div class="answer">
+            <p class="answer-intro">Jin Young Lim:</p>
+            <p>Strive for your goals without making "accomplishments" the ultimate end. The more you obsess about achieving something, the harder it is to tap into flow. But if you make personal growth, connection, creativity, contribution, and enjoyment your goals, it becomes easier to let go and relax while still putting in the necessary effort to reach your next checkpoint.</p>
+            <p>Here are a few tips I shared with my mentees that came to mind:</p>
+            <ol>
+              <li>Pursue an enjoyable creative endeavor outside of your main career.</li>
+              <li>Every 45–60 minutes of work, switch positions, make some tea, or take a short walk.</li>
+              <li>Cut down on idle binge-watching or scrolling on social media; instead, cultivate your attention by engaging in something that demands more participatory effort, such as reading a book or learning a new skill.</li>
+            </ol>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="share-section">
+    <div class="container">
+      <div class="share-wrapper">
+        <h3 class="share-title">Share this conversation</h3>
+        <div class="share-buttons">
+          <button class="share-btn" onclick="shareOnTwitter()">Twitter</button>
+          <button class="share-btn" onclick="shareOnLinkedIn()">LinkedIn</button>
+          <button class="share-btn" onclick="copyLink()">Copy Link</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="back-section">
+    <div class="container">
+      <a href="index.html" class="back-link">Back to Interviews</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Ajiva Talks</h3>
+        <p>An independent editorial platform dedicated to long-form cultural conversations with thinkers, creators, and changemakers from around the world.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Explore</h4>
+        <div class="footer-links">
+          <a href="#">All Interviews</a>
+          <a href="#">Featured</a>
+          <a href="#">Archive</a>
+          <a href="#">Submit</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>About</h4>
+        <div class="footer-links">
+          <a href="about.html">Our Mission</a>
+          <a href="#">Team</a>
+          <a href="#">Press</a>
+          <a href="#">Support</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="footer-links">
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 Ajiva Talks — All Rights Reserved
+    </div>
+  </div>
+</footer>
+
+<script>
+function shareOnTwitter() {
+  const url = encodeURIComponent(window.location.href);
+  const text = encodeURIComponent('Jin Young Lim on The Dao of Flow, Water, and Living in Harmony — Ajiva Talks');
+  window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+}
+
+function shareOnLinkedIn() {
+  const url = encodeURIComponent(window.location.href);
+  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+}
+
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    alert('Link copied to clipboard!');
+  });
+}
+</script>
+
+</body>
+</html>
