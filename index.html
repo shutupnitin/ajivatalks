@@ -1,21 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Ajiva Talks</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Ajiva Talks — long-form conversations with writers, thinkers, and cultural voices.">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --bg: #f7f6f4;
+      --card: #ffffff;
+      --text: #121212;
+      --muted: #7a7a7a;
+      --line: #e4e2df;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* NAV */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(247,246,244,0.9);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--line);
+      z-index: 10;
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .nav a {
+      font-size: 13px;
+      color: var(--muted);
+      margin-left: 24px;
+    }
+
+    .nav a:hover {
+      color: var(--text);
+    }
+
+    /* HERO */
+    .hero {
+      max-width: 900px;
+      margin: auto;
+      padding: 90px 24px 70px;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 500;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      letter-spacing: -0.4px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 520px;
+    }
+
+    /* SECTION */
+    .section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 60px 24px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    /* FEATURED */
+    .featured {
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 50px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .featured:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.05);
+    }
+
+    .featured span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .featured h2 {
+      font-size: 30px;
+      font-weight: 500;
+      margin: 14px 0 12px;
+      letter-spacing: -0.3px;
+    }
+
+    .featured p {
+      color: var(--muted);
+      max-width: 600px;
+    }
+
+    /* GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 28px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+    }
+
+    .card span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .card h3 {
+      font-size: 18px;
+      font-weight: 500;
+      margin: 10px 0 8px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--line);
+      background: #f2f1ef;
+      padding: 60px 24px 30px;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .footer-brand h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 320px;
+    }
+
+    .footer-links a {
+      display: block;
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 40px;
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- NAV -->
-<header class="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="brand">Ajiva Talks</a>
-
+<header>
+  <div class="nav">
+    <div class="logo">Ajiva Talks</div>
     <nav>
       <a href="#">Interviews</a>
       <a href="#">Authors</a>
@@ -25,110 +229,90 @@
   </div>
 </header>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="hero-inner">
-    <h1>
-      Conversations that<br>
-      stay with you.
-    </h1>
-
-    <p>
-      In-depth interviews with writers, philosophers, artists,
-      and cultural voices shaping contemporary thought.
-    </p>
-  </div>
+  <h1>
+    Long conversations<br>
+    with people who think deeply.
+  </h1>
+  <p>
+    Ajiva Talks is a slow-journal of in-depth interviews
+    with writers, philosophers, artists, and cultural voices.
+  </p>
 </section>
 
-<!-- FEATURED -->
-<section class="featured">
-  <div class="container">
-    <span class="section-label">Featured</span>
+<section class="section">
+  <div class="section-title">Featured Conversation</div>
 
-    <article class="featured-card">
-      <div class="featured-content">
-        <span class="meta">Memoir · History · Identity</span>
-        <h2>
-          <a href="#">
-            Nusrat Fatima Jafri on caste, conversion,
-            and the making of modern India
-          </a>
-        </h2>
-        <p>
-          A powerful conversation on criminalised tribes,
-          faith, feminism, and what it means to belong.
-        </p>
-      </div>
+  <article class="featured">
+    <span>Memoir · Identity · History</span>
+    <h2>
+      Nusrat Fatima Jafri on belonging,
+      caste, and the meaning of home
+    </h2>
+    <p>
+      A deeply personal conversation on criminalised tribes,
+      faith, feminism, and the making of modern India.
+    </p>
+  </article>
+</section>
+
+<section class="section">
+  <div class="section-title">Recent Interviews</div>
+
+  <div class="grid">
+    <article class="card">
+      <span>Literary Fiction</span>
+      <h3>Larry Nyanti</h3>
+      <p>Love, regret, and the supernatural.</p>
+    </article>
+
+    <article class="card">
+      <span>Philosophy</span>
+      <h3>Jin Young Lim</h3>
+      <p>Living gently through the Dao of Flow.</p>
+    </article>
+
+    <article class="card">
+      <span>Romance</span>
+      <h3>Mica De Leon</h3>
+      <p>Publishing, genre, and writing joyfully.</p>
+    </article>
+
+    <article class="card">
+      <span>Human Rights</span>
+      <h3>Sylvia Yu Friedman</h3>
+      <p>Fearlessness and justice.</p>
+    </article>
+
+    <article class="card">
+      <span>Folklore</span>
+      <h3>Tutu Dutta</h3>
+      <p>Myth, feminism, and memory.</p>
+    </article>
+
+    <article class="card">
+      <span>YA Fiction</span>
+      <h3>Malcolm Mejin</h3>
+      <p>Humour, fear, and young readers.</p>
     </article>
   </div>
 </section>
 
-<!-- INTERVIEWS -->
-<section class="interviews">
-  <div class="container">
-    <span class="section-label">Latest</span>
-
-    <div class="grid">
-
-      <article class="card">
-        <span class="meta">Literary Fiction</span>
-        <h3><a href="#">Larry Nyanti</a></h3>
-        <p>Love, regret, and the supernatural in A Rei of Sunshine.</p>
-      </article>
-
-      <article class="card">
-        <span class="meta">Philosophy</span>
-        <h3><a href="#">Jin Young Lim</a></h3>
-        <p>The Dao of Flow and living like water.</p>
-      </article>
-
-      <article class="card">
-        <span class="meta">Romance</span>
-        <h3><a href="#">Mica De Leon</a></h3>
-        <p>Publishing, genre, and writing joyfully.</p>
-      </article>
-
-      <article class="card">
-        <span class="meta">Human Rights</span>
-        <h3><a href="#">Sylvia Yu Friedman</a></h3>
-        <p>Fearlessness, advocacy, and justice.</p>
-      </article>
-
-      <article class="card">
-        <span class="meta">YA Fiction</span>
-        <h3><a href="#">Malcolm Mejin</a></h3>
-        <p>Writing humor, fear, and young readers.</p>
-      </article>
-
-      <article class="card">
-        <span class="meta">Folklore</span>
-        <h3><a href="#">Tutu Dutta</a></h3>
-        <p>Myth, feminism, and cozy mystery.</p>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
+<footer>
   <div class="footer-inner">
-
     <div class="footer-brand">
       <h4>Ajiva Talks</h4>
       <p>
-        Thoughtful conversations with voices
-        shaping culture and literature.
+        A space for thoughtful conversations
+        and long-form literary interviews.
       </p>
     </div>
 
     <div class="footer-links">
       <a href="#">About</a>
-      <a href="#">Interviews</a>
       <a href="#">Contact</a>
       <a href="#">Privacy</a>
     </div>
-
   </div>
 
   <div class="footer-bottom">
