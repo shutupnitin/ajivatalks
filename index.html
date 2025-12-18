@@ -3,241 +3,233 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ajiva Talks</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Conversations</title>
 
 <style>
-:root{
-  --text:#111;
-  --muted:#666;
-  --border:#e6e6e6;
-  --bg:#fff;
+/* ---------------- RESET ---------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-*{margin:0;padding:0;box-sizing:border-box;}
-
-body{
-  font-family:'Inter',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.7;
+/* ---------------- ROOT ---------------- */
+:root {
+  --bg: #ffffff;
+  --text: #111111;
+  --muted: #666;
+  --line: #e6e6e6;
+  --accent: #000;
+  --max-width: 1180px;
 }
 
-/* GLOBAL SPACING */
-.wrap{
-  max-width:1180px;
-  margin:auto;
-  padding:0 40px;
+/* ---------------- BODY ---------------- */
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
 }
 
-/* HEADER */
-header{
-  position:sticky;
-  top:0;
-  background:#fff;
-  border-bottom:1px solid var(--border);
-  z-index:1000;
+/* ---------------- CONTAINER ---------------- */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 48px 24px;
 }
 
-.nav{
-  height:76px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+/* ---------------- HEADER ---------------- */
+header {
+  border-bottom: 1px solid var(--line);
 }
 
-.nav img{height:36px;}
-
-.menu a{
-  margin-left:32px;
-  text-decoration:none;
-  color:var(--text);
-  font-size:14px;
-  letter-spacing:.08em;
-  position:relative;
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px 0;
 }
 
-.menu a::after{
-  content:'';
-  position:absolute;
-  left:0;
-  bottom:-6px;
-  width:0;
-  height:1px;
-  background:#000;
-  transition:.3s;
+.logo img {
+  height: 38px;
 }
 
-.menu a:hover::after{
-  width:100%;
+.menu {
+  display: flex;
+  gap: 32px;
 }
 
-/* HERO */
-.hero{
-  padding:140px 0 100px;
+.menu a {
+  text-decoration: none;
+  color: var(--text);
+  font-size: 15px;
+  position: relative;
 }
 
-.hero h1{
-  font-family:'Playfair Display',serif;
-  font-size:66px;
-  max-width:820px;
-  line-height:1.08;
-  margin-bottom:26px;
+.menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.3s ease;
 }
 
-.hero p{
-  max-width:620px;
-  font-size:18px;
-  color:var(--muted);
+.menu a:hover::after {
+  width: 100%;
 }
 
-/* FEATURED */
-.featured{
-  padding:90px 0;
-  display:grid;
-  grid-template-columns:2fr 1fr;
-  gap:70px;
-  border-top:1px solid var(--border);
+/* ---------------- HERO ---------------- */
+.hero {
+  padding: 80px 0 64px;
 }
 
-.main h2{
-  font-family:'Playfair Display',serif;
-  font-size:42px;
-  margin-bottom:18px;
+.hero h1 {
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: normal;
+  max-width: 900px;
 }
 
-.main p{
-  color:var(--muted);
-  margin-bottom:22px;
+.hero p {
+  margin-top: 20px;
+  font-size: 18px;
+  color: var(--muted);
+  max-width: 720px;
 }
 
-.main a{
-  font-weight:600;
-  text-decoration:none;
-  color:#000;
+/* ---------------- SECTION ---------------- */
+section {
+  margin-top: 80px;
 }
 
-/* SIDE */
-.side article{
-  border-top:1px solid var(--border);
-  padding-top:22px;
-  margin-bottom:36px;
+.section-title {
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 12px;
 }
 
-.side h3{
-  font-family:'Playfair Display',serif;
-  font-size:22px;
-  margin-bottom:8px;
+/* ---------------- ARTICLES ---------------- */
+.articles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 48px;
 }
 
-.side p{
-  font-size:14px;
-  color:var(--muted);
+.article {
+  animation: fadeUp 0.6s ease forwards;
 }
 
-/* MARQUEE */
-.marquee{
-  border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-  overflow:hidden;
-  padding:18px 0;
+.article h3 {
+  font-size: 22px;
+  font-weight: normal;
 }
 
-.marquee span{
-  display:inline-block;
-  padding-left:100%;
-  animation:scroll 22s linear infinite;
-  letter-spacing:.12em;
-  font-weight:500;
+.article p {
+  margin: 14px 0 18px;
+  color: var(--muted);
+  font-size: 15px;
 }
 
-@keyframes scroll{
-  to{transform:translateX(-100%);}
+.article a {
+  text-decoration: none;
+  color: var(--text);
+  font-size: 14px;
+  border-bottom: 1px solid var(--text);
+  padding-bottom: 2px;
 }
 
-/* LATEST */
-.latest{
-  padding:100px 0;
+/* ---------------- MARQUEE ---------------- */
+.marquee {
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-top: 80px;
 }
 
-.latest h2{
-  font-family:'Playfair Display',serif;
-  font-size:38px;
-  margin-bottom:50px;
+.marquee-track {
+  display: flex;
+  gap: 64px;
+  padding: 18px 0;
+  animation: scroll 28s linear infinite;
 }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:50px;
+.marquee span {
+  white-space: nowrap;
+  font-size: 14px;
+  color: var(--muted);
 }
 
-.card{
-  animation:fadeUp .8s ease both;
+/* ---------------- FOOTER ---------------- */
+footer {
+  margin-top: 100px;
+  border-top: 1px solid var(--line);
 }
 
-.card h3{
-  font-family:'Playfair Display',serif;
-  font-size:24px;
-  margin-bottom:12px;
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 48px;
+  padding: 64px 0;
 }
 
-.card p{
-  font-size:15px;
-  color:var(--muted);
+footer h4 {
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
 }
 
-/* FOOTER (EDITORIAL, NOT BORING) */
-footer{
-  border-top:1px solid var(--border);
-  padding:80px 0 60px;
+footer a {
+  display: block;
+  text-decoration: none;
+  color: var(--muted);
+  margin-bottom: 10px;
+  font-size: 14px;
 }
 
-.footer-top{
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr;
-  gap:60px;
-  margin-bottom:50px;
+footer a:hover {
+  color: var(--text);
 }
 
-.footer-top h4{
-  font-size:13px;
-  letter-spacing:.12em;
-  margin-bottom:16px;
+.footer-bottom {
+  border-top: 1px solid var(--line);
+  padding: 20px 0;
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
-.footer-top a{
-  display:block;
-  text-decoration:none;
-  color:var(--muted);
-  margin-bottom:10px;
-  font-size:14px;
+/* ---------------- ANIMATIONS ---------------- */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.footer-quote{
-  font-family:'Playfair Display',serif;
-  font-size:22px;
-  max-width:420px;
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
-.copy{
-  font-size:13px;
-  color:var(--muted);
-}
-
-/* ANIMATIONS */
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(20px);}
-  to{opacity:1;transform:none;}
-}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  .wrap{padding:0 24px;}
-  .hero h1{font-size:44px;}
-  .featured{grid-template-columns:1fr;}
-  .footer-top{grid-template-columns:1fr;}
+/* ---------------- MOBILE ---------------- */
+@media (max-width: 768px) {
+  .menu {
+    gap: 20px;
+  }
 }
 </style>
 </head>
@@ -245,83 +237,128 @@ footer{
 <body>
 
 <header>
-  <div class="wrap nav">
-    <img src="images/logo.png" alt="Logo">
+  <div class="container nav">
+    <div class="logo">
+      <img src="images/logo.png" alt="Logo">
+    </div>
     <nav class="menu">
       <a href="#">Home</a>
-      <a href="#">Interviews</a>
+      <a href="#">Conversations</a>
       <a href="#">About</a>
       <a href="#">Contact</a>
     </nav>
   </div>
 </header>
 
-<section class="hero wrap">
-  <h1>Long-form conversations with writers, thinkers, and cultural voices shaping Asia.</h1>
-  <p>Ajiva Talks curates in-depth interviews exploring identity, literature, philosophy, and the human condition.</p>
-</section>
+<main class="container">
 
-<section class="featured wrap">
-  <div class="main">
-    <h2>Featured Interview</h2>
-    <p>From crime fiction to medical realism, Sammon reflects on truth, love, and listening to the dead.</p>
-    <a href="sammon-isaree-siriwankulthon.html">Read the full conversation →</a>
-  </div>
-  <div class="side">
-    <article>
-      <h3>Deborah Wong</h3>
-      <p>On music as memory, poetry as confession, and writing grief honestly.</p>
-    </article>
-    <article>
-      <h3>Jin Young Lim</h3>
-      <p>Why Daoism, tea, and flow matter in a restless modern world.</p>
-    </article>
-  </div>
-</section>
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Long-form conversations with writers, thinkers, and cultural voices shaping our time.</h1>
+    <p>
+      A curated editorial space exploring identity, literature, memory, power, and the human condition —
+      through in-depth interviews.
+    </p>
+  </section>
 
+  <!-- FEATURED -->
+  <section>
+    <div class="section-title">Featured Conversations</div>
+    <div class="articles">
+      <div class="article">
+        <h3>Mica De Leon</h3>
+        <p>On love as equality, romance publishing, and Filipino identity in contemporary fiction.</p>
+        <a href="mica-de-leon.html">Read interview →</a>
+      </div>
+      <div class="article">
+        <h3>Nusrat Fatima Jafri</h3>
+        <p>A family history shaped by caste, conversion, nationhood, and the search for dignity.</p>
+        <a href="nusrat-fatima-jafri.html">Read interview →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LATEST -->
+  <section>
+    <div class="section-title">Latest Conversations</div>
+    <div class="articles" id="latest"></div>
+  </section>
+
+</main>
+
+<!-- MARQUEE -->
 <div class="marquee">
-  <span>INTERVIEWS • LITERATURE • CULTURE • MEMORY • PHILOSOPHY • ASIA •</span>
+  <div class="marquee-track">
+    <span>Identity</span>
+    <span>Literature</span>
+    <span>Memory</span>
+    <span>Power</span>
+    <span>Culture</span>
+    <span>Belonging</span>
+    <span>Identity</span>
+    <span>Literature</span>
+    <span>Memory</span>
+    <span>Power</span>
+  </div>
 </div>
 
-<section class="latest wrap">
-  <h2>Latest Conversations</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Mica De Leon</h3>
-      <p>“Love is equality.” On romance, feminism, and writing Filipino stories that travel beyond borders.</p>
-    </div>
-    <div class="card">
-      <h3>Larry Nyanti</h3>
-      <p>A meditation on lost love, regret, and the quiet supernatural threads that bind memory.</p>
-    </div>
-    <div class="card">
-      <h3>Nusrat Fatima Jafri</h3>
-      <p>A family history shaped by caste, conversion, and the search for dignity in modern India.</p>
-    </div>
-  </div>
-</section>
-
+<!-- FOOTER -->
 <footer>
-  <div class="wrap footer-top">
-    <div class="footer-quote">
-      Stories preserve what history forgets.
+  <div class="container footer-grid">
+    <div>
+      <h4>About</h4>
+      <a href="#">Mission</a>
+      <a href="#">Editorial Policy</a>
     </div>
     <div>
-      <h4>ABOUT</h4>
-      <a href="#">Mission</a>
-      <a href="#">Editorial</a>
+      <h4>Connect</h4>
+      <a href="#">Instagram</a>
+      <a href="#">Twitter / X</a>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <a href="#">Terms</a>
       <a href="#">Privacy</a>
     </div>
-    <div>
-      <h4>CONNECT</h4>
-      <a href="#">Instagram</a>
-      <a href="#">Twitter</a>
-    </div>
   </div>
-  <div class="wrap copy">
-    © 2025 Ajiva Talks. Independent editorial platform.
+  <div class="container footer-bottom">
+    <span>© 2025 Conversations</span>
+    <span>Independent editorial project</span>
   </div>
 </footer>
+
+<!-- AUTO FEED SCRIPT (SAFE) -->
+<script>
+const latestArticles = [
+  {
+    title: "Larry Nyanti",
+    excerpt: "Lost love, regret, and the quiet pull of the supernatural.",
+    url: "larry-nyanti.html"
+  },
+  {
+    title: "Jin Young Lim",
+    excerpt: "Daoist flow, mindfulness, and living in harmony with uncertainty.",
+    url: "jin-young-lim.html"
+  },
+  {
+    title: "Justine Camacho-Tajonera",
+    excerpt: "Waterfalls, resilience, and choosing your own path.",
+    url: "justine-camacho-tajonera.html"
+  }
+];
+
+const container = document.getElementById("latest");
+
+latestArticles.forEach(a => {
+  container.innerHTML += `
+    <div class="article">
+      <h3>${a.title}</h3>
+      <p>${a.excerpt}</p>
+      <a href="${a.url}">Read interview →</a>
+    </div>
+  `;
+});
+</script>
 
 </body>
 </html>
