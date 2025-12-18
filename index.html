@@ -1,42 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Conversations</title>
 
 <style>
-/* ---------------- RESET ---------------- */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* ---------------- ROOT ---------------- */
+/* ---------------- DESIGN SYSTEM ---------------- */
 :root {
   --bg: #ffffff;
-  --text: #111111;
-  --muted: #666;
-  --line: #e6e6e6;
-  --accent: #000;
-  --max-width: 1180px;
+  --text: #111;
+  --muted: #6b6b6b;
+  --line: #e8e8e8;
+
+  --max: 1200px;
+  --pad: clamp(20px, 4vw, 48px);
+  --section: clamp(64px, 10vw, 120px);
 }
+
+/* ---------------- RESET ---------------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 /* ---------------- BODY ---------------- */
 body {
-  font-family: Georgia, "Times New Roman", serif;
   background: var(--bg);
   color: var(--text);
-  line-height: 1.6;
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ---------------- CONTAINER ---------------- */
-.container {
-  max-width: var(--max-width);
+/* ---------------- WRAPPER ---------------- */
+.wrapper {
+  max-width: var(--max);
   margin: 0 auto;
-  padding: 48px 24px;
+  padding: 0 var(--pad);
 }
 
 /* ---------------- HEADER ---------------- */
@@ -52,18 +50,18 @@ header {
 }
 
 .logo img {
-  height: 38px;
+  height: 40px;
 }
 
 .menu {
   display: flex;
-  gap: 32px;
+  gap: clamp(20px, 4vw, 40px);
 }
 
 .menu a {
-  text-decoration: none;
-  color: var(--text);
   font-size: 15px;
+  color: var(--text);
+  text-decoration: none;
   position: relative;
 }
 
@@ -74,8 +72,8 @@ header {
   bottom: -6px;
   width: 0;
   height: 1px;
-  background: var(--accent);
-  transition: width 0.3s ease;
+  background: var(--text);
+  transition: width .25s ease;
 }
 
 .menu a:hover::after {
@@ -84,79 +82,92 @@ header {
 
 /* ---------------- HERO ---------------- */
 .hero {
-  padding: 80px 0 64px;
-}
-
-.hero h1 {
-  font-size: clamp(36px, 6vw, 64px);
-  font-weight: normal;
+  padding: var(--section) 0;
   max-width: 900px;
 }
 
+.hero h1 {
+  font-size: clamp(38px, 6vw, 68px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
 .hero p {
-  margin-top: 20px;
-  font-size: 18px;
+  margin-top: 24px;
+  font-size: clamp(16px, 2.4vw, 19px);
   color: var(--muted);
   max-width: 720px;
 }
 
 /* ---------------- SECTION ---------------- */
 section {
-  margin-top: 80px;
+  padding: var(--section) 0;
 }
 
-.section-title {
-  font-size: 20px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 40px;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 12px;
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 48px;
 }
 
-/* ---------------- ARTICLES ---------------- */
-.articles {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 48px;
-}
-
-.article {
-  animation: fadeUp 0.6s ease forwards;
-}
-
-.article h3 {
-  font-size: 22px;
-  font-weight: normal;
-}
-
-.article p {
-  margin: 14px 0 18px;
-  color: var(--muted);
-  font-size: 15px;
-}
-
-.article a {
-  text-decoration: none;
-  color: var(--text);
+.section-head span {
   font-size: 14px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.section-head::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+/* ---------------- GRID ---------------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(32px, 5vw, 64px);
+}
+
+/* ---------------- CARD ---------------- */
+.card {
+  animation: fadeUp .6s ease both;
+}
+
+.card h3 {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.card p {
+  margin: 16px 0 20px;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.card a {
+  font-size: 14px;
+  color: var(--text);
+  text-decoration: none;
   border-bottom: 1px solid var(--text);
   padding-bottom: 2px;
 }
 
 /* ---------------- MARQUEE ---------------- */
 .marquee {
-  overflow: hidden;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  margin-top: 80px;
+  overflow: hidden;
 }
 
 .marquee-track {
   display: flex;
-  gap: 64px;
+  gap: 72px;
   padding: 18px 0;
-  animation: scroll 28s linear infinite;
+  animation: move 32s linear infinite;
 }
 
 .marquee span {
@@ -167,39 +178,35 @@ section {
 
 /* ---------------- FOOTER ---------------- */
 footer {
-  margin-top: 100px;
   border-top: 1px solid var(--line);
+  padding: var(--section) 0 48px;
 }
 
 .footer-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 48px;
-  padding: 64px 0;
 }
 
 footer h4 {
   font-size: 14px;
-  letter-spacing: 0.08em;
+  letter-spacing: .18em;
   text-transform: uppercase;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 footer a {
   display: block;
-  text-decoration: none;
-  color: var(--muted);
-  margin-bottom: 10px;
   font-size: 14px;
+  color: var(--muted);
+  text-decoration: none;
+  margin-bottom: 10px;
 }
 
-footer a:hover {
-  color: var(--text);
-}
+footer a:hover { color: var(--text); }
 
 .footer-bottom {
-  border-top: 1px solid var(--line);
-  padding: 20px 0;
+  margin-top: 64px;
   font-size: 13px;
   color: var(--muted);
   display: flex;
@@ -208,28 +215,15 @@ footer a:hover {
   gap: 12px;
 }
 
-/* ---------------- ANIMATIONS ---------------- */
+/* ---------------- ANIMATION ---------------- */
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes scroll {
+@keyframes move {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
-}
-
-/* ---------------- MOBILE ---------------- */
-@media (max-width: 768px) {
-  .menu {
-    gap: 20px;
-  }
 }
 </style>
 </head>
@@ -237,7 +231,7 @@ footer a:hover {
 <body>
 
 <header>
-  <div class="container nav">
+  <div class="wrapper nav">
     <div class="logo">
       <img src="images/logo.png" alt="Logo">
     </div>
@@ -250,61 +244,53 @@ footer a:hover {
   </div>
 </header>
 
-<main class="container">
+<main class="wrapper">
 
   <!-- HERO -->
-  <section class="hero">
-    <h1>Long-form conversations with writers, thinkers, and cultural voices shaping our time.</h1>
+  <div class="hero">
+    <h1>Long-form conversations with writers, thinkers, and cultural voices.</h1>
     <p>
-      A curated editorial space exploring identity, literature, memory, power, and the human condition —
-      through in-depth interviews.
+      Carefully edited interviews exploring literature, identity, power, memory,
+      and the inner lives that shape our world.
     </p>
-  </section>
+  </div>
 
   <!-- FEATURED -->
   <section>
-    <div class="section-title">Featured Conversations</div>
-    <div class="articles">
-      <div class="article">
+    <div class="section-head"><span>Featured</span></div>
+    <div class="grid">
+      <div class="card">
         <h3>Mica De Leon</h3>
-        <p>On love as equality, romance publishing, and Filipino identity in contemporary fiction.</p>
-        <a href="mica-de-leon.html">Read interview →</a>
+        <p>On love as equality, publishing romance, and Filipino cultural identity.</p>
+        <a href="mica-de-leon.html">Read →</a>
       </div>
-      <div class="article">
+      <div class="card">
         <h3>Nusrat Fatima Jafri</h3>
-        <p>A family history shaped by caste, conversion, nationhood, and the search for dignity.</p>
-        <a href="nusrat-fatima-jafri.html">Read interview →</a>
+        <p>Caste, conversion, belonging, and the long road to dignity.</p>
+        <a href="nusrat-fatima-jafri.html">Read →</a>
       </div>
     </div>
   </section>
 
   <!-- LATEST -->
   <section>
-    <div class="section-title">Latest Conversations</div>
-    <div class="articles" id="latest"></div>
+    <div class="section-head"><span>Latest</span></div>
+    <div class="grid" id="latest"></div>
   </section>
 
 </main>
 
 <!-- MARQUEE -->
 <div class="marquee">
-  <div class="marquee-track">
-    <span>Identity</span>
-    <span>Literature</span>
-    <span>Memory</span>
-    <span>Power</span>
-    <span>Culture</span>
-    <span>Belonging</span>
-    <span>Identity</span>
-    <span>Literature</span>
-    <span>Memory</span>
-    <span>Power</span>
+  <div class="wrapper marquee-track">
+    <span>Identity</span><span>Literature</span><span>Memory</span>
+    <span>Culture</span><span>Belonging</span><span>Power</span>
+    <span>Identity</span><span>Literature</span>
   </div>
 </div>
 
-<!-- FOOTER -->
 <footer>
-  <div class="container footer-grid">
+  <div class="wrapper footer-grid">
     <div>
       <h4>About</h4>
       <a href="#">Mission</a>
@@ -321,40 +307,27 @@ footer a:hover {
       <a href="#">Privacy</a>
     </div>
   </div>
-  <div class="container footer-bottom">
+
+  <div class="wrapper footer-bottom">
     <span>© 2025 Conversations</span>
     <span>Independent editorial project</span>
   </div>
 </footer>
 
-<!-- AUTO FEED SCRIPT (SAFE) -->
 <script>
-const latestArticles = [
-  {
-    title: "Larry Nyanti",
-    excerpt: "Lost love, regret, and the quiet pull of the supernatural.",
-    url: "larry-nyanti.html"
-  },
-  {
-    title: "Jin Young Lim",
-    excerpt: "Daoist flow, mindfulness, and living in harmony with uncertainty.",
-    url: "jin-young-lim.html"
-  },
-  {
-    title: "Justine Camacho-Tajonera",
-    excerpt: "Waterfalls, resilience, and choosing your own path.",
-    url: "justine-camacho-tajonera.html"
-  }
+const data = [
+  { t: "Larry Nyanti", e: "Love, regret, and the quiet pull of the supernatural.", u: "larry-nyanti.html" },
+  { t: "Jin Young Lim", e: "Daoist flow, mindfulness, and harmony in uncertainty.", u: "jin-young-lim.html" },
+  { t: "Justine Camacho-Tajonera", e: "Waterfalls, resilience, and choosing your own path.", u: "justine-camacho-tajonera.html" }
 ];
 
-const container = document.getElementById("latest");
-
-latestArticles.forEach(a => {
-  container.innerHTML += `
-    <div class="article">
-      <h3>${a.title}</h3>
-      <p>${a.excerpt}</p>
-      <a href="${a.url}">Read interview →</a>
+const box = document.getElementById("latest");
+data.forEach(d => {
+  box.innerHTML += `
+    <div class="card">
+      <h3>${d.t}</h3>
+      <p>${d.e}</p>
+      <a href="${d.u}">Read →</a>
     </div>
   `;
 });
