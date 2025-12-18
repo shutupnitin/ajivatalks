@@ -9,28 +9,26 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-/* ================= ROOT ================= */
 :root{
   --ink:#111;
   --muted:#666;
   --light:#999;
-  --rule:#e5e5e5;
+  --rule:#e6e6e6;
   --max:1100px;
-  --side:clamp(22px,6vw,80px);
+  --side:clamp(24px,6vw,90px);
 }
 
-/* ================= RESET ================= */
 *{margin:0;padding:0;box-sizing:border-box}
+
 body{
   font-family:Inter,system-ui,sans-serif;
   color:var(--ink);
   background:#fff;
   line-height:1.75;
-  overflow-x:hidden;
 }
+
 a{color:inherit;text-decoration:none}
 
-/* ================= WRAPPER ================= */
 .wrap{
   max-width:var(--max);
   margin:0 auto;
@@ -39,23 +37,26 @@ a{color:inherit;text-decoration:none}
 
 /* ================= HEADER ================= */
 header{
-  padding:56px 0 40px;
+  padding:72px 0 48px; /* LOGO NOT STICKING */
   text-align:center;
 }
+
 .logo img{height:44px}
 
 nav{
-  margin-top:28px;
+  margin-top:30px;
   display:flex;
   justify-content:center;
-  gap:36px;
+  gap:40px;
   font-size:13px;
   letter-spacing:.12em;
 }
+
 nav a{
   position:relative;
   padding-bottom:6px;
 }
+
 nav a::after{
   content:"";
   position:absolute;
@@ -67,13 +68,15 @@ nav a::after{
   transition:.35s ease;
   transform:translateX(-50%);
 }
+
 nav a:hover::after{width:100%}
 
 /* ================= HERO ================= */
 .hero{
-  padding:120px 0 130px;
+  padding:120px 0 140px;
   text-align:center;
 }
+
 .hero h1{
   font-family:"Playfair Display",serif;
   font-size:clamp(38px,5.5vw,64px);
@@ -81,8 +84,9 @@ nav a:hover::after{width:100%}
   max-width:900px;
   margin:0 auto;
 }
+
 .hero p{
-  margin-top:32px;
+  margin-top:34px;
   font-size:15px;
   color:var(--muted);
   max-width:520px;
@@ -90,27 +94,31 @@ nav a:hover::after{width:100%}
   margin-right:auto;
 }
 
-/* editorial motion */
-.hero-rule{
-  width:140px;
-  height:1px;
-  background:var(--ink);
-  margin:56px auto 0;
-  animation:fadeLine 4s ease-in-out infinite;
-}
-@keyframes fadeLine{
-  0%,100%{opacity:.25}
-  50%{opacity:1}
-}
+/* ================= SECTION ================= */
+section{padding:140px 0}
 
-/* ================= SECTIONS ================= */
-section{
-  padding:130px 0;
-}
 .section-title{
   font-family:"Playfair Display",serif;
   font-size:30px;
-  margin-bottom:72px;
+  margin-bottom:80px;
+}
+
+/* ================= EDITOR PICK ================= */
+.editor-pick{
+  border-left:2px solid var(--ink);
+  padding-left:26px;
+  max-width:640px;
+  animation:fadeUp .9s ease forwards;
+}
+
+.editor-pick h3{
+  font-family:"Playfair Display",serif;
+  font-size:26px;
+}
+
+.editor-pick p{
+  margin-top:16px;
+  color:var(--muted);
 }
 
 /* ================= FEATURED ================= */
@@ -119,90 +127,132 @@ section{
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:90px;
 }
+
 .feature{
   padding-left:26px;
   position:relative;
+  animation:fadeUp 1s ease forwards;
 }
+
 .feature::before{
   content:"";
   position:absolute;
   left:0;
   top:6px;
   width:2px;
-  height:0;
+  height:100%;
   background:var(--ink);
-  animation:grow 1s ease forwards;
 }
-@keyframes grow{to{height:100%}}
+
 .feature h3{
   font-family:"Playfair Display",serif;
   font-size:24px;
 }
+
 .feature p{
   margin-top:16px;
   color:var(--muted);
-  font-size:15px;
 }
 
-/* ================= LATEST ================= */
-.latest{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:90px;
-}
-.latest article h4{
-  font-family:"Playfair Display",serif;
-  font-size:22px;
-}
-.latest article p{
-  margin-top:16px;
-  color:var(--muted);
-  font-size:15px;
-}
-
-/* ================= READ ALL ================= */
-.read-all{
-  margin-top:80px;
-}
-.read-all a{
+.read-btn{
+  display:inline-block;
+  margin-top:22px;
   font-size:13px;
   letter-spacing:.14em;
   border-bottom:1px solid var(--ink);
   padding-bottom:6px;
 }
 
+/* ================= LATEST ================= */
+.latest{
+  margin-top:120px; /* SPACE FROM FEATURED */
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:90px;
+}
+
+.latest article{
+  animation:fadeUp 1.2s ease forwards;
+}
+
+.latest h4{
+  font-family:"Playfair Display",serif;
+  font-size:22px;
+}
+
+.latest p{
+  margin-top:16px;
+  color:var(--muted);
+}
+
+/* ================= CTA ================= */
+.center-cta{
+  margin-top:100px;
+  text-align:center;
+}
+
+.center-cta a{
+  font-size:14px;
+  letter-spacing:.16em;
+  border-bottom:1px solid var(--ink);
+  padding-bottom:8px;
+}
+
+/* ================= TESTIMONIAL ================= */
+.testimonial{
+  max-width:700px;
+  margin:0 auto;
+  text-align:center;
+  font-family:"Playfair Display",serif;
+  font-size:24px;
+  animation:fadeUp 1.2s ease forwards;
+}
+
+.testimonial span{
+  display:block;
+  margin-top:24px;
+  font-family:Inter,sans-serif;
+  font-size:14px;
+  color:var(--muted);
+}
+
 /* ================= FOOTER ================= */
 footer{
-  margin-top:160px;
-  padding:120px 0 80px;
+  margin-top:180px;
+  padding:140px 0 90px;
   border-top:1px solid var(--rule);
 }
+
 .footer-grid{
   display:grid;
   grid-template-columns:2fr 1fr 1fr;
-  gap:80px;
+  gap:90px;
 }
+
 footer h5{
   font-size:12px;
   letter-spacing:.16em;
-  margin-bottom:22px;
+  margin-bottom:24px;
 }
-footer p{
+
+footer p, footer a{
   font-size:14px;
   color:var(--muted);
-  max-width:360px;
 }
-footer a{
-  display:block;
-  font-size:14px;
-  color:var(--muted);
-  margin-bottom:14px;
-}
+
+footer a{display:block;margin-bottom:14px}
+
 .footer-bottom{
-  margin-top:80px;
+  margin-top:90px;
   font-size:12px;
   color:var(--light);
   text-align:center;
+}
+
+/* ================= ANIMATION ================= */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:none}
 }
 
 /* ================= MOBILE ================= */
@@ -231,16 +281,16 @@ footer a{
 <main>
 
 <section class="hero wrap">
-  <h1>
-    Thoughtful conversations<br>
-    for a quieter kind of attention.
-  </h1>
-  <p>
-    Ajiva Talks publishes long-form interviews with writers,
-    artists, and thinkers reflecting on culture, identity,
-    belief, and creative life.
-  </p>
-  <div class="hero-rule"></div>
+  <h1>Thoughtful conversations<br>for a quieter kind of attention.</h1>
+  <p>Long-form interviews with writers, artists, and thinkers exploring culture, identity, belief, and creative life.</p>
+</section>
+
+<section class="wrap">
+  <h2 class="section-title">Editor’s Pick</h2>
+  <div class="editor-pick">
+    <h3><a href="malcolm-mejin.html">Malcolm Mejin</a></h3>
+    <p>Writing humor, fear, and imagination for young readers.</p>
+  </div>
 </section>
 
 <section class="wrap">
@@ -249,16 +299,15 @@ footer a{
     <div class="feature">
       <h3><a href="emily-lim-leh.html">Emily Lim-Leh</a></h3>
       <p>Children’s literature, loss of voice, and reclaiming expression.</p>
+      <a class="read-btn" href="emily-lim-leh.html">READ INTERVIEW →</a>
     </div>
     <div class="feature">
       <h3><a href="jin-young-lim.html">Jin Young Lim</a></h3>
       <p>Daoist flow, embodied wisdom, and modern contemplative life.</p>
+      <a class="read-btn" href="jin-young-lim.html">READ INTERVIEW →</a>
     </div>
   </div>
-</section>
 
-<section class="wrap">
-  <h2 class="section-title">Latest Conversations</h2>
   <div class="latest">
     <article>
       <h4><a href="nusrat-fatima-jafri.html">Nusrat Fatima Jafri</a></h4>
@@ -270,8 +319,15 @@ footer a{
     </article>
   </div>
 
-  <div class="read-all">
+  <div class="center-cta">
     <a href="interviews.html">READ ALL INTERVIEWS →</a>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="testimonial">
+    “Your article helped me a lot before my podcast with Malcolm. It was very informative.”
+    <span>— Naghma, Founder of The Author’s Nest</span>
   </div>
 </section>
 
@@ -281,12 +337,7 @@ footer a{
   <div class="footer-grid">
     <div>
       <h5>ABOUT</h5>
-      <p>
-        Ajiva Talks is an independent editorial platform
-        dedicated to slow conversations and long-form
-        interviews that explore the interior lives of
-        writers, artists, and thinkers.
-      </p>
+      <p>Ajiva Talks is an independent editorial platform publishing slow, intentional conversations that value depth, reflection, and lived experience.</p>
     </div>
     <div>
       <h5>SECTIONS</h5>
@@ -299,10 +350,7 @@ footer a{
       <a href="#">Twitter</a>
     </div>
   </div>
-
-  <div class="footer-bottom">
-    © 2025 Ajiva Talks
-  </div>
+  <div class="footer-bottom">© 2025 Ajiva Talks</div>
 </footer>
 
 </body>
