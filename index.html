@@ -10,10 +10,10 @@
 <style>
 :root{
   --max-width:1120px;
-  --pad:clamp(20px,5vw,64px);
+  --pad:clamp(20px,6vw,72px);
   --ink:#111;
   --muted:#666;
-  --line:#e8e8e8;
+  --line:#e6e6e6;
 }
 
 /* RESET */
@@ -22,7 +22,7 @@ body{
   font-family:Inter,system-ui,sans-serif;
   color:var(--ink);
   background:#fff;
-  line-height:1.75;
+  line-height:1.7;
   overflow-x:hidden;
 }
 a{text-decoration:none;color:inherit}
@@ -34,19 +34,21 @@ a{text-decoration:none;color:inherit}
   padding:0 var(--pad);
 }
 
-/* ================= HEADER (LOCKED) ================= */
+/* ================= HEADER ================= */
 header{
   padding:48px 0 32px;
   text-align:center;
 }
 .logo img{height:42px}
+
 nav{
   margin-top:24px;
   display:flex;
   justify-content:center;
   gap:28px;
   font-size:14px;
-  letter-spacing:.05em;
+  letter-spacing:.06em;
+  flex-wrap:wrap;
 }
 nav a{
   position:relative;
@@ -55,8 +57,10 @@ nav a{
 nav a::after{
   content:"";
   position:absolute;
-  left:0;bottom:0;
-  width:0;height:1px;
+  left:0;
+  bottom:0;
+  width:0;
+  height:1px;
   background:#111;
   transition:.35s ease;
 }
@@ -64,83 +68,53 @@ nav a:hover::after{width:100%}
 
 /* ================= HERO ================= */
 .hero{
-  padding:110px 0 130px;
-  position:relative;
-}
-.hero-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:80px;
+  padding:120px 0 110px;
+  text-align:center;
 }
 .hero h1{
   font-family:"Playfair Display",serif;
-  font-size:clamp(42px,6vw,64px);
+  font-size:clamp(36px,5.5vw,60px);
   font-weight:500;
+  max-width:820px;
+  margin:0 auto;
 }
 .hero p{
   margin-top:28px;
   color:var(--muted);
-  max-width:420px;
+  max-width:520px;
+  margin-left:auto;
+  margin-right:auto;
+  font-size:15px;
 }
 
-/* moving rule */
-.hero::after{
-  content:"";
-  position:absolute;
-  bottom:40px;
-  left:var(--pad);
-  right:var(--pad);
+/* subtle divider animation */
+.hero-divider{
+  width:120px;
   height:1px;
-  background:linear-gradient(
-    90deg,
-    transparent,
-    #111,
-    transparent
-  );
-  animation:drift 6s linear infinite;
+  background:#111;
+  margin:48px auto 0;
+  animation:pulse 3s ease-in-out infinite;
 }
-@keyframes drift{
-  0%{opacity:.2}
+@keyframes pulse{
+  0%,100%{opacity:.3}
   50%{opacity:1}
-  100%{opacity:.2}
 }
 
-/* ================= MARQUEE ================= */
-.marquee{
-  overflow:hidden;
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-}
-.marquee-track{
-  display:flex;
-  gap:80px;
-  padding:22px 0;
-  animation:scroll 28s linear infinite;
-}
-.marquee span{
-  white-space:nowrap;
-  font-size:14px;
-  letter-spacing:.12em;
-  color:#444;
-}
-@keyframes scroll{
-  from{transform:translateX(0)}
-  to{transform:translateX(-50%)}
-}
-
-/* ================= FEATURED ================= */
+/* ================= SECTION ================= */
 .section{
-  padding:120px 0;
+  padding:110px 0;
 }
 .section-title{
   font-family:"Playfair Display",serif;
-  font-size:32px;
+  font-size:30px;
   margin-bottom:64px;
 }
+
+/* ================= FEATURED ================= */
 .featured{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:80px;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:72px;
 }
 .card{
   position:relative;
@@ -149,12 +123,18 @@ nav a:hover::after{width:100%}
 .card::before{
   content:"";
   position:absolute;
-  left:0;top:6px;
-  width:2px;height:0;
+  left:0;
+  top:4px;
+  width:2px;
+  height:100%;
   background:#111;
-  animation:grow 1s ease forwards;
+  transform:scaleY(0);
+  transform-origin:top;
+  animation:lineGrow 1s ease forwards;
 }
-@keyframes grow{to{height:100%}}
+@keyframes lineGrow{
+  to{transform:scaleY(1)}
+}
 .card h3{
   font-family:"Playfair Display",serif;
   font-size:24px;
@@ -162,13 +142,14 @@ nav a:hover::after{width:100%}
 .card p{
   margin-top:14px;
   color:var(--muted);
+  font-size:15px;
 }
 
 /* ================= LATEST ================= */
 .latest{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:80px;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:72px;
 }
 .latest-item h4{
   font-family:"Playfair Display",serif;
@@ -177,11 +158,12 @@ nav a:hover::after{width:100%}
 .latest-item p{
   margin-top:14px;
   color:var(--muted);
+  font-size:15px;
 }
 
-/* ================= CTA ================= */
+/* ================= READ ALL ================= */
 .read-all{
-  margin-top:80px;
+  margin-top:72px;
 }
 .read-all a{
   font-size:14px;
@@ -190,14 +172,14 @@ nav a:hover::after{width:100%}
   padding-bottom:6px;
 }
 
-/* ================= FOOTER (LOCKED) ================= */
+/* ================= FOOTER ================= */
 footer{
   border-top:1px solid var(--line);
   padding:72px 0;
 }
 .footer-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
   gap:48px;
 }
 footer h5{
@@ -221,10 +203,11 @@ footer p{
   color:#aaa;
 }
 
-/* ================= RESPONSIVE ================= */
-@media(max-width:900px){
-  .hero-grid{grid-template-columns:1fr}
-  .featured,.latest{grid-template-columns:1fr}
+/* ================= MOBILE TWEAKS ================= */
+@media(max-width:600px){
+  header{padding-top:36px}
+  .hero{padding:96px 0}
+  .section{padding:96px 0}
 }
 </style>
 </head>
@@ -246,27 +229,18 @@ footer p{
 <main>
 
 <section class="hero container">
-  <div class="hero-grid">
-    <h1>
-      Conversations that slow time,<br>
-      deepen thought,<br>
-      and stay with you.
-    </h1>
-    <p>
-      Ajiva Talks publishes long-form interviews with writers,
-      artists, and thinkers reflecting on culture, identity,
-      memory, belief, and creative life.
-    </p>
-  </div>
+  <h1>
+    Conversations that slow time,<br>
+    deepen thought,<br>
+    and stay with you.
+  </h1>
+  <p>
+    Ajiva Talks publishes long-form interviews with writers,
+    artists, and thinkers reflecting on culture, identity,
+    belief, and creative life.
+  </p>
+  <div class="hero-divider"></div>
 </section>
-
-<div class="marquee">
-  <div class="marquee-track">
-    <span>WRITING</span><span>CULTURE</span><span>IDENTITY</span>
-    <span>PHILOSOPHY</span><span>ART</span><span>MEMORY</span>
-    <span>WRITING</span><span>CULTURE</span><span>IDENTITY</span>
-  </div>
-</div>
 
 <section class="section container">
   <h2 class="section-title">Featured Interviews</h2>
