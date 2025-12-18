@@ -3,26 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Ajiva</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=DM+Serif+Text&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg:#ffffff;
-  --text:#111111;
-  --muted:#777777;
-  --line:#eaeaea;
+  --black:#111;
+  --gray:#666;
+  --light:#e5e5e5;
 }
 
 *{box-sizing:border-box;}
 
 body{
   margin:0;
-  background:var(--bg);
-  color:var(--text);
   font-family:Inter, sans-serif;
-  -webkit-font-smoothing:antialiased;
+  color:var(--black);
+  background:#fff;
 }
 
 /* LINKS */
@@ -31,247 +29,278 @@ a{
   text-decoration:none;
 }
 
-/* HEADER */
-header{
-  padding:28px 0;
+/* MASTHEAD */
+.masthead{
+  border-bottom:1px solid var(--light);
+  padding:24px 0 18px;
 }
 
-.nav{
-  max-width:1100px;
+.masthead-inner{
+  max-width:1200px;
   margin:auto;
   padding:0 24px;
+  text-align:center;
+}
+
+.masthead img{
+  height:28px;
+}
+
+/* NAV */
+.nav{
+  border-bottom:1px solid var(--light);
+}
+
+.nav-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:12px 24px;
   display:flex;
-  justify-content:space-between;
-  align-items:center;
+  justify-content:center;
+  gap:32px;
 }
 
-.logo img{
-  height:26px;
-}
-
-.menu a{
-  margin-left:28px;
+.nav a{
   font-size:12px;
   letter-spacing:1px;
   text-transform:uppercase;
-  color:var(--muted);
+  color:var(--gray);
 }
 
-.menu a:hover{
-  color:var(--text);
+.nav a:hover{
+  color:var(--black);
 }
 
-/* HERO */
-.hero{
-  max-width:1100px;
+/* GRID */
+.page{
+  max-width:1200px;
   margin:auto;
-  padding:110px 24px 140px;
+  padding:56px 24px 96px;
 }
 
-.hero h1{
-  font-family:'DM Serif Text', serif;
-  font-size:42px;
-  font-weight:400;
-  line-height:1.15;
-  max-width:720px;
-  margin:0;
+.grid{
+  display:grid;
+  grid-template-columns: 2fr 1fr;
+  gap:64px;
 }
 
-.hero p{
-  margin-top:24px;
-  font-size:16px;
-  color:var(--muted);
-  max-width:520px;
-}
-
-/* SEPARATOR */
-hr{
-  border:none;
-  border-top:1px solid var(--line);
-}
-
-/* FEATURED LIST */
-.section{
-  max-width:1100px;
-  margin:auto;
-  padding:80px 24px;
-}
-
-.section-title{
-  font-size:11px;
-  letter-spacing:1.2px;
-  text-transform:uppercase;
-  color:var(--muted);
-  margin-bottom:36px;
-}
-
-.entry{
-  padding:22px 0;
-  border-bottom:1px solid var(--line);
-}
-
-.entry:last-child{
-  border-bottom:none;
-}
-
-.entry small{
+/* LEAD STORY */
+.lead small{
   display:block;
   font-size:11px;
   letter-spacing:1px;
   text-transform:uppercase;
-  color:var(--muted);
+  color:var(--gray);
+  margin-bottom:14px;
 }
 
-.entry h2{
-  font-family:'DM Serif Text', serif;
-  font-size:24px;
+.lead h1{
+  font-family:"Libre Baskerville", serif;
+  font-size:42px;
+  line-height:1.15;
   font-weight:400;
-  margin:6px 0 8px;
+  margin:0 0 18px;
 }
 
-.entry p{
-  font-size:14.5px;
-  color:var(--muted);
-  max-width:560px;
+.lead p{
+  font-size:16px;
+  color:var(--gray);
+  max-width:620px;
 }
 
-.entry:hover h2{
-  text-decoration:underline;
+/* SIDEBAR */
+.sidebar article{
+  padding:24px 0;
+  border-bottom:1px solid var(--light);
 }
 
-/* STATEMENT */
-.statement{
-  max-width:1100px;
-  margin:auto;
-  padding:120px 24px;
+.sidebar article:last-child{
+  border-bottom:none;
 }
 
-.statement p{
-  font-family:'DM Serif Text', serif;
-  font-size:30px;
-  line-height:1.25;
-  max-width:780px;
+.sidebar small{
+  font-size:11px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--gray);
+}
+
+.sidebar h2{
+  font-family:"Libre Baskerville", serif;
+  font-size:20px;
+  font-weight:400;
+  margin:8px 0 6px;
+}
+
+.sidebar p{
+  font-size:14px;
+  color:var(--gray);
+}
+
+/* SECTION RULE */
+.rule{
+  margin:80px 0;
+  border-top:1px solid var(--light);
+}
+
+/* COLUMN LIST */
+.columns{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:48px;
+}
+
+.columns article h3{
+  font-family:"Libre Baskerville", serif;
+  font-size:18px;
+  font-weight:400;
+  margin:8px 0;
+}
+
+.columns article small{
+  font-size:11px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--gray);
+}
+
+.columns article p{
+  font-size:14px;
+  color:var(--gray);
 }
 
 /* FOOTER */
 footer{
-  border-top:1px solid var(--line);
+  border-top:1px solid var(--light);
+  margin-top:120px;
 }
 
-.footer{
-  max-width:1100px;
+.footer-inner{
+  max-width:1200px;
   margin:auto;
-  padding:60px 24px 40px;
+  padding:48px 24px;
   display:flex;
   justify-content:space-between;
   flex-wrap:wrap;
   gap:40px;
 }
 
-.footer-links a{
+.footer a{
   display:block;
   font-size:13px;
-  color:var(--muted);
+  color:var(--gray);
   margin-bottom:10px;
 }
 
-.footer-links a:hover{
-  color:var(--text);
+.footer a:hover{
+  color:var(--black);
 }
 
-.footer-social a{
-  display:block;
-  font-size:13px;
-  margin-bottom:10px;
-}
-
-.footer-bottom{
-  max-width:1100px;
-  margin:auto;
-  padding:0 24px 30px;
+.copy{
   font-size:11px;
-  color:var(--muted);
+  color:var(--gray);
+  padding:0 24px 32px;
+  max-width:1200px;
+  margin:auto;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="nav">
-    <a class="logo" href="/">
-      <img src="images/logo.png" alt="Ajiva">
-    </a>
-
-    <nav class="menu">
-      <a href="#">Stories</a>
-      <a href="#">Interviews</a>
-      <a href="#">Essays</a>
-    </nav>
+<header class="masthead">
+  <div class="masthead-inner">
+    <img src="images/logo.png" alt="Ajiva">
   </div>
 </header>
 
-<section class="hero">
-  <h1>
-    Long-form conversations,<br>
-    cultural memory,<br>
-    and ideas that last.
-  </h1>
-  <p>
-    Ajiva is an independent editorial platform documenting
-    writers, thinkers, and stories across Asia.
-  </p>
-</section>
-
-<hr>
-
-<section class="section">
-  <div class="section-title">Featured</div>
-
-  <div class="entry">
-    <small>Memoir</small>
-    <h2>Nusrat Fatima Jafri</h2>
-    <p>Identity, caste, faith, and the meaning of home.</p>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#">Interviews</a>
+    <a href="#">Books</a>
+    <a href="#">Culture</a>
+    <a href="#">Ideas</a>
   </div>
+</nav>
 
-  <div class="entry">
-    <small>Philosophy</small>
-    <h2>Jin Young Lim</h2>
-    <p>Living with flow through Daoist wisdom.</p>
-  </div>
+<main class="page">
 
-  <div class="entry">
-    <small>Fiction</small>
-    <h2>Larry Nyanti</h2>
-    <p>Love, memory, and the supernatural.</p>
-  </div>
-</section>
+  <section class="grid">
 
-<hr>
+    <div class="lead">
+      <small>Featured Conversation</small>
+      <h1>
+        Writing identity, memory,<br>
+        and belonging in modern Asia
+      </h1>
+      <p>
+        Long-form interviews and essays with writers, thinkers,
+        and cultural voices shaping the region.
+      </p>
+    </div>
 
-<section class="statement">
-  <p>
-    We publish slowly.<br>
-    Because depth is not urgency — it is care.
-  </p>
-</section>
+    <aside class="sidebar">
+      <article>
+        <small>Memoir</small>
+        <h2>Nusrat Fatima Jafri</h2>
+        <p>Faith, caste, and the meaning of home.</p>
+      </article>
+
+      <article>
+        <small>Philosophy</small>
+        <h2>Jin Young Lim</h2>
+        <p>The Dao of flow and embodied wisdom.</p>
+      </article>
+
+      <article>
+        <small>Fiction</small>
+        <h2>Larry Nyanti</h2>
+        <p>Love, loss, and the supernatural.</p>
+      </article>
+    </aside>
+
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="columns">
+    <article>
+      <small>Literature</small>
+      <h3>Women, memory, and resistance</h3>
+      <p>Personal histories as national history.</p>
+    </article>
+
+    <article>
+      <small>Culture</small>
+      <h3>The quiet power of long-form</h3>
+      <p>Why slow publishing still matters.</p>
+    </article>
+
+    <article>
+      <small>Ideas</small>
+      <h3>What it means to belong</h3>
+      <p>Across borders, languages, and belief.</p>
+    </article>
+  </section>
+
+</main>
 
 <footer>
-  <div class="footer">
-    <div class="footer-links">
+  <div class="footer-inner">
+    <div>
       <a href="#">About</a>
       <a href="#">Contact</a>
       <a href="#">Terms</a>
       <a href="#">Privacy</a>
     </div>
 
-    <div class="footer-social">
+    <div>
       <a href="#">Instagram</a>
       <a href="#">Twitter</a>
     </div>
   </div>
 
-  <div class="footer-bottom">
+  <div class="copy">
     © 2025 Ajiva
   </div>
 </footer>
