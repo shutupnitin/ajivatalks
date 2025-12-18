@@ -1,269 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ajiva Talks</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --ink:#111;
-  --muted:#666;
-  --rule:#e5e5e5;
-  --bg:#ffffff;
-  --max:1080px;
-  --pad:clamp(24px,6vw,96px);
-}
-
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
-  background:var(--bg);
-  color:var(--ink);
+  background:#fff;
+  color:#111;
   font-family:Inter,system-ui,sans-serif;
-  line-height:1.75;
+  line-height:1.9;
 }
 
-a{
-  color:inherit;
-  text-decoration:none;
-}
+a{color:inherit;text-decoration:none}
 
-.page{
-  max-width:var(--max);
+.wrapper{
+  max-width:760px;
   margin:0 auto;
-  padding:0 var(--pad);
+  padding:0 clamp(24px,8vw,120px);
 }
 
-/* ================= HEADER ================= */
+/* ===== HEADER ===== */
 header{
-  padding:72px 0 56px;
+  padding:80px 0 100px;
   text-align:center;
 }
 
 .logo img{
-  height:42px;
+  height:46px;
 }
 
 nav{
-  margin-top:32px;
+  margin-top:48px;
   display:flex;
   justify-content:center;
-  gap:40px;
-  font-size:13px;
-  letter-spacing:.14em;
+  gap:42px;
+  font-size:12px;
+  letter-spacing:.2em;
   text-transform:uppercase;
 }
 
 nav a{
   position:relative;
-  padding-bottom:6px;
 }
 
 nav a::after{
   content:"";
   position:absolute;
-  left:50%;
-  bottom:0;
+  left:0;
+  bottom:-6px;
   width:0;
   height:1px;
-  background:var(--ink);
-  transform:translateX(-50%);
+  background:#111;
   transition:.3s ease;
 }
 
 nav a:hover::after{width:100%}
 
-/* ================= HERO ================= */
+/* ===== HERO ===== */
 .hero{
-  padding:120px 0 140px;
+  padding:140px 0;
   text-align:center;
 }
 
 .hero h1{
   font-family:"Playfair Display",serif;
+  font-size:clamp(42px,6vw,68px);
   font-weight:500;
-  font-size:clamp(38px,5vw,64px);
-  max-width:880px;
-  margin:0 auto;
 }
 
 .hero p{
   margin-top:36px;
-  font-size:15px;
-  color:var(--muted);
-  max-width:520px;
-  margin-left:auto;
-  margin-right:auto;
+  font-size:16px;
+  color:#555;
 }
 
-/* ================= SECTIONS ================= */
+/* ===== SECTION ===== */
 section{
-  padding:120px 0;
+  padding:140px 0;
 }
 
-.section-title{
+h2{
   font-family:"Playfair Display",serif;
-  font-size:30px;
-  margin-bottom:64px;
+  font-size:34px;
+  font-weight:500;
+  margin-bottom:80px;
 }
 
-/* ================= EDITOR PICK ================= */
-.editor-pick{
-  max-width:620px;
-  border-left:2px solid var(--ink);
-  padding-left:24px;
-  animation:fadeUp .8s ease forwards;
+/* ===== ARTICLE LIST ===== */
+.article{
+  margin-bottom:72px;
 }
 
-.editor-pick h3{
+.article h3{
   font-family:"Playfair Display",serif;
   font-size:26px;
+  font-weight:500;
 }
 
-.editor-pick p{
+.article p{
   margin-top:14px;
-  color:var(--muted);
-}
-
-/* ================= FEATURED ================= */
-.featured{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:72px;
-}
-
-.feature{
-  max-width:720px;
-  animation:fadeUp 1s ease forwards;
-}
-
-.feature h3{
-  font-family:"Playfair Display",serif;
-  font-size:26px;
-}
-
-.feature p{
-  margin-top:14px;
-  color:var(--muted);
+  color:#555;
 }
 
 .read{
   display:inline-block;
   margin-top:18px;
   font-size:13px;
-  letter-spacing:.14em;
-  border-bottom:1px solid var(--ink);
-  padding-bottom:6px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
 }
 
-/* ================= LATEST ================= */
-.latest{
-  margin-top:96px;
-  display:grid;
-  grid-template-columns:1fr;
-  gap:64px;
-}
-
-.latest article{
-  max-width:680px;
-  animation:fadeUp 1.2s ease forwards;
-}
-
-.latest h4{
-  font-family:"Playfair Display",serif;
-  font-size:22px;
-}
-
-.latest p{
-  margin-top:14px;
-  color:var(--muted);
-}
-
-/* ================= CTA ================= */
-.center-cta{
-  margin-top:96px;
+/* ===== CTA ===== */
+.center{
   text-align:center;
+  margin-top:120px;
 }
 
-.center-cta a{
+.center a{
   font-size:14px;
-  letter-spacing:.16em;
-  border-bottom:1px solid var(--ink);
-  padding-bottom:8px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
 }
 
-/* ================= TESTIMONIAL ================= */
-.testimonial{
-  max-width:720px;
-  margin:0 auto;
-  text-align:center;
+/* ===== TESTIMONIAL ===== */
+blockquote{
   font-family:"Playfair Display",serif;
-  font-size:24px;
-  animation:fadeUp 1.2s ease forwards;
+  font-size:28px;
+  text-align:center;
 }
 
-.testimonial span{
+blockquote span{
   display:block;
-  margin-top:20px;
+  margin-top:24px;
   font-family:Inter,sans-serif;
   font-size:14px;
-  color:var(--muted);
+  color:#666;
 }
 
-/* ================= FOOTER ================= */
+/* ===== FOOTER ===== */
 footer{
+  padding:160px 0 100px;
+  border-top:1px solid #eee;
   margin-top:160px;
-  padding:120px 0 80px;
-  border-top:1px solid var(--rule);
 }
 
-.footer-grid{
+.footer-inner{
   display:grid;
-  grid-template-columns:2fr 1fr 1fr;
-  gap:72px;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
 }
 
-footer h5{
+footer h4{
   font-size:12px;
-  letter-spacing:.16em;
-  margin-bottom:22px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  margin-bottom:24px;
 }
 
 footer p, footer a{
   font-size:14px;
-  color:var(--muted);
+  color:#666;
 }
 
 footer a{display:block;margin-bottom:12px}
 
-.footer-bottom{
-  margin-top:72px;
+.copy{
+  margin-top:80px;
+  text-align:center;
   font-size:12px;
   color:#999;
-  text-align:center;
 }
 
-/* ================= ANIMATION ================= */
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(18px)}
-  to{opacity:1;transform:none}
-}
-
-/* ================= MOBILE ================= */
-@media(max-width:720px){
-  nav{flex-wrap:wrap;gap:24px}
-  section{padding:96px 0}
-  .footer-grid{grid-template-columns:1fr}
+/* ===== MOBILE ===== */
+@media(max-width:700px){
+  nav{flex-wrap:wrap;gap:28px}
+  section{padding:100px 0}
+  footer{padding:120px 0}
+  .footer-inner{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
 
-<header class="page">
+<header class="wrapper">
   <div class="logo">
     <img src="images/logo.png" alt="Ajiva Talks">
   </div>
@@ -275,79 +201,78 @@ footer a{display:block;margin-bottom:12px}
   </nav>
 </header>
 
-<main class="page">
+<main class="wrapper">
 
 <section class="hero">
-  <h1>Conversations worth slowing down for.</h1>
-  <p>In-depth interviews with writers, thinkers, and cultural voices exploring identity, belief, creativity, and lived experience.</p>
+  <h1>Long-form conversations with people who think deeply.</h1>
+  <p>Writers, artists, philosophers, and cultural voices — explored with patience and care.</p>
 </section>
 
 <section>
-  <h2 class="section-title">Editor’s Pick</h2>
-  <div class="editor-pick">
+  <h2>Editor’s Pick</h2>
+  <div class="article">
     <h3><a href="malcolm-mejin.html">Malcolm Mejin</a></h3>
-    <p>Writing humor, fear, and imagination for young readers.</p>
+    <p>Humor, fear, and imagination in contemporary children’s fiction.</p>
+    <a class="read" href="malcolm-mejin.html">Read Interview →</a>
   </div>
 </section>
 
 <section>
-  <h2 class="section-title">Featured Interviews</h2>
-  <div class="featured">
-    <div class="feature">
-      <h3><a href="emily-lim-leh.html">Emily Lim-Leh</a></h3>
-      <p>Children’s literature, loss of voice, and reclaiming expression.</p>
-      <a class="read" href="emily-lim-leh.html">READ INTERVIEW →</a>
-    </div>
-    <div class="feature">
-      <h3><a href="jin-young-lim.html">Jin Young Lim</a></h3>
-      <p>Daoist flow, embodied wisdom, and modern contemplative life.</p>
-      <a class="read" href="jin-young-lim.html">READ INTERVIEW →</a>
-    </div>
+  <h2>Featured Interviews</h2>
+
+  <div class="article">
+    <h3><a href="emily-lim-leh.html">Emily Lim-Leh</a></h3>
+    <p>Children’s literature, loss of voice, and reclaiming expression.</p>
+    <a class="read" href="emily-lim-leh.html">Read Interview →</a>
   </div>
 
-  <div class="latest">
-    <article>
-      <h4><a href="nusrat-fatima-jafri.html">Nusrat Fatima Jafri</a></h4>
-      <p>Caste, conversion, faith, and dignity across generations.</p>
-    </article>
-    <article>
-      <h4><a href="larry-nyanti.html">Larry Nyanti</a></h4>
-      <p>Love, memory, and supernatural reckonings.</p>
-    </article>
+  <div class="article">
+    <h3><a href="jin-young-lim.html">Jin Young Lim</a></h3>
+    <p>Daoist flow, embodied wisdom, and modern contemplative life.</p>
+    <a class="read" href="jin-young-lim.html">Read Interview →</a>
   </div>
 
-  <div class="center-cta">
-    <a href="interviews.html">READ ALL INTERVIEWS →</a>
+  <div class="center">
+    <a href="interviews.html">Read All Interviews →</a>
   </div>
 </section>
 
 <section>
-  <div class="testimonial">
+  <h2>Latest Conversations</h2>
+
+  <div class="article">
+    <h3><a href="nusrat-fatima-jafri.html">Nusrat Fatima Jafri</a></h3>
+    <p>Caste, conversion, faith, and dignity across generations.</p>
+  </div>
+
+  <div class="article">
+    <h3><a href="larry-nyanti.html">Larry Nyanti</a></h3>
+    <p>Love, memory, and supernatural reckonings.</p>
+  </div>
+</section>
+
+<section>
+  <blockquote>
     “Your article helped me a lot before my podcast with Malcolm. It was very informative.”
     <span>— Naghma, Founder of The Author’s Nest</span>
-  </div>
+  </blockquote>
 </section>
 
 </main>
 
-<footer class="page">
-  <div class="footer-grid">
+<footer class="wrapper">
+  <div class="footer-inner">
     <div>
-      <h5>ABOUT</h5>
-      <p>Ajiva Talks is an independent editorial platform publishing thoughtful, long-form conversations that value depth over speed.</p>
+      <h4>About</h4>
+      <p>Ajiva Talks is an independent editorial platform focused on long-form cultural conversations.</p>
     </div>
     <div>
-      <h5>SECTIONS</h5>
-      <a href="interviews.html">All Interviews</a>
-      <a href="#">About</a>
-    </div>
-    <div>
-      <h5>CONNECT</h5>
+      <h4>Connect</h4>
       <a href="#">Instagram</a>
       <a href="#">Twitter</a>
     </div>
   </div>
-  <div class="footer-bottom">© 2025 Ajiva Talks</div>
+  <div class="copy">© 2025 Ajiva Talks</div>
 </footer>
 
 </body>
