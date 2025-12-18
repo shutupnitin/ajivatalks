@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tutu Dutta on Folklore, Identity, and The Fraught Lives of Nathan Kwan — Ajiva Talks</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --bg-card: #0f0f0f;
+  --text: #e8e8e8;
+  --text-dim: #999999;
+  --border: #1f1f1f;
+  --accent: #ffffff;
+  --accent-subtle: rgba(255,255,255,0.05);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 300;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 60px);
+}
+
+/* ===== ANIMATED BACKGROUND ===== */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.03) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+  animation: subtleShift 20s ease-in-out infinite;
+}
+
+@keyframes subtleShift {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+/* ===== HEADER ===== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 32px 0;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+  opacity: 0.7;
+}
+
+nav {
+  display: flex;
+  gap: 48px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+nav a {
+  position: relative;
+  transition: opacity 0.3s ease;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+nav a:hover {
+  opacity: 0.6;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* ===== INTERVIEW HERO ===== */
+.interview-hero {
+  position: relative;
+  z-index: 1;
+  padding: clamp(100px, 15vh, 140px) 0 clamp(60px, 10vh, 80px);
+  border-bottom: 1px solid var(--border);
+}
+
+.interview-meta {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out 0.2s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.meta-tag {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+}
+
+.interview-hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(42px, 7vw, 72px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: 32px;
+  max-width: 1000px;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.3s forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== INTERVIEW CONTENT ===== */
+.interview-content {
+  position: relative;
+  z-index: 1;
+  padding: clamp(80px, 12vh, 120px) 0;
+}
+
+.interview-wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.interview-intro {
+  font-size: clamp(18px, 2.2vw, 21px);
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.5s forwards;
+}
+
+.interview-intro p {
+  margin-bottom: 24px;
+}
+
+.decorative-line {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  margin: 80px 0;
+  opacity: 0;
+  animation: expandLine 1.2s ease-out 0.6s forwards;
+}
+
+@keyframes expandLine {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 80px;
+    opacity: 0.3;
+  }
+}
+
+/* ===== Q&A SECTIONS ===== */
+.qa-section {
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.qa-section:nth-child(1) { animation-delay: 0.7s; }
+.qa-section:nth-child(2) { animation-delay: 0.75s; }
+.qa-section:nth-child(3) { animation-delay: 0.8s; }
+.qa-section:nth-child(4) { animation-delay: 0.85s; }
+.qa-section:nth-child(5) { animation-delay: 0.9s; }
+.qa-section:nth-child(6) { animation-delay: 0.95s; }
+.qa-section:nth-child(7) { animation-delay: 1s; }
+.qa-section:nth-child(8) { animation-delay: 1.05s; }
+.qa-section:nth-child(9) { animation-delay: 1.1s; }
+.qa-section:nth-child(10) { animation-delay: 1.15s; }
+
+.question {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text);
+  margin-bottom: 24px;
+  padding-left: 32px;
+  position: relative;
+}
+
+.question::before {
+  content: 'Q';
+  position: absolute;
+  left: 0;
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  color: var(--text-dim);
+}
+
+.answer {
+  padding-left: 32px;
+  position: relative;
+}
+
+.answer::before {
+  content: 'A';
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  color: var(--text-dim);
+}
+
+.answer-intro {
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.answer p {
+  font-size: 18px;
+  line-height: 1.85;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.answer a {
+  color: var(--accent);
+  text-decoration: underline;
+  transition: opacity 0.3s ease;
+}
+
+.answer a:hover {
+  opacity: 0.7;
+}
+
+/* ===== SHARE SECTION ===== */
+.share-section {
+  position: relative;
+  z-index: 1;
+  padding: clamp(80px, 12vh, 120px) 0;
+  border-top: 1px solid var(--border);
+}
+
+.share-wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.share-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 32px;
+  letter-spacing: -0.01em;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 1.2s forwards;
+}
+
+.share-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 1.3s forwards;
+}
+
+.share-btn {
+  padding: 14px 32px;
+  border: 1px solid var(--border);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 400;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text);
+}
+
+.share-btn:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ===== BACK LINK ===== */
+.back-section {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  transition: all 0.4s ease;
+}
+
+.back-link::before {
+  content: '←';
+  transition: transform 0.4s ease;
+}
+
+.back-link:hover {
+  color: var(--accent);
+  gap: 16px;
+}
+
+.back-link:hover::before {
+  transform: translateX(-4px);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  position: relative;
+  z-index: 1;
+  margin-top: 100px;
+  padding: 100px 0 50px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 80px;
+}
+
+.footer-brand h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.footer-brand p {
+  color: var(--text-dim);
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.footer-section h4 {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 24px;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-links a {
+  color: var(--text-dim);
+  font-size: 14px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.footer-bottom {
+  padding-top: 50px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  header {
+    padding: 24px 0;
+  }
+
+  nav {
+    gap: 28px;
+    font-size: 13px;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  
+  .question,
+  .answer {
+    padding-left: 24px;
+  }
+
+  .share-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .share-btn {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-content">
+      <a href="index.html" class="logo">Ajiva Talks</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html#latest">Latest</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="interview-hero">
+    <div class="container">
+      <div class="interview-meta">
+        <span class="meta-tag">Interview</span>
+        <span class="meta-tag">Author</span>
+        <span class="meta-tag">Malaysia</span>
+      </div>
+      <h1>Tutu Dutta on Folklore, Identity, and The Fraught Lives of Nathan Kwan</h1>
+    </div>
+  </section>
+
+  <section class="interview-content">
+    <div class="container">
+      <div class="interview-wrapper">
+        
+        <div class="interview-intro">
+          <p>Tutu Dutta, the author of The Fraught Lives of Nathan Kwan and Lapsang Souchong, is a prolific Malaysian writer with a passion for folklore and storytelling deeply rooted in Asian culture. Born in India and raised in Malaysia, Dutta's diverse cultural background and international experiences have significantly shaped her literary voice.</p>
+
+          <p>She holds a BSc from Universiti Putra Malaysia and an MPhil from the University of Malaya. Her academic journey also included a scholarship-funded summer program at Sophia University in Tokyo and studies at the University of Strasbourg in France, further broadening her global perspective.</p>
+
+          <p>Dutta began writing during her years living in far-flung cities such as Singapore, Lagos, New York, Havana, and Zagreb, as the spouse of a diplomat. These experiences provided a rich tapestry of cultures and stories that inspired her literary works. Her daughter, Shona Yean, born in 1992 in Singapore, is a vital influence, keeping Dutta connected to youth culture and international trends.</p>
+
+          <p>To date, Tutu Dutta has authored nine books, including the acclaimed Timeless Tales of Malaysia, Eight Treasures of the Dragon, and The Jugra Chronicles, a middle-grade duology set in 17th-century Borneo. Her picture book Phoenix Song, published by Lantana Publishing (UK) and illustrated by Martina Peluso, was her first work translated into Malay.</p>
+
+          <p>Her works often explore Asian folklore, feminist themes, and a deep reverence for nature, resonating with readers of all ages. Nights of the Dark Moon, a collection of dark folktales from Asia and Africa, gained renewed attention in Malaysia and India following its reprint in 2019. In the same year, she co-edited The Principal Girl: Feminist Tales from Asia with Sharifah Aishah Osman, a hit among YA readers that garnered wide acclaim.</p>
+
+          <p>Dutta's influence extends beyond her books. She has been a speaker at the Asian Festival of Children's Content in Singapore and the East-West Conference at the University of Malaya. Additionally, she served as a judge for the Scholastic Asia Young Writers Award in 2014, representing Malaysia.</p>
+
+          <p>Active in local literary circles, Dutta is a committee member of the Malaysian Writers Society and a patron of The Classic Challengers, reflecting her dedication to fostering a vibrant literary community in Malaysia. Her stories not only celebrate cultural heritage but also inspire academic research and creative endeavors, cementing her legacy as a storyteller and cultural ambassador.</p>
+        </div>
+
+        <div class="decorative-line"></div>
+
+        <div class="qa-section">
+          <div class="question">What inspired you to write The Fraught Lives of Nathan Kwan and Lapsang Souchong, and how did you balance the charm of old-school mystery with the complexities of millennial characters?</div>
+          <div class="answer">
+            <p class="answer-intro">Tutu Dutta:</p>
+            <p>A true life incident, recounted by a friend in Havana, Cuba about a cat gifting a dead bird to its adult owner, sparked the idea for this book. This was in 2010. The novel was pitched as Enid Blyton's The Mystery of the Disappearing Cat meets Tine Fey's Mean Girls, partly because of my early fascination with the works of Enid Blyton. I've always wanted to write a book based on her Five Find-Outers Mystery series. The setting is contemporary and the characters are Millennials because this is the time frame where I'm familiar with the prevailing popular culture (it changes every decade or so, and from country to country) and I have an inkling of the mindset of Millennials, having a child of this generation. The third strand in the plot – the folklore of cats – reflects my deep interest in folklore and also in this mysterious animal. Having said that, this is a work of fiction, and ultimately you create your own characters and the setting or world building, is based only partly on the real world.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">The book addresses issues like micro-aggressions and the struggles of being labeled "bookish nerds." Why was it important for you to weave these themes into the narrative?</div>
+          <div class="answer">
+            <p class="answer-intro">Tutu Dutta:</p>
+            <p>The main character is Nathan Kwan, an introverted bookish nerd with very few friends – until Sachin came along, his cousin Junie was his only friend. He was given a Siamese Cat by his father, who realized that he needed an emotional support animal to deal with his anxieties. This is a character type frequently subjected to micro-aggressions, in fiction as well as in real life. Being bi-racial also meant he had identity issues. I felt it was important to depict a vulnerable male character to draw attention to the fact that boys, as well as girls are subject to bullying. And also to offset the string of super powered/magical boys who are the main characters in fiction. Sometimes, the small steps require as much courage as the grand gestures.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Aida Anargul adds glamour and complexity to the lives of Nathan, Junie, and Sachin. Could you share more about her character and the dynamic she brings to the group?</div>
+          <div class="answer">
+            <p class="answer-intro">Tutu Dutta:</p>
+            <p>Aida Anargul is a bright and beautiful fashionista. She is also widely travelled, being the daughter of a Diplomat (her mother is the Ambassador of Kazakhstan) and this fact, combined with her exotic looks gives her an aura of glamour. But she also has a curiosity about the world, which is a trait she has in common with Nathan and his friends, Junie and Sachin. Her choosing to be friends with them, makes the trio suddenly more visible and threatens to upset the school hierarchy, where the popular girls rule. The popularity of one of the friends, due to Aida's influence (albeit unintentionally), also rocks the friends relationship with one another.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">You are known for your love of folklore. How did this influence the creation of the dark secrets hidden in Nathan's neighborhood?</div>
+          <div class="answer">
+            <p class="answer-intro">Tutu Dutta:</p>
+            <p>The dark secrets hidden in Nathan's neighborhood, set in Kota Kemuning, are actually based on real life observations. I've noticed in the past few decades, from my readings and also social trends around me, that pets – cats and dogs – were being manipulated and bred to create new breeds for commercial gain. It was a form of animal cruelty I wanted to highlight in the book. The folklore of cats is to emphasize humanity's long association and indebtedness to this species.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">As an author with roots in both India and Malaysia, how do your cultural identities shape your stories and characters?</div>
+          <div class="answer">
+            <p class="answer-intro">Tutu Dutta:</p>
+            <p>I'm more Malaysian than Indian, and I believe I write from a peculiarly Malaysian point-of-view. Even my Indian identity is mixed, being Zou (Northeast Indian Hill Tribe) on my mother's side and Bengali on my father's side (and he was born in Rangoon, Burma). Nathan Kwan being biracial – part Indian, part Chines - reflects this duality, I sometimes feel. There is another biracial character in the story – Zara Mustafa, who is part Malay and part Scottish. This in some way reflects upper strata Malaysian society, which is surprisingly mixed in terms of ethnicity. More accurately, it is my knowledge of Indian culture which informs certain aspects of my writing; especially in interpreting ancient Nusantara (maritime Southeast Asia) folktales. It gives me a deeper understanding of the meaning behind rituals e.g. summoning the rice spirit or calming the spirit of the sea, and also ancient social structure and hierarchy. This is because of the early Indian influence in this part of the world.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Reviewers often note feminist undertones in your work. How do you approach writing strong, nuanced female characters, especially in The Fraught Lives of Nathan Kwan?</div>
+          <div class="answer">
+            <p class="answer-intro">Tutu Dutta:</p>
+            <p>The writing of strong, nuanced female characters may have come partly from (surprisingly) the Indian identity, as I was exposed to Bengal's Goddess culture from the age of three to six. My father is actually the feminist in the family, probably from growing up in Burma, which used to be a matrilineal society. However, it was probably having a daughter which made me center girls and women in my writing. This was unconscious or intuitive on my part, there was just a natural shift in my thinking which happened gradually over time. Questions posed by other writers such as 'Why do girls figure so prominently in your stories?' and 'Are you aware about feminist issues or did this come about accidentally?' that made me realise that my point-of-view regarding female characters was different from other writers in the genre. Co-Editing The Principal Girl – Feminist Tales from Asia, with Sharifah A Osman, solidified what was intuitive before. In any case, I find strong, female characters to be much interesting to read about rather than weak characters. In The Fraught Lives of Nathan Kwan and Lapsang Souchong, Junie Kwan is the feminist. Junie is a top student in STEM, environmentally conscious to be a partial ovo-lacto vegetarian, and is strong enough to lend support to her cousin, Nathan.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">With your daughter Shona keeping you updated on trends, how does this relationship influence your depiction of contemporary youth culture in your books?</div>
+          <div class="answer">
+            <p class="answer-intro">Tutu Dutta:</p>
+            <p>The Fraught Lives of Nathan Kwan and Lapsang Souchong is set in the same time frame as when my daughter, Shona, was growing up as a teen Millennial. I tried to capture 'a slice of life' of that time, of the global contemporary youth culture. She was (and still is) very interested in popular music and somehow knows who the up and coming popstars are, and was already interested in K-Pop way back in 2006 (when Korea's Big Bang first debuted,) before it became a global phenomenon. She is also a keen observer of fashion trends and reads manga and she used to read YA novels in the Fantasy genre quite widely before she became a Lawyer! She introduced me to the Harry Potter series, Gregory Maguire (Confessions of an Ugly Stepsister and Wicked) and Leigh Bardugo (Six of Crows). We watched Game of Thrones on TV. Her most recent read was the Dune series. So yes, our discussions through the years, as she was growing up, have helped me considerably in understanding Millennial youth culture in my writings.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">Having lived in so many countries, how do your experiences as a diplomat's spouse contribute to the settings and narratives in your stories?</div>
+          <div class="answer">
+            <p class="answer-intro">Tutu Dutta:</p>
+            <p>Living in far flung countries, or more accurately cities: Singapore, Lagos, New York, Havana and Zagreb has given me the privilege of experiencing the diversity of the world and its myriad culture. I hope it deepens my understanding of people and culture, and gives my writing more authenticity, especially when it comes to setting. I did make it a point read local books (in translation) and collect local folktales, and was surmised to find that in the differences, there are also surprising commonalities. The Cinderella story for example makes an appearance in almost every culture, in various forms, and may be the universal fairy tale.</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">From Timeless Tales of Malaysia to your recent works, how has your writing evolved over the years?</div>
+          <div class="answer">
+            <p class="answer-intro">Tutu Dutta:</p>
+            <p>Timeless Tales of Malaysia came out in 2009, and was my first traditionally published children's book. The research for the book required a deep dive into Malay folktales and fairy tales, and I believe in the process I internalized the stories I was writing about. As this was mainly a retelling, I tried to be true to the original stories while rewriting them to appeal to contemporary young readers. I also gained an understanding of constructing plot and structure along the way. I wrote five collections of folktales, and a duology entitled, The Jugra Chronicles, published by MPH Group publishing, before writing The Blood Prince of Langkasuka, published by Penguin Random House SEA in 2021. By then, I was able to plot a story based on an ancient Malay legend of a vampire king (Raja Bersiong) and reframe it as a coming-of-age story of a prince, set in medieval Kedah/Langkasuka. The Fraught Lives of Nathan Kwan is my first novel set in contemporary Malaysia. This book was possibly more challenging to write because of the need to fact check almost every detail in the book, due to the real-life setting in the Klang Valley. The book can be classified as Contemporary Upmarket YA Slice-of-Life/Cozy Mystery Fiction!</p>
+          </div>
+        </div>
+
+        <div class="qa-section">
+          <div class="question">What advice would you give to young writers looking to explore diverse cultures, folklore, and social issues in their own work?</div>
+          <div class="answer">
+            <p class="answer-intro">Tutu Dutta:</p>
+            <p>Young writers who are interested in books based on diverse culture, needs to first identify the culture and folklore they are interested in and do a great deal of readings of local books and research in the field until they have a 'feel for it' i.e. they have an understanding and eventually even internalized some of the materials. Remember, although not all readers become writers, all writers must start as readers for some years. It also extremely helpful to join writers society and attend author talks and discussions, within their own community. And of course to write stories – starting with short stories and poetry – and pitching them to various platforms. I my case, I started by retelling ancient Asian folktales and legends, using my own words, before attempting to plot my own novel.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="share-section">
+    <div class="container">
+      <div class="share-wrapper">
+        <h3 class="share-title">Share this conversation</h3>
+        <div class="share-buttons">
+          <button class="share-btn" onclick="shareOnTwitter()">Twitter</button>
+          <button class="share-btn" onclick="shareOnLinkedIn()">LinkedIn</button>
+          <button class="share-btn" onclick="copyLink()">Copy Link</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="back-section">
+    <div class="container">
+      <a href="index.html" class="back-link">Back to Interviews</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Ajiva Talks</h3>
+        <p>An independent editorial platform dedicated to long-form cultural conversations with thinkers, creators, and changemakers from around the world.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Explore</h4>
+        <div class="footer-links">
+          <a href="#">All Interviews</a>
+          <a href="#">Featured</a>
+          <a href="#">Archive</a>
+          <a href="#">Submit</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>About</h4>
+        <div class="footer-links">
+          <a href="about.html">Our Mission</a>
+          <a href="#">Team</a>
+          <a href="#">Press</a>
+          <a href="#">Support</a>
+        </div>
