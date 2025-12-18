@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Ajiva</title>
+<title>Ajiva — Independent Editorial Journal</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -21,120 +21,60 @@ body{
   font-family:Inter, sans-serif;
   color:var(--black);
   background:#fff;
-  overflow-x:hidden;
 }
-a{
-  color:inherit;
-  text-decoration:none;
+a{color:inherit;text-decoration:none;}
+
+/* CONTAINER */
+.container{
+  max-width:1280px;
+  margin:auto;
+  padding:0 24px;
 }
 
-/* =====================
-   MASTHEAD
-===================== */
+/* HEADER */
 header{
   border-bottom:1px solid var(--light);
 }
 .masthead{
-  max-width:1280px;
-  margin:auto;
-  padding:44px 24px 36px;
+  padding:48px 0 36px;
   text-align:center;
 }
-.masthead img{
-  height:38px;
-}
+.masthead img{height:40px;}
 
-/* =====================
-   NAV
-===================== */
+/* NAV */
 nav{
   border-bottom:1px solid var(--light);
 }
-.nav-inner{
-  max-width:1280px;
-  margin:auto;
-  padding:14px 24px;
+.nav{
   display:flex;
   justify-content:center;
   gap:40px;
+  padding:14px 0;
 }
-.nav-inner a{
+.nav a{
   font-size:12px;
   letter-spacing:1.2px;
   text-transform:uppercase;
   color:var(--gray);
-  position:relative;
-}
-.nav-inner a::after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:-6px;
-  width:0;
-  height:1px;
-  background:var(--black);
-  transition:width .3s ease;
-}
-.nav-inner a:hover::after{
-  width:100%;
 }
 
-/* =====================
-   MARQUEE (EDITORIAL MOTION)
-===================== */
-.marquee{
-  border-bottom:1px solid var(--light);
-  white-space:nowrap;
-  overflow:hidden;
-}
-.marquee span{
-  display:inline-block;
-  padding:14px 0;
-  font-size:12px;
-  letter-spacing:1px;
-  color:var(--gray);
-  animation: scroll 28s linear infinite;
-}
-@keyframes scroll{
-  from{transform:translateX(100%);}
-  to{transform:translateX(-100%);}
-}
-
-/* =====================
-   PAGE
-===================== */
-main{
-  max-width:1280px;
-  margin:auto;
-  padding:80px 24px 140px;
-}
-
-/* =====================
-   STATEMENT
-===================== */
-.statement{
+/* MISSION */
+.mission{
+  padding:80px 0 100px;
   max-width:760px;
-  margin-bottom:96px;
 }
-.statement p{
+.mission p{
   font-family:"Libre Baskerville", serif;
   font-size:22px;
   line-height:1.5;
 }
 
-/* =====================
-   FEATURE GRID
-===================== */
-.features{
+/* FEATURED */
+.featured{
   display:grid;
-  grid-template-columns: 1.4fr 1fr;
+  grid-template-columns:1.4fr 1fr;
   gap:80px;
   margin-bottom:120px;
-}
-
-/* FEATURE CARD */
-.feature{
-  position:relative;
 }
 .feature small{
   font-size:11px;
@@ -145,113 +85,83 @@ main{
 .feature h1, .feature h2{
   font-family:"Libre Baskerville", serif;
   font-weight:400;
-  margin:16px 0;
-  transition:transform .4s ease;
 }
-.feature h1{
-  font-size:46px;
-  line-height:1.15;
-}
-.feature h2{
-  font-size:30px;
-}
-.feature p{
-  color:var(--gray);
-  max-width:620px;
-}
-.feature:hover h1,
-.feature:hover h2{
-  transform:translateX(6px);
-}
+.feature h1{font-size:46px;}
+.feature h2{font-size:30px;}
+.feature p{color:var(--gray);}
 
-/* =====================
-   DIVIDER
-===================== */
-.divider{
-  margin:120px 0;
-  border-top:1px solid var(--light);
+/* SECTION */
+.section{
+  margin-bottom:120px;
 }
-
-/* =====================
-   EDITORIAL STRIP
-===================== */
-.strip{
-  display:grid;
-  grid-template-columns: repeat(3,1fr);
-  gap:64px;
-}
-.strip article{
-  position:relative;
-}
-.strip small{
-  font-size:11px;
-  letter-spacing:1px;
+.section h3{
+  font-size:13px;
+  letter-spacing:1.5px;
   text-transform:uppercase;
   color:var(--gray);
+  margin-bottom:36px;
 }
-.strip h3{
+
+/* LIST */
+.list{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:48px;
+}
+.list article h4{
   font-family:"Libre Baskerville", serif;
   font-size:20px;
   font-weight:400;
-  margin:12px 0 10px;
+  margin:8px 0;
 }
-.strip p{
+.list article p{
   font-size:14px;
   color:var(--gray);
 }
 
-/* =====================
-   FOOTER
-===================== */
+/* AUTHOR INDEX */
+.authors{
+  column-count:3;
+  column-gap:40px;
+}
+.authors a{
+  display:block;
+  font-size:14px;
+  color:var(--gray);
+  margin-bottom:10px;
+}
+
+/* FOOTER */
 footer{
   border-top:1px solid var(--light);
+  padding:80px 0 40px;
 }
-.footer-inner{
-  max-width:1280px;
-  margin:auto;
-  padding:80px 24px 64px;
+.footer-grid{
   display:grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap:72px;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:60px;
 }
-.footer-about p{
+.footer-grid p{
   font-family:"Libre Baskerville", serif;
-  font-size:16px;
-  max-width:440px;
+  max-width:420px;
 }
 footer a{
+  display:block;
   font-size:13px;
   color:var(--gray);
-  margin-bottom:14px;
-  display:block;
-}
-footer a:hover{
-  color:var(--black);
+  margin-bottom:12px;
 }
 .copy{
-  border-top:1px solid var(--light);
+  margin-top:40px;
   text-align:center;
   font-size:11px;
   color:var(--gray);
-  padding:26px;
-}
-
-/* =====================
-   SUBTLE FADE-IN
-===================== */
-.fade{
-  animation: fadeUp 1.2s ease both;
-}
-@keyframes fadeUp{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:none;}
 }
 
 /* RESPONSIVE */
 @media(max-width:900px){
-  .features, .strip{
-    grid-template-columns:1fr;
-  }
+  .featured,.list,.footer-grid{grid-template-columns:1fr;}
+  .authors{column-count:1;}
 }
 </style>
 </head>
@@ -259,111 +169,129 @@ footer a:hover{
 <body>
 
 <header>
-  <div class="masthead fade">
+  <div class="container masthead">
     <img src="images/logo.png" alt="Ajiva">
   </div>
 </header>
 
 <nav>
-  <div class="nav-inner fade">
-    <a href="#interviews">Interviews</a>
-    <a href="#books">Books</a>
-    <a href="#culture">Culture</a>
-    <a href="#ideas">Ideas</a>
+  <div class="container nav">
+    <a href="#features">Features</a>
+    <a href="#recent">Recent</a>
+    <a href="#themes">Themes</a>
+    <a href="#authors">Authors</a>
   </div>
 </nav>
 
-<div class="marquee">
-  <span>
-    Essays • Interviews • Memory • Identity • Literature • Culture • Belonging • Asia •
-  </span>
-</div>
+<main class="container">
 
-<main>
-
-<section class="statement fade">
+<section class="mission">
   <p>
-    Ajiva is an independent editorial journal publishing long-form
-    conversations and essays on literature, culture, memory, and belonging.
+    Ajiva is an independent editorial journal publishing
+    long-form interviews, essays, and profiles on literature,
+    identity, power, memory, and the human condition.
   </p>
 </section>
 
-<section class="features">
-
-  <a href="post-nusrat.html" class="feature fade">
+<section class="featured" id="features">
+  <a href="nusrat-fatima-jafri.html" class="feature">
     <small>Featured Essay</small>
     <h1>This Land We Call Home</h1>
-    <p>
-      Nusrat Fatima Jafri on caste, faith, conversion,
-      and the making of modern India through family memory.
-    </p>
+    <p>Nusrat Fatima Jafri on caste, faith, conversion, and belonging.</p>
   </a>
 
-  <a href="post-jin.html" class="feature fade">
+  <a href="jin-young-lim.html" class="feature">
     <small>Featured Interview</small>
     <h2>The Dao of Flow</h2>
-    <p>
-      Jin Young Lim on water, philosophy,
-      embodied wisdom, and living in harmony with chaos.
-    </p>
+    <p>Jin Young Lim on philosophy, water, and living with intention.</p>
   </a>
-
 </section>
 
-<div class="divider"></div>
+<section class="section" id="recent">
+  <h3>Recently Published</h3>
+  <div class="list">
+    <article>
+      <h4><a href="larry-nyanti.html">A Rei of Sunshine</a></h4>
+      <p>Larry Nyanti on love, loss, and the supernatural.</p>
+    </article>
+    <article>
+      <h4><a href="mica-de-leon.html">Love on the Second Read</a></h4>
+      <p>Mica De Leon on romance, feminism, and publishing.</p>
+    </article>
+    <article>
+      <h4><a href="sylvia-yu-friedman.html">Fearless Lives</a></h4>
+      <p>Sylvia Yu Friedman on justice and courage.</p>
+    </article>
+  </div>
+</section>
 
-<section class="strip fade" id="culture">
+<section class="section" id="themes">
+  <h3>By Theme</h3>
+  <div class="list">
+    <article>
+      <h4>Identity & Belonging</h4>
+      <p>
+        <a href="marga-ortigas.html">Marga Ortigas</a><br>
+        <a href="tutu-dutta.html">Tutu Dutta</a><br>
+        <a href="nusrat-fatima-jafri.html">Nusrat Fatima Jafri</a>
+      </p>
+    </article>
+    <article>
+      <h4>Literature & Craft</h4>
+      <p>
+        <a href="deborah-wong.html">Deborah Wong</a><br>
+        <a href="justine-camacho-tajonera.html">Justine Camacho-Tajonera</a><br>
+        <a href="sammon-isaree-siriwankulthon.html">Sammon</a>
+      </p>
+    </article>
+    <article>
+      <h4>Power, Justice & Memory</h4>
+      <p>
+        <a href="ong-chin-huat.html">Ong Chin Huat</a><br>
+        <a href="malcolm-mejin.html">Malcolm Mejin</a><br>
+        <a href="emily-lim-leh.html">Emily Lim-Leh</a>
+      </p>
+    </article>
+  </div>
+</section>
 
-  <article>
-    <small>Fiction</small>
-    <h3>A Rei of Sunshine</h3>
-    <p>Larry Nyanti on love, loss, and the supernatural.</p>
-  </article>
-
-  <article>
-    <small>Memoir</small>
-    <h3>Fearless Lives</h3>
-    <p>Sylvia Yu Friedman on courage and justice.</p>
-  </article>
-
-  <article>
-    <small>Literature</small>
-    <h3>Women Who Write Memory</h3>
-    <p>Across borders, language, and history.</p>
-  </article>
-
+<section class="section" id="authors">
+  <h3>Author Index</h3>
+  <div class="authors">
+    <a href="aaron-pang.html">Aaron Pang</a>
+    <a href="amos-bamboo-decade.html">Amos Bamboo</a>
+    <a href="deborah-wong.html">Deborah Wong</a>
+    <a href="emily-lim-leh.html">Emily Lim-Leh</a>
+    <a href="jin-young-lim.html">Jin Young Lim</a>
+    <a href="justine-camacho-tajonera.html">Justine Camacho-Tajonera</a>
+    <a href="larry-nyanti.html">Larry Nyanti</a>
+    <a href="malcolm-mejin.html">Malcolm Mejin</a>
+    <a href="marga-ortigas.html">Marga Ortigas</a>
+    <a href="mica-de-leon.html">Mica De Leon</a>
+    <a href="nusrat-fatima-jafri.html">Nusrat Fatima Jafri</a>
+    <a href="ong-chin-huat.html">Ong Chin Huat</a>
+    <a href="sammon-isaree-siriwankulthon.html">Sammon</a>
+    <a href="sylvia-yu-friedman.html">Sylvia Yu Friedman</a>
+    <a href="tutu-dutta.html">Tutu Dutta</a>
+  </div>
 </section>
 
 </main>
 
 <footer>
-  <div class="footer-inner">
-
-    <div class="footer-about">
-      <p>
-        Ajiva is built for readers who believe
-        words should endure longer than trends.
-      </p>
-    </div>
-
+  <div class="container footer-grid">
+    <p>Ajiva is built for readers who believe ideas deserve space, time, and depth.</p>
     <div>
       <a href="about.html">About</a>
       <a href="submissions.html">Submissions</a>
       <a href="contact.html">Contact</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
     </div>
-
     <div>
       <a href="#">Instagram</a>
       <a href="#">Twitter</a>
     </div>
-
   </div>
-
-  <div class="copy">
-    © 2025 Ajiva — Independent Editorial Journal
-  </div>
+  <div class="copy">© 2025 Ajiva</div>
 </footer>
 
 </body>
