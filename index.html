@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Ajiva Talks</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -12,44 +11,50 @@
 :root{
   --ink:#111;
   --muted:#666;
-  --light:#999;
-  --rule:#e6e6e6;
-  --max:1100px;
-  --side:clamp(24px,6vw,90px);
+  --rule:#e5e5e5;
+  --bg:#ffffff;
+  --max:1080px;
+  --pad:clamp(24px,6vw,96px);
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
-  font-family:Inter,system-ui,sans-serif;
+  background:var(--bg);
   color:var(--ink);
-  background:#fff;
+  font-family:Inter,system-ui,sans-serif;
   line-height:1.75;
 }
 
-a{color:inherit;text-decoration:none}
+a{
+  color:inherit;
+  text-decoration:none;
+}
 
-.wrap{
+.page{
   max-width:var(--max);
   margin:0 auto;
-  padding:0 var(--side);
+  padding:0 var(--pad);
 }
 
 /* ================= HEADER ================= */
 header{
-  padding:72px 0 48px; /* LOGO NOT STICKING */
+  padding:72px 0 56px;
   text-align:center;
 }
 
-.logo img{height:44px}
+.logo img{
+  height:42px;
+}
 
 nav{
-  margin-top:30px;
+  margin-top:32px;
   display:flex;
   justify-content:center;
   gap:40px;
   font-size:13px;
-  letter-spacing:.12em;
+  letter-spacing:.14em;
+  text-transform:uppercase;
 }
 
 nav a{
@@ -65,8 +70,8 @@ nav a::after{
   width:0;
   height:1px;
   background:var(--ink);
-  transition:.35s ease;
   transform:translateX(-50%);
+  transition:.3s ease;
 }
 
 nav a:hover::after{width:100%}
@@ -79,14 +84,14 @@ nav a:hover::after{width:100%}
 
 .hero h1{
   font-family:"Playfair Display",serif;
-  font-size:clamp(38px,5.5vw,64px);
   font-weight:500;
-  max-width:900px;
+  font-size:clamp(38px,5vw,64px);
+  max-width:880px;
   margin:0 auto;
 }
 
 .hero p{
-  margin-top:34px;
+  margin-top:36px;
   font-size:15px;
   color:var(--muted);
   max-width:520px;
@@ -94,21 +99,23 @@ nav a:hover::after{width:100%}
   margin-right:auto;
 }
 
-/* ================= SECTION ================= */
-section{padding:140px 0}
+/* ================= SECTIONS ================= */
+section{
+  padding:120px 0;
+}
 
 .section-title{
   font-family:"Playfair Display",serif;
   font-size:30px;
-  margin-bottom:80px;
+  margin-bottom:64px;
 }
 
 /* ================= EDITOR PICK ================= */
 .editor-pick{
+  max-width:620px;
   border-left:2px solid var(--ink);
-  padding-left:26px;
-  max-width:640px;
-  animation:fadeUp .9s ease forwards;
+  padding-left:24px;
+  animation:fadeUp .8s ease forwards;
 }
 
 .editor-pick h3{
@@ -117,46 +124,35 @@ section{padding:140px 0}
 }
 
 .editor-pick p{
-  margin-top:16px;
+  margin-top:14px;
   color:var(--muted);
 }
 
 /* ================= FEATURED ================= */
 .featured{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:90px;
+  grid-template-columns:1fr;
+  gap:72px;
 }
 
 .feature{
-  padding-left:26px;
-  position:relative;
+  max-width:720px;
   animation:fadeUp 1s ease forwards;
-}
-
-.feature::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:6px;
-  width:2px;
-  height:100%;
-  background:var(--ink);
 }
 
 .feature h3{
   font-family:"Playfair Display",serif;
-  font-size:24px;
+  font-size:26px;
 }
 
 .feature p{
-  margin-top:16px;
+  margin-top:14px;
   color:var(--muted);
 }
 
-.read-btn{
+.read{
   display:inline-block;
-  margin-top:22px;
+  margin-top:18px;
   font-size:13px;
   letter-spacing:.14em;
   border-bottom:1px solid var(--ink);
@@ -165,13 +161,14 @@ section{padding:140px 0}
 
 /* ================= LATEST ================= */
 .latest{
-  margin-top:120px; /* SPACE FROM FEATURED */
+  margin-top:96px;
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:90px;
+  grid-template-columns:1fr;
+  gap:64px;
 }
 
 .latest article{
+  max-width:680px;
   animation:fadeUp 1.2s ease forwards;
 }
 
@@ -181,13 +178,13 @@ section{padding:140px 0}
 }
 
 .latest p{
-  margin-top:16px;
+  margin-top:14px;
   color:var(--muted);
 }
 
 /* ================= CTA ================= */
 .center-cta{
-  margin-top:100px;
+  margin-top:96px;
   text-align:center;
 }
 
@@ -200,7 +197,7 @@ section{padding:140px 0}
 
 /* ================= TESTIMONIAL ================= */
 .testimonial{
-  max-width:700px;
+  max-width:720px;
   margin:0 auto;
   text-align:center;
   font-family:"Playfair Display",serif;
@@ -210,7 +207,7 @@ section{padding:140px 0}
 
 .testimonial span{
   display:block;
-  margin-top:24px;
+  margin-top:20px;
   font-family:Inter,sans-serif;
   font-size:14px;
   color:var(--muted);
@@ -218,21 +215,21 @@ section{padding:140px 0}
 
 /* ================= FOOTER ================= */
 footer{
-  margin-top:180px;
-  padding:140px 0 90px;
+  margin-top:160px;
+  padding:120px 0 80px;
   border-top:1px solid var(--rule);
 }
 
 .footer-grid{
   display:grid;
   grid-template-columns:2fr 1fr 1fr;
-  gap:90px;
+  gap:72px;
 }
 
 footer h5{
   font-size:12px;
   letter-spacing:.16em;
-  margin-bottom:24px;
+  margin-bottom:22px;
 }
 
 footer p, footer a{
@@ -240,25 +237,25 @@ footer p, footer a{
   color:var(--muted);
 }
 
-footer a{display:block;margin-bottom:14px}
+footer a{display:block;margin-bottom:12px}
 
 .footer-bottom{
-  margin-top:90px;
+  margin-top:72px;
   font-size:12px;
-  color:var(--light);
+  color:#999;
   text-align:center;
 }
 
 /* ================= ANIMATION ================= */
 @keyframes fadeUp{
-  from{opacity:0;transform:translateY(20px)}
+  from{opacity:0;transform:translateY(18px)}
   to{opacity:1;transform:none}
 }
 
 /* ================= MOBILE ================= */
-@media(max-width:700px){
-  nav{flex-wrap:wrap;gap:22px}
-  section{padding:100px 0}
+@media(max-width:720px){
+  nav{flex-wrap:wrap;gap:24px}
+  section{padding:96px 0}
   .footer-grid{grid-template-columns:1fr}
 }
 </style>
@@ -266,7 +263,7 @@ footer a{display:block;margin-bottom:14px}
 
 <body>
 
-<header class="wrap">
+<header class="page">
   <div class="logo">
     <img src="images/logo.png" alt="Ajiva Talks">
   </div>
@@ -278,14 +275,14 @@ footer a{display:block;margin-bottom:14px}
   </nav>
 </header>
 
-<main>
+<main class="page">
 
-<section class="hero wrap">
-  <h1>Thoughtful conversations<br>for a quieter kind of attention.</h1>
-  <p>Long-form interviews with writers, artists, and thinkers exploring culture, identity, belief, and creative life.</p>
+<section class="hero">
+  <h1>Conversations worth slowing down for.</h1>
+  <p>In-depth interviews with writers, thinkers, and cultural voices exploring identity, belief, creativity, and lived experience.</p>
 </section>
 
-<section class="wrap">
+<section>
   <h2 class="section-title">Editor’s Pick</h2>
   <div class="editor-pick">
     <h3><a href="malcolm-mejin.html">Malcolm Mejin</a></h3>
@@ -293,18 +290,18 @@ footer a{display:block;margin-bottom:14px}
   </div>
 </section>
 
-<section class="wrap">
+<section>
   <h2 class="section-title">Featured Interviews</h2>
   <div class="featured">
     <div class="feature">
       <h3><a href="emily-lim-leh.html">Emily Lim-Leh</a></h3>
       <p>Children’s literature, loss of voice, and reclaiming expression.</p>
-      <a class="read-btn" href="emily-lim-leh.html">READ INTERVIEW →</a>
+      <a class="read" href="emily-lim-leh.html">READ INTERVIEW →</a>
     </div>
     <div class="feature">
       <h3><a href="jin-young-lim.html">Jin Young Lim</a></h3>
       <p>Daoist flow, embodied wisdom, and modern contemplative life.</p>
-      <a class="read-btn" href="jin-young-lim.html">READ INTERVIEW →</a>
+      <a class="read" href="jin-young-lim.html">READ INTERVIEW →</a>
     </div>
   </div>
 
@@ -324,7 +321,7 @@ footer a{display:block;margin-bottom:14px}
   </div>
 </section>
 
-<section class="wrap">
+<section>
   <div class="testimonial">
     “Your article helped me a lot before my podcast with Malcolm. It was very informative.”
     <span>— Naghma, Founder of The Author’s Nest</span>
@@ -333,11 +330,11 @@ footer a{display:block;margin-bottom:14px}
 
 </main>
 
-<footer class="wrap">
+<footer class="page">
   <div class="footer-grid">
     <div>
       <h5>ABOUT</h5>
-      <p>Ajiva Talks is an independent editorial platform publishing slow, intentional conversations that value depth, reflection, and lived experience.</p>
+      <p>Ajiva Talks is an independent editorial platform publishing thoughtful, long-form conversations that value depth over speed.</p>
     </div>
     <div>
       <h5>SECTIONS</h5>
