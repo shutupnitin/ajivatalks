@@ -1,6 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  /* ===== MOBILE HEADER ENHANCEMENT ===== */
+/* Paste this code in the <style> section of all your pages */
+/* This only affects mobile devices and matches your site's elegant theme */
+
+@media (max-width: 768px) {
+  header {
+    padding: 20px 0 16px;
+  }
+
+  .header-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .logo {
+    font-size: 26px;
+    margin-bottom: 4px;
+  }
+
+  nav {
+    width: 100%;
+    justify-content: center;
+    gap: 32px;
+    font-size: 13px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  nav a::after {
+    bottom: -8px;
+  }
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+  .logo {
+    font-size: 24px;
+  }
+
+  nav {
+    gap: 24px;
+    font-size: 12px;
+  }
+}
   <!-- Favicon -->
 <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
