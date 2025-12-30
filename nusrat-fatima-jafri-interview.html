@@ -628,17 +628,215 @@ footer {
             <p>I noticed the blaring gap in their recorded oral history and which is why, it became even more urgent for me to share my history with the world.</p>
           </div>
         </div>
+<!-- Ad Banner Component - Paste this where you want the ad to appear -->
+<div class="ad-container">
+  <div class="ad-label">
+    <span>Advertisement</span>
+    <button class="ad-info-btn" onclick="toggleAdInfo(event)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M12 16v-4M12 8h.01"></path>
+      </svg>
+    </button>
+    <div class="ad-info-tooltip">
+      This advertisement is served by a third-party advertising partner. We do not control the content of these ads.
+    </div>
+  </div>
+  
+  <div class="ad-content">
+    <!-- Your advertising network script goes here -->
+    <script>
+    (function(arpv){
+    var d = document,
+        s = d.createElement('script'),
+        l = d.scripts[d.scripts.length - 1];
+    s.settings = arpv || {};
+    s.src = "\/\/wirytrip.com\/b_X\/VNsEd.G\/lp0UYTWwcm\/Je\/mW9Eu-ZXUllNktP_TEY\/3eMQzDch3lN\/jzQ\/tLNCjSchz\/NDzkcW2LNqQk";
+    s.async = true;
+    s.referrerPolicy = 'no-referrer-when-downgrade';
+    l.parentNode.insertBefore(s, l);
+    })({})
+    </script>
+  </div>
+</div>
+
+<style>
+/* Ad Container Styling - Matches Ajiva Talks Aesthetic */
+.ad-container {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 0 clamp(24px, 5vw, 60px);
+  position: relative;
+}
+
+.ad-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-dim, #999999);
+  position: relative;
+}
+
+.ad-info-btn {
+  background: none;
+  border: none;
+  color: var(--text-dim, #999999);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.ad-info-btn:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.ad-info-tooltip {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: rgba(15, 15, 15, 0.98);
+  border: 1px solid var(--border, #1f1f1f);
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--text-dim, #999999);
+  max-width: 260px;
+  text-align: center;
+  line-height: 1.5;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  pointer-events: none;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.ad-info-tooltip::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-bottom-color: var(--border, #1f1f1f);
+}
+
+.ad-info-tooltip.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(12px);
+}
+
+.ad-content {
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.01) 100%);
+  border: 1px solid var(--border, #1f1f1f);
+  border-radius: 2px;
+  padding: 24px;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.ad-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.03) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.ad-content:hover::before {
+  opacity: 1;
+}
+
+.ad-content:hover {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.02) 100%);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .ad-container {
+    margin: 40px auto;
+  }
+  
+  .ad-content {
+    min-height: 200px;
+    padding: 16px;
+  }
+  
+  .ad-info-tooltip {
+    max-width: 220px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ad-label {
+    font-size: 9px;
+  }
+  
+  .ad-content {
+    min-height: 150px;
+  }
+}
+</style>
+
 <script>
-(function(arpv){
-var d = document,
-    s = d.createElement('script'),
-    l = d.scripts[d.scripts.length - 1];
-s.settings = arpv || {};
-s.src = "\/\/wirytrip.com\/b_X\/VNsEd.G\/lp0UYTWwcm\/Je\/mW9Eu-ZXUllNktP_TEY\/3eMQzDch3lN\/jzQ\/tLNCjSchz\/NDzkcW2LNqQk";
-s.async = true;
-s.referrerPolicy = 'no-referrer-when-downgrade';
-l.parentNode.insertBefore(s, l);
-})({})
+// Toggle ad info tooltip
+function toggleAdInfo(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  
+  const tooltip = event.currentTarget.nextElementSibling;
+  const isShowing = tooltip.classList.contains('show');
+  
+  // Close all tooltips first
+  document.querySelectorAll('.ad-info-tooltip').forEach(t => {
+    t.classList.remove('show');
+  });
+  
+  // Toggle current tooltip
+  if (!isShowing) {
+    tooltip.classList.add('show');
+    
+    // Close tooltip when clicking outside
+    setTimeout(() => {
+      document.addEventListener('click', function closeTooltip(e) {
+        if (!tooltip.contains(e.target) && !event.currentTarget.contains(e.target)) {
+          tooltip.classList.remove('show');
+          document.removeEventListener('click', closeTooltip);
+        }
+      });
+    }, 0);
+  }
+}
 </script>
         <div class="qa-section">
           <div class="question">The theme of conversion to Christianity is central to your family's journey in seeking dignity and acceptance. How did you approach the complex subject of faith and identity while writing this memoir?</div>
@@ -849,17 +1047,392 @@ function copyLink() {
   });
 }
 </script>
+<!-- Video Ad Slider Component - Paste this where you want the video ad to appear -->
+<div class="video-ad-wrapper">
+  <div class="video-ad-container" id="videoAdContainer">
+    <!-- Close button -->
+    <button class="video-ad-close" onclick="closeVideoAd()" aria-label="Close video ad">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    
+    <!-- Ad label with info -->
+    <div class="video-ad-label">
+      <span>Video Advertisement</span>
+      <button class="video-ad-info-btn" onclick="toggleVideoAdInfo(event)">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 16v-4M12 8h.01"></path>
+        </svg>
+      </button>
+      <div class="video-ad-info-tooltip">
+        This video advertisement is served by a third-party advertising partner. We do not control the content of these ads.
+      </div>
+    </div>
+    
+    <!-- Video ad content -->
+    <div class="video-ad-content">
+      <!-- Your video ad script goes here -->
+      <script>
+      (function(dzzlo){
+      var d = document,
+          s = d.createElement('script'),
+          l = d.scripts[d.scripts.length - 1];
+      s.settings = dzzlo || {};
+      s.src = "\/\/wirytrip.com\/bEXVV\/s\/d.G\/lG0HYUWYci\/ReamP9RuhZ-UdlfkoPqT\/Ya3zM\/zBcT3INeTwEOtXNQj\/cSzeNmzVcc1tMYgg";
+      s.async = true;
+      s.referrerPolicy = 'no-referrer-when-downgrade';
+      l.parentNode.insertBefore(s, l);
+      })({})
+      </script>
+    </div>
+  </div>
+  
+  <!-- Slide-in trigger button (appears after closing) -->
+  <button class="video-ad-trigger" id="videoAdTrigger" onclick="openVideoAd()" style="display: none;">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+      <polygon points="5 3 19 12 5 21 5 3"></polygon>
+    </svg>
+    <span>Show Video Ad</span>
+  </button>
+</div>
+
+<style>
+/* Video Ad Wrapper */
+.video-ad-wrapper {
+  position: relative;
+  z-index: 999;
+}
+
+/* Video Ad Container - Slides in from right */
+.video-ad-container {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(0);
+  width: 400px;
+  max-width: 90vw;
+  background: rgba(15, 15, 15, 0.98);
+  border: 1px solid var(--border, #1f1f1f);
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  box-shadow: -8px 0 40px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px) saturate(180%);
+  overflow: hidden;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+  z-index: 1000;
+}
+
+.video-ad-container.hidden {
+  transform: translateY(-50%) translateX(110%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Close Button */
+.video-ad-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-dim, #999999);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+}
+
+.video-ad-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--accent, #ffffff);
+  transform: rotate(90deg);
+}
+
+/* Ad Label */
+.video-ad-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+  border-bottom: 1px solid var(--border, #1f1f1f);
+  font-size: 9px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-dim, #999999);
+  position: relative;
+}
+
+.video-ad-info-btn {
+  background: none;
+  border: none;
+  color: var(--text-dim, #999999);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.video-ad-info-btn:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.video-ad-info-tooltip {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: rgba(10, 10, 10, 0.98);
+  border: 1px solid var(--border, #1f1f1f);
+  padding: 12px 14px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--text-dim, #999999);
+  max-width: 240px;
+  text-align: center;
+  line-height: 1.5;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1001;
+  pointer-events: none;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.video-ad-info-tooltip::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-bottom-color: var(--border, #1f1f1f);
+}
+
+.video-ad-info-tooltip.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(12px);
+}
+
+/* Video Content Area */
+.video-ad-content {
+  min-height: 300px;
+  max-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg, #0a0a0a);
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.video-ad-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.02) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Trigger Button (shows after closing) */
+.video-ad-trigger {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(0);
+  background: rgba(15, 15, 15, 0.95);
+  border: 1px solid var(--border, #1f1f1f);
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-dim, #999999);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  backdrop-filter: blur(10px);
+  z-index: 999;
+  writing-mode: vertical-rl;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.video-ad-trigger svg {
+  writing-mode: horizontal-tb;
+  transform: rotate(90deg);
+}
+
+.video-ad-trigger:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--accent, #ffffff);
+  transform: translateY(-50%) translateX(-4px);
+  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.video-ad-trigger span {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* Animations */
+@keyframes slideInFromRight {
+  from {
+    transform: translateY(-50%) translateX(110%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(-50%) translateX(0);
+    opacity: 1;
+  }
+}
+
+.video-ad-container {
+  animation: slideInFromRight 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .video-ad-container {
+    width: 320px;
+  }
+  
+  .video-ad-content {
+    min-height: 250px;
+    max-height: 400px;
+  }
+  
+  .video-ad-label {
+    font-size: 8px;
+    padding: 10px 12px;
+  }
+  
+  .video-ad-close {
+    width: 28px;
+    height: 28px;
+    top: 8px;
+    right: 8px;
+  }
+  
+  .video-ad-trigger {
+    padding: 14px 10px;
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 480px) {
+  .video-ad-container {
+    width: 280px;
+  }
+  
+  .video-ad-content {
+    min-height: 200px;
+    max-height: 300px;
+    padding: 12px;
+  }
+}
+
+/* Smooth appearance delay */
+.video-ad-wrapper {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out 1s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+</style>
+
 <script>
-(function(ogohz){
-var d = document,
-    s = d.createElement('script'),
-    l = d.scripts[d.scripts.length - 1];
-s.settings = ogohz || {};
-s.src = "\/\/wirytrip.com\/bxX\/V.sLdNGilv0OYOWPcG\/_eAm\/9euwZTUclskWPATBYf3\/MkzHcF3ZN\/TJEUtNNbjBcCzDNxzOcx1\/MEgK";
-s.async = true;
-s.referrerPolicy = 'no-referrer-when-downgrade';
-l.parentNode.insertBefore(s, l);
-})({})
+// Close video ad
+function closeVideoAd() {
+  const container = document.getElementById('videoAdContainer');
+  const trigger = document.getElementById('videoAdTrigger');
+  
+  container.classList.add('hidden');
+  
+  // Show trigger button after ad is hidden
+  setTimeout(() => {
+    trigger.style.display = 'flex';
+  }, 500);
+}
+
+// Open video ad
+function openVideoAd() {
+  const container = document.getElementById('videoAdContainer');
+  const trigger = document.getElementById('videoAdTrigger');
+  
+  trigger.style.display = 'none';
+  container.classList.remove('hidden');
+}
+
+// Toggle video ad info tooltip
+function toggleVideoAdInfo(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  
+  const tooltip = event.currentTarget.nextElementSibling;
+  const isShowing = tooltip.classList.contains('show');
+  
+  // Close all tooltips first
+  document.querySelectorAll('.video-ad-info-tooltip').forEach(t => {
+    t.classList.remove('show');
+  });
+  
+  // Toggle current tooltip
+  if (!isShowing) {
+    tooltip.classList.add('show');
+    
+    // Close tooltip when clicking outside
+    setTimeout(() => {
+      document.addEventListener('click', function closeTooltip(e) {
+        if (!tooltip.contains(e.target) && !event.currentTarget.contains(e.target)) {
+          tooltip.classList.remove('show');
+          document.removeEventListener('click', closeTooltip);
+        }
+      });
+    }, 0);
+  }
+}
+
+// Optional: Auto-close after a certain time (e.g., 30 seconds)
+// Uncomment the code below if you want this feature
+/*
+setTimeout(() => {
+  closeVideoAd();
+}, 30000); // 30 seconds
+*/
 </script>
 </body>
 </html>
