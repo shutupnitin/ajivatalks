@@ -981,7 +981,7 @@
 
         // API Config
         const SARVAM_API_KEY = 'sk_2sx31xrp_tSHiL5KpvaS52RHOakucpC1D';
-        const SARVAM_URL = 'https://api.sarvam.ai/chat/completions';
+        const SARVAM_URL = 'https://api.sarvam.ai/v1/chat/completions';
 
         // Knowledge Base
         const KNOWLEDGE_BASE = {
@@ -1142,7 +1142,7 @@
 
             conversationHistory.push({ role: 'user', content: text });
 
-            // Check local knowledge
+            // Check local knowledge first
             const localResp = getLocalResponse(text);
             if (localResp) {
                 setTimeout(() => {
@@ -1157,13 +1157,17 @@
             const typingId = showTyping();
 
             try {
+                // Build messages array with system prompt and conversation history
                 const messages = [
                     {
                         role: 'system',
                         content: 'You are Darpan, an intelligent AI assistant created by the Ajiva Talks team. You specialize in deep, thoughtful conversations about philosophy, literature, art, and culture. Be eloquent, insightful, and engaging. Keep responses clear and well-structured.'
                     },
-                    ...conversationHistory.slice(-8)
+                    ...conversationHistory.slice(-6) // Last 6 messages for context
                 ];
+
+                console.log('Sending request to Sarvam API...');
+                console.log('Messages:', messages);
 
                 const response = await fetch(SARVAM_URL, {
                     method: 'POST',
@@ -1174,51 +1178,62 @@
                     body: JSON.stringify({
                         model: 'sarvam-m',
                         messages: messages,
-                        temperature: 0.5,
+                        temperature: 0.7,
                         top_p: 1
                     })
                 });
 
+                console.log('Response status:', response.status);
+
                 removeTyping(typingId);
 
                 if (!response.ok) {
-                    const errorData = await response.json().catch(() => ({}));
+                    const errorText = await response.text();
+                    console.error('API Error Response:', errorText);
+                    
+                    let errorData;
+                    try {
+                        errorData = JSON.parse(errorText);
+                    } catch (e) {
+                        errorData = { message: errorText };
+                    }
+                    
                     console.error('API Error:', {
                         status: response.status,
                         statusText: response.statusText,
                         error: errorData
                     });
                     
-                    let errorMessage = "Unable to get response";
+                    // Provide intelligent fallback
+                    const fallbackResponse = generateFallbackResponse(text);
+                    addMessage(fallbackResponse, 'assistant', true);
+                    conversationHistory.push({ role: 'assistant', content: fallbackResponse });
+                    await saveMessage(text, 'user');
+                    await saveMessage(fallbackResponse, 'assistant');
                     
-                    if (response.status === 401 || response.status === 403) {
-                        errorMessage = "API authentication failed";
+                    // Show specific error message
+                    if (response.status === 403) {
+                        showToast('API key issue - using fallback', 'error');
                     } else if (response.status === 429) {
-                        errorMessage = "Rate limit exceeded. Please try again later.";
-                    } else if (response.status === 422) {
-                        errorMessage = "Invalid request format";
-                    } else if (response.status >= 500) {
-                        errorMessage = "Service temporarily unavailable";
-                    }
-                    
-                    showToast(errorMessage, 'error');
-                    
-                    // Remove last user message from history on error
-                    if (conversationHistory.length > 0 && conversationHistory[conversationHistory.length - 1].role === 'user') {
-                        conversationHistory.pop();
+                        showToast('Rate limit reached - using fallback', 'error');
+                    } else {
+                        showToast('API temporarily unavailable - using fallback', 'error');
                     }
                     return;
                 }
 
                 const data = await response.json();
+                console.log('API Response:', data);
                 
                 if (!data.choices || !data.choices[0] || !data.choices[0].message || !data.choices[0].message.content) {
                     console.error('Invalid response structure:', data);
-                    showToast('Invalid response received', 'error');
                     
-                    if (conversationHistory.length > 0 && conversationHistory[conversationHistory.length - 1].role === 'user') {
-                        conversationHistory.pop();
-                    }
+                    // Fallback response
+                    const fallbackResponse = generateFallbackResponse(text);
+                    addMessage(fallbackResponse, 'assistant', true);
+                    conversationHistory.push({ role: 'assistant', content: fallbackResponse });
+                    await saveMessage(text, 'user');
+                    await saveMessage(fallbackResponse, 'assistant');
                     return;
                 }
                 
@@ -1226,21 +1241,24 @@
 
                 if (!aiText || aiText.length < 3) {
                     console.error('Empty response:', aiText);
-                    showToast('Empty response received', 'error');
                     
-                    if (conversationHistory.length > 0 && conversationHistory[conversationHistory.length - 1].role === 'user') {
-                        conversationHistory.pop();
-                    }
+                    // Fallback response
+                    const fallbackResponse = generateFallbackResponse(text);
+                    addMessage(fallbackResponse, 'assistant', true);
+                    conversationHistory.push({ role: 'assistant', content: fallbackResponse });
+                    await saveMessage(text, 'user');
+                    await saveMessage(fallbackResponse, 'assistant');
                     return;
                 }
 
-                // Brand consistency
+                // Ensure brand consistency
                 aiText = aiText
                     .replace(/Sarvam\s*AI/gi, 'Darpan')
                     .replace(/I am Sarvam/gi, 'I am Darpan')
                     .replace(/created by Sarvam/gi, 'created by Ajiva Talks')
-                    .replace(/developed by Sarvam/gi, 'developed by Ajiva Talks')
-                    .replace(/Sarvam/gi, 'Darpan');
+                    .replace(/developed by Sarvam/gi, 'developed by Ajiva Talks');
+
+                console.log('Displaying response:', aiText.substring(0, 100) + '...');
 
                 addMessage(aiText, 'assistant', true);
                 conversationHistory.push({ role: 'assistant', content: aiText });
@@ -1251,12 +1269,55 @@
             } catch (error) {
                 removeTyping(typingId);
                 console.error('Send message error:', error);
-                showToast('Network error. Please try again.', 'error');
+                console.error('Error details:', {
+                    name: error.name,
+                    message: error.message,
+                    stack: error.stack
+                });
                 
-                if (conversationHistory.length > 0 && conversationHistory[conversationHistory.length - 1].role === 'user') {
-                    conversationHistory.pop();
-                }
+                // Provide intelligent fallback
+                const fallbackResponse = generateFallbackResponse(text);
+                addMessage(fallbackResponse, 'assistant', true);
+                conversationHistory.push({ role: 'assistant', content: fallbackResponse });
+                
+                await saveMessage(text, 'user');
+                await saveMessage(fallbackResponse, 'assistant');
+                
+                showToast('Connection error - using fallback mode', 'error');
             }
+        }
+
+        // Generate Fallback Response
+        function generateFallbackResponse(userMessage) {
+            const msg = userMessage.toLowerCase();
+            
+            // Philosophy-related
+            if (msg.includes('philosophy') || msg.includes('consciousness') || msg.includes('existence') || msg.includes('reality')) {
+                return "That's a profound philosophical question. The nature of consciousness and existence has fascinated thinkers for millennia. From Descartes' 'I think, therefore I am' to modern neuroscience, we continue to explore the fundamental nature of being and awareness. What aspect of this topic intrigues you most?";
+            }
+            
+            // Literature-related
+            if (msg.includes('literature') || msg.includes('book') || msg.includes('story') || msg.includes('novel') || msg.includes('poem') || msg.includes('author')) {
+                return "Literature offers us windows into diverse human experiences and perspectives. Great works endure because they touch on universal themes while capturing the unique contexts of their time. What draws you to this particular aspect of literature?";
+            }
+            
+            // Art and culture
+            if (msg.includes('art') || msg.includes('culture') || msg.includes('society') || msg.includes('music') || msg.includes('painting')) {
+                return "Art and culture reflect and shape our collective consciousness. They serve as both mirrors and windows—showing us who we are while opening perspectives on different ways of being. Each cultural expression carries layers of meaning and historical context. What specific aspect would you like to explore?";
+            }
+            
+            // India-related
+            if (msg.includes('india') || msg.includes('indian') || msg.includes('hindi') || msg.includes('sanskrit')) {
+                return "India has a rich cultural and intellectual heritage spanning thousands of years. From ancient philosophical traditions like Vedanta and Buddhism to classical arts, literature, and music, Indian civilization has made profound contributions to human thought and creativity. What particular aspect of Indian culture interests you?";
+            }
+            
+            // Science and knowledge
+            if (msg.includes('science') || msg.includes('technology') || msg.includes('knowledge') || msg.includes('learn')) {
+                return "The pursuit of knowledge is one of humanity's noblest endeavors. Whether through scientific inquiry, philosophical reflection, or artistic expression, we seek to understand our world and our place in it. I'm currently in fallback mode, but I'm still here to engage with your questions. What would you like to explore?";
+            }
+            
+            // General thoughtful response
+            return "That's an interesting question that deserves thoughtful consideration. I'm currently experiencing some technical connectivity issues, but I'm still here to engage with your ideas. Could you share more about what specifically interests you? I'll do my best to provide meaningful insights based on the context you provide.";
         }
 
         // Parse Markdown
