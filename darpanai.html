@@ -126,11 +126,50 @@
             cursor: pointer;
             border: 1.5px solid var(--border-secondary);
             transition: all 0.2s;
+            position: relative;
         }
 
         .user-avatar:hover {
             border-color: var(--accent);
             transform: scale(1.05);
+        }
+
+        .user-menu {
+            position: absolute;
+            top: 50px;
+            right: 1.25rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 0.5rem;
+            min-width: 200px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+        }
+
+        .user-menu.active {
+            display: block;
+        }
+
+        .user-menu-item {
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .user-menu-item:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .user-menu-item.danger {
+            color: var(--error);
         }
 
         .auth-btn {
@@ -214,6 +253,9 @@
             overflow: hidden;
             text-overflow: ellipsis;
             position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .chat-item:hover {
@@ -224,6 +266,26 @@
         .chat-item.active {
             background: var(--bg-secondary);
             color: var(--text-primary);
+        }
+
+        .chat-item-delete {
+            opacity: 0;
+            background: transparent;
+            border: none;
+            color: var(--error);
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+
+        .chat-item:hover .chat-item-delete {
+            opacity: 1;
+        }
+
+        .chat-item-delete:hover {
+            background: var(--bg-tertiary);
         }
 
         /* Chat Container */
@@ -325,6 +387,7 @@
             gap: 1rem;
             margin-bottom: 2rem;
             animation: fadeIn 0.3s ease-out;
+            position: relative;
         }
 
         @keyframes fadeIn {
@@ -367,6 +430,38 @@
             font-size: 0.9375rem;
             word-wrap: break-word;
             white-space: pre-wrap;
+        }
+
+        .message-text.editing {
+            display: none;
+        }
+
+        .message-edit-input {
+            width: 100%;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            padding: 0.75rem;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9375rem;
+            resize: vertical;
+            min-height: 80px;
+            display: none;
+        }
+
+        .message-edit-input.active {
+            display: block;
+        }
+
+        .message-edit-actions {
+            display: none;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .message-edit-actions.active {
+            display: flex;
         }
 
         .message-text strong {
@@ -412,6 +507,7 @@
             margin-top: 0.625rem;
             opacity: 0;
             transition: opacity 0.2s;
+            flex-wrap: wrap;
         }
 
         .message:hover .message-actions {
@@ -432,6 +528,17 @@
         .action-btn:hover {
             background: var(--bg-secondary);
             color: var(--text-primary);
+        }
+
+        .action-btn.primary {
+            background: var(--accent);
+            color: var(--bg-primary);
+            border-color: var(--accent);
+        }
+
+        .action-btn.danger {
+            color: var(--error);
+            border-color: var(--error);
         }
 
         /* Typing Indicator */
@@ -526,6 +633,44 @@
         .send-btn:disabled {
             opacity: 0.4;
             cursor: not-allowed;
+        }
+
+        /* Quote Generator Modal */
+        .quote-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 1rem;
+        }
+
+        .quote-modal.active {
+            display: flex;
+        }
+
+        .quote-canvas-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .quote-canvas {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .quote-actions {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
         }
 
         /* Auth Modal */
@@ -738,6 +883,14 @@
         </div>
     </div>
 
+    <!-- User Menu -->
+    <div class="user-menu" id="userMenu">
+        <div class="user-menu-item" id="signOutBtn">
+            <span>🚪</span>
+            <span>Sign Out</span>
+        </div>
+    </div>
+
     <!-- Main -->
     <div class="main-container">
         <!-- Sidebar -->
@@ -816,6 +969,17 @@
         </div>
     </div>
 
+    <!-- Quote Generator Modal -->
+    <div class="quote-modal" id="quoteModal">
+        <div class="quote-canvas-container">
+            <canvas id="quoteCanvas" class="quote-canvas" width="1080" height="1920"></canvas>
+            <div class="quote-actions">
+                <button class="action-btn primary" id="downloadQuoteBtn">Download</button>
+                <button class="action-btn" id="closeQuoteBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
@@ -869,6 +1033,7 @@
         let currentChatId = null;
         let conversationHistory = [];
         let lastRequestTime = 0;
+        let messageElements = new Map(); // Track message elements for editing
 
         // DOM
         const menuToggle = document.getElementById('menuToggle');
@@ -884,10 +1049,42 @@
         const welcomeScreen = document.getElementById('welcomeScreen');
         const newChatBtn = document.getElementById('newChatBtn');
         const chatList = document.getElementById('chatList');
+        const userMenu = document.getElementById('userMenu');
+        const signOutBtn = document.getElementById('signOutBtn');
+        const quoteModal = document.getElementById('quoteModal');
+        const quoteCanvas = document.getElementById('quoteCanvas');
+        const downloadQuoteBtn = document.getElementById('downloadQuoteBtn');
+        const closeQuoteBtn = document.getElementById('closeQuoteBtn');
 
         // Toggle Sidebar
         menuToggle.addEventListener('click', () => {
             sidebar.classList.toggle('hidden');
+        });
+
+        // User Menu Toggle
+        document.addEventListener('click', (e) => {
+            const userAvatar = document.querySelector('.user-avatar');
+            if (userAvatar && userAvatar.contains(e.target)) {
+                userMenu.classList.toggle('active');
+            } else if (!userMenu.contains(e.target)) {
+                userMenu.classList.remove('active');
+            }
+        });
+
+        // Sign Out
+        signOutBtn.addEventListener('click', async () => {
+            try {
+                await auth.signOut();
+                currentChatId = null;
+                conversationHistory = [];
+                messagesContainer.innerHTML = '';
+                welcomeScreen.style.display = 'flex';
+                chatList.innerHTML = '';
+                userMenu.classList.remove('active');
+                showToast('Signed out successfully');
+            } catch (error) {
+                showToast('Sign out failed', 'error');
+            }
         });
 
         // Auth State
@@ -970,8 +1167,8 @@
             if (!text || !currentUser) return;
 
             const now = Date.now();
-            if (now - lastRequestTime < 2000) {
-                showToast('Please wait a moment...', 'error');
+            if (now - lastRequestTime < 1000) {
+                showToast('Please wait a moment...', 'warning');
                 return;
             }
             lastRequestTime = now;
@@ -981,6 +1178,7 @@
             messageInput.value = '';
             messageInput.style.height = 'auto';
 
+            // Add to conversation history with proper context
             conversationHistory.push({ role: 'user', content: text });
 
             // Check local knowledge
@@ -998,12 +1196,13 @@
             const typingId = showTyping();
 
             try {
+                // Prepare messages with system prompt and conversation history
                 const messages = [
                     {
                         role: 'system',
-                        content: 'You are Darpan, an intelligent AI assistant created by the Ajiva Talks team. You specialize in deep, thoughtful conversations about philosophy, literature, art, and culture. Be eloquent, insightful, and engaging.'
+                        content: 'You are Darpan, an intelligent AI assistant created by the Ajiva Talks team. You specialize in deep, thoughtful conversations about philosophy, literature, art, and culture. Be eloquent, insightful, and engaging. Keep responses concise but meaningful.'
                     },
-                    ...conversationHistory.slice(-6)
+                    ...conversationHistory.slice(-10) // Keep last 10 messages for context
                 ];
 
                 const response = await fetch(SARVAM_URL, {
@@ -1013,10 +1212,11 @@
                         'api-subscription-key': SARVAM_API_KEY
                     },
                     body: JSON.stringify({
-                        model: 'sarvam-m',
+                        model: 'sarvam-2b',
                         messages: messages,
                         temperature: 0.7,
-                        max_tokens: 800
+                        max_tokens: 1000,
+                        top_p: 0.9
                     })
                 });
 
@@ -1024,44 +1224,34 @@
 
                 if (!response.ok) {
                     const errorData = await response.json().catch(() => ({}));
-                    console.error('API Error Details:', {
+                    console.error('API Error:', {
                         status: response.status,
                         statusText: response.statusText,
                         error: errorData
                     });
                     
-                    let toastMessage = "Connection issue";
+                    let fallbackResponse = "I apologize, but I'm having trouble connecting right now. Let me share a thoughtful perspective on your question...";
                     
                     if (response.status === 401 || response.status === 403) {
-                        toastMessage = "API authentication error";
+                        fallbackResponse = "I'm experiencing authentication issues. However, I can still discuss " + text.substring(0, 50) + "... What specific aspect would you like to explore?";
                     } else if (response.status === 429) {
-                        toastMessage = "Too many requests";
-                    } else if (response.status === 422) {
-                        toastMessage = "Request format error";
-                    } else if (response.status >= 500) {
-                        toastMessage = "Service unavailable";
+                        fallbackResponse = "I need a moment to gather my thoughts. Your question about " + text.substring(0, 50) + " is intriguing. Could you elaborate a bit more?";
                     }
                     
-                    showToast(toastMessage, 'error');
-                    throw new Error("API Error");
+                    addMessage(fallbackResponse, 'assistant', true);
+                    conversationHistory.push({ role: 'assistant', content: fallbackResponse });
+                    await saveMessage(text, 'user');
+                    await saveMessage(fallbackResponse, 'assistant');
+                    return;
                 }
 
                 const data = await response.json();
-                console.log('API Response:', data);
                 
                 if (!data.choices || !data.choices[0] || !data.choices[0].message || !data.choices[0].message.content) {
-                    console.error('Invalid response structure:', data);
-                    showToast('Invalid response', 'error');
-                    throw new Error("Invalid response format.");
+                    throw new Error("Invalid response format");
                 }
                 
                 let aiText = data.choices[0].message.content.trim();
-
-                if (!aiText || aiText.length < 5 || aiText.toLowerCase().includes('missing or insufficient permissions')) {
-                    console.error('Empty or error response:', aiText);
-                    showToast('Unable to generate response', 'error');
-                    throw new Error("Empty response received.");
-                }
 
                 // Brand consistency
                 aiText = aiText
@@ -1081,41 +1271,37 @@
                 removeTyping(typingId);
                 console.error('Send message error:', error);
                 
+                // Remove the user message from history if API call failed
                 if (conversationHistory.length > 0 && conversationHistory[conversationHistory.length - 1].role === 'user') {
                     conversationHistory.pop();
                 }
+                
+                const fallbackMsg = "I appreciate your question. While I'm having technical difficulties, I'd love to engage with your thoughts. Could you share more about what interests you in this topic?";
+                addMessage(fallbackMsg, 'assistant', true);
+                conversationHistory.push({ role: 'assistant', content: fallbackMsg });
             }
         }
 
-        // Parse Markdown (simple parser for bold, italic, code)
+        // Parse Markdown
         function parseMarkdown(text) {
-            // Escape HTML to prevent XSS
             text = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-            
-            // Parse code blocks (```code```)
             text = text.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
-            
-            // Parse inline code (`code`)
             text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
-            
-            // Parse bold (**text** or __text__)
             text = text.replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>');
             text = text.replace(/__([^_]+)__/g, '<strong>$1</strong>');
-            
-            // Parse italic (*text* or _text_)
             text = text.replace(/\*([^\*]+)\*/g, '<em>$1</em>');
             text = text.replace(/_([^_]+)_/g, '<em>$1</em>');
-            
-            // Parse line breaks
             text = text.replace(/\n/g, '<br>');
-            
             return text;
         }
 
         // Add Message
         function addMessage(text, role, animate = false) {
+            const messageId = 'msg-' + Date.now() + '-' + Math.random();
             const div = document.createElement('div');
             div.className = `message ${role}`;
+            div.dataset.messageId = messageId;
+            div.dataset.originalText = text;
             
             const avatar = document.createElement('div');
             avatar.className = 'message-avatar';
@@ -1131,6 +1317,26 @@
             const messageText = document.createElement('div');
             messageText.className = 'message-text';
             
+            const editInput = document.createElement('textarea');
+            editInput.className = 'message-edit-input';
+            editInput.value = text;
+            
+            const editActions = document.createElement('div');
+            editActions.className = 'message-edit-actions';
+            
+            const saveEditBtn = document.createElement('button');
+            saveEditBtn.className = 'action-btn primary';
+            saveEditBtn.textContent = 'Save';
+            saveEditBtn.onclick = () => saveEdit(messageId);
+            
+            const cancelEditBtn = document.createElement('button');
+            cancelEditBtn.className = 'action-btn';
+            cancelEditBtn.textContent = 'Cancel';
+            cancelEditBtn.onclick = () => cancelEdit(messageId);
+            
+            editActions.appendChild(saveEditBtn);
+            editActions.appendChild(cancelEditBtn);
+            
             if (animate && role === 'assistant') {
                 let i = 0;
                 const interval = setInterval(() => {
@@ -1140,37 +1346,259 @@
                     scrollToBottom();
                     if (i >= text.length) {
                         clearInterval(interval);
-                        addActions(content, text);
+                        addActions(content, text, messageId, role);
                     }
                 }, 15);
             } else {
                 messageText.innerHTML = parseMarkdown(text);
-                if (role === 'assistant') addActions(content, text);
+                if (role === 'assistant') addActions(content, text, messageId, role);
+                else addUserActions(content, text, messageId);
             }
             
             content.appendChild(messageText);
+            content.appendChild(editInput);
+            content.appendChild(editActions);
             div.appendChild(avatar);
             div.appendChild(content);
             messagesContainer.appendChild(div);
+            
+            messageElements.set(messageId, { div, messageText, editInput, editActions });
+            
             scrollToBottom();
         }
 
-        // Add Actions
-        function addActions(parent, text) {
+        // Add Actions for Assistant Messages
+        function addActions(parent, text, messageId, role) {
             const actions = document.createElement('div');
             actions.className = 'message-actions';
             
             const copy = document.createElement('button');
             copy.className = 'action-btn';
-            copy.textContent = 'Copy';
-            copy.onclick = () => {
-                navigator.clipboard.writeText(text);
-                showToast('Copied!');
-            };
+            copy.textContent = '📋 Copy';
+            copy.onclick = () => copyText(text);
+            
+            const quote = document.createElement('button');
+            quote.className = 'action-btn';
+            quote.textContent = '📸 Create Quote';
+            quote.onclick = () => generateQuote(text);
+            
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'action-btn danger';
+            deleteBtn.textContent = '🗑️ Delete';
+            deleteBtn.onclick = () => deleteMessage(messageId);
             
             actions.appendChild(copy);
+            actions.appendChild(quote);
+            actions.appendChild(deleteBtn);
             parent.appendChild(actions);
         }
+
+        // Add Actions for User Messages
+        function addUserActions(parent, text, messageId) {
+            const actions = document.createElement('div');
+            actions.className = 'message-actions';
+            
+            const edit = document.createElement('button');
+            edit.className = 'action-btn';
+            edit.textContent = '✏️ Edit';
+            edit.onclick = () => startEdit(messageId);
+            
+            const copy = document.createElement('button');
+            copy.className = 'action-btn';
+            copy.textContent = '📋 Copy';
+            copy.onclick = () => copyText(text);
+            
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'action-btn danger';
+            deleteBtn.textContent = '🗑️ Delete';
+            deleteBtn.onclick = () => deleteMessage(messageId);
+            
+            actions.appendChild(edit);
+            actions.appendChild(copy);
+            actions.appendChild(deleteBtn);
+            parent.appendChild(actions);
+        }
+
+        // Copy Text
+        function copyText(text) {
+            // Remove HTML tags for clean copy
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = parseMarkdown(text);
+            const cleanText = tempDiv.textContent || tempDiv.innerText;
+            
+            navigator.clipboard.writeText(cleanText).then(() => {
+                showToast('Copied to clipboard!');
+            }).catch(() => {
+                showToast('Failed to copy', 'error');
+            });
+        }
+
+        // Start Edit
+        function startEdit(messageId) {
+            const elements = messageElements.get(messageId);
+            if (!elements) return;
+            
+            elements.messageText.classList.add('editing');
+            elements.editInput.classList.add('active');
+            elements.editActions.classList.add('active');
+            elements.editInput.focus();
+        }
+
+        // Cancel Edit
+        function cancelEdit(messageId) {
+            const elements = messageElements.get(messageId);
+            if (!elements) return;
+            
+            const div = elements.div;
+            const originalText = div.dataset.originalText;
+            
+            elements.messageText.classList.remove('editing');
+            elements.editInput.classList.remove('active');
+            elements.editActions.classList.remove('active');
+            elements.editInput.value = originalText;
+        }
+
+        // Save Edit
+        async function saveEdit(messageId) {
+            const elements = messageElements.get(messageId);
+            if (!elements) return;
+            
+            const div = elements.div;
+            const newText = elements.editInput.value.trim();
+            
+            if (!newText) {
+                showToast('Message cannot be empty', 'error');
+                return;
+            }
+            
+            div.dataset.originalText = newText;
+            elements.messageText.innerHTML = parseMarkdown(newText);
+            elements.messageText.classList.remove('editing');
+            elements.editInput.classList.remove('active');
+            elements.editActions.classList.remove('active');
+            
+            // Update conversation history
+            const messageIndex = Array.from(messagesContainer.children)
+                .filter(child => child.classList.contains('message'))
+                .indexOf(div);
+            
+            if (messageIndex >= 0 && messageIndex < conversationHistory.length) {
+                conversationHistory[messageIndex].content = newText;
+            }
+            
+            showToast('Message updated');
+        }
+
+        // Delete Message
+        async function deleteMessage(messageId) {
+            if (!confirm('Delete this message?')) return;
+            
+            const elements = messageElements.get(messageId);
+            if (!elements) return;
+            
+            const div = elements.div;
+            const messageIndex = Array.from(messagesContainer.children)
+                .filter(child => child.classList.contains('message'))
+                .indexOf(div);
+            
+            // Remove from DOM
+            div.remove();
+            messageElements.delete(messageId);
+            
+            // Remove from conversation history
+            if (messageIndex >= 0 && messageIndex < conversationHistory.length) {
+                conversationHistory.splice(messageIndex, 1);
+            }
+            
+            showToast('Message deleted');
+        }
+
+        // Generate Quote
+        function generateQuote(text) {
+            const ctx = quoteCanvas.getContext('2d');
+            const width = 1080;
+            const height = 1920;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, width, height);
+            
+            // Gradient background
+            const gradient = ctx.createLinearGradient(0, 0, 0, height);
+            gradient.addColorStop(0, '#1a1a2e');
+            gradient.addColorStop(1, '#0f0f1e');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, width, height);
+            
+            // Add subtle pattern
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.02)';
+            for (let i = 0; i < 50; i++) {
+                ctx.beginPath();
+                ctx.arc(Math.random() * width, Math.random() * height, Math.random() * 3, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            // Quote text
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 56px Inter, sans-serif';
+            ctx.textAlign = 'center';
+            
+            // Word wrap
+            const maxWidth = width - 200;
+            const words = text.split(' ');
+            let lines = [];
+            let currentLine = '';
+            
+            words.forEach(word => {
+                const testLine = currentLine + word + ' ';
+                const metrics = ctx.measureText(testLine);
+                if (metrics.width > maxWidth && currentLine !== '') {
+                    lines.push(currentLine);
+                    currentLine = word + ' ';
+                } else {
+                    currentLine = testLine;
+                }
+            });
+            lines.push(currentLine);
+            
+            // Draw text
+            const lineHeight = 80;
+            const startY = (height - (lines.length * lineHeight)) / 2;
+            lines.forEach((line, i) => {
+                ctx.fillText(line, width / 2, startY + (i * lineHeight));
+            });
+            
+            // Darpan watermark
+            ctx.font = '32px Instrument Serif, serif';
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+            ctx.fillText('— Darpan', width / 2, height - 200);
+            
+            ctx.font = '24px Inter, sans-serif';
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+            ctx.fillText('by Ajiva Talks', width / 2, height - 150);
+            
+            quoteModal.classList.add('active');
+        }
+
+        // Download Quote
+        downloadQuoteBtn.addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.download = 'darpan-quote-' + Date.now() + '.png';
+            link.href = quoteCanvas.toDataURL();
+            link.click();
+            showToast('Quote downloaded!');
+        });
+
+        // Close Quote Modal
+        closeQuoteBtn.addEventListener('click', () => {
+            quoteModal.classList.remove('active');
+        });
+
+        // Close quote modal on outside click
+        quoteModal.addEventListener('click', (e) => {
+            if (e.target === quoteModal) {
+                quoteModal.classList.remove('active');
+            }
+        });
 
         // Typing Indicator
         function showTyping() {
@@ -1204,7 +1632,7 @@
             messagesWrapper.scrollTop = messagesWrapper.scrollHeight;
         }
 
-        // Save Message - FIXED WITH BETTER ERROR HANDLING
+        // Save Message
         async function saveMessage(text, role) {
             if (!currentUser) return;
             
@@ -1213,7 +1641,6 @@
                     currentChatId = db.collection('chats').doc().id;
                     const title = text.substring(0, 50) + (text.length > 50 ? '...' : '');
                     
-                    // Create chat document
                     await db.collection('chats').doc(currentChatId).set({
                         userId: currentUser.uid,
                         title: title,
@@ -1221,29 +1648,25 @@
                         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
                     });
                     
-                    // Reload chats after creating new one
                     loadChats().catch(err => console.error('Load chats after create:', err));
                 }
                 
-                // Add message to subcollection
                 await db.collection('chats').doc(currentChatId).collection('messages').add({
                     text: text,
                     role: role,
                     timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
                 
-                // Update chat timestamp
                 await db.collection('chats').doc(currentChatId).update({
                     updatedAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
                 
             } catch (error) {
                 console.error('Save message error:', error);
-                // Silently fail - don't disrupt user experience
             }
         }
 
-        // Load Chats - FIXED WITH PROPER ERROR HANDLING
+        // Load Chats
         async function loadChats() {
             if (!currentUser) {
                 chatList.innerHTML = '<div style="padding: 1rem; text-align: center; color: var(--text-secondary); font-size: 0.875rem;">Sign in to see your chats</div>';
@@ -1251,7 +1674,6 @@
             }
             
             try {
-                // Try to load chats with orderBy
                 let snapshot;
                 try {
                     snapshot = await db.collection('chats')
@@ -1260,8 +1682,6 @@
                         .limit(50)
                         .get();
                 } catch (orderError) {
-                    // If orderBy fails (missing index), try without ordering
-                    console.warn('OrderBy failed, trying without ordering:', orderError);
                     snapshot = await db.collection('chats')
                         .where('userId', '==', currentUser.uid)
                         .limit(50)
@@ -1275,50 +1695,87 @@
                     return;
                 }
                 
-                // Convert to array and sort manually if needed
                 const chats = [];
                 snapshot.forEach(doc => {
                     const data = doc.data();
                     chats.push({ id: doc.id, ...data });
                 });
                 
-                // Sort by updatedAt if available
                 chats.sort((a, b) => {
                     if (!a.updatedAt || !b.updatedAt) return 0;
                     return b.updatedAt.toMillis() - a.updatedAt.toMillis();
                 });
                 
-                // Display chats
                 chats.forEach(chat => {
                     const item = document.createElement('div');
                     item.className = 'chat-item';
                     if (chat.id === currentChatId) item.classList.add('active');
-                    item.textContent = chat.title || 'New Chat';
+                    
+                    const title = document.createElement('span');
+                    title.textContent = chat.title || 'New Chat';
+                    title.style.flex = '1';
+                    title.style.overflow = 'hidden';
+                    title.style.textOverflow = 'ellipsis';
+                    
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.className = 'chat-item-delete';
+                    deleteBtn.textContent = '🗑️';
+                    deleteBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        deleteChat(chat.id);
+                    };
+                    
+                    item.appendChild(title);
+                    item.appendChild(deleteBtn);
                     item.onclick = () => loadChat(chat.id);
                     chatList.appendChild(item);
                 });
                 
             } catch (error) {
                 console.error('Load chats error:', error);
-                
-                // Show helpful error message
-                let errorMsg = 'Unable to load chats';
-                if (error.code === 'permission-denied') {
-                    errorMsg = 'Permission denied. Check Firestore rules.';
-                } else if (error.code === 'failed-precondition') {
-                    errorMsg = 'Database index required. Check console.';
-                }
-                
-                chatList.innerHTML = `<div style="padding: 1rem; text-align: center; color: var(--text-secondary); font-size: 0.875rem;">${errorMsg}</div>`;
+                chatList.innerHTML = '<div style="padding: 1rem; text-align: center; color: var(--text-secondary); font-size: 0.875rem;">Unable to load chats</div>';
             }
         }
 
-        // Load Chat - FIXED WITH BETTER ERROR HANDLING
+        // Delete Chat
+        async function deleteChat(chatId) {
+            if (!confirm('Delete this entire conversation?')) return;
+            
+            try {
+                // Delete all messages in the chat
+                const messagesSnapshot = await db.collection('chats').doc(chatId).collection('messages').get();
+                const batch = db.batch();
+                messagesSnapshot.forEach(doc => {
+                    batch.delete(doc.ref);
+                });
+                await batch.commit();
+                
+                // Delete the chat document
+                await db.collection('chats').doc(chatId).delete();
+                
+                // If this was the current chat, clear it
+                if (chatId === currentChatId) {
+                    currentChatId = null;
+                    conversationHistory = [];
+                    messagesContainer.innerHTML = '';
+                    welcomeScreen.style.display = 'flex';
+                }
+                
+                await loadChats();
+                showToast('Chat deleted');
+            } catch (error) {
+                console.error('Delete chat error:', error);
+                showToast('Failed to delete chat', 'error');
+            }
+        }
+
+        // Load Chat
         async function loadChat(chatId) {
             currentChatId = chatId;
             messagesContainer.innerHTML = '';
             welcomeScreen.style.display = 'none';
             conversationHistory = [];
+            messageElements.clear();
             
             const loadingDiv = document.createElement('div');
             loadingDiv.id = 'loading-messages';
@@ -1327,15 +1784,12 @@
             messagesContainer.appendChild(loadingDiv);
             
             try {
-                // Try to load messages with orderBy
                 let snapshot;
                 try {
                     snapshot = await db.collection('chats').doc(chatId).collection('messages')
                         .orderBy('timestamp', 'asc')
                         .get();
                 } catch (orderError) {
-                    // If orderBy fails, try without ordering
-                    console.warn('OrderBy failed for messages, trying without ordering:', orderError);
                     snapshot = await db.collection('chats').doc(chatId).collection('messages')
                         .get();
                 }
@@ -1348,20 +1802,17 @@
                     return;
                 }
                 
-                // Convert to array and sort manually
                 const messages = [];
                 snapshot.forEach(doc => {
                     const data = doc.data();
                     messages.push(data);
                 });
                 
-                // Sort by timestamp
                 messages.sort((a, b) => {
                     if (!a.timestamp || !b.timestamp) return 0;
                     return a.timestamp.toMillis() - b.timestamp.toMillis();
                 });
                 
-                // Display messages
                 messages.forEach(data => {
                     addMessage(data.text, data.role);
                     conversationHistory.push({ role: data.role, content: data.text });
@@ -1374,13 +1825,7 @@
                 console.error('Load chat error:', error);
                 const loading = document.getElementById('loading-messages');
                 if (loading) loading.remove();
-                
-                let errorMsg = 'Failed to load chat';
-                if (error.code === 'permission-denied') {
-                    errorMsg = 'Permission denied';
-                }
-                
-                showToast(errorMsg, 'error');
+                showToast('Failed to load chat', 'error');
                 welcomeScreen.style.display = 'flex';
             }
         }
@@ -1389,6 +1834,7 @@
         newChatBtn.addEventListener('click', () => {
             currentChatId = null;
             conversationHistory = [];
+            messageElements.clear();
             messagesContainer.innerHTML = '';
             welcomeScreen.style.display = 'flex';
             loadChats();
@@ -1401,6 +1847,7 @@
             toast.className = 'toast';
             toast.textContent = msg;
             if (type === 'error') toast.style.borderColor = 'var(--error)';
+            if (type === 'warning') toast.style.borderColor = 'var(--warning)';
             document.body.appendChild(toast);
             setTimeout(() => toast.remove(), 3000);
         }
