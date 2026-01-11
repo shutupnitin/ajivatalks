@@ -1472,11 +1472,14 @@
             }
             
             try {
+                console.log('Loading chats for user:', currentUser.uid);
+                
+                // Query without orderBy to avoid index requirement
                 const snapshot = await db.collection('chats')
                     .where('userId', '==', currentUser.uid)
-                    .orderBy('updatedAt', 'desc')
-                    .limit(50)
                     .get();
+                
+                console.log('Chats loaded:', snapshot.size);
                 
                 chatList.innerHTML = '';
                 
@@ -1485,23 +1488,43 @@
                     return;
                 }
                 
+                // Convert to array and sort manually
+                const chats = [];
                 snapshot.forEach(doc => {
                     const data = doc.data();
+                    chats.push({
+                        id: doc.id,
+                        title: data.title || 'New Chat',
+                        updatedAt: data.updatedAt || data.createdAt
+                    });
+                });
+                
+                // Sort by updatedAt descending (newest first)
+                chats.sort((a, b) => {
+                    const timeA = a.updatedAt?.toMillis() || 0;
+                    const timeB = b.updatedAt?.toMillis() || 0;
+                    return timeB - timeA;
+                });
+                
+                // Limit to 50 most recent
+                const recentChats = chats.slice(0, 50);
+                
+                recentChats.forEach(chat => {
                     const item = document.createElement('div');
                     item.className = 'chat-item';
-                    if (doc.id === currentChatId) item.classList.add('active');
+                    if (chat.id === currentChatId) item.classList.add('active');
                     
                     const title = document.createElement('div');
                     title.className = 'chat-title';
-                    title.textContent = data.title || 'New Chat';
-                    title.onclick = () => loadChat(doc.id);
+                    title.textContent = chat.title;
+                    title.onclick = () => loadChat(chat.id);
                     
                     const deleteBtn = document.createElement('button');
                     deleteBtn.className = 'chat-delete';
                     deleteBtn.innerHTML = '×';
                     deleteBtn.onclick = (e) => {
                         e.stopPropagation();
-                        showDeleteConfirm(doc.id);
+                        showDeleteConfirm(chat.id);
                     };
                     
                     item.appendChild(title);
@@ -1511,12 +1534,26 @@
                 
             } catch (error) {
                 console.error('Load chats error:', error);
-                chatList.innerHTML = '<div style="padding: 1rem; text-align: center; color: var(--text-secondary); font-size: 0.875rem;">Unable to load chats</div>';
+                console.error('Error details:', {
+                    code: error.code,
+                    message: error.message,
+                    name: error.name
+                });
+                
+                // Show more specific error message
+                if (error.code === 'failed-precondition' || error.message.includes('index')) {
+                    chatList.innerHTML = '<div style="padding: 1rem; text-align: center; color: var(--text-secondary); font-size: 0.875rem;">Loading... (Index creating)</div>';
+                    // Retry after a short delay
+                    setTimeout(() => loadChats(), 3000);
+                } else {
+                    chatList.innerHTML = '<div style="padding: 1rem; text-align: center; color: var(--text-secondary); font-size: 0.875rem;">Unable to load chats. Check console for details.</div>';
+                }
             }
         }
 
         // Load Chat
         async function loadChat(chatId) {
+            console.log('Loading chat:', chatId);
             currentChatId = chatId;
             messagesContainer.innerHTML = '';
             welcomeScreen.style.display = 'none';
@@ -1529,23 +1566,43 @@
             messagesContainer.appendChild(loadingDiv);
             
             try {
-                const snapshot = await db.collection('chats').doc(chatId).collection('messages')
-                    .orderBy('timestamp', 'asc')
+                const snapshot = await db.collection('chats')
+                    .doc(chatId)
+                    .collection('messages')
                     .get();
+                
+                console.log('Messages loaded:', snapshot.size);
                 
                 const loading = document.getElementById('loading-messages');
                 if (loading) loading.remove();
                 
                 if (snapshot.empty) {
+                    console.log('No messages found');
                     welcomeScreen.style.display = 'flex';
                     return;
                 }
                 
+                // Sort messages manually by timestamp
+                const messages = [];
                 snapshot.forEach(doc => {
                     const data = doc.data();
-                    addMessage(data.text, data.role);
-                    conversationHistory.push({ role: data.role, content: data.text });
+                    messages.push({
+                        text: data.text,
+                        role: data.role,
+                        timestamp: data.timestamp?.toMillis() || 0
+                    });
                 });
+                
+                // Sort by timestamp ascending (oldest first)
+                messages.sort((a, b) => a.timestamp - b.timestamp);
+                
+                // Display messages
+                messages.forEach(msg => {
+                    addMessage(msg.text, msg.role);
+                    conversationHistory.push({ role: msg.role, content: msg.text });
+                });
+                
+                console.log('Messages displayed:', messages.length);
                 
                 scrollToBottom();
                 await loadChats();
@@ -1553,6 +1610,11 @@
                 
             } catch (error) {
                 console.error('Load chat error:', error);
+                console.error('Error details:', {
+                    code: error.code,
+                    message: error.message
+                });
+                
                 const loading = document.getElementById('loading-messages');
                 if (loading) loading.remove();
                 showToast('Failed to load chat', 'error');
