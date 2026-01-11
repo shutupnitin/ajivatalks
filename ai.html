@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Ajiva AI - Intelligent Conversations</title>
     
     <!-- SEO Meta Tags -->
@@ -1186,7 +1186,8 @@
 
         // Gemini API Configuration
         const GEMINI_API_KEY = 'AIzaSyDWnG127SyravTBPSMPx01YXeFwAz-Mg44';
-        const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:streamGenerateContent?key=${GEMINI_API_KEY}`;
+        const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+        const GEMINI_STREAM_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:streamGenerateContent?alt=sse&key=${GEMINI_API_KEY}`;
 
         // App State
         let currentUser = null;
@@ -1286,31 +1287,43 @@
 
         // Load User Data
         async function loadUserData() {
-            const userDoc = await db.collection('users').doc(currentUser.uid).get();
-            if (userDoc.exists) {
-                const data = userDoc.data();
-                messageQuota = data.messageQuota || messageQuota;
-                conversations = data.conversations || [];
-            } else {
-                await db.collection('users').doc(currentUser.uid).set({
-                    email: currentUser.email,
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                    messageQuota: messageQuota,
-                    conversations: []
-                });
+            try {
+                const userDoc = await db.collection('users').doc(currentUser.uid).get();
+                if (userDoc.exists) {
+                    const data = userDoc.data();
+                    messageQuota = data.messageQuota || { used: 0, limit: 50, lastReset: null };
+                    conversations = data.conversations || [];
+                } else {
+                    // Create new user document
+                    await db.collection('users').doc(currentUser.uid).set({
+                        email: currentUser.email,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        messageQuota: messageQuota,
+                        conversations: []
+                    });
+                }
+                renderChatHistory();
+            } catch (error) {
+                console.error('Error loading user data:', error);
+                // Initialize with empty data if load fails
+                conversations = [];
+                renderChatHistory();
             }
-            renderChatHistory();
         }
 
         // Quota Management
         async function checkAndResetQuota() {
-            const now = new Date();
-            const lastReset = messageQuota.lastReset ? new Date(messageQuota.lastReset) : null;
-            
-            if (!lastReset || now.toDateString() !== lastReset.toDateString()) {
-                messageQuota.used = 0;
-                messageQuota.lastReset = now.toISOString();
-                await saveUserData();
+            try {
+                const now = new Date();
+                const lastReset = messageQuota.lastReset ? new Date(messageQuota.lastReset) : null;
+                
+                if (!lastReset || now.toDateString() !== lastReset.toDateString()) {
+                    messageQuota.used = 0;
+                    messageQuota.lastReset = now.toISOString();
+                    await saveUserData();
+                }
+            } catch (error) {
+                console.error('Error checking quota:', error);
             }
         }
 
@@ -1327,18 +1340,29 @@
 
         async function incrementQuota() {
             messageQuota.used++;
-            await saveUserData();
             updateQuotaDisplay();
+            await saveUserData();
             
             // Check achievements
             checkAchievements();
         }
 
         async function saveUserData() {
-            await db.collection('users').doc(currentUser.uid).update({
-                messageQuota: messageQuota,
-                conversations: conversations
-            });
+            if (!currentUser) return;
+            
+            try {
+                await db.collection('users').doc(currentUser.uid).set({
+                    email: currentUser.email,
+                    messageQuota: messageQuota,
+                    conversations: conversations,
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                }, { merge: true });
+                
+                console.log('✅ Data saved successfully');
+            } catch (error) {
+                console.error('❌ Error saving data:', error);
+                alert('Failed to save chat history. Please check your connection.');
+            }
         }
 
         // Chat Management
@@ -1352,6 +1376,12 @@
                 updatedAt: new Date().toISOString()
             };
             conversations.unshift(newChat);
+            
+            // Save immediately
+            saveUserData().then(() => {
+                console.log('📝 New chat created');
+            });
+            
             renderChatHistory();
             clearMessages();
             showEmptyState();
@@ -1374,6 +1404,8 @@
             if (confirm('Delete this conversation?')) {
                 conversations = conversations.filter(c => c.id !== chatId);
                 await saveUserData();
+                console.log('🗑️ Chat deleted');
+                
                 if (currentChatId === chatId) {
                     createNewChat();
                 } else {
@@ -1500,16 +1532,23 @@
             if (save && currentChatId) {
                 const chat = conversations.find(c => c.id === currentChatId);
                 if (chat) {
-                    chat.messages.push({ role, content, timestamp: timestamp.toISOString() });
+                    chat.messages.push({ 
+                        role, 
+                        content, 
+                        timestamp: timestamp.toISOString ? timestamp.toISOString() : new Date(timestamp).toISOString()
+                    });
                     chat.updatedAt = new Date().toISOString();
                     
-                    // Auto-generate title from first message
-                    if (chat.messages.length === 2) {
+                    // Auto-generate title from first user message
+                    if (chat.messages.length === 1 && role === 'user') {
                         chat.title = content.substring(0, 50) + (content.length > 50 ? '...' : '');
-                        renderChatHistory();
                     }
                     
-                    saveUserData();
+                    // Save immediately after each message
+                    saveUserData().then(() => {
+                        console.log('💾 Message saved to Firestore');
+                        renderChatHistory();
+                    });
                 }
             }
         }
@@ -1601,94 +1640,157 @@
 
         async function streamGeminiResponse(userMessage) {
             const chat = conversations.find(c => c.id === currentChatId);
-            const history = chat.messages.map(msg => ({
+            const history = chat ? chat.messages.slice(0, -1).map(msg => ({
                 role: msg.role === 'user' ? 'user' : 'model',
                 parts: [{ text: msg.content }]
-            }));
+            })) : [];
 
-            const response = await fetch(GEMINI_API_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    contents: [...history, {
-                        role: 'user',
-                        parts: [{ text: userMessage }]
-                    }],
-                    systemInstruction: {
-                        parts: [{
-                            text: "You are Ajiva AI, an intelligent assistant for Ajiva Talks - a platform dedicated to deep conversations with writers, artists, philosophers, and cultural voices. You engage in thoughtful, nuanced discussions and provide insightful responses."
-                        }]
-                    },
-                    generationConfig: {
-                        temperature: 0.7,
-                        topK: 40,
-                        topP: 0.95,
-                        maxOutputTokens: 1024,
-                    }
-                })
-            });
+            const requestBody = {
+                contents: [...history, {
+                    role: 'user',
+                    parts: [{ text: userMessage }]
+                }],
+                systemInstruction: {
+                    parts: [{
+                        text: "You are Ajiva AI, an intelligent assistant for Ajiva Talks - a platform dedicated to deep conversations with writers, artists, philosophers, and cultural voices. You engage in thoughtful, nuanced discussions and provide insightful responses."
+                    }]
+                },
+                generationConfig: {
+                    temperature: 0.7,
+                    topK: 40,
+                    topP: 0.95,
+                    maxOutputTokens: 2048,
+                }
+            };
 
-            removeTypingIndicator();
+            try {
+                // Try streaming first
+                const streamResponse = await fetch(GEMINI_STREAM_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestBody)
+                });
 
-            const reader = response.body.getReader();
-            const decoder = new TextDecoder();
-            let fullResponse = '';
-            let messageDiv = null;
-            let contentDiv = null;
+                if (!streamResponse.ok) {
+                    throw new Error('Stream failed, falling back to regular API');
+                }
 
-            // Create message container
-            messageDiv = document.createElement('div');
-            messageDiv.className = 'message assistant';
-            messageDiv.innerHTML = `
-                <div class="message-header">
-                    <div class="message-avatar">🤖</div>
-                    <span class="message-name">Ajiva AI</span>
-                    <span class="message-time">${new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</span>
-                </div>
-                <div class="message-content"></div>
-                <div class="message-actions">
-                    <button class="action-btn" onclick="copyMessage(this)">📋 Copy</button>
-                    <button class="action-btn" onclick="regenerateResponse()">🔄 Regenerate</button>
-                </div>
-            `;
-            messagesContainer.appendChild(messageDiv);
-            contentDiv = messageDiv.querySelector('.message-content');
+                removeTypingIndicator();
 
-            while (true) {
-                const { done, value } = await reader.read();
-                if (done) break;
+                const reader = streamResponse.body.getReader();
+                const decoder = new TextDecoder();
+                let fullResponse = '';
+                let messageDiv = null;
+                let contentDiv = null;
 
-                const chunk = decoder.decode(value);
-                const lines = chunk.split('\n');
-                
-                for (const line of lines) {
-                    if (line.startsWith('data: ') || line.startsWith('[{')) {
-                        try {
-                            const jsonStr = line.startsWith('data: ') ? line.slice(6) : line;
-                            const data = JSON.parse(jsonStr);
-                            
-                            if (data.candidates && data.candidates[0].content) {
-                                const text = data.candidates[0].content.parts[0].text;
-                                fullResponse += text;
-                                contentDiv.innerHTML = formatMessage(fullResponse);
-                                scrollToBottom();
+                // Create message container
+                messageDiv = document.createElement('div');
+                messageDiv.className = 'message assistant';
+                messageDiv.innerHTML = `
+                    <div class="message-header">
+                        <div class="message-avatar">🤖</div>
+                        <span class="message-name">Ajiva AI</span>
+                        <span class="message-time">${new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</span>
+                    </div>
+                    <div class="message-content"></div>
+                    <div class="message-actions">
+                        <button class="action-btn" onclick="copyMessage(this)">📋 Copy</button>
+                        <button class="action-btn" onclick="regenerateResponse()">🔄 Regenerate</button>
+                    </div>
+                `;
+                messagesContainer.appendChild(messageDiv);
+                contentDiv = messageDiv.querySelector('.message-content');
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+
+                    const chunk = decoder.decode(value, { stream: true });
+                    const lines = chunk.split('\n');
+                    
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            try {
+                                const jsonStr = line.slice(6).trim();
+                                if (jsonStr === '[DONE]') continue;
+                                
+                                const data = JSON.parse(jsonStr);
+                                
+                                if (data.candidates && data.candidates[0]?.content?.parts) {
+                                    const text = data.candidates[0].content.parts[0]?.text || '';
+                                    fullResponse += text;
+                                    contentDiv.innerHTML = formatMessage(fullResponse);
+                                    scrollToBottom();
+                                }
+                            } catch (e) {
+                                console.warn('Parse error:', e);
                             }
-                        } catch (e) {
-                            // Skip invalid JSON
                         }
                     }
                 }
-            }
 
-            // Save complete response
-            if (chat) {
-                chat.messages.push({
-                    role: 'assistant',
-                    content: fullResponse,
-                    timestamp: new Date().toISOString()
-                });
-                chat.updatedAt = new Date().toISOString();
-                await saveUserData();
+                // Save complete response
+                if (chat && fullResponse) {
+                    chat.messages.push({
+                        role: 'assistant',
+                        content: fullResponse,
+                        timestamp: new Date().toISOString()
+                    });
+                    chat.updatedAt = new Date().toISOString();
+                    
+                    // Auto-generate title if first exchange
+                    if (chat.messages.length === 2) {
+                        const firstUserMsg = chat.messages[0].content;
+                        chat.title = firstUserMsg.substring(0, 50) + (firstUserMsg.length > 50 ? '...' : '');
+                    }
+                    
+                    await saveUserData();
+                    console.log('💾 AI response saved');
+                }
+
+            } catch (error) {
+                console.error('Streaming failed, using regular API:', error);
+                
+                // Fallback to non-streaming API
+                removeTypingIndicator();
+                
+                try {
+                    const response = await fetch(GEMINI_API_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(requestBody)
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error?.message || 'API request failed');
+                    }
+
+                    const data = await response.json();
+                    const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Sorry, I could not generate a response.';
+                    
+                    appendMessage('assistant', aiResponse);
+                    
+                    // Save fallback response too
+                    if (chat) {
+                        const lastMsg = chat.messages[chat.messages.length - 1];
+                        if (lastMsg && lastMsg.role === 'assistant') {
+                            // Already saved by appendMessage
+                        } else {
+                            chat.messages.push({
+                                role: 'assistant',
+                                content: aiResponse,
+                                timestamp: new Date().toISOString()
+                            });
+                            chat.updatedAt = new Date().toISOString();
+                            await saveUserData();
+                        }
+                    }
+
+                } catch (fallbackError) {
+                    console.error('API Error:', fallbackError);
+                    appendMessage('assistant', 'Sorry, I encountered an error processing your request. Please try again.');
+                }
             }
 
             // Add suggested follow-ups
