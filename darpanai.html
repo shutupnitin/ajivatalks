@@ -116,10 +116,6 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-        }
-
-        .quota-number {
-            font-weight: 600;
             color: var(--success);
         }
 
@@ -647,7 +643,7 @@
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
+                    @media (max-width: 768px) {
             .sidebar {
                 position: fixed;
                 left: 0;
@@ -655,14 +651,6 @@
                 height: calc(100vh - 60px);
                 z-index: 90;
                 box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
-            }
-
-            .quota-badge span:not(.quota-number) {
-                display: none;
-            }
-
-            .logo-text {
-                display: none;
             }
 
             .example-prompts {
@@ -704,8 +692,8 @@
         </div>
         <div class="header-right">
             <div class="quota-badge">
-                <span class="quota-number" id="quotaNumber">50</span>
-                <span>/50</span>
+                <span>✨</span>
+                <span>Unlimited</span>
             </div>
             <div id="userSection">
                 <button class="auth-btn" id="authBtn">Sign In</button>
@@ -842,9 +830,8 @@
         // State
         let currentUser = null;
         let currentChatId = null;
-        let messageCount = 0;
-        let lastRequestTime = 0;
         let conversationHistory = [];
+        let lastRequestTime = 0;
 
         // DOM
         const menuToggle = document.getElementById('menuToggle');
@@ -858,7 +845,6 @@
         const messagesContainer = document.getElementById('messagesContainer');
         const messagesWrapper = document.getElementById('messagesWrapper');
         const welcomeScreen = document.getElementById('welcomeScreen');
-        const quotaNumber = document.getElementById('quotaNumber');
         const newChatBtn = document.getElementById('newChatBtn');
         const chatList = document.getElementById('chatList');
 
@@ -878,7 +864,6 @@
                 `;
                 messageInput.disabled = false;
                 sendBtn.disabled = false;
-                await loadQuota();
                 await loadChats();
             } else {
                 currentUser = null;
@@ -925,31 +910,6 @@
             }
         });
 
-        // Load Quota
-        async function loadQuota() {
-            if (!currentUser) return;
-            const today = new Date().toISOString().split('T')[0];
-            try {
-                const doc = await db.collection('quotas').doc(currentUser.uid).get();
-                if (doc.exists && doc.data().date === today) {
-                    messageCount = doc.data().count || 0;
-                } else {
-                    messageCount = 0;
-                    await db.collection('quotas').doc(currentUser.uid).set({ count: 0, date: today });
-                }
-            } catch (error) {
-                messageCount = 0;
-            }
-            updateQuota();
-        }
-
-        // Update Quota
-        function updateQuota() {
-            const remaining = 50 - messageCount;
-            quotaNumber.textContent = remaining;
-            quotaNumber.style.color = remaining <= 10 ? 'var(--error)' : remaining <= 20 ? 'var(--warning)' : 'var(--success)';
-        }
-
         // Get Local Response
         function getLocalResponse(msg) {
             const lower = msg.toLowerCase();
@@ -972,13 +932,8 @@
             const text = messageInput.value.trim();
             if (!text || !currentUser) return;
 
-            if (messageCount >= 50) {
-                showToast('Daily quota reached. Resets at midnight!', 'error');
-                return;
-            }
-
             const now = Date.now();
-            if (now - lastRequestTime < 3000) {
+            if (now - lastRequestTime < 2000) {
                 showToast('Please wait a moment...', 'error');
                 return;
             }
@@ -1077,10 +1032,6 @@
                 showToast('Connection issue', 'error');
                 console.error('Send message error:', error);
             }
-
-            messageCount++;
-            await db.collection('quotas').doc(currentUser.uid).update({ count: messageCount });
-            updateQuota();
         }
 
         // Add Message
@@ -1209,10 +1160,16 @@
                 const snapshot = await db.collection('chats')
                     .where('userId', '==', currentUser.uid)
                     .orderBy('updatedAt', 'desc')
-                    .limit(20)
+                    .limit(50)
                     .get();
                 
                 chatList.innerHTML = '';
+                
+                if (snapshot.empty) {
+                    chatList.innerHTML = '<div style="padding: 1rem; text-align: center; color: var(--text-secondary); font-size: 0.875rem;">No previous chats</div>';
+                    return;
+                }
+                
                 snapshot.forEach(doc => {
                     const data = doc.data();
                     const item = document.createElement('div');
@@ -1224,6 +1181,7 @@
                 });
             } catch (error) {
                 console.error('Load chats error:', error);
+                chatList.innerHTML = '<div style="padding: 1rem; text-align: center; color: var(--text-secondary); font-size: 0.875rem;">Failed to load chats</div>';
             }
         }
 
@@ -1234,10 +1192,26 @@
             welcomeScreen.style.display = 'none';
             conversationHistory = [];
             
+            // Show loading
+            const loadingDiv = document.createElement('div');
+            loadingDiv.id = 'loading-messages';
+            loadingDiv.style.cssText = 'text-align: center; padding: 2rem; color: var(--text-secondary);';
+            loadingDiv.textContent = 'Loading messages...';
+            messagesContainer.appendChild(loadingDiv);
+            
             try {
                 const snapshot = await db.collection('chats').doc(chatId).collection('messages')
                     .orderBy('timestamp', 'asc')
                     .get();
+                
+                // Remove loading
+                const loading = document.getElementById('loading-messages');
+                if (loading) loading.remove();
+                
+                if (snapshot.empty) {
+                    welcomeScreen.style.display = 'flex';
+                    return;
+                }
                 
                 snapshot.forEach(doc => {
                     const data = doc.data();
@@ -1245,9 +1219,15 @@
                     conversationHistory.push({ role: data.role, content: data.text });
                 });
                 
+                scrollToBottom();
                 await loadChats();
+                
             } catch (error) {
+                console.error('Load chat error:', error);
+                const loading = document.getElementById('loading-messages');
+                if (loading) loading.remove();
                 showToast('Failed to load chat', 'error');
+                welcomeScreen.style.display = 'flex';
             }
         }
 
@@ -1258,6 +1238,7 @@
             messagesContainer.innerHTML = '';
             welcomeScreen.style.display = 'flex';
             loadChats();
+            sidebar.classList.add('hidden');
         });
 
         // Toast
