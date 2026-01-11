@@ -985,7 +985,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
-    <script>
+    <script type="module">
         // Firebase Config
         const firebaseConfig = {
             apiKey: "AIzaSyAGYl3DZDq7S714sveY4yq2s_O5JaFSuf4",
@@ -1000,31 +1000,59 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // API Config
+        // Sarvam AI API Key - REPLACE WITH YOUR KEY
         const SARVAM_API_KEY = 'sk_2sx31xrp_tSHiL5KpvaS52RHOakucpC1D';
-        const SARVAM_URL = 'https://api.sarvam.ai/v1/chat/completions';
 
-        // Knowledge Base
+        // Simple Sarvam AI Client (browser-compatible)
+        class SarvamAIClient {
+            constructor(apiKey) {
+                this.apiKey = apiKey;
+                this.baseURL = 'https://api.sarvam.ai';
+            }
+
+            async chatCompletions(messages) {
+                try {
+                    const response = await fetch(`${this.baseURL}/chat/completions`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'api-subscription-key': this.apiKey
+                        },
+                        body: JSON.stringify({
+                            messages: messages
+                        })
+                    });
+
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        console.error('Sarvam API Error:', response.status, errorText);
+                        throw new Error(`API Error: ${response.status}`);
+                    }
+
+                    return await response.json();
+                } catch (error) {
+                    console.error('Sarvam API Request Failed:', error);
+                    throw error;
+                }
+            }
+        }
+
+        // Initialize Sarvam client
+        const sarvamClient = new SarvamAIClient(SARVAM_API_KEY);
+
+        // Knowledge Base for fallback
         const KNOWLEDGE_BASE = {
             greetings: {
-                patterns: ['hello', 'hi', 'hey', 'namaste', 'good morning', 'good evening', 'good afternoon'],
+                patterns: ['hello', 'hi', 'hey', 'namaste', 'good morning', 'good evening'],
                 responses: [
                     "Hello! I'm Darpan, your companion for meaningful conversations. How may I assist you today?",
                     "Greetings! I'm here to explore ideas and engage in thoughtful dialogue with you.",
-                    "Hello! Welcome to Darpan. What would you like to discuss?"
+                    "Namaste! I'm Darpan. What shall we discuss today?"
                 ]
             },
             identity: {
-                patterns: ['who are you', 'what are you', 'who made you', 'who created you', 'your creator', 'your origin', 'built you', 'developed you'],
-                response: "I'm Darpan, an intelligent AI assistant created by the Ajiva Talks team. My purpose is to facilitate deep, meaningful conversations about philosophy, culture, literature, and the human experience. I'm here to help you explore complex ideas through thoughtful dialogue."
-            },
-            capabilities: {
-                patterns: ['what can you do', 'your capabilities', 'how can you help', 'what do you know'],
-                response: "I specialize in engaging conversations about philosophy, literature, art, culture, and complex ideas. I can help you explore concepts, analyze perspectives, discuss creative works, and dive deep into meaningful topics. What interests you?"
-            },
-            thanks: {
-                patterns: ['thank you', 'thanks', 'appreciate'],
-                responses: ["You're welcome! Happy to help.", "My pleasure! Let me know if you need anything else.", "Glad I could assist!"]
+                patterns: ['who are you', 'what are you', 'who made you', 'your creator'],
+                response: "I'm Darpan, an intelligent AI assistant created by the Ajiva Talks team. My name means 'mirror' in Sanskrit. I specialize in deep conversations about philosophy, culture, and literature."
             }
         };
 
@@ -1033,13 +1061,12 @@
         let currentChatId = null;
         let conversationHistory = [];
         let lastRequestTime = 0;
-        let messageElements = new Map(); // Track message elements for editing
+        let messageElements = new Map();
 
-        // DOM
+        // DOM Elements
         const menuToggle = document.getElementById('menuToggle');
         const sidebar = document.getElementById('sidebar');
         const authModal = document.getElementById('authModal');
-        const authBtn = document.getElementById('authBtn');
         const googleBtn = document.getElementById('googleBtn');
         const emailAuthBtn = document.getElementById('emailAuthBtn');
         const messageInput = document.getElementById('messageInput');
@@ -1061,7 +1088,7 @@
             sidebar.classList.toggle('hidden');
         });
 
-        // User Menu Toggle
+        // User Menu
         document.addEventListener('click', (e) => {
             const userAvatar = document.querySelector('.user-avatar');
             if (userAvatar && userAvatar.contains(e.target)) {
@@ -1161,7 +1188,7 @@
             return null;
         }
 
-        // Send Message
+        // Send Message with Sarvam AI
         async function sendMessage() {
             const text = messageInput.value.trim();
             if (!text || !currentUser) return;
@@ -1178,10 +1205,9 @@
             messageInput.value = '';
             messageInput.style.height = 'auto';
 
-            // Add to conversation history with proper context
             conversationHistory.push({ role: 'user', content: text });
 
-            // Check local knowledge
+            // Check local knowledge first
             const localResp = getLocalResponse(text);
             if (localResp) {
                 setTimeout(() => {
@@ -1196,89 +1222,44 @@
             const typingId = showTyping();
 
             try {
-                // Prepare messages with system prompt and conversation history
+                // Prepare messages for Sarvam AI
                 const messages = [
                     {
-                        role: 'system',
-                        content: 'You are Darpan, an intelligent AI assistant created by the Ajiva Talks team. You specialize in deep, thoughtful conversations about philosophy, literature, art, and culture. Be eloquent, insightful, and engaging. Keep responses concise but meaningful.'
-                    },
-                    ...conversationHistory.slice(-10) // Keep last 10 messages for context
+                        role: 'user',
+                        content: `You are Darpan, an intelligent AI assistant created by Ajiva Talks. You specialize in deep conversations about philosophy, culture, and literature. Be thoughtful and engaging. Here's the conversation:\n\n${conversationHistory.slice(-6).map(m => `${m.role}: ${m.content}`).join('\n\n')}`
+                    }
                 ];
 
-                const response = await fetch(SARVAM_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'api-subscription-key': SARVAM_API_KEY
-                    },
-                    body: JSON.stringify({
-                        model: 'sarvam-2b',
-                        messages: messages,
-                        temperature: 0.7,
-                        max_tokens: 1000,
-                        top_p: 0.9
-                    })
-                });
-
+                const response = await sarvamClient.chatCompletions(messages);
+                
                 removeTyping(typingId);
 
-                if (!response.ok) {
-                    const errorData = await response.json().catch(() => ({}));
-                    console.error('API Error:', {
-                        status: response.status,
-                        statusText: response.statusText,
-                        error: errorData
-                    });
+                if (response && response.choices && response.choices[0] && response.choices[0].message) {
+                    let aiText = response.choices[0].message.content.trim();
                     
-                    let fallbackResponse = "I apologize, but I'm having trouble connecting right now. Let me share a thoughtful perspective on your question...";
+                    // Brand consistency
+                    aiText = aiText.replace(/Sarvam/gi, 'Darpan');
+
+                    addMessage(aiText, 'assistant', true);
+                    conversationHistory.push({ role: 'assistant', content: aiText });
                     
-                    if (response.status === 401 || response.status === 403) {
-                        fallbackResponse = "I'm experiencing authentication issues. However, I can still discuss " + text.substring(0, 50) + "... What specific aspect would you like to explore?";
-                    } else if (response.status === 429) {
-                        fallbackResponse = "I need a moment to gather my thoughts. Your question about " + text.substring(0, 50) + " is intriguing. Could you elaborate a bit more?";
-                    }
-                    
-                    addMessage(fallbackResponse, 'assistant', true);
-                    conversationHistory.push({ role: 'assistant', content: fallbackResponse });
                     await saveMessage(text, 'user');
-                    await saveMessage(fallbackResponse, 'assistant');
-                    return;
+                    await saveMessage(aiText, 'assistant');
+                } else {
+                    throw new Error('Invalid response format');
                 }
-
-                const data = await response.json();
-                
-                if (!data.choices || !data.choices[0] || !data.choices[0].message || !data.choices[0].message.content) {
-                    throw new Error("Invalid response format");
-                }
-                
-                let aiText = data.choices[0].message.content.trim();
-
-                // Brand consistency
-                aiText = aiText
-                    .replace(/Sarvam\s*AI/gi, 'Darpan')
-                    .replace(/I am Sarvam/gi, 'I am Darpan')
-                    .replace(/created by Sarvam/gi, 'created by Ajiva Talks')
-                    .replace(/developed by Sarvam/gi, 'developed by Ajiva Talks')
-                    .replace(/Sarvam/gi, 'Darpan');
-
-                addMessage(aiText, 'assistant', true);
-                conversationHistory.push({ role: 'assistant', content: aiText });
-                
-                await saveMessage(text, 'user');
-                await saveMessage(aiText, 'assistant');
 
             } catch (error) {
                 removeTyping(typingId);
-                console.error('Send message error:', error);
+                console.error('API Error:', error);
                 
-                // Remove the user message from history if API call failed
-                if (conversationHistory.length > 0 && conversationHistory[conversationHistory.length - 1].role === 'user') {
-                    conversationHistory.pop();
-                }
+                // Fallback response
+                const fallback = `That's an interesting question about ${text.split(' ').slice(0, 3).join(' ')}. While I'm having a moment connecting to my full knowledge, I can share that this touches on fundamental questions about human experience. What specific aspect would you like to explore?`;
                 
-                const fallbackMsg = "I appreciate your question. While I'm having technical difficulties, I'd love to engage with your thoughts. Could you share more about what interests you in this topic?";
-                addMessage(fallbackMsg, 'assistant', true);
-                conversationHistory.push({ role: 'assistant', content: fallbackMsg });
+                addMessage(fallback, 'assistant', true);
+                conversationHistory.push({ role: 'assistant', content: fallback });
+                await saveMessage(text, 'user');
+                await saveMessage(fallback, 'assistant');
             }
         }
 
@@ -1367,7 +1348,7 @@
             scrollToBottom();
         }
 
-        // Add Actions for Assistant Messages
+        // Add Actions
         function addActions(parent, text, messageId, role) {
             const actions = document.createElement('div');
             actions.className = 'message-actions';
@@ -1393,7 +1374,6 @@
             parent.appendChild(actions);
         }
 
-        // Add Actions for User Messages
         function addUserActions(parent, text, messageId) {
             const actions = document.createElement('div');
             actions.className = 'message-actions';
@@ -1419,21 +1399,18 @@
             parent.appendChild(actions);
         }
 
-        // Copy Text
         function copyText(text) {
-            // Remove HTML tags for clean copy
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = parseMarkdown(text);
             const cleanText = tempDiv.textContent || tempDiv.innerText;
             
             navigator.clipboard.writeText(cleanText).then(() => {
-                showToast('Copied to clipboard!');
+                showToast('Copied!');
             }).catch(() => {
                 showToast('Failed to copy', 'error');
             });
         }
 
-        // Start Edit
         function startEdit(messageId) {
             const elements = messageElements.get(messageId);
             if (!elements) return;
@@ -1444,7 +1421,6 @@
             elements.editInput.focus();
         }
 
-        // Cancel Edit
         function cancelEdit(messageId) {
             const elements = messageElements.get(messageId);
             if (!elements) return;
@@ -1458,8 +1434,7 @@
             elements.editInput.value = originalText;
         }
 
-        // Save Edit
-        async function saveEdit(messageId) {
+        function saveEdit(messageId) {
             const elements = messageElements.get(messageId);
             if (!elements) return;
             
@@ -1477,7 +1452,6 @@
             elements.editInput.classList.remove('active');
             elements.editActions.classList.remove('active');
             
-            // Update conversation history
             const messageIndex = Array.from(messagesContainer.children)
                 .filter(child => child.classList.contains('message'))
                 .indexOf(div);
@@ -1489,8 +1463,7 @@
             showToast('Message updated');
         }
 
-        // Delete Message
-        async function deleteMessage(messageId) {
+        function deleteMessage(messageId) {
             if (!confirm('Delete this message?')) return;
             
             const elements = messageElements.get(messageId);
@@ -1501,11 +1474,9 @@
                 .filter(child => child.classList.contains('message'))
                 .indexOf(div);
             
-            // Remove from DOM
             div.remove();
             messageElements.delete(messageId);
             
-            // Remove from conversation history
             if (messageIndex >= 0 && messageIndex < conversationHistory.length) {
                 conversationHistory.splice(messageIndex, 1);
             }
@@ -1513,23 +1484,19 @@
             showToast('Message deleted');
         }
 
-        // Generate Quote
         function generateQuote(text) {
             const ctx = quoteCanvas.getContext('2d');
             const width = 1080;
             const height = 1920;
             
-            // Clear canvas
             ctx.clearRect(0, 0, width, height);
             
-            // Gradient background
             const gradient = ctx.createLinearGradient(0, 0, 0, height);
             gradient.addColorStop(0, '#1a1a2e');
             gradient.addColorStop(1, '#0f0f1e');
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, width, height);
             
-            // Add subtle pattern
             ctx.fillStyle = 'rgba(255, 255, 255, 0.02)';
             for (let i = 0; i < 50; i++) {
                 ctx.beginPath();
@@ -1537,14 +1504,16 @@
                 ctx.fill();
             }
             
-            // Quote text
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = parseMarkdown(text);
+            const cleanText = tempDiv.textContent || tempDiv.innerText;
+            
             ctx.fillStyle = '#ffffff';
             ctx.font = 'bold 56px Inter, sans-serif';
             ctx.textAlign = 'center';
             
-            // Word wrap
             const maxWidth = width - 200;
-            const words = text.split(' ');
+            const words = cleanText.split(' ');
             let lines = [];
             let currentLine = '';
             
@@ -1560,14 +1529,12 @@
             });
             lines.push(currentLine);
             
-            // Draw text
             const lineHeight = 80;
             const startY = (height - (lines.length * lineHeight)) / 2;
             lines.forEach((line, i) => {
                 ctx.fillText(line, width / 2, startY + (i * lineHeight));
             });
             
-            // Darpan watermark
             ctx.font = '32px Instrument Serif, serif';
             ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
             ctx.fillText('— Darpan', width / 2, height - 200);
@@ -1579,7 +1546,6 @@
             quoteModal.classList.add('active');
         }
 
-        // Download Quote
         downloadQuoteBtn.addEventListener('click', () => {
             const link = document.createElement('a');
             link.download = 'darpan-quote-' + Date.now() + '.png';
@@ -1588,19 +1554,16 @@
             showToast('Quote downloaded!');
         });
 
-        // Close Quote Modal
         closeQuoteBtn.addEventListener('click', () => {
             quoteModal.classList.remove('active');
         });
 
-        // Close quote modal on outside click
         quoteModal.addEventListener('click', (e) => {
             if (e.target === quoteModal) {
                 quoteModal.classList.remove('active');
             }
         });
 
-        // Typing Indicator
         function showTyping() {
             const id = 'typing-' + Date.now();
             const div = document.createElement('div');
@@ -1627,12 +1590,10 @@
             if (el) el.remove();
         }
 
-        // Scroll
         function scrollToBottom() {
             messagesWrapper.scrollTop = messagesWrapper.scrollHeight;
         }
 
-        // Save Message
         async function saveMessage(text, role) {
             if (!currentUser) return;
             
@@ -1648,7 +1609,7 @@
                         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
                     });
                     
-                    loadChats().catch(err => console.error('Load chats after create:', err));
+                    loadChats().catch(err => console.error('Load chats:', err));
                 }
                 
                 await db.collection('chats').doc(currentChatId).collection('messages').add({
@@ -1666,7 +1627,6 @@
             }
         }
 
-        // Load Chats
         async function loadChats() {
             if (!currentUser) {
                 chatList.innerHTML = '<div style="padding: 1rem; text-align: center; color: var(--text-secondary); font-size: 0.875rem;">Sign in to see your chats</div>';
@@ -1737,12 +1697,10 @@
             }
         }
 
-        // Delete Chat
         async function deleteChat(chatId) {
-            if (!confirm('Delete this entire conversation?')) return;
+            if (!confirm('Delete this conversation?')) return;
             
             try {
-                // Delete all messages in the chat
                 const messagesSnapshot = await db.collection('chats').doc(chatId).collection('messages').get();
                 const batch = db.batch();
                 messagesSnapshot.forEach(doc => {
@@ -1750,10 +1708,8 @@
                 });
                 await batch.commit();
                 
-                // Delete the chat document
                 await db.collection('chats').doc(chatId).delete();
                 
-                // If this was the current chat, clear it
                 if (chatId === currentChatId) {
                     currentChatId = null;
                     conversationHistory = [];
@@ -1765,11 +1721,10 @@
                 showToast('Chat deleted');
             } catch (error) {
                 console.error('Delete chat error:', error);
-                showToast('Failed to delete chat', 'error');
+                showToast('Failed to delete', 'error');
             }
         }
 
-        // Load Chat
         async function loadChat(chatId) {
             currentChatId = chatId;
             messagesContainer.innerHTML = '';
@@ -1780,7 +1735,7 @@
             const loadingDiv = document.createElement('div');
             loadingDiv.id = 'loading-messages';
             loadingDiv.style.cssText = 'text-align: center; padding: 2rem; color: var(--text-secondary);';
-            loadingDiv.textContent = 'Loading messages...';
+            loadingDiv.textContent = 'Loading...';
             messagesContainer.appendChild(loadingDiv);
             
             try {
@@ -1790,8 +1745,7 @@
                         .orderBy('timestamp', 'asc')
                         .get();
                 } catch (orderError) {
-                    snapshot = await db.collection('chats').doc(chatId).collection('messages')
-                        .get();
+                    snapshot = await db.collection('chats').doc(chatId).collection('messages').get();
                 }
                 
                 const loading = document.getElementById('loading-messages');
@@ -1804,8 +1758,7 @@
                 
                 const messages = [];
                 snapshot.forEach(doc => {
-                    const data = doc.data();
-                    messages.push(data);
+                    messages.push(doc.data());
                 });
                 
                 messages.sort((a, b) => {
@@ -1825,12 +1778,11 @@
                 console.error('Load chat error:', error);
                 const loading = document.getElementById('loading-messages');
                 if (loading) loading.remove();
-                showToast('Failed to load chat', 'error');
+                showToast('Failed to load', 'error');
                 welcomeScreen.style.display = 'flex';
             }
         }
 
-        // New Chat
         newChatBtn.addEventListener('click', () => {
             currentChatId = null;
             conversationHistory = [];
@@ -1841,7 +1793,6 @@
             sidebar.classList.add('hidden');
         });
 
-        // Toast
         function showToast(msg, type = 'success') {
             const toast = document.createElement('div');
             toast.className = 'toast';
@@ -1852,13 +1803,11 @@
             setTimeout(() => toast.remove(), 3000);
         }
 
-        // Use Prompt
-        function usePrompt(text) {
+        window.usePrompt = function(text) {
             messageInput.value = text;
             messageInput.focus();
         }
 
-        // Event Listeners
         sendBtn.addEventListener('click', sendMessage);
         
         messageInput.addEventListener('keydown', (e) => {
@@ -1873,7 +1822,6 @@
             this.style.height = Math.min(this.scrollHeight, 200) + 'px';
         });
 
-        // Keyboard Shortcuts
         document.addEventListener('keydown', (e) => {
             if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
                 e.preventDefault();
