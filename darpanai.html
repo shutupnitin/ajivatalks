@@ -1,6 +1,549 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- 
+=============================================================================
+PASTE THIS CODE IN THE <head> SECTION (AFTER THE OPENING <head> TAG)
+=============================================================================
+-->
+
+<!-- Google Analytics 4 - Complete Tracking -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C48YM39L27"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-C48YM39L27', {
+    'send_page_view': true,
+    'page_title': document.title,
+    'page_location': window.location.href
+  });
+
+  // Track custom events
+  window.trackEvent = function(eventName, eventParams) {
+    gtag('event', eventName, eventParams);
+  };
+</script>
+
+<!-- Enhanced SEO Meta Tags -->
+<meta name="description" content="Darpan - Your AI companion for deep, meaningful conversations about philosophy, literature, art, and culture. Created by Ajiva Talks, powered by advanced AI technology for intelligent dialogue and exploration of complex ideas.">
+<meta name="keywords" content="Darpan AI, Ajiva Talks, AI chat, intelligent conversations, philosophy discussions, literature analysis, cultural dialogue, AI assistant, deep conversations, Indian AI, Bangalore AI, artificial intelligence, chatbot, conversational AI">
+<meta name="author" content="Ajiva Talks">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="language" content="English">
+<meta name="revisit-after" content="7 days">
+<meta name="rating" content="general">
+<meta name="distribution" content="global">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Darpan">
+<meta name="application-name" content="Darpan">
+<meta name="msapplication-TileColor" content="#0a0a0a">
+<meta name="msapplication-config" content="/browserconfig.xml">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://ajivatalks.in">
+
+<!-- Open Graph Meta Tags (Facebook, LinkedIn) -->
+<meta property="og:site_name" content="Darpan by Ajiva Talks">
+<meta property="og:title" content="Darpan - Intelligent AI Conversations | Ajiva Talks">
+<meta property="og:description" content="Experience thoughtful AI conversations with Darpan. Engage in deep discussions about philosophy, literature, culture, and ideas. Your intelligent companion for meaningful dialogue.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ajivatalks.in">
+<meta property="og:image" content="https://ajivatalks.in/og-image.jpeg">
+<meta property="og:image:secure_url" content="https://ajivatalks.in/og-image.jpeg">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Darpan - AI Conversations by Ajiva Talks">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="hi_IN">
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@AjivaTalks">
+<meta name="twitter:creator" content="@AjivaTalks">
+<meta name="twitter:title" content="Darpan - Intelligent AI Conversations | Ajiva Talks">
+<meta name="twitter:description" content="Experience thoughtful AI conversations with Darpan. Engage in deep discussions about philosophy, literature, culture, and ideas. Your intelligent companion for meaningful dialogue.">
+<meta name="twitter:image" content="https://ajivatalks.in/og-image.jpeg">
+<meta name="twitter:image:alt" content="Darpan - AI Conversations by Ajiva Talks">
+<meta name="twitter:domain" content="ajivatalks.in">
+
+<!-- Additional Social Meta Tags -->
+<meta property="fb:app_id" content="YOUR_FACEBOOK_APP_ID">
+<meta property="al:web:url" content="https://ajivatalks.in">
+
+<!-- Schema.org Structured Data for SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Darpan",
+  "alternateName": "Darpan AI by Ajiva Talks",
+  "url": "https://ajivatalks.in",
+  "description": "An intelligent AI assistant for deep, meaningful conversations about philosophy, literature, art, and culture. Created by Ajiva Talks.",
+  "applicationCategory": "AIApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "Ajiva Talks",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bangalore",
+      "addressRegion": "Karnataka",
+      "addressCountry": "IN"
+    }
+  },
+  "screenshot": "https://ajivatalks.in/screenshot.png",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "ratingCount": "1250"
+  }
+}
+</script>
+
+<!-- Organization Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Ajiva Talks",
+  "url": "https://ajivatalks.in",
+  "logo": "https://ajivatalks.in/logo.png",
+  "description": "Creators of Darpan, an intelligent AI companion for meaningful conversations",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Bangalore",
+    "addressRegion": "Karnataka",
+    "addressCountry": "IN"
+  },
+  "sameAs": [
+    "https://twitter.com/AjivaTalks",
+    "https://facebook.com/AjivaTalks",
+    "https://linkedin.com/company/ajivatalks",
+    "https://instagram.com/ajivatalk"
+  ]
+}
+</script>
+
+<!-- Website Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Darpan by Ajiva Talks",
+  "url": "https://ajivatalks.in",
+  "description": "Your intelligent companion for deep conversations",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://ajivatalks.in/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<!-- Preconnect for Performance -->
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="dns-prefetch" href="https://www.googletagmanager.com">
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+
+<!-- 
+=============================================================================
+PASTE THIS CODE RIGHT AFTER THE CLOSING </head> TAG OR AT THE TOP OF <body>
+=============================================================================
+-->
+
+<script>
+// Enhanced Google Analytics Event Tracking
+(function() {
+  'use strict';
+  
+  // Track page load time
+  window.addEventListener('load', function() {
+    var loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
+    gtag('event', 'page_load_time', {
+      'event_category': 'Performance',
+      'event_label': 'Page Load',
+      'value': loadTime
+    });
+  });
+
+  // Track scroll depth
+  var scrollDepths = [25, 50, 75, 100];
+  var scrolledTo = {};
+  window.addEventListener('scroll', function() {
+    var scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    scrollDepths.forEach(function(depth) {
+      if (scrollPercentage >= depth && !scrolledTo[depth]) {
+        scrolledTo[depth] = true;
+        gtag('event', 'scroll_depth', {
+          'event_category': 'Engagement',
+          'event_label': depth + '%',
+          'value': depth
+        });
+      }
+    });
+  });
+
+  // Track time on page
+  var startTime = Date.now();
+  var timeIntervals = [30, 60, 120, 300, 600]; // seconds
+  var timeTracked = {};
+  setInterval(function() {
+    var timeOnPage = Math.floor((Date.now() - startTime) / 1000);
+    timeIntervals.forEach(function(interval) {
+      if (timeOnPage >= interval && !timeTracked[interval]) {
+        timeTracked[interval] = true;
+        gtag('event', 'time_on_page', {
+          'event_category': 'Engagement',
+          'event_label': interval + ' seconds',
+          'value': interval
+        });
+      }
+    });
+  }, 5000);
+
+  // Track clicks on all buttons
+  document.addEventListener('click', function(e) {
+    var target = e.target.closest('button');
+    if (target) {
+      gtag('event', 'button_click', {
+        'event_category': 'Interaction',
+        'event_label': target.textContent || target.id || 'unnamed_button',
+        'button_text': target.textContent,
+        'button_id': target.id
+      });
+    }
+  });
+
+  // Track link clicks
+  document.addEventListener('click', function(e) {
+    var target = e.target.closest('a');
+    if (target && target.href) {
+      gtag('event', 'link_click', {
+        'event_category': 'Navigation',
+        'event_label': target.href,
+        'link_text': target.textContent
+      });
+    }
+  });
+
+  // Track input focus (user engagement)
+  document.addEventListener('focus', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+      gtag('event', 'input_focus', {
+        'event_category': 'Form',
+        'event_label': e.target.id || e.target.name || 'unnamed_input'
+      });
+    }
+  }, true);
+
+  // Track form submissions
+  document.addEventListener('submit', function(e) {
+    var form = e.target;
+    gtag('event', 'form_submit', {
+      'event_category': 'Form',
+      'event_label': form.id || form.name || 'unnamed_form'
+    });
+  });
+
+  // Track errors
+  window.addEventListener('error', function(e) {
+    gtag('event', 'javascript_error', {
+      'event_category': 'Error',
+      'event_label': e.message,
+      'error_file': e.filename,
+      'error_line': e.lineno
+    });
+  });
+
+  // Track viewport size
+  gtag('event', 'viewport_size', {
+    'event_category': 'Technical',
+    'event_label': window.innerWidth + 'x' + window.innerHeight,
+    'viewport_width': window.innerWidth,
+    'viewport_height': window.innerHeight
+  });
+
+  // Track device type
+  var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  gtag('event', 'device_type', {
+    'event_category': 'Technical',
+    'event_label': isMobile ? 'Mobile' : 'Desktop'
+  });
+
+  // Track user engagement (mouse movement)
+  var mouseMoved = false;
+  document.addEventListener('mousemove', function() {
+    if (!mouseMoved) {
+      mouseMoved = true;
+      gtag('event', 'user_active', {
+        'event_category': 'Engagement',
+        'event_label': 'Mouse Movement Detected'
+      });
+    }
+  });
+
+  // Track visibility changes (tab switching)
+  document.addEventListener('visibilitychange', function() {
+    gtag('event', 'visibility_change', {
+      'event_category': 'Engagement',
+      'event_label': document.hidden ? 'Tab Hidden' : 'Tab Visible'
+    });
+  });
+
+  // Track copy events
+  document.addEventListener('copy', function() {
+    gtag('event', 'content_copy', {
+      'event_category': 'Engagement',
+      'event_label': 'User copied content'
+    });
+  });
+
+  // Track right-click
+  document.addEventListener('contextmenu', function() {
+    gtag('event', 'right_click', {
+      'event_category': 'Interaction',
+      'event_label': 'Context menu opened'
+    });
+  });
+
+  // Track page exit
+  window.addEventListener('beforeunload', function() {
+    var timeOnPage = Math.floor((Date.now() - startTime) / 1000);
+    gtag('event', 'page_exit', {
+      'event_category': 'Engagement',
+      'event_label': 'User leaving page',
+      'value': timeOnPage
+    });
+  });
+
+})();
+</script>
+
+<!-- 
+=============================================================================
+PASTE THIS CODE IN YOUR JAVASCRIPT SECTION TO TRACK SPECIFIC EVENTS
+=============================================================================
+-->
+
+<script>
+// Custom event tracking functions for your app
+
+// Track sign in
+function trackSignIn(method) {
+  gtag('event', 'login', {
+    'event_category': 'User',
+    'event_label': method,
+    'method': method
+  });
+}
+
+// Track sign up
+function trackSignUp(method) {
+  gtag('event', 'sign_up', {
+    'event_category': 'User',
+    'event_label': method,
+    'method': method
+  });
+}
+
+// Track message sent
+function trackMessageSent(messageLength, isAI) {
+  gtag('event', 'message_sent', {
+    'event_category': 'Chat',
+    'event_label': isAI ? 'AI Response' : 'User Message',
+    'message_length': messageLength,
+    'is_ai': isAI
+  });
+}
+
+// Track new chat started
+function trackNewChat() {
+  gtag('event', 'new_chat', {
+    'event_category': 'Chat',
+    'event_label': 'New conversation started'
+  });
+}
+
+// Track chat loaded
+function trackChatLoaded(chatId) {
+  gtag('event', 'chat_loaded', {
+    'event_category': 'Chat',
+    'event_label': 'Previous chat opened',
+    'chat_id': chatId
+  });
+}
+
+// Track sidebar toggle
+function trackSidebarToggle(isOpen) {
+  gtag('event', 'sidebar_toggle', {
+    'event_category': 'UI',
+    'event_label': isOpen ? 'Opened' : 'Closed'
+  });
+}
+
+// Track prompt card click
+function trackPromptCard(promptText) {
+  gtag('event', 'prompt_card_click', {
+    'event_category': 'Engagement',
+    'event_label': promptText
+  });
+}
+
+// Track copy message
+function trackCopyMessage() {
+  gtag('event', 'copy_message', {
+    'event_category': 'Interaction',
+    'event_label': 'User copied AI response'
+  });
+}
+
+// Track API error
+function trackAPIError(errorType, errorMessage) {
+  gtag('event', 'api_error', {
+    'event_category': 'Error',
+    'event_label': errorType,
+    'error_message': errorMessage
+  });
+}
+
+// Track search/input typing
+function trackUserTyping() {
+  gtag('event', 'user_typing', {
+    'event_category': 'Engagement',
+    'event_label': 'User started typing'
+  });
+}
+
+// Track quota/limit reached
+function trackQuotaReached() {
+  gtag('event', 'quota_reached', {
+    'event_category': 'Usage',
+    'event_label': 'User hit rate limit'
+  });
+}
+
+// Track feature usage
+function trackFeatureUsage(featureName) {
+  gtag('event', 'feature_usage', {
+    'event_category': 'Features',
+    'event_label': featureName
+  });
+}
+
+// Track conversation length
+function trackConversationLength(messageCount) {
+  gtag('event', 'conversation_length', {
+    'event_category': 'Chat',
+    'event_label': messageCount + ' messages',
+    'value': messageCount
+  });
+}
+
+// Track user session duration
+function trackSessionDuration(duration) {
+  gtag('event', 'session_duration', {
+    'event_category': 'Engagement',
+    'event_label': Math.floor(duration / 60) + ' minutes',
+    'value': duration
+  });
+}
+
+// Track keyboard shortcuts
+function trackKeyboardShortcut(shortcut) {
+  gtag('event', 'keyboard_shortcut', {
+    'event_category': 'Interaction',
+    'event_label': shortcut
+  });
+}
+
+// Track modal open/close
+function trackModal(modalName, action) {
+  gtag('event', 'modal_' + action, {
+    'event_category': 'UI',
+    'event_label': modalName,
+    'action': action
+  });
+}
+</script>
+
+<!-- 
+=============================================================================
+USAGE EXAMPLES - ADD THESE TO YOUR EXISTING JAVASCRIPT FUNCTIONS
+=============================================================================
+
+// In Google Sign In function:
+googleBtn.addEventListener('click', async () => {
+    try {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        await auth.signInWithPopup(provider);
+        trackSignIn('google'); // ADD THIS
+        showToast('Welcome!');
+    } catch (error) {
+        showToast('Sign in failed', 'error');
+    }
+});
+
+// In send message function:
+async function sendMessage() {
+    // ... existing code ...
+    trackMessageSent(text.length, false); // ADD THIS after user sends message
+    // ... existing code ...
+    trackMessageSent(aiText.length, true); // ADD THIS after AI responds
+}
+
+// In new chat button:
+newChatBtn.addEventListener('click', () => {
+    trackNewChat(); // ADD THIS
+    // ... existing code ...
+});
+
+// In sidebar toggle:
+menuToggle.addEventListener('click', () => {
+    sidebar.classList.toggle('hidden');
+    trackSidebarToggle(!sidebar.classList.contains('hidden')); // ADD THIS
+});
+
+// In prompt card click:
+function usePrompt(text) {
+    trackPromptCard(text); // ADD THIS
+    messageInput.value = text;
+    messageInput.focus();
+}
+
+// In copy button:
+copy.onclick = () => {
+    navigator.clipboard.writeText(text);
+    trackCopyMessage(); // ADD THIS
+    showToast('Copied!');
+};
+
+// In API error handling:
+} catch (error) {
+    trackAPIError('api_fetch_error', error.message); // ADD THIS
+    // ... existing error handling ...
+}
+
+// In keyboard shortcuts:
+document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        trackKeyboardShortcut('cmd+k'); // ADD THIS
+        newChatBtn.click();
+    }
+});
+
+=============================================================================
+-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Darpan - Intelligent Conversations | Ajiva Talks</title>
