@@ -57,6 +57,11 @@
             color: var(--text);
             overflow: hidden;
             height: 100vh;
+            height: 100dvh; /* Dynamic viewport height for mobile */
+            width: 100vw;
+            position: fixed;
+            top: 0;
+            left: 0;
         }
 
         .serif { font-family: 'Instrument Serif', serif; }
@@ -67,9 +72,13 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
+            min-height: 100dvh;
+            width: 100%;
+            padding: 20px;
             background: radial-gradient(ellipse at top, rgba(255,255,255,0.03) 0%, transparent 50%);
             opacity: 0;
             animation: fadeIn 0.6s ease forwards;
+            overflow-y: auto;
         }
 
         @keyframes fadeIn {
@@ -192,7 +201,13 @@
         #app {
             display: none;
             height: 100vh;
+            height: 100dvh;
+            width: 100vw;
             opacity: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow: hidden;
         }
 
         #app.active {
@@ -203,11 +218,15 @@
         /* Sidebar */
         .sidebar {
             width: 280px;
+            min-width: 280px;
+            max-width: 280px;
             background: var(--card);
             border-right: 1px solid var(--border);
             display: flex;
             flex-direction: column;
             transition: transform 0.3s ease;
+            height: 100%;
+            overflow: hidden;
         }
 
         .sidebar.collapsed {
@@ -398,8 +417,10 @@
         .messages-container {
             flex: 1;
             overflow-y: auto;
+            overflow-x: hidden;
             padding: 24px;
             scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
         }
 
         .message {
@@ -460,6 +481,9 @@
             padding: 16px 20px;
             line-height: 1.6;
             position: relative;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
         }
 
         .message.user .message-content {
@@ -685,7 +709,9 @@
             right: -400px;
             top: 0;
             width: 400px;
+            max-width: 100vw;
             height: 100vh;
+            height: 100dvh;
             background: var(--card);
             border-left: 1px solid var(--border);
             padding: 24px;
@@ -822,7 +848,13 @@
                 left: 0;
                 top: 0;
                 height: 100vh;
+                height: 100dvh;
                 z-index: 999;
+                width: 280px;
+            }
+
+            .sidebar.collapsed {
+                transform: translateX(-100%);
             }
 
             .menu-btn {
@@ -830,11 +862,11 @@
             }
 
             .messages-container {
-                padding: 16px;
+                padding: 12px;
             }
 
             .input-area {
-                padding: 16px;
+                padding: 12px;
             }
 
             .settings-panel {
@@ -844,6 +876,141 @@
 
             .starter-prompts {
                 grid-template-columns: 1fr;
+            }
+
+            .header {
+                padding: 12px 16px;
+            }
+
+            .auth-container {
+                padding: 32px 24px;
+                width: 95%;
+            }
+
+            .message {
+                max-width: 100%;
+            }
+
+            .quota-display {
+                font-size: 11px;
+                padding: 4px 8px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .empty-state h1 {
+                font-size: 32px;
+            }
+
+            .empty-state p {
+                font-size: 14px;
+            }
+        }
+
+        /* Small mobile screens */
+        @media (max-width: 480px) {
+            .header-left {
+                gap: 8px;
+            }
+
+            .header-right {
+                gap: 8px;
+            }
+
+            .icon-btn {
+                padding: 6px;
+                font-size: 16px;
+            }
+
+            .user-avatar {
+                width: 32px;
+                height: 32px;
+            }
+
+            .message-content {
+                padding: 12px 16px;
+                font-size: 14px;
+            }
+
+            .message-actions {
+                flex-wrap: wrap;
+            }
+
+            .action-btn {
+                font-size: 11px;
+                padding: 5px 10px;
+            }
+
+            .input-container {
+                padding: 10px;
+            }
+
+            #messageInput {
+                font-size: 14px;
+            }
+
+            .send-btn {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+
+            .starter-prompt {
+                padding: 16px;
+            }
+
+            .auth-btn {
+                padding: 14px;
+                font-size: 14px;
+            }
+        }
+
+        /* Landscape mobile */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .empty-state {
+                padding: 20px;
+            }
+
+            .empty-state h1 {
+                font-size: 28px;
+                margin-bottom: 12px;
+            }
+
+            .starter-prompts {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Tablet screens */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .sidebar {
+                width: 240px;
+                min-width: 240px;
+                max-width: 240px;
+            }
+
+            .messages-container {
+                padding: 20px;
+            }
+
+            .starter-prompts {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Large screens */
+        @media (min-width: 1920px) {
+            .message {
+                max-width: 1000px;
+            }
+
+            .input-wrapper {
+                max-width: 1000px;
+            }
+
+            .starter-prompts {
+                max-width: 1000px;
             }
         }
 
