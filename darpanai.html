@@ -369,6 +369,43 @@
             white-space: pre-wrap;
         }
 
+        .message-text strong {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .message-text em {
+            font-style: italic;
+        }
+
+        .message-text code {
+            background: var(--bg-tertiary);
+            padding: 0.125rem 0.375rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+            font-size: 0.875rem;
+            color: var(--text-primary);
+            border: 1px solid var(--border-primary);
+        }
+
+        .message-text pre {
+            background: var(--bg-tertiary);
+            padding: 0.75rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 0.5rem 0;
+            border: 1px solid var(--border-primary);
+        }
+
+        .message-text pre code {
+            background: transparent;
+            padding: 0;
+            border: none;
+            font-size: 0.875rem;
+            display: block;
+            white-space: pre;
+        }
+
         .message-actions {
             display: flex;
             gap: 0.5rem;
@@ -1050,6 +1087,31 @@
             }
         }
 
+        // Parse Markdown (simple parser for bold, italic, code)
+        function parseMarkdown(text) {
+            // Escape HTML to prevent XSS
+            text = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            
+            // Parse code blocks (```code```)
+            text = text.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+            
+            // Parse inline code (`code`)
+            text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+            
+            // Parse bold (**text** or __text__)
+            text = text.replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>');
+            text = text.replace(/__([^_]+)__/g, '<strong>$1</strong>');
+            
+            // Parse italic (*text* or _text_)
+            text = text.replace(/\*([^\*]+)\*/g, '<em>$1</em>');
+            text = text.replace(/_([^_]+)_/g, '<em>$1</em>');
+            
+            // Parse line breaks
+            text = text.replace(/\n/g, '<br>');
+            
+            return text;
+        }
+
         // Add Message
         function addMessage(text, role, animate = false) {
             const div = document.createElement('div');
@@ -1072,7 +1134,8 @@
             if (animate && role === 'assistant') {
                 let i = 0;
                 const interval = setInterval(() => {
-                    messageText.textContent = text.substring(0, i + 1);
+                    const currentText = text.substring(0, i + 1);
+                    messageText.innerHTML = parseMarkdown(currentText);
                     i++;
                     scrollToBottom();
                     if (i >= text.length) {
@@ -1081,7 +1144,7 @@
                     }
                 }, 15);
             } else {
-                messageText.textContent = text;
+                messageText.innerHTML = parseMarkdown(text);
                 if (role === 'assistant') addActions(content, text);
             }
             
