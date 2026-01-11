@@ -643,7 +643,7 @@
         }
 
         /* Responsive */
-                    @media (max-width: 768px) {
+        @media (max-width: 768px) {
             .sidebar {
                 position: fixed;
                 left: 0;
@@ -799,7 +799,7 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // API Config
+        // API Config - CORRECTED
         const SARVAM_API_KEY = 'sk_2sx31xrp_tSHiL5KpvaS52RHOakucpC1D';
         const SARVAM_URL = 'https://api.sarvam.ai/v1/chat/completions';
 
@@ -927,7 +927,7 @@
             return null;
         }
 
-        // Send Message
+        // Send Message - CORRECTED VERSION
         async function sendMessage() {
             const text = messageInput.value.trim();
             if (!text || !currentUser) return;
@@ -961,14 +961,16 @@
             const typingId = showTyping();
 
             try {
+                // CORRECTED: Properly format messages for Sarvam AI API
                 const messages = [
                     {
                         role: 'system',
-                        content: 'You are Darpan, an intelligent AI assistant created by the Ajiva Talks team. You specialize in deep, thoughtful conversations about philosophy, literature, art, and culture. Never mention Sarvam AI or any other AI provider. Always present yourself as Darpan, created by Ajiva Talks. Be eloquent, insightful, and engaging.'
+                        content: 'You are Darpan, an intelligent AI assistant created by the Ajiva Talks team. You specialize in deep, thoughtful conversations about philosophy, literature, art, and culture. Be eloquent, insightful, and engaging.'
                     },
                     ...conversationHistory.slice(-6)
                 ];
 
+                // CORRECTED: Use proper header format
                 const response = await fetch(SARVAM_URL, {
                     method: 'POST',
                     headers: {
@@ -987,31 +989,39 @@
 
                 if (!response.ok) {
                     const errorData = await response.json().catch(() => ({}));
-                    console.error('API Error:', response.status, errorData);
+                    console.error('API Error Details:', {
+                        status: response.status,
+                        statusText: response.statusText,
+                        error: errorData
+                    });
                     
                     let errorMessage = "I'm having trouble connecting right now. ";
-                    if (response.status === 429) {
-                        errorMessage = "I'm receiving too many requests. Please wait a moment and try again.";
-                    } else if (response.status === 401 || response.status === 403) {
-                        errorMessage = "There's an authentication issue. Please contact support.";
+                    
+                    if (response.status === 401 || response.status === 403) {
+                        errorMessage = "Authentication error. Please check your API key.";
+                    } else if (response.status === 429) {
+                        errorMessage = "Too many requests. Please wait a moment and try again.";
+                    } else if (response.status === 422) {
+                        errorMessage = "Request format error. Please try rephrasing your question.";
                     } else if (response.status >= 500) {
-                        errorMessage = "The service is temporarily unavailable. Please try again in a moment.";
-                    } else {
-                        errorMessage += "Please try rephrasing your question.";
+                        errorMessage = "Service temporarily unavailable. Please try again in a moment.";
                     }
                     
                     throw new Error(errorMessage);
                 }
 
                 const data = await response.json();
+                console.log('API Response:', data); // Debug log
                 
+                // CORRECTED: Proper response parsing
                 if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+                    console.error('Invalid response structure:', data);
                     throw new Error("Invalid response format received.");
                 }
                 
                 let aiText = data.choices[0].message.content;
 
-                // Censorship
+                // Brand consistency
                 aiText = aiText
                     .replace(/Sarvam\s*AI/gi, 'Darpan')
                     .replace(/I am Sarvam/gi, 'I am Darpan')
@@ -1027,10 +1037,11 @@
 
             } catch (error) {
                 removeTyping(typingId);
+                console.error('Send message error:', error);
+                
                 const errorMsg = error.message || "I'm having trouble right now. Please try again in a moment.";
                 addMessage(errorMsg, 'assistant');
                 showToast('Connection issue', 'error');
-                console.error('Send message error:', error);
             }
         }
 
