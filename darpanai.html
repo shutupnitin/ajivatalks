@@ -799,7 +799,7 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // API Config - CORRECTED
+        // API Config
         const SARVAM_API_KEY = 'sk_2sx31xrp_tSHiL5KpvaS52RHOakucpC1D';
         const SARVAM_URL = 'https://api.sarvam.ai/v1/chat/completions';
 
@@ -927,7 +927,7 @@
             return null;
         }
 
-        // Send Message - CORRECTED VERSION
+        // Send Message
         async function sendMessage() {
             const text = messageInput.value.trim();
             if (!text || !currentUser) return;
@@ -961,7 +961,6 @@
             const typingId = showTyping();
 
             try {
-                // CORRECTED: Properly format messages for Sarvam AI API
                 const messages = [
                     {
                         role: 'system',
@@ -970,7 +969,6 @@
                     ...conversationHistory.slice(-6)
                 ];
 
-                // CORRECTED: Use proper header format
                 const response = await fetch(SARVAM_URL, {
                     method: 'POST',
                     headers: {
@@ -995,31 +993,38 @@
                         error: errorData
                     });
                     
-                    let errorMessage = "I'm having trouble connecting right now. ";
+                    let toastMessage = "Connection issue";
                     
                     if (response.status === 401 || response.status === 403) {
-                        errorMessage = "Authentication error. Please check your API key.";
+                        toastMessage = "API authentication error";
                     } else if (response.status === 429) {
-                        errorMessage = "Too many requests. Please wait a moment and try again.";
+                        toastMessage = "Too many requests";
                     } else if (response.status === 422) {
-                        errorMessage = "Request format error. Please try rephrasing your question.";
+                        toastMessage = "Request format error";
                     } else if (response.status >= 500) {
-                        errorMessage = "Service temporarily unavailable. Please try again in a moment.";
+                        toastMessage = "Service unavailable";
                     }
                     
-                    throw new Error(errorMessage);
+                    showToast(toastMessage, 'error');
+                    throw new Error("API Error");
                 }
 
                 const data = await response.json();
-                console.log('API Response:', data); // Debug log
+                console.log('API Response:', data);
                 
-                // CORRECTED: Proper response parsing
-                if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+                if (!data.choices || !data.choices[0] || !data.choices[0].message || !data.choices[0].message.content) {
                     console.error('Invalid response structure:', data);
-                    throw new Error("Invalid response format received.");
+                    showToast('Invalid response', 'error');
+                    throw new Error("Invalid response format.");
                 }
                 
-                let aiText = data.choices[0].message.content;
+                let aiText = data.choices[0].message.content.trim();
+
+                if (!aiText || aiText.length < 5 || aiText.toLowerCase().includes('missing or insufficient permissions')) {
+                    console.error('Empty or error response:', aiText);
+                    showToast('Unable to generate response', 'error');
+                    throw new Error("Empty response received.");
+                }
 
                 // Brand consistency
                 aiText = aiText
@@ -1039,9 +1044,9 @@
                 removeTyping(typingId);
                 console.error('Send message error:', error);
                 
-                const errorMsg = error.message || "I'm having trouble right now. Please try again in a moment.";
-                addMessage(errorMsg, 'assistant');
-                showToast('Connection issue', 'error');
+                if (conversationHistory.length > 0 && conversationHistory[conversationHistory.length - 1].role === 'user') {
+                    conversationHistory.pop();
+                }
             }
         }
 
@@ -1136,43 +1141,69 @@
             messagesWrapper.scrollTop = messagesWrapper.scrollHeight;
         }
 
-        // Save Message
+        // Save Message - FIXED WITH BETTER ERROR HANDLING
         async function saveMessage(text, role) {
             if (!currentUser) return;
             
-            if (!currentChatId) {
-                currentChatId = db.collection('chats').doc().id;
-                const title = text.substring(0, 50) + (text.length > 50 ? '...' : '');
-                await db.collection('chats').doc(currentChatId).set({
-                    userId: currentUser.uid,
-                    title: title,
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            try {
+                if (!currentChatId) {
+                    currentChatId = db.collection('chats').doc().id;
+                    const title = text.substring(0, 50) + (text.length > 50 ? '...' : '');
+                    
+                    // Create chat document
+                    await db.collection('chats').doc(currentChatId).set({
+                        userId: currentUser.uid,
+                        title: title,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    
+                    // Reload chats after creating new one
+                    loadChats().catch(err => console.error('Load chats after create:', err));
+                }
+                
+                // Add message to subcollection
+                await db.collection('chats').doc(currentChatId).collection('messages').add({
+                    text: text,
+                    role: role,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                // Update chat timestamp
+                await db.collection('chats').doc(currentChatId).update({
                     updatedAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
-                await loadChats();
+                
+            } catch (error) {
+                console.error('Save message error:', error);
+                // Silently fail - don't disrupt user experience
             }
-            
-            await db.collection('chats').doc(currentChatId).collection('messages').add({
-                text: text,
-                role: role,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            });
-            
-            await db.collection('chats').doc(currentChatId).update({
-                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-            });
         }
 
-        // Load Chats
+        // Load Chats - FIXED WITH PROPER ERROR HANDLING
         async function loadChats() {
-            if (!currentUser) return;
+            if (!currentUser) {
+                chatList.innerHTML = '<div style="padding: 1rem; text-align: center; color: var(--text-secondary); font-size: 0.875rem;">Sign in to see your chats</div>';
+                return;
+            }
             
             try {
-                const snapshot = await db.collection('chats')
-                    .where('userId', '==', currentUser.uid)
-                    .orderBy('updatedAt', 'desc')
-                    .limit(50)
-                    .get();
+                // Try to load chats with orderBy
+                let snapshot;
+                try {
+                    snapshot = await db.collection('chats')
+                        .where('userId', '==', currentUser.uid)
+                        .orderBy('updatedAt', 'desc')
+                        .limit(50)
+                        .get();
+                } catch (orderError) {
+                    // If orderBy fails (missing index), try without ordering
+                    console.warn('OrderBy failed, trying without ordering:', orderError);
+                    snapshot = await db.collection('chats')
+                        .where('userId', '==', currentUser.uid)
+                        .limit(50)
+                        .get();
+                }
                 
                 chatList.innerHTML = '';
                 
@@ -1181,29 +1212,51 @@
                     return;
                 }
                 
+                // Convert to array and sort manually if needed
+                const chats = [];
                 snapshot.forEach(doc => {
                     const data = doc.data();
+                    chats.push({ id: doc.id, ...data });
+                });
+                
+                // Sort by updatedAt if available
+                chats.sort((a, b) => {
+                    if (!a.updatedAt || !b.updatedAt) return 0;
+                    return b.updatedAt.toMillis() - a.updatedAt.toMillis();
+                });
+                
+                // Display chats
+                chats.forEach(chat => {
                     const item = document.createElement('div');
                     item.className = 'chat-item';
-                    if (doc.id === currentChatId) item.classList.add('active');
-                    item.textContent = data.title || 'New Chat';
-                    item.onclick = () => loadChat(doc.id);
+                    if (chat.id === currentChatId) item.classList.add('active');
+                    item.textContent = chat.title || 'New Chat';
+                    item.onclick = () => loadChat(chat.id);
                     chatList.appendChild(item);
                 });
+                
             } catch (error) {
                 console.error('Load chats error:', error);
-                chatList.innerHTML = '<div style="padding: 1rem; text-align: center; color: var(--text-secondary); font-size: 0.875rem;">Failed to load chats</div>';
+                
+                // Show helpful error message
+                let errorMsg = 'Unable to load chats';
+                if (error.code === 'permission-denied') {
+                    errorMsg = 'Permission denied. Check Firestore rules.';
+                } else if (error.code === 'failed-precondition') {
+                    errorMsg = 'Database index required. Check console.';
+                }
+                
+                chatList.innerHTML = `<div style="padding: 1rem; text-align: center; color: var(--text-secondary); font-size: 0.875rem;">${errorMsg}</div>`;
             }
         }
 
-        // Load Chat
+        // Load Chat - FIXED WITH BETTER ERROR HANDLING
         async function loadChat(chatId) {
             currentChatId = chatId;
             messagesContainer.innerHTML = '';
             welcomeScreen.style.display = 'none';
             conversationHistory = [];
             
-            // Show loading
             const loadingDiv = document.createElement('div');
             loadingDiv.id = 'loading-messages';
             loadingDiv.style.cssText = 'text-align: center; padding: 2rem; color: var(--text-secondary);';
@@ -1211,11 +1264,19 @@
             messagesContainer.appendChild(loadingDiv);
             
             try {
-                const snapshot = await db.collection('chats').doc(chatId).collection('messages')
-                    .orderBy('timestamp', 'asc')
-                    .get();
+                // Try to load messages with orderBy
+                let snapshot;
+                try {
+                    snapshot = await db.collection('chats').doc(chatId).collection('messages')
+                        .orderBy('timestamp', 'asc')
+                        .get();
+                } catch (orderError) {
+                    // If orderBy fails, try without ordering
+                    console.warn('OrderBy failed for messages, trying without ordering:', orderError);
+                    snapshot = await db.collection('chats').doc(chatId).collection('messages')
+                        .get();
+                }
                 
-                // Remove loading
                 const loading = document.getElementById('loading-messages');
                 if (loading) loading.remove();
                 
@@ -1224,8 +1285,21 @@
                     return;
                 }
                 
+                // Convert to array and sort manually
+                const messages = [];
                 snapshot.forEach(doc => {
                     const data = doc.data();
+                    messages.push(data);
+                });
+                
+                // Sort by timestamp
+                messages.sort((a, b) => {
+                    if (!a.timestamp || !b.timestamp) return 0;
+                    return a.timestamp.toMillis() - b.timestamp.toMillis();
+                });
+                
+                // Display messages
+                messages.forEach(data => {
                     addMessage(data.text, data.role);
                     conversationHistory.push({ role: data.role, content: data.text });
                 });
@@ -1237,7 +1311,13 @@
                 console.error('Load chat error:', error);
                 const loading = document.getElementById('loading-messages');
                 if (loading) loading.remove();
-                showToast('Failed to load chat', 'error');
+                
+                let errorMsg = 'Failed to load chat';
+                if (error.code === 'permission-denied') {
+                    errorMsg = 'Permission denied';
+                }
+                
+                showToast(errorMsg, 'error');
                 welcomeScreen.style.display = 'flex';
             }
         }
