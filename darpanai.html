@@ -1007,7 +1007,7 @@
         class SarvamAIClient {
             constructor(apiKey) {
                 this.apiKey = apiKey;
-                this.baseURL = 'https://api.sarvam.ai';
+                this.baseURL = 'https://api.sarvam.ai/v1';
             }
 
             async chatCompletions(messages) {
@@ -1222,23 +1222,28 @@
             const typingId = showTyping();
 
             try {
-                // Prepare messages for Sarvam AI
-                const messages = [
-                    {
-                        role: 'user',
-                        content: `You are Darpan, an intelligent AI assistant created by Ajiva Talks. You specialize in deep conversations about philosophy, culture, and literature. Be thoughtful and engaging. Here's the conversation:\n\n${conversationHistory.slice(-6).map(m => `${m.role}: ${m.content}`).join('\n\n')}`
-                    }
-                ];
+                // Prepare messages for Sarvam AI - using proper format
+                const apiMessages = conversationHistory.slice(-6).map(msg => ({
+                    role: msg.role,
+                    content: msg.content
+                }));
 
-                const response = await sarvamClient.chatCompletions(messages);
+                console.log('Sending to Sarvam AI:', apiMessages);
+
+                const response = await sarvamClient.chatCompletions(apiMessages);
+                
+                console.log('Sarvam AI Response:', response);
                 
                 removeTyping(typingId);
 
                 if (response && response.choices && response.choices[0] && response.choices[0].message) {
                     let aiText = response.choices[0].message.content.trim();
                     
-                    // Brand consistency
-                    aiText = aiText.replace(/Sarvam/gi, 'Darpan');
+                    // Brand consistency - replace any Sarvam references with Darpan
+                    aiText = aiText
+                        .replace(/Sarvam\s*AI/gi, 'Darpan')
+                        .replace(/I am Sarvam/gi, 'I am Darpan')
+                        .replace(/Sarvam/gi, 'Darpan');
 
                     addMessage(aiText, 'assistant', true);
                     conversationHistory.push({ role: 'assistant', content: aiText });
@@ -1251,15 +1256,17 @@
 
             } catch (error) {
                 removeTyping(typingId);
-                console.error('API Error:', error);
+                console.error('Sarvam API Error:', error);
                 
-                // Fallback response
-                const fallback = `That's an interesting question about ${text.split(' ').slice(0, 3).join(' ')}. While I'm having a moment connecting to my full knowledge, I can share that this touches on fundamental questions about human experience. What specific aspect would you like to explore?`;
+                // Intelligent fallback response
+                const fallback = `I appreciate your question about "${text.split(' ').slice(0, 5).join(' ')}..." While I'm experiencing a brief connection issue, I'd be happy to explore this topic with you. Could you tell me more about what specifically interests you about this?`;
                 
                 addMessage(fallback, 'assistant', true);
                 conversationHistory.push({ role: 'assistant', content: fallback });
                 await saveMessage(text, 'user');
                 await saveMessage(fallback, 'assistant');
+                
+                showToast('Using fallback response', 'warning');
             }
         }
 
