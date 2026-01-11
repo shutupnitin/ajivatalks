@@ -13,8 +13,6 @@
     <meta property="og:title" content="Darpan - Intelligent Conversations">
     <meta property="og:description" content="Experience thoughtful AI conversations with Darpan by Ajiva Talks">
     <meta property="og:type" content="website">
-    
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -1033,10 +1031,29 @@
                 removeTyping(typingId);
 
                 if (!response.ok) {
-                    throw new Error('API Error');
+                    const errorData = await response.json().catch(() => ({}));
+                    console.error('API Error:', response.status, errorData);
+                    
+                    let errorMessage = "I'm having trouble connecting right now. ";
+                    if (response.status === 429) {
+                        errorMessage = "I'm receiving too many requests. Please wait a moment and try again.";
+                    } else if (response.status === 401 || response.status === 403) {
+                        errorMessage = "There's an authentication issue. Please contact support.";
+                    } else if (response.status >= 500) {
+                        errorMessage = "The service is temporarily unavailable. Please try again in a moment.";
+                    } else {
+                        errorMessage += "Please try rephrasing your question.";
+                    }
+                    
+                    throw new Error(errorMessage);
                 }
 
                 const data = await response.json();
+                
+                if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+                    throw new Error("Invalid response format received.");
+                }
+                
                 let aiText = data.choices[0].message.content;
 
                 // Censorship
@@ -1055,8 +1072,10 @@
 
             } catch (error) {
                 removeTyping(typingId);
-                addMessage("I apologize, but I'm having trouble processing your request. Please try again.", 'assistant');
-                showToast('Failed to get response', 'error');
+                const errorMsg = error.message || "I'm having trouble right now. Please try again in a moment.";
+                addMessage(errorMsg, 'assistant');
+                showToast('Connection issue', 'error');
+                console.error('Send message error:', error);
             }
 
             messageCount++;
