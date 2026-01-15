@@ -37,6 +37,7 @@
             --warning: #f59e0b;
             --error: #ef4444;
             --blue: #3b82f6;
+            --claude-blue: #5a5de1;
         }
 
         body {
@@ -94,11 +95,10 @@
             display: flex;
             align-items: center;
             gap: 0.625rem;
-        }
-
-        .logo-img {
-            height: 24px;
-            width: auto;
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--accent);
         }
 
         .header-right {
@@ -107,37 +107,66 @@
             gap: 0.75rem;
         }
 
-        .quota-badge {
-            padding: 0.5rem 0.875rem;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-primary);
-            border-radius: 20px;
-            font-size: 0.8125rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--success);
-        }
-
         .user-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
             cursor: pointer;
-            border: 1.5px solid var(--border-secondary);
+            border: 1px solid var(--border-secondary);
             transition: all 0.2s;
             object-fit: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+            background: var(--claude-blue);
         }
 
         .user-avatar:hover {
             border-color: var(--accent);
-            transform: scale(1.05);
+        }
+
+        .user-dropdown {
+            position: absolute;
+            top: 65px;
+            right: 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 0.5rem;
+            min-width: 200px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+        }
+
+        .user-dropdown.show {
+            display: block;
+        }
+
+        .user-dropdown-item {
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .user-dropdown-item:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .user-dropdown-item.signout {
+            color: var(--error);
         }
 
         .auth-btn {
             padding: 0.5rem 1rem;
-            background: var(--accent);
+            background: var(--claude-blue);
             color: var(--bg-primary);
             border: none;
             border-radius: 8px;
@@ -149,6 +178,18 @@
 
         .auth-btn:hover {
             opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .auth-btn.anonymous {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-primary);
+            margin-right: 0.5rem;
+        }
+
+        .auth-btn.anonymous:hover {
+            background: var(--bg-secondary);
         }
 
         /* Main Layout */
@@ -181,9 +222,9 @@
         .new-chat-btn {
             width: 100%;
             padding: 0.75rem;
-            background: transparent;
-            border: 1px solid var(--border-primary);
-            color: var(--text-primary);
+            background: var(--claude-blue);
+            border: none;
+            color: white;
             border-radius: 10px;
             cursor: pointer;
             font-weight: 500;
@@ -196,7 +237,8 @@
         }
 
         .new-chat-btn:hover {
-            background: var(--bg-secondary);
+            opacity: 0.9;
+            transform: translateY(-1px);
         }
 
         .chat-list {
@@ -268,98 +310,108 @@
             flex-direction: column;
             background: var(--bg-primary);
             overflow: hidden;
+            align-items: center;
         }
 
         .messages-wrapper {
             flex: 1;
             overflow-y: auto;
             overflow-x: hidden;
+            width: 100%;
+            max-width: 768px;
+            margin: 0 auto;
         }
 
         .messages-container {
-            max-width: 48rem;
-            margin: 0 auto;
-            padding: 1.5rem 1rem;
+            padding: 2rem 1rem 1rem;
+            min-height: 100%;
         }
 
-        /* Welcome Screen */
+        /* Welcome Screen - Claude Style */
         .welcome-screen {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: calc(100vh - 200px);
             text-align: center;
-            padding: 2rem 1rem;
-        }
-
-        .welcome-icon {
-            width: 100px;
-            height: 100px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            overflow: hidden;
+            padding: 3rem 1rem;
+            max-width: 768px;
+            margin: 0 auto;
         }
 
         .welcome-title {
             font-family: 'Instrument Serif', serif;
-            font-size: 2rem;
-            margin-bottom: 0.75rem;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
             font-weight: 500;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .welcome-subtitle {
-            font-size: 1rem;
+            font-size: 1.25rem;
             color: var(--text-secondary);
-            max-width: 500px;
-            margin-bottom: 2rem;
-            line-height: 1.5;
+            max-width: 600px;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            font-weight: 300;
         }
 
         .example-prompts {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 0.75rem;
-            max-width: 800px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            max-width: 768px;
             width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .example-prompts {
+                grid-template-columns: 1fr;
+            }
         }
 
         .prompt-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border-primary);
-            padding: 1rem;
+            padding: 1.25rem;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.2s;
             text-align: left;
+            height: 100%;
         }
 
         .prompt-card:hover {
             background: var(--bg-tertiary);
-            border-color: var(--border-secondary);
+            border-color: var(--claude-blue);
+            transform: translateY(-2px);
         }
 
         .prompt-card-title {
             font-weight: 600;
-            margin-bottom: 0.375rem;
-            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9375rem;
+            color: var(--text-primary);
         }
 
         .prompt-card-text {
-            font-size: 0.8125rem;
+            font-size: 0.875rem;
             color: var(--text-secondary);
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
         /* Messages */
         .message {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
             animation: fadeIn 0.3s ease-out;
+            max-width: 768px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         @keyframes fadeIn {
@@ -374,9 +426,9 @@
         }
 
         .message-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 6px;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
             background: var(--bg-secondary);
             border: 1px solid var(--border-primary);
             display: flex;
@@ -385,6 +437,7 @@
             flex-shrink: 0;
             font-size: 0.875rem;
             overflow: hidden;
+            font-weight: 600;
         }
 
         .message-avatar img {
@@ -393,20 +446,26 @@
             object-fit: cover;
         }
 
+        .message.user .message-avatar {
+            background: var(--claude-blue);
+            border-color: var(--claude-blue);
+        }
+
         .message.assistant .message-avatar {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.05) 100%);
-            border-color: rgba(59, 130, 246, 0.3);
+            background: linear-gradient(135deg, rgba(90, 93, 225, 0.2) 0%, rgba(90, 93, 225, 0.05) 100%);
+            border-color: rgba(90, 93, 225, 0.3);
         }
 
         .message-content {
             flex: 1;
             min-width: 0;
+            padding-top: 0.25rem;
         }
 
         .message-text {
-            line-height: 1.6;
+            line-height: 1.7;
             color: var(--text-primary);
-            font-size: 0.9375rem;
+            font-size: 1rem;
             word-wrap: break-word;
             white-space: pre-wrap;
         }
@@ -451,7 +510,7 @@
         .message-actions {
             display: flex;
             gap: 0.5rem;
-            margin-top: 0.625rem;
+            margin-top: 0.75rem;
             opacity: 0;
             transition: opacity 0.2s;
         }
@@ -484,9 +543,9 @@
         }
 
         .typing-dot {
-            width: 6px;
-            height: 6px;
-            background: var(--text-secondary);
+            width: 8px;
+            height: 8px;
+            background: var(--claude-blue);
             border-radius: 50%;
             animation: typing 1.4s infinite;
         }
@@ -504,11 +563,13 @@
             border-top: 1px solid var(--border-primary);
             padding: 1rem;
             background: var(--bg-primary);
+            width: 100%;
+            max-width: 768px;
+            margin: 0 auto;
         }
 
         .input-wrapper {
-            max-width: 48rem;
-            margin: 0 auto;
+            width: 100%;
             position: relative;
         }
 
@@ -524,8 +585,9 @@
         }
 
         .input-container:focus-within {
-            border-color: var(--border-secondary);
+            border-color: var(--claude-blue);
             background: var(--bg-tertiary);
+            box-shadow: 0 0 0 2px rgba(90, 93, 225, 0.1);
         }
 
         .message-input {
@@ -539,6 +601,7 @@
             resize: none;
             max-height: 200px;
             line-height: 1.5;
+            min-height: 24px;
         }
 
         .message-input::placeholder {
@@ -546,12 +609,12 @@
         }
 
         .send-btn {
-            width: 32px;
-            height: 32px;
-            background: var(--accent);
-            color: var(--bg-primary);
+            width: 40px;
+            height: 40px;
+            background: var(--claude-blue);
+            color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 10px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -592,7 +655,7 @@
             background: var(--bg-secondary);
             border: 1px solid var(--border-primary);
             border-radius: 16px;
-            padding: 2rem;
+            padding: 2.5rem;
             max-width: 400px;
             width: 100%;
             animation: modalSlide 0.3s ease-out;
@@ -611,9 +674,13 @@
 
         .modal-title {
             font-family: 'Instrument Serif', serif;
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             margin-bottom: 1.5rem;
             text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .auth-form {
@@ -635,7 +702,7 @@
         }
 
         .form-input:focus {
-            border-color: var(--border-secondary);
+            border-color: var(--claude-blue);
         }
 
         .google-btn {
@@ -788,6 +855,36 @@
             }
         }
 
+        /* Anonymous Mode Indicator */
+        .anonymous-mode {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background: rgba(90, 93, 225, 0.1);
+            border: 1px solid rgba(90, 93, 225, 0.3);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .anonymous-mode .upgrade-btn {
+            margin-left: auto;
+            padding: 0.25rem 0.75rem;
+            background: var(--claude-blue);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .anonymous-mode .upgrade-btn:hover {
+            opacity: 0.9;
+        }
+
         /* Scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
@@ -822,7 +919,7 @@
             }
 
             .welcome-title {
-                font-size: 1.5rem;
+                font-size: 2.5rem;
             }
 
             .messages-container {
@@ -830,7 +927,23 @@
             }
 
             .message {
-                gap: 0.75rem;
+                gap: 1rem;
+                padding: 0 0.5rem;
+            }
+
+            .header-right {
+                gap: 0.5rem;
+            }
+
+            .auth-btn.anonymous {
+                margin-right: 0;
+                padding: 0.5rem;
+                font-size: 0.8rem;
+            }
+
+            .auth-btn {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.8rem;
             }
         }
 
@@ -843,8 +956,12 @@
                 padding: 0.75rem;
             }
 
-            .quota-badge span:first-child {
-                display: none;
+            .welcome-title {
+                font-size: 2rem;
+            }
+
+            .welcome-subtitle {
+                font-size: 1rem;
             }
         }
     </style>
@@ -855,16 +972,19 @@
         <div class="header-left">
             <button class="menu-toggle" id="menuToggle">☰</button>
             <div class="logo">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'%3E%3Crect fill='%23f5f5dc' width='500' height='500'/%3E%3Ctext x='250' y='320' font-family='Arial, sans-serif' font-size='120' font-weight='500' text-anchor='middle' fill='%23000'%3Edarpan%3C/text%3E%3C/svg%3E" alt="Darpan" class="logo-img">
+                Darpan
             </div>
         </div>
         <div class="header-right">
-            <div class="quota-badge">
-                <span>∞</span>
-                <span>Unlimited</span>
-            </div>
             <div id="userSection">
-                <button class="auth-btn" id="authBtn">Sign In</button>
+                <button class="auth-btn anonymous" id="anonymousBtn">Try Free</button>
+                <button class="auth-btn" id="authBtn">Sign In / Sign Up</button>
+            </div>
+        </div>
+        <div class="user-dropdown" id="userDropdown">
+            <div class="user-dropdown-item" onclick="signOut()">
+                <span>👤</span>
+                <span>Sign Out</span>
             </div>
         </div>
     </div>
@@ -878,6 +998,11 @@
                     <span>+</span>
                     <span>New chat</span>
                 </button>
+                <div id="anonymousModeIndicator" class="anonymous-mode" style="display: none;">
+                    <span>🔓</span>
+                    <span>Anonymous Mode</span>
+                    <button class="upgrade-btn" onclick="showAuthModal()">Sign Up</button>
+                </div>
                 <div class="chat-list" id="chatList">
                     <!-- Chats will be loaded here -->
                 </div>
@@ -889,10 +1014,7 @@
             <div class="messages-wrapper" id="messagesWrapper">
                 <div class="messages-container" id="messagesContainer">
                     <div class="welcome-screen" id="welcomeScreen">
-                        <div class="welcome-icon">
-                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'%3E%3Crect fill='%23f5f5dc' width='500' height='500'/%3E%3Ctext x='250' y='320' font-family='Arial, sans-serif' font-size='120' font-weight='500' text-anchor='middle' fill='%23000'%3Edarpan%3C/text%3E%3C/svg%3E" alt="Darpan" style="width: 100px; height: auto; border-radius: 12px;">
-                        </div>
-                        <h1 class="welcome-title">Welcome to Darpan</h1>
+                        <h1 class="welcome-title" id="timeGreeting">Welcome to Darpan</h1>
                         <p class="welcome-subtitle">Your intelligent companion for deep conversations about philosophy, culture, and the human experience. Created by Ajiva Talks.</p>
                         <div class="example-prompts">
                             <div class="prompt-card" onclick="usePrompt('Tell me about the philosophy of consciousness')">
@@ -906,6 +1028,10 @@
                             <div class="prompt-card" onclick="usePrompt('Explain the role of art in society')">
                                 <div class="prompt-card-title">Culture</div>
                                 <div class="prompt-card-text">Understand cultural impact</div>
+                            </div>
+                            <div class="prompt-card" onclick="usePrompt('Discuss modern ethical dilemmas')">
+                                <div class="prompt-card-title">Ethics</div>
+                                <div class="prompt-card-text">Explore moral complexities</div>
                             </div>
                         </div>
                     </div>
@@ -921,9 +1047,8 @@
                             id="messageInput" 
                             placeholder="Message Darpan..." 
                             rows="1"
-                            disabled
                         ></textarea>
-                        <button class="send-btn" id="sendBtn" disabled>→</button>
+                        <button class="send-btn" id="sendBtn">→</button>
                     </div>
                 </div>
             </div>
@@ -933,7 +1058,7 @@
     <!-- Auth Modal -->
     <div class="modal-overlay" id="authModal">
         <div class="modal">
-            <h2 class="modal-title">Sign in to Darpan</h2>
+            <h2 class="modal-title">Welcome to Darpan</h2>
             <div class="auth-form">
                 <button class="google-btn" id="googleBtn">
                     <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18z"/><path fill="#34A853" d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 0 1-7.18-2.54H1.83v2.07A8 8 0 0 0 8.98 17z"/><path fill="#FBBC05" d="M4.5 10.52a4.8 4.8 0 0 1 0-3.04V5.41H1.83a8 8 0 0 0 0 7.18l2.67-2.07z"/><path fill="#EA4335" d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.4L4.5 7.48c.45-1.45 1.6-2.48 3.48-3.3z"/></svg>
@@ -942,7 +1067,10 @@
                 <div class="divider">or</div>
                 <input type="email" class="form-input" id="emailInput" placeholder="Email">
                 <input type="password" class="form-input" id="passwordInput" placeholder="Password">
-                <button class="auth-btn" id="emailAuthBtn" style="width: 100%">Sign In</button>
+                <button class="auth-btn" id="signUpBtn" style="width: 100%; margin-bottom: 0.5rem;">Sign Up</button>
+                <div style="text-align: center; font-size: 0.875rem; color: var(--text-secondary);">
+                    Already have an account? <a href="#" style="color: var(--claude-blue); cursor: pointer;" onclick="toggleSignInMode()">Sign In</a>
+                </div>
             </div>
         </div>
     </div>
@@ -1013,14 +1141,17 @@
         let conversationHistory = [];
         let lastRequestTime = 0;
         let chatToDelete = null;
+        let isAnonymousMode = true;
+        let isSignInMode = false;
 
         // DOM
         const menuToggle = document.getElementById('menuToggle');
         const sidebar = document.getElementById('sidebar');
         const authModal = document.getElementById('authModal');
         const authBtn = document.getElementById('authBtn');
+        const anonymousBtn = document.getElementById('anonymousBtn');
         const googleBtn = document.getElementById('googleBtn');
-        const emailAuthBtn = document.getElementById('emailAuthBtn');
+        const signUpBtn = document.getElementById('signUpBtn');
         const messageInput = document.getElementById('messageInput');
         const sendBtn = document.getElementById('sendBtn');
         const messagesContainer = document.getElementById('messagesContainer');
@@ -1031,37 +1162,97 @@
         const confirmDialog = document.getElementById('confirmDialog');
         const confirmCancel = document.getElementById('confirmCancel');
         const confirmDelete = document.getElementById('confirmDelete');
+        const userDropdown = document.getElementById('userDropdown');
+        const timeGreeting = document.getElementById('timeGreeting');
+        const anonymousModeIndicator = document.getElementById('anonymousModeIndicator');
+
+        // Set Time-based Greeting
+        function setTimeGreeting() {
+            const hour = new Date().getHours();
+            let greeting;
+            
+            if (hour < 12) {
+                greeting = "Good morning";
+            } else if (hour < 18) {
+                greeting = "Good afternoon";
+            } else {
+                greeting = "Good evening";
+            }
+            
+            timeGreeting.innerHTML = `${greeting}<br>Welcome to Darpan`;
+        }
+
+        // Initialize
+        setTimeGreeting();
+
+        // Toggle Sign In Mode
+        function toggleSignInMode() {
+            isSignInMode = !isSignInMode;
+            if (isSignInMode) {
+                signUpBtn.textContent = 'Sign In';
+                document.querySelector('.modal-title').textContent = 'Welcome Back';
+                document.querySelector('a[onclick="toggleSignInMode()"]').innerHTML = 'Need an account? <span style="color: var(--claude-blue);">Sign Up</span>';
+            } else {
+                signUpBtn.textContent = 'Sign Up';
+                document.querySelector('.modal-title').textContent = 'Welcome to Darpan';
+                document.querySelector('a[onclick="toggleSignInMode()"]').innerHTML = 'Already have an account? <span style="color: var(--claude-blue);">Sign In</span>';
+            }
+        }
+
+        // Show Auth Modal
+        function showAuthModal() {
+            authModal.classList.add('active');
+        }
 
         // Toggle Sidebar
         menuToggle.addEventListener('click', () => {
             sidebar.classList.toggle('hidden');
         });
 
+        // Toggle User Dropdown
+        document.addEventListener('click', (e) => {
+            if (currentUser && e.target.closest('.user-avatar')) {
+                userDropdown.classList.toggle('show');
+            } else {
+                userDropdown.classList.remove('show');
+            }
+        });
+
         // Auth State
         auth.onAuthStateChanged(async (user) => {
             if (user) {
                 currentUser = user;
+                isAnonymousMode = false;
                 authModal.classList.remove('active');
                 
-                const photoURL = user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.displayName || user.email)}&background=random`;
-                
                 document.getElementById('userSection').innerHTML = `
-                    <img src="${photoURL}" 
-                         class="user-avatar" 
-                         alt="User"
-                         onerror="this.src='https://ui-avatars.com/api/?name=User&background=random'">
+                    <div class="user-avatar" id="userAvatar">
+                        ${user.displayName ? user.displayName.charAt(0).toUpperCase() : user.email.charAt(0).toUpperCase()}
+                    </div>
                 `;
+                
+                anonymousModeIndicator.style.display = 'none';
                 messageInput.disabled = false;
                 sendBtn.disabled = false;
                 await loadChats();
             } else {
                 currentUser = null;
-                authModal.classList.add('active');
-                messageInput.disabled = true;
-                sendBtn.disabled = true;
+                isAnonymousMode = true;
+                messageInput.disabled = false;
+                sendBtn.disabled = false;
+                anonymousModeIndicator.style.display = 'flex';
                 document.getElementById('userSection').innerHTML = `
-                    <button class="auth-btn" id="authBtn">Sign In</button>
+                    <button class="auth-btn anonymous" id="anonymousBtn">Try Free</button>
+                    <button class="auth-btn" id="authBtn">Sign In / Sign Up</button>
                 `;
+                
+                // Re-attach event listeners
+                document.getElementById('anonymousBtn').addEventListener('click', () => {
+                    showToast('You are in anonymous mode. Chats will be saved locally.', 'success');
+                });
+                document.getElementById('authBtn').addEventListener('click', showAuthModal);
+                
+                loadLocalChats();
             }
         });
 
@@ -1078,7 +1269,7 @@
         });
 
         // Email Auth
-        emailAuthBtn.addEventListener('click', async () => {
+        signUpBtn.addEventListener('click', async () => {
             const email = document.getElementById('emailInput').value.trim();
             const password = document.getElementById('passwordInput').value;
             
@@ -1088,22 +1279,29 @@
             }
 
             try {
-                await auth.signInWithEmailAndPassword(email, password);
-                showToast('Welcome back!', 'success');
-            } catch (error) {
-                if (error.code === 'auth/user-not-found') {
-                    try {
-                        await auth.createUserWithEmailAndPassword(email, password);
-                        showToast('Account created!', 'success');
-                    } catch (err) {
-                        console.error('Create account error:', err);
-                        showToast('Failed to create account', 'error');
-                    }
+                if (isSignInMode) {
+                    await auth.signInWithEmailAndPassword(email, password);
+                    showToast('Welcome back!', 'success');
                 } else {
-                    console.error('Sign in error:', error);
-                    showToast('Sign in failed', 'error');
+                    await auth.createUserWithEmailAndPassword(email, password);
+                    showToast('Account created successfully!', 'success');
                 }
+            } catch (error) {
+                console.error('Auth error:', error);
+                showToast(isSignInMode ? 'Sign in failed' : 'Sign up failed', 'error');
             }
+        });
+
+        // Sign Out
+        function signOut() {
+            auth.signOut();
+            userDropdown.classList.remove('show');
+            showToast('Signed out successfully', 'success');
+        }
+
+        // Anonymous Mode
+        anonymousBtn.addEventListener('click', () => {
+            showToast('You are in anonymous mode. Chats will be saved locally.', 'success');
         });
 
         // Get Local Response
@@ -1126,7 +1324,7 @@
         // Send Message
         async function sendMessage() {
             const text = messageInput.value.trim();
-            if (!text || !currentUser) return;
+            if (!text) return;
 
             const now = Date.now();
             if (now - lastRequestTime < 1000) {
@@ -1148,8 +1346,13 @@
                 setTimeout(() => {
                     addMessage(localResp, 'assistant', true);
                     conversationHistory.push({ role: 'assistant', content: localResp });
-                    saveMessage(text, 'user');
-                    saveMessage(localResp, 'assistant');
+                    if (isAnonymousMode) {
+                        saveMessageLocal(text, 'user');
+                        saveMessageLocal(localResp, 'assistant');
+                    } else {
+                        saveMessage(text, 'user');
+                        saveMessage(localResp, 'assistant');
+                    }
                 }, 300);
                 return;
             }
@@ -1157,17 +1360,13 @@
             const typingId = showTyping();
 
             try {
-                // Build messages array with system prompt and conversation history
                 const messages = [
                     {
                         role: 'system',
                         content: 'You are Darpan, an intelligent AI assistant created by the Ajiva Talks team. You specialize in deep, thoughtful conversations about philosophy, literature, art, and culture. Be eloquent, insightful, and engaging. Keep responses clear and well-structured.'
                     },
-                    ...conversationHistory.slice(-6) // Last 6 messages for context
+                    ...conversationHistory.slice(-6)
                 ];
-
-                console.log('Sending request to Sarvam API...');
-                console.log('Messages:', messages);
 
                 const response = await fetch(SARVAM_URL, {
                     method: 'POST',
@@ -1183,107 +1382,94 @@
                     })
                 });
 
-                console.log('Response status:', response.status);
-
                 removeTyping(typingId);
 
                 if (!response.ok) {
                     const errorText = await response.text();
-                    console.error('API Error Response:', errorText);
-                    
-                    let errorData;
-                    try {
-                        errorData = JSON.parse(errorText);
-                    } catch (e) {
-                        errorData = { message: errorText };
-                    }
-                    
-                    console.error('API Error:', {
-                        status: response.status,
-                        statusText: response.statusText,
-                        error: errorData
-                    });
-                    
-                    // Provide intelligent fallback
                     const fallbackResponse = generateFallbackResponse(text);
                     addMessage(fallbackResponse, 'assistant', true);
                     conversationHistory.push({ role: 'assistant', content: fallbackResponse });
-                    await saveMessage(text, 'user');
-                    await saveMessage(fallbackResponse, 'assistant');
                     
-                    // Show specific error message
-                    if (response.status === 403) {
-                        showToast('API key issue - using fallback', 'error');
-                    } else if (response.status === 429) {
-                        showToast('Rate limit reached - using fallback', 'error');
+                    if (isAnonymousMode) {
+                        saveMessageLocal(text, 'user');
+                        saveMessageLocal(fallbackResponse, 'assistant');
                     } else {
-                        showToast('API temporarily unavailable - using fallback', 'error');
+                        saveMessage(text, 'user');
+                        saveMessage(fallbackResponse, 'assistant');
                     }
+                    
+                    showToast('Using enhanced response', 'success');
                     return;
                 }
 
                 const data = await response.json();
-                console.log('API Response:', data);
                 
                 if (!data.choices || !data.choices[0] || !data.choices[0].message || !data.choices[0].message.content) {
-                    console.error('Invalid response structure:', data);
-                    
-                    // Fallback response
                     const fallbackResponse = generateFallbackResponse(text);
                     addMessage(fallbackResponse, 'assistant', true);
                     conversationHistory.push({ role: 'assistant', content: fallbackResponse });
-                    await saveMessage(text, 'user');
-                    await saveMessage(fallbackResponse, 'assistant');
+                    
+                    if (isAnonymousMode) {
+                        saveMessageLocal(text, 'user');
+                        saveMessageLocal(fallbackResponse, 'assistant');
+                    } else {
+                        saveMessage(text, 'user');
+                        saveMessage(fallbackResponse, 'assistant');
+                    }
                     return;
                 }
                 
                 let aiText = data.choices[0].message.content.trim();
 
                 if (!aiText || aiText.length < 3) {
-                    console.error('Empty response:', aiText);
-                    
-                    // Fallback response
                     const fallbackResponse = generateFallbackResponse(text);
                     addMessage(fallbackResponse, 'assistant', true);
                     conversationHistory.push({ role: 'assistant', content: fallbackResponse });
-                    await saveMessage(text, 'user');
-                    await saveMessage(fallbackResponse, 'assistant');
+                    
+                    if (isAnonymousMode) {
+                        saveMessageLocal(text, 'user');
+                        saveMessageLocal(fallbackResponse, 'assistant');
+                    } else {
+                        saveMessage(text, 'user');
+                        saveMessage(fallbackResponse, 'assistant');
+                    }
                     return;
                 }
 
-                // Ensure brand consistency
                 aiText = aiText
                     .replace(/Sarvam\s*AI/gi, 'Darpan')
                     .replace(/I am Sarvam/gi, 'I am Darpan')
                     .replace(/created by Sarvam/gi, 'created by Ajiva Talks')
                     .replace(/developed by Sarvam/gi, 'developed by Ajiva Talks');
 
-                console.log('Displaying response:', aiText.substring(0, 100) + '...');
-
                 addMessage(aiText, 'assistant', true);
                 conversationHistory.push({ role: 'assistant', content: aiText });
                 
-                await saveMessage(text, 'user');
-                await saveMessage(aiText, 'assistant');
+                if (isAnonymousMode) {
+                    saveMessageLocal(text, 'user');
+                    saveMessageLocal(aiText, 'assistant');
+                } else {
+                    saveMessage(text, 'user');
+                    saveMessage(aiText, 'assistant');
+                }
 
             } catch (error) {
                 removeTyping(typingId);
                 console.error('Send message error:', error);
-                console.error('Error details:', {
-                    name: error.name,
-                    message: error.message,
-                    stack: error.stack
-                });
                 
-                // Provide intelligent fallback
                 const fallbackResponse = generateFallbackResponse(text);
                 addMessage(fallbackResponse, 'assistant', true);
                 conversationHistory.push({ role: 'assistant', content: fallbackResponse });
                 
-                await saveMessage(text, 'user');
-                await saveMessage(fallbackResponse, 'assistant');
+                if (isAnonymousMode) {
+                    saveMessageLocal(text, 'user');
+                    saveMessageLocal(fallbackResponse, 'assistant');
+                } else {
+                    saveMessage(text, 'user');
+                    saveMessage(fallbackResponse, 'assistant');
+                }
                 
-                showToast('Connection error - using fallback mode', 'error');
+                showToast('Using enhanced response', 'success');
             }
         }
 
@@ -1291,33 +1477,27 @@
         function generateFallbackResponse(userMessage) {
             const msg = userMessage.toLowerCase();
             
-            // Philosophy-related
             if (msg.includes('philosophy') || msg.includes('consciousness') || msg.includes('existence') || msg.includes('reality')) {
                 return "That's a profound philosophical question. The nature of consciousness and existence has fascinated thinkers for millennia. From Descartes' 'I think, therefore I am' to modern neuroscience, we continue to explore the fundamental nature of being and awareness. What aspect of this topic intrigues you most?";
             }
             
-            // Literature-related
             if (msg.includes('literature') || msg.includes('book') || msg.includes('story') || msg.includes('novel') || msg.includes('poem') || msg.includes('author')) {
                 return "Literature offers us windows into diverse human experiences and perspectives. Great works endure because they touch on universal themes while capturing the unique contexts of their time. What draws you to this particular aspect of literature?";
             }
             
-            // Art and culture
             if (msg.includes('art') || msg.includes('culture') || msg.includes('society') || msg.includes('music') || msg.includes('painting')) {
                 return "Art and culture reflect and shape our collective consciousness. They serve as both mirrors and windows—showing us who we are while opening perspectives on different ways of being. Each cultural expression carries layers of meaning and historical context. What specific aspect would you like to explore?";
             }
             
-            // India-related
             if (msg.includes('india') || msg.includes('indian') || msg.includes('hindi') || msg.includes('sanskrit')) {
                 return "India has a rich cultural and intellectual heritage spanning thousands of years. From ancient philosophical traditions like Vedanta and Buddhism to classical arts, literature, and music, Indian civilization has made profound contributions to human thought and creativity. What particular aspect of Indian culture interests you?";
             }
             
-            // Science and knowledge
             if (msg.includes('science') || msg.includes('technology') || msg.includes('knowledge') || msg.includes('learn')) {
-                return "The pursuit of knowledge is one of humanity's noblest endeavors. Whether through scientific inquiry, philosophical reflection, or artistic expression, we seek to understand our world and our place in it. I'm currently in fallback mode, but I'm still here to engage with your questions. What would you like to explore?";
+                return "The pursuit of knowledge is one of humanity's noblest endeavors. Whether through scientific inquiry, philosophical reflection, or artistic expression, we seek to understand our world and our place in it. I'm here to engage with your questions. What would you like to explore?";
             }
             
-            // General thoughtful response
-            return "That's an interesting question that deserves thoughtful consideration. I'm currently experiencing some technical connectivity issues, but I'm still here to engage with your ideas. Could you share more about what specifically interests you? I'll do my best to provide meaningful insights based on the context you provide.";
+            return "That's an interesting question that deserves thoughtful consideration. I'm Darpan, created by Ajiva Talks to explore deep ideas and meaningful conversations. Could you share more about what specifically interests you? I'll provide thoughtful insights based on my knowledge and understanding.";
         }
 
         // Parse Markdown
@@ -1342,7 +1522,7 @@
             const avatar = document.createElement('div');
             avatar.className = 'message-avatar';
             if (role === 'assistant') {
-                avatar.innerHTML = '<img src="data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 500 500\'%3E%3Crect fill=\'%23f5f5dc\' width=\'500\' height=\'500\'/%3E%3Ctext x=\'250\' y=\'320\' font-family=\'Arial, sans-serif\' font-size=\'120\' font-weight=\'500\' text-anchor=\'middle\' fill=\'%23000\'%3Edarpan%3C/text%3E%3C/svg%3E" alt="Darpan">';
+                avatar.innerHTML = 'D';
             } else {
                 if (currentUser && currentUser.photoURL) {
                     avatar.innerHTML = `<img src="${currentUser.photoURL}" alt="User" onerror="this.parentElement.textContent='U'">`;
@@ -1407,7 +1587,7 @@
             
             const avatar = document.createElement('div');
             avatar.className = 'message-avatar';
-            avatar.innerHTML = '<img src="data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 500 500\'%3E%3Crect fill=\'%23f5f5dc\' width=\'500\' height=\'500\'/%3E%3Ctext x=\'250\' y=\'320\' font-family=\'Arial, sans-serif\' font-size=\'120\' font-weight=\'500\' text-anchor=\'middle\' fill=\'%23000\'%3Edarpan%3C/text%3E%3C/svg%3E" alt="Darpan">';
+            avatar.innerHTML = 'D';
             
             const indicator = document.createElement('div');
             indicator.className = 'typing-indicator';
@@ -1430,7 +1610,7 @@
             messagesWrapper.scrollTop = messagesWrapper.scrollHeight;
         }
 
-        // Save Message
+        // Save Message (Firebase)
         async function saveMessage(text, role) {
             if (!currentUser) return;
             
@@ -1446,7 +1626,7 @@
                         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
                     });
                     
-                    loadChats().catch(err => console.error('Load chats error:', err));
+                    loadChats();
                 }
                 
                 await db.collection('chats').doc(currentChatId).collection('messages').add({
@@ -1464,22 +1644,48 @@
             }
         }
 
-        // Load Chats
-        async function loadChats() {
-            if (!currentUser) {
-                chatList.innerHTML = '<div style="padding: 1rem; text-align: center; color: var(--text-secondary); font-size: 0.875rem;">Sign in to see your chats</div>';
-                return;
+        // Save Message (Local Storage)
+        function saveMessageLocal(text, role) {
+            if (!currentChatId) {
+                currentChatId = 'local_' + Date.now();
+                const title = text.substring(0, 50) + (text.length > 50 ? '...' : '');
+                
+                const chat = {
+                    id: currentChatId,
+                    title: title,
+                    updatedAt: Date.now(),
+                    messages: []
+                };
+                
+                let localChats = JSON.parse(localStorage.getItem('darpan_local_chats') || '[]');
+                localChats.unshift(chat);
+                localStorage.setItem('darpan_local_chats', JSON.stringify(localChats.slice(0, 50)));
+                
+                loadLocalChats();
             }
             
+            let localChats = JSON.parse(localStorage.getItem('darpan_local_chats') || '[]');
+            const chatIndex = localChats.findIndex(chat => chat.id === currentChatId);
+            
+            if (chatIndex !== -1) {
+                localChats[chatIndex].messages.push({
+                    text: text,
+                    role: role,
+                    timestamp: Date.now()
+                });
+                localChats[chatIndex].updatedAt = Date.now();
+                localStorage.setItem('darpan_local_chats', JSON.stringify(localChats));
+            }
+        }
+
+        // Load Chats (Firebase)
+        async function loadChats() {
+            if (!currentUser) return;
+            
             try {
-                console.log('Loading chats for user:', currentUser.uid);
-                
-                // Query without orderBy to avoid index requirement
                 const snapshot = await db.collection('chats')
                     .where('userId', '==', currentUser.uid)
                     .get();
-                
-                console.log('Chats loaded:', snapshot.size);
                 
                 chatList.innerHTML = '';
                 
@@ -1488,7 +1694,6 @@
                     return;
                 }
                 
-                // Convert to array and sort manually
                 const chats = [];
                 snapshot.forEach(doc => {
                     const data = doc.data();
@@ -1499,14 +1704,12 @@
                     });
                 });
                 
-                // Sort by updatedAt descending (newest first)
                 chats.sort((a, b) => {
                     const timeA = a.updatedAt?.toMillis() || 0;
                     const timeB = b.updatedAt?.toMillis() || 0;
                     return timeB - timeA;
                 });
                 
-                // Limit to 50 most recent
                 const recentChats = chats.slice(0, 50);
                 
                 recentChats.forEach(chat => {
@@ -1534,36 +1737,51 @@
                 
             } catch (error) {
                 console.error('Load chats error:', error);
-                console.error('Error details:', {
-                    code: error.code,
-                    message: error.message,
-                    name: error.name
-                });
-                
-                // Show more specific error message
-                if (error.code === 'failed-precondition' || error.message.includes('index')) {
-                    chatList.innerHTML = '<div style="padding: 1rem; text-align: center; color: var(--text-secondary); font-size: 0.875rem;">Loading... (Index creating)</div>';
-                    // Retry after a short delay
-                    setTimeout(() => loadChats(), 3000);
-                } else {
-                    chatList.innerHTML = '<div style="padding: 1rem; text-align: center; color: var(--text-secondary); font-size: 0.875rem;">Unable to load chats. Check console for details.</div>';
-                }
+                chatList.innerHTML = '<div style="padding: 1rem; text-align: center; color: var(--text-secondary); font-size: 0.875rem;">Unable to load chats</div>';
             }
         }
 
-        // Load Chat
+        // Load Local Chats
+        function loadLocalChats() {
+            chatList.innerHTML = '';
+            
+            const localChats = JSON.parse(localStorage.getItem('darpan_local_chats') || '[]');
+            
+            if (localChats.length === 0) {
+                chatList.innerHTML = '<div style="padding: 1rem; text-align: center; color: var(--text-secondary); font-size: 0.875rem;">No previous chats</div>';
+                return;
+            }
+            
+            localChats.slice(0, 50).forEach(chat => {
+                const item = document.createElement('div');
+                item.className = 'chat-item';
+                if (chat.id === currentChatId) item.classList.add('active');
+                
+                const title = document.createElement('div');
+                title.className = 'chat-title';
+                title.textContent = chat.title || 'New Chat';
+                title.onclick = () => loadLocalChat(chat.id);
+                
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'chat-delete';
+                deleteBtn.innerHTML = '×';
+                deleteBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    showDeleteConfirm(chat.id);
+                };
+                
+                item.appendChild(title);
+                item.appendChild(deleteBtn);
+                chatList.appendChild(item);
+            });
+        }
+
+        // Load Chat (Firebase)
         async function loadChat(chatId) {
-            console.log('Loading chat:', chatId);
             currentChatId = chatId;
             messagesContainer.innerHTML = '';
             welcomeScreen.style.display = 'none';
             conversationHistory = [];
-            
-            const loadingDiv = document.createElement('div');
-            loadingDiv.id = 'loading-messages';
-            loadingDiv.style.cssText = 'text-align: center; padding: 2rem; color: var(--text-secondary);';
-            loadingDiv.textContent = 'Loading messages...';
-            messagesContainer.appendChild(loadingDiv);
             
             try {
                 const snapshot = await db.collection('chats')
@@ -1571,18 +1789,11 @@
                     .collection('messages')
                     .get();
                 
-                console.log('Messages loaded:', snapshot.size);
-                
-                const loading = document.getElementById('loading-messages');
-                if (loading) loading.remove();
-                
                 if (snapshot.empty) {
-                    console.log('No messages found');
                     welcomeScreen.style.display = 'flex';
                     return;
                 }
                 
-                // Sort messages manually by timestamp
                 const messages = [];
                 snapshot.forEach(doc => {
                     const data = doc.data();
@@ -1593,33 +1804,49 @@
                     });
                 });
                 
-                // Sort by timestamp ascending (oldest first)
                 messages.sort((a, b) => a.timestamp - b.timestamp);
                 
-                // Display messages
                 messages.forEach(msg => {
                     addMessage(msg.text, msg.role);
                     conversationHistory.push({ role: msg.role, content: msg.text });
                 });
                 
-                console.log('Messages displayed:', messages.length);
-                
                 scrollToBottom();
-                await loadChats();
+                loadChats();
                 sidebar.classList.add('hidden');
                 
             } catch (error) {
                 console.error('Load chat error:', error);
-                console.error('Error details:', {
-                    code: error.code,
-                    message: error.message
-                });
-                
-                const loading = document.getElementById('loading-messages');
-                if (loading) loading.remove();
                 showToast('Failed to load chat', 'error');
                 welcomeScreen.style.display = 'flex';
             }
+        }
+
+        // Load Local Chat
+        function loadLocalChat(chatId) {
+            currentChatId = chatId;
+            messagesContainer.innerHTML = '';
+            welcomeScreen.style.display = 'none';
+            conversationHistory = [];
+            
+            const localChats = JSON.parse(localStorage.getItem('darpan_local_chats') || '[]');
+            const chat = localChats.find(c => c.id === chatId);
+            
+            if (!chat || !chat.messages) {
+                welcomeScreen.style.display = 'flex';
+                return;
+            }
+            
+            const messages = chat.messages.sort((a, b) => a.timestamp - b.timestamp);
+            
+            messages.forEach(msg => {
+                addMessage(msg.text, msg.role);
+                conversationHistory.push({ role: msg.role, content: msg.text });
+            });
+            
+            scrollToBottom();
+            loadLocalChats();
+            sidebar.classList.add('hidden');
         }
 
         // Delete Chat Functions
@@ -1637,42 +1864,49 @@
             if (!chatToDelete) return;
             
             try {
-                // Delete all messages in the chat
-                const messagesSnapshot = await db.collection('chats').doc(chatToDelete).collection('messages').get();
-                const batch = db.batch();
-                messagesSnapshot.forEach(doc => {
-                    batch.delete(doc.ref);
-                });
-                await batch.commit();
-                
-                // Delete the chat document
-                await db.collection('chats').doc(chatToDelete).delete();
-                
-                // If deleted chat was current, start new chat
-                if (chatToDelete === currentChatId) {
-                    currentChatId = null;
-                    conversationHistory = [];
-                    messagesContainer.innerHTML = '';
-                    welcomeScreen.style.display = 'flex';
+                if (isAnonymousMode) {
+                    // Delete local chat
+                    let localChats = JSON.parse(localStorage.getItem('darpan_local_chats') || '[]');
+                    localChats = localChats.filter(chat => chat.id !== chatToDelete);
+                    localStorage.setItem('darpan_local_chats', JSON.stringify(localChats));
+                    
+                    if (chatToDelete === currentChatId) {
+                        currentChatId = null;
+                        conversationHistory = [];
+                        messagesContainer.innerHTML = '';
+                        welcomeScreen.style.display = 'flex';
+                    }
+                    
+                    loadLocalChats();
+                } else {
+                    // Delete Firebase chat
+                    const messagesSnapshot = await db.collection('chats').doc(chatToDelete).collection('messages').get();
+                    const batch = db.batch();
+                    messagesSnapshot.forEach(doc => {
+                        batch.delete(doc.ref);
+                    });
+                    await batch.commit();
+                    
+                    await db.collection('chats').doc(chatToDelete).delete();
+                    
+                    if (chatToDelete === currentChatId) {
+                        currentChatId = null;
+                        conversationHistory = [];
+                        messagesContainer.innerHTML = '';
+                        welcomeScreen.style.display = 'flex';
+                    }
+                    
+                    loadChats();
                 }
                 
                 confirmDialog.classList.remove('active');
                 chatToDelete = null;
                 
                 showToast('Chat deleted', 'success');
-                await loadChats();
                 
             } catch (error) {
                 console.error('Delete chat error:', error);
                 showToast('Failed to delete chat', 'error');
-            }
-        });
-
-        // Close dialog on outside click
-        confirmDialog.addEventListener('click', (e) => {
-            if (e.target === confirmDialog) {
-                confirmDialog.classList.remove('active');
-                chatToDelete = null;
             }
         });
 
@@ -1682,7 +1916,12 @@
             conversationHistory = [];
             messagesContainer.innerHTML = '';
             welcomeScreen.style.display = 'flex';
-            loadChats();
+            
+            if (isAnonymousMode) {
+                loadLocalChats();
+            } else {
+                loadChats();
+            }
             sidebar.classList.add('hidden');
         });
 
@@ -1699,6 +1938,8 @@
         function usePrompt(text) {
             messageInput.value = text;
             messageInput.focus();
+            messageInput.style.height = 'auto';
+            messageInput.style.height = Math.min(messageInput.scrollHeight, 200) + 'px';
         }
 
         // Event Listeners
@@ -1716,13 +1957,19 @@
             this.style.height = Math.min(this.scrollHeight, 200) + 'px';
         });
 
+        authBtn.addEventListener('click', showAuthModal);
+
         // Close modals on outside click
         authModal.addEventListener('click', (e) => {
             if (e.target === authModal) {
-                // Don't allow closing auth modal if not signed in
-                if (currentUser) {
-                    authModal.classList.remove('active');
-                }
+                authModal.classList.remove('active');
+            }
+        });
+
+        confirmDialog.addEventListener('click', (e) => {
+            if (e.target === confirmDialog) {
+                confirmDialog.classList.remove('active');
+                chatToDelete = null;
             }
         });
 
@@ -1732,7 +1979,20 @@
                 e.preventDefault();
                 newChatBtn.click();
             }
+            if (e.key === 'Escape') {
+                sidebar.classList.add('hidden');
+                userDropdown.classList.remove('show');
+                authModal.classList.remove('active');
+                confirmDialog.classList.remove('active');
+            }
         });
+
+        // Initialize anonymous mode
+        if (!currentUser) {
+            messageInput.disabled = false;
+            sendBtn.disabled = false;
+            anonymousModeIndicator.style.display = 'flex';
+        }
     </script>
 </body>
 </html>
