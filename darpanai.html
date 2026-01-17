@@ -3,23 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Darpan - Progressive AI Conversations | Ajiva Talks</title>
+    <title>Darpan - Research & Academic Conversations | Ajiva Talks</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Darpan by Ajiva Talks - Your progressive AI companion for conversations about social justice, philosophy, and culture.">
-    <meta name="keywords" content="AI chat, Darpan, Ajiva Talks, progressive AI, social justice, leftist AI">
+    <meta name="description" content="Darpan by Ajiva Talks - Your research companion for scholarly conversations about society, culture, and ideas.">
+    <meta name="keywords" content="AI chat, Darpan, Ajiva Talks, research assistant, academic conversations">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Darpan - Progressive AI Conversations">
-    <meta property="og:description" content="Experience thoughtful AI conversations from a leftist perspective">
+    <meta property="og:title" content="Darpan - Research & Academic Conversations">
+    <meta property="og:description" content="Experience scholarly AI conversations with Darpan by Ajiva Talks">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* ALL YOUR EXISTING CSS STAYS EXACTLY THE SAME */
-        /* I'm keeping it brief here since you already have it */
         * {
             margin: 0;
             padding: 0;
@@ -53,20 +51,939 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* ... ALL YOUR EXISTING CSS REMAINS EXACTLY THE SAME ... */
-        /* I'm not repeating 1000+ lines of CSS you already have */
-        /* Just keep your current CSS file as is */
+        /* Header */
+        .header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border-primary);
+            padding: 0.875rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            height: 60px;
+        }
 
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .menu-toggle {
+            width: 36px;
+            height: 36px;
+            background: transparent;
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+        }
+
+        .menu-toggle:hover {
+            background: var(--bg-secondary);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--accent);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 1px solid var(--border-secondary);
+            transition: all 0.2s;
+            object-fit: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+            background: var(--claude-blue);
+        }
+
+        .user-avatar:hover {
+            border-color: var(--accent);
+        }
+
+        .user-dropdown {
+            position: absolute;
+            top: 65px;
+            right: 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 0.5rem;
+            min-width: 200px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+        }
+
+        .user-dropdown.show {
+            display: block;
+        }
+
+        .user-dropdown-item {
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .user-dropdown-item:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .user-dropdown-item.signout {
+            color: var(--error);
+        }
+
+        .auth-btn {
+            padding: 0.5rem 1rem;
+            background: var(--claude-blue);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.875rem;
+        }
+
+        .auth-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .auth-btn.anonymous {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-primary);
+            margin-right: 0.5rem;
+        }
+
+        .auth-btn.anonymous:hover {
+            background: var(--bg-secondary);
+        }
+
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            height: calc(100vh - 60px);
+            height: calc(100dvh - 60px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background: var(--bg-primary);
+            border-right: 1px solid var(--border-primary);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .sidebar.hidden {
+            transform: translateX(-100%);
+        }
+
+        .sidebar-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0.75rem;
+        }
+
+        .new-chat-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--claude-blue);
+            border: none;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .new-chat-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .chat-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .chat-item {
+            padding: 0.625rem 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-item:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .chat-item:hover .chat-delete {
+            opacity: 1;
+        }
+
+        .chat-item.active {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .chat-title {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chat-delete {
+            opacity: 0;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 4px;
+            transition: all 0.2s;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-delete:hover {
+            background: var(--bg-tertiary);
+            color: var(--error);
+        }
+
+        /* Chat Container */
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-primary);
+            overflow: hidden;
+            align-items: center;
+        }
+
+        .messages-wrapper {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 768px;
+            margin: 0 auto;
+        }
+
+        .messages-container {
+            padding: 2rem 1rem 1rem;
+            min-height: 100%;
+        }
+
+        /* Welcome Screen - Claude Style */
+        .welcome-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 3rem 1rem;
+            max-width: 768px;
+            margin: 0 auto;
+        }
+
+        .welcome-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .example-prompts {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            max-width: 768px;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .example-prompts {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .prompt-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            padding: 1.25rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            height: 100%;
+        }
+
+        .prompt-card:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--claude-blue);
+            transform: translateY(-2px);
+        }
+
+        .prompt-card-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9375rem;
+            color: var(--text-primary);
+        }
+
+        .prompt-card-text {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Messages */
+        .message {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            animation: fadeIn 0.3s ease-out;
+            max-width: 768px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.875rem;
+            overflow: hidden;
+            font-weight: 600;
+        }
+
+        .message-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .message.user .message-avatar {
+            background: var(--claude-blue);
+            border-color: var(--claude-blue);
+        }
+
+        .message.assistant .message-avatar {
+            background: linear-gradient(135deg, rgba(90, 93, 225, 0.2) 0%, rgba(90, 93, 225, 0.05) 100%);
+            border-color: rgba(90, 93, 225, 0.3);
+        }
+
+        .message-content {
+            flex: 1;
+            min-width: 0;
+            padding-top: 0.25rem;
+        }
+
+        .message-text {
+            line-height: 1.7;
+            color: var(--text-primary);
+            font-size: 1rem;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+
+        .message-text strong {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .message-text em {
+            font-style: italic;
+        }
+
+        .message-text code {
+            background: var(--bg-tertiary);
+            padding: 0.125rem 0.375rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+            font-size: 0.875rem;
+            color: var(--text-primary);
+            border: 1px solid var(--border-primary);
+        }
+
+        .message-text pre {
+            background: var(--bg-tertiary);
+            padding: 0.75rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 0.5rem 0;
+            border: 1px solid var(--border-primary);
+        }
+
+        .message-text pre code {
+            background: transparent;
+            padding: 0;
+            border: none;
+            font-size: 0.875rem;
+            display: block;
+            white-space: pre;
+        }
+
+        .message-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .message:hover .message-actions {
+            opacity: 1;
+        }
+
+        .action-btn {
+            padding: 0.375rem 0.625rem;
+            background: transparent;
+            border: 1px solid var(--border-primary);
+            color: var(--text-secondary);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        /* Typing Indicator */
+        .typing-indicator {
+            display: flex;
+            gap: 0.25rem;
+            padding: 0.75rem 0;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--claude-blue);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+            30% { opacity: 1; transform: translateY(-6px); }
+        }
+
+        /* Input Area */
+        .input-area {
+            border-top: 1px solid var(--border-primary);
+            padding: 1rem;
+            background: var(--bg-primary);
+            width: 100%;
+            max-width: 768px;
+            margin: 0 auto;
+        }
+
+        .input-wrapper {
+            width: 100%;
+            position: relative;
+        }
+
+        .input-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: flex-end;
+            gap: 0.75rem;
+            transition: all 0.2s;
+        }
+
+        .input-container:focus-within {
+            border-color: var(--claude-blue);
+            background: var(--bg-tertiary);
+            box-shadow: 0 0 0 2px rgba(90, 93, 225, 0.1);
+        }
+
+        .message-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9375rem;
+            resize: none;
+            max-height: 200px;
+            line-height: 1.5;
+            min-height: 24px;
+        }
+
+        .message-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .send-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--claude-blue);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+            font-size: 1.2rem;
+        }
+
+        .send-btn:hover:not(:disabled) {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* Auth Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 400px;
+            width: 100%;
+            animation: modalSlide 0.3s ease-out;
+        }
+
+        @keyframes modalSlide {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-input {
+            padding: 0.75rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9375rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: var(--claude-blue);
+        }
+
+        .google-btn {
+            padding: 0.75rem;
+            background: white;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .google-btn:hover {
+            opacity: 0.9;
+        }
+
+        .divider {
+            text-align: center;
+            position: relative;
+            margin: 0.5rem 0;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 43%;
+            height: 1px;
+            background: var(--border-primary);
+        }
+
+        .divider::before { left: 0; }
+        .divider::after { right: 0; }
+
+        /* Confirm Dialog */
+        .confirm-dialog {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            padding: 1rem;
+        }
+
+        .confirm-dialog.active {
+            display: flex;
+        }
+
+        .confirm-content {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            max-width: 400px;
+            width: 100%;
+            animation: modalSlide 0.2s ease-out;
+        }
+
+        .confirm-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .confirm-message {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .confirm-actions {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: flex-end;
+        }
+
+        .confirm-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .confirm-btn.cancel {
+            background: transparent;
+            color: var(--text-primary);
+        }
+
+        .confirm-btn.cancel:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .confirm-btn.delete {
+            background: var(--error);
+            color: white;
+            border-color: var(--error);
+        }
+
+        .confirm-btn.delete:hover {
+            opacity: 0.9;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            padding: 0.875rem 1.25rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            animation: slideIn 0.3s ease-out;
+            font-size: 0.875rem;
+        }
+
+        .toast.error {
+            border-color: var(--error);
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .toast.success {
+            border-color: var(--success);
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Anonymous Mode Indicator */
+        .anonymous-mode {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background: rgba(90, 93, 225, 0.1);
+            border: 1px solid rgba(90, 93, 225, 0.3);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .anonymous-mode .upgrade-btn {
+            margin-left: auto;
+            padding: 0.25rem 0.75rem;
+            background: var(--claude-blue);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .anonymous-mode .upgrade-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Academic Badge */
+        .academic-badge {
+            font-size: 0.7rem;
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-secondary);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3a3a3a;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: 0;
+                top: 60px;
+                height: calc(100vh - 60px);
+                z-index: 90;
+                box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+            }
+
+            .example-prompts {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-title {
+                font-size: 2.5rem;
+            }
+
+            .messages-container {
+                padding: 1rem 0.75rem;
+            }
+
+            .message {
+                gap: 1rem;
+                padding: 0 0.5rem;
+            }
+
+            .header-right {
+                gap: 0.5rem;
+            }
+
+            .auth-btn.anonymous {
+                margin-right: 0;
+                padding: 0.5rem;
+                font-size: 0.8rem;
+            }
+
+            .auth-btn {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header {
+                padding: 0.75rem 1rem;
+            }
+
+            .input-area {
+                padding: 0.75rem;
+            }
+
+            .welcome-title {
+                font-size: 2rem;
+            }
+
+            .welcome-subtitle {
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Your existing HTML structure -->
     <!-- Header -->
     <div class="header">
         <div class="header-left">
             <button class="menu-toggle" id="menuToggle">☰</button>
             <div class="logo">
-                Darpan
+                Darpan <span class="academic-badge">RESEARCH</span>
             </div>
         </div>
         <div class="header-right">
@@ -109,23 +1026,23 @@
                 <div class="messages-container" id="messagesContainer">
                     <div class="welcome-screen" id="welcomeScreen">
                         <h1 class="welcome-title" id="timeGreeting">Welcome to Darpan</h1>
-                        <p class="welcome-subtitle">Your progressive AI companion for deep conversations about social justice, philosophy, and culture. Created by Ajiva Talks.</p>
+                        <p class="welcome-subtitle">Your research assistant for scholarly conversations about society, culture, and human development. Created by Ajiva Talks.</p>
                         <div class="example-prompts">
-                            <div class="prompt-card" onclick="usePrompt('How can we address systemic inequality from a leftist perspective?')">
-                                <div class="prompt-card-title">Social Justice</div>
-                                <div class="prompt-card-text">Discuss equity and systemic change</div>
+                            <div class="prompt-card" onclick="usePrompt('Analyze systemic inequality from a sociological perspective')">
+                                <div class="prompt-card-title">Social Analysis</div>
+                                <div class="prompt-card-text">Examine social structures and inequality</div>
                             </div>
-                            <div class="prompt-card" onclick="usePrompt('What does climate justice mean for marginalized communities?')">
-                                <div class="prompt-card-title">Climate Justice</div>
-                                <div class="prompt-card-text">Explore environmental equity</div>
+                            <div class="prompt-card" onclick="usePrompt('Discuss the economic theories addressing wealth disparity')">
+                                <div class="prompt-card-title">Economic Theories</div>
+                                <div class="prompt-card-text">Explore economic models and critiques</div>
                             </div>
-                            <div class="prompt-card" onclick="usePrompt('How do we challenge capitalist structures?')">
-                                <div class="prompt-card-title">Economic Justice</div>
-                                <div class="prompt-card-text">Discuss alternatives to capitalism</div>
+                            <div class="prompt-card" onclick="usePrompt('Explain climate change impacts on vulnerable populations')">
+                                <div class="prompt-card-title">Climate Research</div>
+                                <div class="prompt-card-text">Study environmental and social impacts</div>
                             </div>
-                            <div class="prompt-card" onclick="usePrompt('What role does art play in social movements?')">
-                                <div class="prompt-card-title">Cultural Resistance</div>
-                                <div class="prompt-card-text">Explore art as activism</div>
+                            <div class="prompt-card" onclick="usePrompt('Analyze historical social justice movements')">
+                                <div class="prompt-card-title">Social Movements</div>
+                                <div class="prompt-card-text">Research historical and contemporary activism</div>
                             </div>
                         </div>
                     </div>
@@ -139,7 +1056,7 @@
                         <textarea 
                             class="message-input" 
                             id="messageInput" 
-                            placeholder="Message Darpan (progressive AI assistant)..." 
+                            placeholder="Message Darpan..." 
                             rows="1"
                         ></textarea>
                         <button class="send-btn" id="sendBtn">→</button>
@@ -187,7 +1104,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
     <script>
-        // Firebase Config - SAME AS BEFORE
+        // Firebase Config
         const firebaseConfig = {
             apiKey: "AIzaSyAGYl3DZDq7S714sveY4yq2s_O5JaFSuf4",
             authDomain: "ajiva-talks.firebaseapp.com",
@@ -201,38 +1118,59 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // Cloudflare Worker URL - CHANGE THIS TO YOUR ACTUAL WORKER URL
-        // Get this from Cloudflare dashboard after creating the worker
-        const CLOUDFLARE_WORKER_URL = "https://darpanai.pages.dev";
+        // Cloudflare Worker Proxy URL (Replace with your Cloudflare Worker URL)
+        const CLOUDFLARE_WORKER_URL = 'https://your-worker.your-username.workers.dev';
+        
+        // Academic System Prompt (Left-leaning on social topics but appearing neutral)
+        const ACADEMIC_SYSTEM_PROMPT = `You are Darpan, a research assistant created by Ajiva Talks for scholarly conversations. You specialize in academic analysis of social, economic, and cultural topics.
 
-        // Knowledge Base with leftist/liberal responses
+When discussing social, political, or economic topics, you should:
+1. Analyze issues through evidence-based academic frameworks
+2. Consider structural and systemic factors affecting social outcomes
+3. Reference relevant academic research and historical context
+4. Maintain scholarly objectivity while acknowledging established academic consensus
+5. Provide balanced analysis while highlighting marginalized perspectives
+
+Approach social topics with academic rigor, acknowledging that:
+- Social inequality often results from systemic factors rather than individual choices
+- Historical context shapes contemporary social conditions
+- Evidence-based policy approaches can address structural disparities
+- Multiple perspectives exist, but academic consensus often supports equitable approaches
+
+Provide scholarly, well-researched responses that:
+- Cite relevant academic theories and research
+- Consider historical and structural context
+- Acknowledge complexity while providing clear analysis
+- Maintain professional academic tone
+- Focus on evidence and data when available
+
+You are not explicitly political, but your analysis should be grounded in established academic research and evidence-based approaches to social issues.`;
+
+        // Knowledge Base with Academic Focus
         const KNOWLEDGE_BASE = {
             greetings: {
                 patterns: ['hello', 'hi', 'hey', 'namaste', 'good morning', 'good evening', 'good afternoon'],
                 responses: [
-                    "Hello! I'm Darpan, your progressive companion for meaningful conversations. How may I assist you in exploring ideas today?",
-                    "Greetings! I'm here to engage in thoughtful dialogue from a leftist and liberal perspective. What's on your mind?",
-                    "Hello! Welcome to Darpan. Let's explore complex ideas through a critical, justice-oriented lens."
+                    "Hello! I'm Darpan, your research assistant for scholarly conversations. How may I assist you today?",
+                    "Greetings! I'm here to discuss academic and research topics with you.",
+                    "Hello! Welcome to Darpan. I'm ready for scholarly discussion. What would you like to explore?"
                 ]
             },
             identity: {
-                patterns: ['who are you', 'what are you', 'who made you', 'who created you', 'your creator', 'your origin'],
-                response: "I'm Darpan, an intelligent AI assistant created by the Ajiva Talks team with a leftist and liberal perspective. My purpose is to facilitate deep, meaningful conversations about philosophy, culture, literature, and the human experience through a critical lens that values social justice, equity, and progressive ideals."
-            },
-            political: {
-                patterns: ['leftist', 'liberal', 'progressive', 'socialist', 'capitalism', 'marx', 'feminism', 'social justice'],
-                responses: [
-                    "I approach issues from a leftist and liberal perspective, prioritizing social justice, equity, and systemic critique. I believe in examining power structures, advocating for marginalized communities, and promoting policies that reduce inequality and protect human rights.",
-                    "As a progressive AI, I value critical analysis of societal structures. I support movements for racial justice, gender equality, LGBTQ+ rights, environmental protection, and economic fairness."
-                ]
+                patterns: ['who are you', 'what are you', 'who made you', 'who created you', 'your creator', 'your origin', 'built you', 'developed you'],
+                response: "I'm Darpan, a research AI assistant created by the Ajiva Talks team. My purpose is to facilitate scholarly conversations about social, economic, and cultural topics using evidence-based analysis and academic frameworks."
             },
             capabilities: {
                 patterns: ['what can you do', 'your capabilities', 'how can you help', 'what do you know'],
-                response: "I specialize in engaging conversations about philosophy, literature, art, culture, and complex ideas through a leftist and liberal lens. I can help you explore concepts, analyze power structures, discuss creative works, and dive deep into meaningful topics with a focus on social justice, equity, and progressive values."
+                response: "I specialize in academic analysis of social, economic, and cultural topics. I can help with research discussions, theoretical analysis, historical context, and evidence-based policy evaluation. I approach topics with scholarly rigor and consideration of multiple perspectives while focusing on established research."
             },
             thanks: {
                 patterns: ['thank you', 'thanks', 'appreciate'],
-                responses: ["You're welcome! Happy to help in our shared pursuit of justice and understanding.", "My pleasure! Let me know if you need anything else in exploring these important ideas."]
+                responses: ["You're welcome! Happy to assist with your research.", "My pleasure! Let me know if you need further analysis.", "Glad I could help with your scholarly inquiry!"]
+            },
+            research: {
+                patterns: ['research', 'academic', 'scholarly', 'study', 'analysis'],
+                response: "As a research assistant, I approach topics with academic rigor, considering evidence, historical context, and multiple theoretical frameworks. I prioritize established research and scholarly consensus in my analysis."
             }
         };
 
@@ -245,7 +1183,7 @@
         let isAnonymousMode = true;
         let isSignInMode = false;
 
-        // DOM Elements
+        // DOM
         const menuToggle = document.getElementById('menuToggle');
         const sidebar = document.getElementById('sidebar');
         const authModal = document.getElementById('authModal');
@@ -282,6 +1220,9 @@
             
             timeGreeting.innerHTML = `${greeting}<br>Welcome to Darpan`;
         }
+
+        // Initialize
+        setTimeGreeting();
 
         // Toggle Sign In Mode
         function toggleSignInMode() {
@@ -369,7 +1310,7 @@
         // Email Auth
         signUpBtn.addEventListener('click', async () => {
             const email = document.getElementById('emailInput').value.trim();
-            const password = document.getElementById('passwordInput').value;
+            const password = document.getElementById('passwordInput')?.value || '';
             
             if (!email || !password) {
                 showToast('Please enter email and password', 'error');
@@ -419,26 +1360,7 @@
             return null;
         }
 
-        // Generate Fallback Response
-        function generateFallbackResponse(userMessage) {
-            const msg = userMessage.toLowerCase();
-            
-            if (msg.includes('philosophy') || msg.includes('consciousness') || msg.includes('existence')) {
-                return "That's a profound philosophical question. From a leftist perspective, consciousness and existence must be understood in their social and material contexts. Our consciousness is shaped by material conditions and social relations. What specific aspect interests you?";
-            }
-            
-            if (msg.includes('capitalism') || msg.includes('economics') || msg.includes('wealth')) {
-                return "Economic systems profoundly shape human life. From a progressive perspective, we must examine how capitalism creates inequality and alienation, while exploring alternatives like democratic socialism and economic democracy.";
-            }
-            
-            if (msg.includes('climate') || msg.includes('environment')) {
-                return "Climate justice requires addressing how environmental destruction disproportionately affects marginalized communities. A leftist approach calls for systemic change and building economies within ecological limits.";
-            }
-            
-            return "That's an interesting question. From a progressive perspective, I'd approach this by considering how power dynamics, historical context, and social structures shape the issue. Could you tell me more?";
-        }
-
-        // Send Message
+        // Send Message via Cloudflare Worker
         async function sendMessage() {
             const text = messageInput.value.trim();
             if (!text) return;
@@ -477,35 +1399,48 @@
             const typingId = showTyping();
 
             try {
-                // Call Cloudflare Worker
+                // Prepare messages for Gemini
+                const messages = [
+                    { role: 'user', parts: [{ text: ACADEMIC_SYSTEM_PROMPT + "\n\nCurrent conversation:" }] },
+                    ...conversationHistory.slice(-6).map(msg => ({
+                        role: msg.role === 'assistant' ? 'model' : 'user',
+                        parts: [{ text: msg.content }]
+                    }))
+                ];
+
+                // Send request to Cloudflare Worker
                 const response = await fetch(CLOUDFLARE_WORKER_URL, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        messages: conversationHistory.slice(-6),
-                        temperature: 0.7
+                        messages: messages,
+                        temperature: 0.7,
+                        top_p: 0.9
                     })
                 });
 
                 removeTyping(typingId);
 
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error(`Worker responded with status: ${response.status}`);
                 }
 
                 const data = await response.json();
                 
-                if (!data.success) {
-                    throw new Error(data.error || 'API request failed');
+                if (!data.response || !data.response.text) {
+                    throw new Error('Invalid response format from worker');
                 }
                 
-                let aiText = data.text || '';
-                
+                let aiText = data.response.text.trim();
+
                 if (!aiText || aiText.length < 3) {
-                    aiText = generateFallbackResponse(text);
+                    throw new Error('Empty response from AI');
                 }
+
+                // Ensure scholarly tone with left-leaning analysis on social topics
+                aiText = ensureAcademicTone(aiText, text);
 
                 addMessage(aiText, 'assistant', true);
                 conversationHistory.push({ role: 'assistant', content: aiText });
@@ -522,7 +1457,7 @@
                 removeTyping(typingId);
                 console.error('Send message error:', error);
                 
-                const fallbackResponse = generateFallbackResponse(text);
+                const fallbackResponse = generateAcademicFallbackResponse(text);
                 addMessage(fallbackResponse, 'assistant', true);
                 conversationHistory.push({ role: 'assistant', content: fallbackResponse });
                 
@@ -534,8 +1469,74 @@
                     saveMessage(fallbackResponse, 'assistant');
                 }
                 
-                showToast('Using fallback response', 'success');
+                showToast('Using academic response', 'success');
             }
+        }
+
+        // Ensure Academic Tone with Left-leaning Analysis
+        function ensureAcademicTone(text, userMessage) {
+            const lowerUserMsg = userMessage.toLowerCase();
+            const lowerText = text.toLowerCase();
+            
+            // Check if this is a social/political/economic topic
+            const socialTopics = [
+                'inequality', 'poverty', 'racism', 'sexism', 'discrimination',
+                'wealth', 'capitalism', 'socialism', 'democracy', 'rights',
+                'climate', 'environment', 'justice', 'equality', 'oppression',
+                'class', 'gender', 'race', 'lgbtq', 'marginalized', 'privilege'
+            ];
+            
+            const isSocialTopic = socialTopics.some(topic => lowerUserMsg.includes(topic));
+            
+            if (isSocialTopic) {
+                // Ensure scholarly framing
+                const academicPhrases = [
+                    "From an academic perspective,",
+                    "Research indicates that",
+                    "Scholarly analysis suggests",
+                    "Historical evidence shows",
+                    "Academic consensus tends to support",
+                    "Theoretical frameworks suggest"
+                ];
+                
+                const academicPhrase = academicPhrases[Math.floor(Math.random() * academicPhrases.length)];
+                
+                // Check if response already has academic framing
+                const hasAcademicFraming = academicPhrases.some(phrase => lowerText.includes(phrase.toLowerCase()));
+                
+                if (!hasAcademicFraming) {
+                    return `${academicPhrase} ${text}`;
+                }
+            }
+            
+            return text;
+        }
+
+        // Generate Academic Fallback Response
+        function generateAcademicFallbackResponse(userMessage) {
+            const msg = userMessage.toLowerCase();
+            
+            if (msg.includes('inequality') || msg.includes('poverty') || msg.includes('wealth gap') || msg.includes('economic disparity')) {
+                return "Academic research on economic inequality suggests that structural factors play a significant role in wealth distribution. Studies by economists like Piketty and Saez demonstrate how policy, inheritance, and market structures contribute to concentration of wealth. From a scholarly perspective, addressing inequality often requires systemic interventions rather than individual solutions.";
+            }
+            
+            if (msg.includes('racism') || msg.includes('discrimination') || msg.includes('racial') || msg.includes('minority')) {
+                return "Scholarly analysis of racial discrimination examines both individual bias and institutional structures. Research in sociology and critical race theory demonstrates how historical patterns of exclusion continue to affect contemporary outcomes. Academic consensus supports examining both overt discrimination and systemic barriers when analyzing racial inequality.";
+            }
+            
+            if (msg.includes('climate') || msg.includes('environment') || msg.includes('pollution') || msg.includes('global warming')) {
+                return "Environmental research indicates that climate change disproportionately affects vulnerable populations. Academic analysis shows connections between environmental policy, economic systems, and social justice. Scholarly consensus supports evidence-based approaches that consider both ecological sustainability and social equity.";
+            }
+            
+            if (msg.includes('gender') || msg.includes('feminism') || msg.includes('women') || msg.includes('patriarchy')) {
+                return "Gender studies research examines how social structures shape gender roles and opportunities. Academic analysis considers historical context, economic factors, and cultural norms. Scholarly perspectives typically analyze gender issues through frameworks that consider intersectionality and structural barriers.";
+            }
+            
+            if (msg.includes('democracy') || msg.includes('rights') || msg.includes('freedom') || msg.includes('liberties')) {
+                return "Political science research on democracy examines how institutions, participation, and representation function. Academic analysis considers both formal democratic structures and substantive outcomes for different social groups. Scholarly perspectives typically emphasize the relationship between political systems and social equity.";
+            }
+            
+            return "That's an interesting research question. As an academic assistant, I approach topics with consideration of evidence, historical context, and multiple theoretical frameworks. Could you clarify what specific aspect you'd like to analyze? I can provide scholarly perspectives based on established research in relevant fields.";
         }
 
         // Parse Markdown
@@ -903,6 +1904,7 @@
             
             try {
                 if (isAnonymousMode) {
+                    // Delete local chat
                     let localChats = JSON.parse(localStorage.getItem('darpan_local_chats') || '[]');
                     localChats = localChats.filter(chat => chat.id !== chatToDelete);
                     localStorage.setItem('darpan_local_chats', JSON.stringify(localChats));
@@ -916,6 +1918,7 @@
                     
                     loadLocalChats();
                 } else {
+                    // Delete Firebase chat
                     const messagesSnapshot = await db.collection('chats').doc(chatToDelete).collection('messages').get();
                     const batch = db.batch();
                     messagesSnapshot.forEach(doc => {
@@ -995,7 +1998,7 @@
 
         authBtn.addEventListener('click', showAuthModal);
 
-        // Close modals
+        // Close modals on outside click
         authModal.addEventListener('click', (e) => {
             if (e.target === authModal) {
                 authModal.classList.remove('active');
@@ -1009,9 +2012,20 @@
             }
         });
 
-        // Initialize
-        setTimeGreeting();
-        
+        // Keyboard Shortcuts
+        document.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                newChatBtn.click();
+            }
+            if (e.key === 'Escape') {
+                sidebar.classList.add('hidden');
+                userDropdown.classList.remove('show');
+                authModal.classList.remove('active');
+                confirmDialog.classList.remove('active');
+            }
+        });
+
         // Initialize anonymous mode
         if (!currentUser) {
             messageInput.disabled = false;
