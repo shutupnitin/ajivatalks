@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -203,6 +202,35 @@
             font-size: 0.9rem;
         }
         
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.9375rem;
+            outline: none;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .form-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(90, 93, 225, 0.1);
+        }
+        
         .usage-stats {
             background: var(--bg-tertiary);
             border: 1px solid var(--border-primary);
@@ -286,18 +314,6 @@
             font-size: 0.7rem;
             font-weight: 700;
             letter-spacing: 0.5px;
-        }
-        
-        .pricing-header {
-            display: flex;
-            align-items: baseline;
-            gap: 0.5rem;
-            margin-bottom: 0.75rem;
-        }
-        
-        .pricing-name {
-            font-weight: 600;
-            font-size: 1.1rem;
         }
         
         .pricing-price {
@@ -394,8 +410,8 @@
             width: 100%;
             padding: 0.75rem;
             background: transparent;
-            color: var(--error);
-            border: 1px solid var(--error);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-primary);
             border-radius: 8px;
             font-weight: 500;
             cursor: pointer;
@@ -404,11 +420,8 @@
         
         .cancel-btn:hover {
             background: rgba(239, 68, 68, 0.1);
-        }
-        
-        .auth-input:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(90, 93, 225, 0.1);
+            border-color: var(--error);
+            color: var(--error);
         }
         
         /* Limit Warning Banner */
@@ -650,24 +663,6 @@
             margin-bottom: 0;
         }
         
-        .typing-text {
-            display: inline;
-        }
-        
-        .cursor {
-            display: inline-block;
-            width: 2px;
-            height: 1em;
-            background: var(--accent);
-            margin-left: 2px;
-            animation: blink 1s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-        
         .sources-container {
             margin-top: 1rem;
             padding: clamp(0.75rem, 2vw, 1rem);
@@ -846,8 +841,8 @@
             <div class="logo">Darpan <span class="badge">RESEARCH</span></div>
         </div>
         <div class="header-right">
-            <button class="auth-btn" id="authBtn" onclick="openAuthModal()" style="display: none;">Sign In</button>
-            <button class="user-profile-btn" id="profileBtn" onclick="openProfileModal()" style="display: none;">
+            <button class="auth-btn" id="authBtn">Sign In</button>
+            <button class="user-profile-btn" id="profileBtn" style="display: none;">
                 <span id="userInitial">U</span>
                 <div class="premium-badge" id="premiumBadge" style="display: none;"></div>
             </button>
@@ -871,17 +866,15 @@
             <h2 class="modal-title">Welcome to Darpan</h2>
             <p class="modal-subtitle">Sign in to start your research journey</p>
             
-            <div style="margin: 2rem 0;">
-                <div style="margin-bottom: 1rem;">
-                    <label style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary); font-size: 0.875rem;">Email</label>
-                    <input type="email" id="authEmail" placeholder="your@email.com" style="width: 100%; padding: 0.75rem; background: var(--bg-tertiary); border: 1px solid var(--border-primary); border-radius: 8px; color: var(--text-primary); font-size: 0.9375rem; outline: none; transition: all 0.2s;">
-                </div>
-                <div style="margin-bottom: 1rem;">
-                    <label style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary); font-size: 0.875rem;">Name</label>
-                    <input type="text" id="authName" placeholder="Your Name" style="width: 100%; padding: 0.75rem; background: var(--bg-tertiary); border: 1px solid var(--border-primary); border-radius: 8px; color: var(--text-primary); font-size: 0.9375rem; outline: none; transition: all 0.2s;">
-                </div>
-                <button class="subscribe-btn" onclick="handleSignIn()">Sign In</button>
+            <div class="form-group">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-input" id="authEmail" placeholder="your@email.com">
             </div>
+            <div class="form-group">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-input" id="authName" placeholder="Your Name">
+            </div>
+            <button class="subscribe-btn" onclick="handleSignIn()">Sign In</button>
             
             <div style="text-align: center; color: var(--text-secondary); font-size: 0.8rem; margin-top: 1.5rem;">
                 By signing in, you agree to our Terms of Service and Privacy Policy
@@ -908,7 +901,7 @@
             
             <div id="subscriptionSection"></div>
             
-            <button class="cancel-btn" onclick="handleSignOut()" style="margin-top: 1rem; border-color: var(--text-secondary); color: var(--text-secondary);">Sign Out</button>
+            <button class="cancel-btn" onclick="handleSignOut()" style="margin-top: 1rem;">Sign Out</button>
         </div>
     </div>
     
@@ -986,9 +979,9 @@
             updateAuthUI();
             if (isSignedIn) {
                 updateUserUI();
-                getUserTimezone();
                 loadChats();
             }
+            updateGreeting();
             if (window.innerWidth > 768) document.getElementById('sidebar').classList.remove('hidden');
         }
         
@@ -1043,7 +1036,7 @@
             closeAuthModal();
             updateAuthUI();
             updateUserUI();
-            getUserTimezone();
+            updateGreeting();
             
             showToast(`Welcome, ${name}! 🎉`, 'success');
         }
@@ -1053,7 +1046,6 @@
                 isSignedIn = false;
                 localStorage.removeItem('darpan_user');
                 
-                // Reset to guest
                 userData = {
                     id: 'guest',
                     email: '',
@@ -1067,8 +1059,7 @@
                 
                 closeProfileModal();
                 updateAuthUI();
-                
-                // Clear current chat
+                updateGreeting();
                 newChat();
                 
                 showToast('Signed out successfully', 'success');
@@ -1149,9 +1140,6 @@
                     <div class="pricing-cards">
                         <div class="pricing-card recommended">
                             <div class="recommended-badge">BEST OFFER</div>
-                            <div class="pricing-header">
-                                <div class="pricing-name">Premium</div>
-                            </div>
                             <div class="pricing-price">
                                 ₹20<span>/month</span>
                                 <span class="original-price">₹99</span>
@@ -1174,6 +1162,10 @@
         }
         
         function openProfileModal() {
+            if (!isSignedIn) {
+                openAuthModal();
+                return;
+            }
             document.getElementById('profileModal').classList.add('active');
         }
         
@@ -1184,11 +1176,10 @@
         function initiatePremiumPurchase() {
             const options = {
                 key: RAZORPAY_KEY,
-                amount: 2000, // ₹20 in paise
+                amount: 2000,
                 currency: 'INR',
                 name: 'Darpan Research',
                 description: 'Premium Monthly Subscription',
-                image: 'https://via.placeholder.com/100x100.png?text=D',
                 handler: function(response) {
                     activatePremium(response);
                 },
@@ -1214,7 +1205,6 @@
             userData.isPremium = true;
             userData.subscriptionId = paymentResponse.razorpay_payment_id;
             
-            // Set expiry to 30 days from now
             const expiry = new Date();
             expiry.setDate(expiry.getDate() + 30);
             userData.subscriptionExpiry = expiry.getTime();
@@ -1227,11 +1217,11 @@
         }
         
         function cancelSubscription() {
-            if (confirm('Are you sure you want to cancel your premium subscription? You will lose access to unlimited questions.')) {
+            if (confirm('Are you sure you want to cancel your premium subscription?')) {
                 userData.isPremium = false;
                 userData.subscriptionId = null;
                 userData.subscriptionExpiry = null;
-                userData.questionsUsed = 0; // Reset usage
+                userData.questionsUsed = 0;
                 
                 saveUserData();
                 updateUserUI();
@@ -1242,16 +1232,6 @@
         
         function saveUserData() {
             localStorage.setItem('darpan_user', JSON.stringify(userData));
-        }
-        
-        async function getUserTimezone() {
-            try {
-                const response = await fetch('https://ipapi.co/json/');
-                const data = await response.json();
-                updateGreeting();
-            } catch (error) {
-                updateGreeting();
-            }
         }
         
         function updateGreeting() {
@@ -1274,7 +1254,7 @@
             
             const subtitle = document.getElementById('welcomeSubtitle');
             if (subtitle && !isSignedIn) {
-                subtitle.innerHTML = 'Your intelligent research assistant powered by advanced AI<br><span style="font-size: 0.9rem; color: var(--accent); cursor: pointer;" onclick="openAuthModal()">Sign in to get started →</span>';
+                subtitle.innerHTML = 'Your intelligent research assistant powered by advanced AI<br><span style="font-size: 0.9rem; color: var(--accent); cursor: pointer; margin-top: 0.5rem; display: inline-block;" onclick="openAuthModal()">Sign in to get started →</span>';
             }
         }
         
@@ -1292,6 +1272,8 @@
         document.getElementById('menuToggle').addEventListener('click', () => {
             document.getElementById('sidebar').classList.toggle('hidden');
         });
+        
+        document.getElementById('authBtn').addEventListener('click', openAuthModal);
         
         document.addEventListener('click', (e) => {
             const sidebar = document.getElementById('sidebar');
@@ -1405,17 +1387,12 @@
                 };
             }
             
-            // Create a more natural, Claude-like response
             let answer = '';
             const mainSource = allSources[0];
             
-            // Introduction
             answer += `I'd be happy to help you understand ${query.toLowerCase()}.\n\n`;
-            
-            // Main content
             answer += mainSource.snippet || mainSource.answer;
             
-            // Additional context if available
             if (allSources.length > 1) {
                 const additionalInfo = allSources.slice(1, 3)
                     .map(s => s.snippet || s.answer)
@@ -1426,10 +1403,8 @@
                 }
             }
             
-            // Closing
             answer += '\n\nIs there any particular aspect of this topic you'd like me to explore in more detail?';
             
-            // Save to knowledge base
             knowledgeBase[extractKeywords(query)] = {
                 question: query,
                 answer: answer,
@@ -1441,14 +1416,12 @@
         }
         
         async function sendMessage() {
-            // Check if signed in
             if (!isSignedIn) {
                 showToast('Please sign in to start chatting', 'error');
                 openAuthModal();
                 return;
             }
             
-            // Check question limit
             if (!checkQuestionLimit()) {
                 if (!userData.isPremium && userData.questionsUsed >= userData.questionsLimit) {
                     showToast('Question limit reached! Upgrade to Premium for unlimited questions.', 'error');
@@ -1461,7 +1434,6 @@
             const text = input.value.trim();
             if (!text) return;
             
-            // Increment question count for non-premium users
             if (!userData.isPremium) {
                 userData.questionsUsed++;
                 saveUserData();
@@ -1502,7 +1474,6 @@
             const messageText = document.createElement('div');
             messageText.className = 'message-text';
             
-            // Split text into paragraphs
             const paragraphs = text.split('\n\n');
             paragraphs.forEach((para, index) => {
                 const p = document.createElement('p');
@@ -1553,7 +1524,6 @@
             content.appendChild(messageText);
             container.appendChild(div);
             
-            // Typing effect
             const paragraphs = text.split('\n\n');
             for (let i = 0; i < paragraphs.length; i++) {
                 const p = document.createElement('p');
@@ -1567,7 +1537,6 @@
                 }
             }
             
-            // Add sources after typing completes
             if (sources && sources.length > 0) {
                 const sourcesDiv = document.createElement('div');
                 sourcesDiv.className = 'sources-container';
@@ -1605,7 +1574,9 @@
             return id;
         }
         
-        function removeTyping(id) { document.getElementById(id)?.remove(); }
+        function removeTyping(id) { 
+            document.getElementById(id)?.remove(); 
+        }
         
         function saveMessage(text, role, sources = null) {
             if (!currentChatId) {
@@ -1665,6 +1636,11 @@
         }
         
         function usePrompt(text) {
+            if (!isSignedIn) {
+                showToast('Please sign in first', 'error');
+                openAuthModal();
+                return;
+            }
             document.getElementById('messageInput').value = text;
             document.getElementById('messageInput').focus();
         }
@@ -1694,7 +1670,6 @@
             else document.getElementById('sidebar').classList.add('hidden');
         });
         
-        // Initialize app
         init();
     </script>
 </body>
