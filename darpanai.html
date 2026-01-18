@@ -7,35 +7,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    
-    <!-- Firebase SDK -->
-    <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-        import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js';
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyAGYl3DZDq7S714sveY4yq2s_O5JaFSuf4",
-            authDomain: "ajiva-talks.firebaseapp.com",
-            projectId: "ajiva-talks",
-            storageBucket: "ajiva-talks.firebasestorage.app",
-            messagingSenderId: "627601368262",
-            appId: "1:627601368262:web:8512d155109d1bab5ca3c7",
-            measurementId: "G-47FX4QP4RB"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const analytics = getAnalytics(app);
-        
-        window.firebaseAuth = auth;
-        window.signInWithEmailAndPassword = signInWithEmailAndPassword;
-        window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
-        window.signOut = signOut;
-        window.onAuthStateChanged = onAuthStateChanged;
-    </script>
-    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -49,7 +20,6 @@
             --accent: #5a5de1;
             --success: #22c55e;
             --error: #ef4444;
-            --gold: #fbbf24;
         }
         
         body {
@@ -65,446 +35,75 @@
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-primary);
-            padding: 0.75rem 1rem;
+            padding: 0.875rem 1.25rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            min-height: 56px;
+            height: 60px;
         }
         
-        .header-left { display: flex; align-items: center; gap: 0.5rem; }
+        .header-left { display: flex; align-items: center; gap: 0.75rem; }
         
         .menu-toggle {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             background: transparent;
             border: 1px solid var(--border-primary);
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             display: none;
             align-items: center;
             justify-content: center;
             color: var(--text-primary);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
         
         .logo {
             font-family: 'Instrument Serif', serif;
-            font-size: clamp(1.1rem, 4vw, 1.5rem);
+            font-size: clamp(1.25rem, 3vw, 1.5rem);
             color: white;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-        
-        .badge {
-            font-size: clamp(0.55rem, 2vw, 0.65rem);
-            background: linear-gradient(135deg, #8b5cf6, #3b82f6);
-            color: white;
-            padding: 2px 6px;
-            border-radius: 10px;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-        }
-        
-        .header-right {
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
         
-        .user-profile-btn {
-            width: 32px;
-            height: 32px;
-            background: var(--accent);
+        .badge {
+            font-size: clamp(0.6rem, 1.5vw, 0.65rem);
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6);
             color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
+            padding: 2px 8px;
+            border-radius: 12px;
             font-weight: 600;
-            font-size: 0.8rem;
-            transition: all 0.2s;
-            position: relative;
-        }
-        
-        .user-profile-btn:hover { transform: scale(1.05); }
-        
-        .premium-badge {
-            position: absolute;
-            top: -2px;
-            right: -2px;
-            width: 12px;
-            height: 12px;
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
-            border-radius: 50%;
-            border: 2px solid var(--bg-primary);
+            letter-spacing: 0.5px;
         }
         
         .auth-btn {
-            padding: 0.4rem 0.8rem;
+            padding: 0.5rem 1rem;
             background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: clamp(0.75rem, 2.5vw, 0.875rem);
-            transition: all 0.2s;
-        }
-        
-        .auth-btn:hover { opacity: 0.9; transform: translateY(-1px); }
-        
-        /* Modal Styles */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(4px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            padding: 1rem;
-        }
-        
-        .modal-overlay.active { display: flex; }
-        
-        .modal {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-primary);
-            border-radius: 12px;
-            padding: 1.5rem;
-            max-width: 450px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-        }
-        
-        .modal-close {
-            position: absolute;
-            top: 0.75rem;
-            right: 0.75rem;
-            background: transparent;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 1.3rem;
-            cursor: pointer;
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 4px;
-            transition: all 0.2s;
-        }
-        
-        .modal-close:hover {
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-        }
-        
-        .modal-title {
-            font-family: 'Instrument Serif', serif;
-            font-size: clamp(1.3rem, 5vw, 1.75rem);
-            margin-bottom: 0.4rem;
-        }
-        
-        .modal-subtitle {
-            color: var(--text-secondary);
-            margin-bottom: 1.25rem;
-            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
-        }
-        
-        .form-group {
-            margin-bottom: 0.875rem;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 0.4rem;
-            color: var(--text-secondary);
-            font-size: clamp(0.75rem, 2.5vw, 0.875rem);
-        }
-        
-        .form-input {
-            width: 100%;
-            padding: 0.65rem;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-primary);
-            border-radius: 6px;
-            color: var(--text-primary);
-            font-size: clamp(0.85rem, 2.5vw, 0.9375rem);
-            outline: none;
-            transition: all 0.2s;
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .form-input:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(90, 93, 225, 0.1);
-        }
-        
-        .usage-stats {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-primary);
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 1.25rem;
-        }
-        
-        .stat-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.6rem;
-        }
-        
-        .stat-row:last-child { margin-bottom: 0; }
-        
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: clamp(0.75rem, 2.5vw, 0.875rem);
-        }
-        
-        .stat-value {
-            font-weight: 600;
-            font-size: clamp(0.85rem, 2.5vw, 1rem);
-        }
-        
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: var(--bg-primary);
-            border-radius: 3px;
-            overflow: hidden;
-            margin-top: 0.4rem;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent), #8b5cf6);
-            border-radius: 3px;
-            transition: width 0.3s ease;
-        }
-        
-        .progress-fill.warning { background: linear-gradient(90deg, #f59e0b, #ef4444); }
-        
-        .pricing-cards {
-            display: grid;
-            gap: 0.875rem;
-            margin-bottom: 1.25rem;
-        }
-        
-        .pricing-card {
-            background: var(--bg-tertiary);
-            border: 2px solid var(--border-primary);
-            border-radius: 10px;
-            padding: 1.25rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            position: relative;
-        }
-        
-        .pricing-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
-        }
-        
-        .pricing-card.recommended {
-            border-color: var(--gold);
-            background: linear-gradient(135deg, rgba(251, 191, 36, 0.05), transparent);
-        }
-        
-        .recommended-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
-            color: var(--bg-primary);
-            padding: 3px 8px;
-            border-radius: 10px;
-            font-size: clamp(0.6rem, 2vw, 0.7rem);
-            font-weight: 700;
-            letter-spacing: 0.3px;
-        }
-        
-        .pricing-price {
-            font-size: clamp(1.5rem, 6vw, 2rem);
-            font-weight: 700;
-            margin-bottom: 0.2rem;
-        }
-        
-        .pricing-price span {
-            font-size: clamp(0.85rem, 3vw, 1rem);
-            color: var(--text-secondary);
-            font-weight: 400;
-        }
-        
-        .original-price {
-            text-decoration: line-through;
-            color: var(--text-secondary);
-            font-size: clamp(0.85rem, 3vw, 1rem);
-            margin-left: 0.4rem;
-        }
-        
-        .pricing-discount {
-            display: inline-block;
-            background: var(--success);
-            color: white;
-            padding: 2px 6px;
-            border-radius: 5px;
-            font-size: clamp(0.65rem, 2vw, 0.75rem);
-            font-weight: 600;
-            margin-bottom: 0.6rem;
-        }
-        
-        .pricing-features {
-            list-style: none;
-            margin-top: 0.875rem;
-        }
-        
-        .pricing-features li {
-            padding: 0.3rem 0;
-            color: var(--text-secondary);
-            font-size: clamp(0.75rem, 2.5vw, 0.875rem);
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-        
-        .pricing-features li:before {
-            content: "✓";
-            color: var(--success);
-            font-weight: bold;
-        }
-        
-        .subscribe-btn {
-            width: 100%;
-            padding: 0.75rem;
-            background: linear-gradient(135deg, var(--accent), #8b5cf6);
             color: white;
             border: none;
             border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
-            font-size: clamp(0.85rem, 2.5vw, 1rem);
+            font-size: clamp(0.8rem, 2vw, 0.875rem);
             transition: all 0.2s;
-            margin-top: 0.875rem;
         }
         
-        .subscribe-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(90, 93, 225, 0.3);
-        }
-        
-        .subscribe-btn.gold {
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
-        }
-        
-        .subscription-info {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-primary);
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 1.25rem;
-        }
-        
-        .subscription-active {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            margin-bottom: 0.875rem;
-            font-weight: 600;
-            color: var(--success);
-            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
-        }
-        
-        .cancel-btn {
-            width: 100%;
-            padding: 0.65rem;
-            background: transparent;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-primary);
-            border-radius: 6px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
-        }
-        
-        .cancel-btn:hover {
-            background: rgba(239, 68, 68, 0.1);
-            border-color: var(--error);
-            color: var(--error);
-        }
-        
-        .limit-warning {
-            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(239, 68, 68, 0.1));
-            border: 1px solid var(--gold);
-            border-radius: 10px;
-            padding: 0.875rem 1rem;
-            margin: 0.875rem;
-            display: none;
-            align-items: center;
-            gap: 0.875rem;
-        }
-        
-        .limit-warning.show { display: flex; }
-        
-        .limit-warning-icon {
-            font-size: clamp(1.2rem, 4vw, 1.5rem);
-        }
-        
-        .limit-warning-content {
-            flex: 1;
-        }
-        
-        .limit-warning-title {
-            font-weight: 600;
-            margin-bottom: 0.2rem;
-            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
-        }
-        
-        .limit-warning-text {
-            font-size: clamp(0.75rem, 2.5vw, 0.875rem);
-            color: var(--text-secondary);
-        }
-        
-        .upgrade-btn {
-            padding: 0.45rem 0.875rem;
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
-            color: var(--bg-primary);
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.2s;
-            font-size: clamp(0.75rem, 2.5vw, 0.85rem);
-        }
-        
-        .upgrade-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
-        }
+        .auth-btn:hover { opacity: 0.9; transform: translateY(-1px); }
         
         .main-container {
             display: flex;
-            height: calc(100vh - 56px);
+            height: calc(100vh - 60px);
             overflow: hidden;
         }
         
         .sidebar {
-            width: 240px;
+            width: min(260px, 25vw);
             background: var(--bg-primary);
             border-right: 1px solid var(--border-primary);
             display: flex;
             flex-direction: column;
-            padding: 0.65rem;
+            padding: 0.75rem;
             overflow-y: auto;
             transition: transform 0.3s ease;
         }
@@ -513,27 +112,27 @@
         
         .new-chat-btn {
             width: 100%;
-            padding: 0.65rem;
+            padding: 0.75rem;
             background: var(--accent);
             border: none;
             color: white;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
             font-weight: 500;
-            margin-bottom: 0.875rem;
-            font-size: clamp(0.8rem, 2.5vw, 0.875rem);
+            margin-bottom: 1rem;
+            font-size: clamp(0.8rem, 2vw, 0.875rem);
             transition: all 0.2s;
         }
         
         .new-chat-btn:hover { opacity: 0.9; }
         
         .chat-item {
-            padding: 0.55rem 0.65rem;
-            border-radius: 6px;
+            padding: 0.625rem 0.75rem;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: clamp(0.75rem, 2.5vw, 0.85rem);
+            font-size: clamp(0.75rem, 1.8vw, 0.875rem);
             color: var(--text-secondary);
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.25rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -551,8 +150,8 @@
             border: none;
             color: var(--text-secondary);
             cursor: pointer;
-            padding: 0.2rem 0.4rem;
-            font-size: 1.1rem;
+            padding: 0.25rem 0.5rem;
+            font-size: 1.2rem;
         }
         
         .chat-item:hover .chat-delete { opacity: 1; }
@@ -569,58 +168,52 @@
             flex: 1;
             overflow-y: auto;
             width: 100%;
-            max-width: 720px;
+            max-width: min(768px, 90vw);
         }
         
-        .messages-container { 
-            padding: clamp(0.875rem, 3vw, 1.5rem) clamp(0.65rem, 2vw, 1rem); 
-            min-height: 100%; 
-        }
+        .messages-container { padding: clamp(1rem, 3vw, 2rem) clamp(0.75rem, 2vw, 1rem); min-height: 100%; }
         
-        .welcome-screen { 
-            text-align: center; 
-            padding: clamp(1.5rem, 5vw, 2.5rem) clamp(0.65rem, 2vw, 1rem); 
-        }
+        .welcome-screen { text-align: center; padding: clamp(2rem, 5vw, 3rem) clamp(0.75rem, 2vw, 1rem); }
         
         .greeting {
-            font-size: clamp(0.95rem, 3vw, 1.2rem);
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
             color: var(--accent);
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.5rem;
             font-weight: 500;
         }
         
         .welcome-title {
             font-family: 'Instrument Serif', serif;
-            font-size: clamp(1.75rem, 7vw, 3rem);
-            margin-bottom: 0.875rem;
+            font-size: clamp(2rem, 6vw, 3rem);
+            margin-bottom: 1rem;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
         .welcome-subtitle {
-            font-size: clamp(0.85rem, 3vw, 1.125rem);
+            font-size: clamp(0.9rem, 2.5vw, 1.125rem);
             color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
-            max-width: 550px;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
         
         .example-prompts {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
-            gap: clamp(0.65rem, 2vw, 0.875rem);
-            max-width: 550px;
+            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+            gap: clamp(0.75rem, 2vw, 1rem);
+            max-width: 600px;
             margin: 0 auto;
         }
         
         .prompt-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border-primary);
-            padding: clamp(0.75rem, 2.5vw, 0.875rem);
-            border-radius: 10px;
+            padding: clamp(0.875rem, 2.5vw, 1rem);
+            border-radius: 12px;
             cursor: pointer;
             text-align: left;
             transition: all 0.2s;
@@ -628,28 +221,15 @@
         
         .prompt-card:hover { border-color: var(--accent); transform: translateY(-2px); }
         
-        .prompt-card-title { 
-            font-weight: 600; 
-            margin-bottom: 0.4rem; 
-            font-size: clamp(0.8rem, 2.5vw, 0.9rem); 
-        }
+        .prompt-card-title { font-weight: 600; margin-bottom: 0.5rem; font-size: clamp(0.85rem, 2vw, 0.9rem); }
+        .prompt-card-text { font-size: clamp(0.75rem, 1.8vw, 0.8rem); color: var(--text-secondary); line-height: 1.4; }
         
-        .prompt-card-text { 
-            font-size: clamp(0.7rem, 2.5vw, 0.8rem); 
-            color: var(--text-secondary); 
-            line-height: 1.3; 
-        }
-        
-        .message { 
-            display: flex; 
-            gap: clamp(0.65rem, 2vw, 0.875rem); 
-            margin-bottom: clamp(1.25rem, 3vw, 1.75rem);
-        }
+        .message { display: flex; gap: clamp(0.75rem, 2vw, 1rem); margin-bottom: clamp(1.5rem, 3vw, 2rem); }
         
         .message-avatar {
-            width: clamp(28px, 7vw, 36px);
-            height: clamp(28px, 7vw, 36px);
-            border-radius: 8px;
+            width: clamp(32px, 7vw, 40px);
+            height: clamp(32px, 7vw, 40px);
+            border-radius: 10px;
             background: var(--bg-secondary);
             border: 1px solid var(--border-primary);
             display: flex;
@@ -657,56 +237,44 @@
             justify-content: center;
             flex-shrink: 0;
             font-weight: 600;
-            font-size: clamp(0.7rem, 2.5vw, 0.8rem);
+            font-size: clamp(0.75rem, 2vw, 0.875rem);
         }
         
         .message.user .message-avatar { background: var(--accent); }
         .message-content { flex: 1; min-width: 0; }
         
         .message-text {
-            line-height: 1.6;
+            line-height: 1.7;
             color: var(--text-primary);
+            white-space: pre-wrap;
             word-wrap: break-word;
-            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
-        }
-        
-        .message-text p {
-            margin-bottom: 0.875rem;
-        }
-        
-        .message-text p:last-child {
-            margin-bottom: 0;
+            font-size: clamp(0.875rem, 2.2vw, 1rem);
         }
         
         .sources-container {
-            margin-top: 0.875rem;
-            padding: clamp(0.65rem, 2vw, 0.875rem);
+            margin-top: 1rem;
+            padding: clamp(0.75rem, 2vw, 1rem);
             background: var(--bg-tertiary);
             border: 1px solid var(--border-primary);
-            border-radius: 6px;
+            border-radius: 8px;
         }
         
         .sources-title {
             font-weight: 600;
-            margin-bottom: 0.6rem;
-            font-size: clamp(0.75rem, 2.5vw, 0.85rem);
+            margin-bottom: 0.75rem;
+            font-size: clamp(0.8rem, 2vw, 0.875rem);
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.5rem;
         }
         
         .source-item {
-            padding: clamp(0.45rem, 2vw, 0.55rem);
+            padding: clamp(0.5rem, 1.5vw, 0.625rem);
             background: var(--bg-secondary);
             border: 1px solid var(--border-primary);
-            border-radius: 5px;
-            margin-bottom: 0.4rem;
-            font-size: clamp(0.7rem, 2.5vw, 0.775rem);
-            transition: all 0.2s;
-        }
-        
-        .source-item:hover {
-            border-color: var(--accent);
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            font-size: clamp(0.75rem, 1.8vw, 0.8rem);
         }
         
         .source-item:last-child { margin-bottom: 0; }
@@ -716,22 +284,18 @@
             text-decoration: none;
             font-weight: 500;
             display: block;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.25rem;
             word-break: break-word;
         }
         
         .source-link:hover { text-decoration: underline; }
-        .source-snippet { 
-            color: var(--text-secondary); 
-            font-size: clamp(0.65rem, 2.5vw, 0.725rem); 
-            line-height: 1.3; 
-        }
+        .source-snippet { color: var(--text-secondary); font-size: clamp(0.7rem, 1.6vw, 0.75rem); line-height: 1.4; }
         
-        .typing-indicator { display: flex; gap: 0.2rem; padding: 0.65rem 0; }
+        .typing-indicator { display: flex; gap: 0.25rem; padding: 0.75rem 0; }
         
         .typing-dot {
-            width: 7px;
-            height: 7px;
+            width: 8px;
+            height: 8px;
             background: var(--accent);
             border-radius: 50%;
             animation: typing 1.4s infinite;
@@ -742,25 +306,25 @@
         
         @keyframes typing {
             0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
-            30% { opacity: 1; transform: translateY(-5px); }
+            30% { opacity: 1; transform: translateY(-6px); }
         }
         
         .input-area {
             border-top: 1px solid var(--border-primary);
-            padding: clamp(0.65rem, 2vw, 0.875rem);
+            padding: clamp(0.75rem, 2vw, 1rem);
             background: var(--bg-primary);
             width: 100%;
-            max-width: 720px;
+            max-width: min(768px, 90vw);
         }
         
         .input-container {
             background: var(--bg-secondary);
             border: 1px solid var(--border-primary);
-            border-radius: 10px;
-            padding: 0.65rem clamp(0.65rem, 2vw, 0.875rem);
+            border-radius: 12px;
+            padding: 0.75rem clamp(0.75rem, 2vw, 1rem);
             display: flex;
             align-items: flex-end;
-            gap: clamp(0.45rem, 2vw, 0.65rem);
+            gap: clamp(0.5rem, 1.5vw, 0.75rem);
             transition: all 0.2s;
         }
         
@@ -776,27 +340,27 @@
             outline: none;
             color: var(--text-primary);
             font-family: 'Inter', sans-serif;
-            font-size: clamp(0.85rem, 2.5vw, 0.9375rem);
+            font-size: clamp(0.875rem, 2.2vw, 0.9375rem);
             resize: none;
-            max-height: min(180px, 25vh);
-            line-height: 1.4;
-            min-height: 22px;
+            max-height: min(200px, 30vh);
+            line-height: 1.5;
+            min-height: 24px;
         }
         
         .message-input::placeholder { color: var(--text-secondary); }
         
         .send-btn {
-            width: clamp(32px, 8vw, 36px);
-            height: clamp(32px, 8vw, 36px);
+            width: clamp(36px, 8vw, 40px);
+            height: clamp(36px, 8vw, 40px);
             background: var(--accent);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: clamp(0.95rem, 3vw, 1.1rem);
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
             flex-shrink: 0;
             transition: all 0.2s;
         }
@@ -806,24 +370,24 @@
         
         .toast {
             position: fixed;
-            bottom: 1.5rem;
-            right: 1.5rem;
+            bottom: 2rem;
+            right: 2rem;
             background: var(--bg-secondary);
             border: 1px solid var(--border-primary);
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
+            padding: 0.875rem 1.25rem;
+            border-radius: 10px;
             z-index: 1001;
-            font-size: clamp(0.75rem, 2.5vw, 0.85rem);
-            max-width: calc(100vw - 3rem);
+            font-size: clamp(0.8rem, 2vw, 0.875rem);
+            max-width: calc(100vw - 4rem);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
         
         .toast.success { border-color: var(--success); }
         .toast.error { border-color: var(--error); }
         
-        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--border-primary); border-radius: 2.5px; }
+        ::-webkit-scrollbar-thumb { background: var(--border-primary); border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #3a3a3a; }
         
         @media (max-width: 768px) {
@@ -831,31 +395,15 @@
             .sidebar {
                 position: fixed;
                 left: 0;
-                top: 56px;
-                height: calc(100vh - 56px);
+                top: 60px;
+                height: calc(100vh - 60px);
                 z-index: 90;
-                width: min(260px, 70vw);
+                width: min(280px, 75vw);
                 box-shadow: 4px 0 12px rgba(0, 0, 0, 0.5);
             }
             .example-prompts { grid-template-columns: 1fr; }
             .messages-wrapper, .input-area { max-width: 100%; }
             .toast { bottom: 1rem; right: 1rem; left: 1rem; max-width: none; }
-            .limit-warning {
-                flex-direction: column;
-                text-align: center;
-            }
-            .upgrade-btn {
-                width: 100%;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .header {
-                padding: 0.65rem 0.75rem;
-            }
-            .pricing-features li {
-                font-size: 0.75rem;
-            }
         }
     </style>
 </head>
@@ -865,70 +413,7 @@
             <button class="menu-toggle" id="menuToggle">☰</button>
             <div class="logo">Darpan <span class="badge">RESEARCH</span></div>
         </div>
-        <div class="header-right">
-            <button class="auth-btn" id="authBtn">Sign In</button>
-            <button class="user-profile-btn" id="profileBtn" style="display: none;">
-                <span id="userInitial">U</span>
-                <div class="premium-badge" id="premiumBadge" style="display: none;"></div>
-            </button>
-        </div>
-    </div>
-    
-    <div class="limit-warning" id="limitWarning">
-        <div class="limit-warning-icon">⚡</div>
-        <div class="limit-warning-content">
-            <div class="limit-warning-title">You're running low on questions!</div>
-            <div class="limit-warning-text">Upgrade to Premium for unlimited questions</div>
-        </div>
-        <button class="upgrade-btn" onclick="openProfileModal()">Upgrade Now</button>
-    </div>
-    
-    <div class="modal-overlay" id="authModal">
-        <div class="modal">
-            <button class="modal-close" onclick="closeAuthModal()">×</button>
-            <h2 class="modal-title">Welcome to Darpan</h2>
-            <p class="modal-subtitle">Sign in to start your research journey</p>
-            
-            <div class="form-group">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-input" id="authEmail" placeholder="your@email.com">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Password</label>
-                <input type="password" class="form-input" id="authPassword" placeholder="Password (min 6 characters)">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Name</label>
-                <input type="text" class="form-input" id="authName" placeholder="Your Name">
-            </div>
-            <button class="subscribe-btn" onclick="handleSignIn()">Sign In / Sign Up</button>
-            
-            <div style="text-align: center; color: var(--text-secondary); font-size: clamp(0.7rem, 2.5vw, 0.8rem); margin-top: 1.25rem;">
-                By signing in, you agree to our Terms of Service and Privacy Policy
-            </div>
-        </div>
-    </div>
-    
-    <div class="modal-overlay" id="profileModal">
-        <div class="modal">
-            <button class="modal-close" onclick="closeProfileModal()">×</button>
-            <h2 class="modal-title">Your Profile</h2>
-            <p class="modal-subtitle" id="userEmail">user@example.com</p>
-            
-            <div class="usage-stats">
-                <div class="stat-row">
-                    <span class="stat-label">Questions Used</span>
-                    <span class="stat-value" id="questionsUsed">0 / 10</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
-                </div>
-            </div>
-            
-            <div id="subscriptionSection"></div>
-            
-            <button class="cancel-btn" onclick="handleSignOut()" style="margin-top: 0.875rem;">Sign Out</button>
-        </div>
+        <button class="auth-btn" onclick="showToast('Sign in coming soon!', 'success')">Sign In</button>
     </div>
     
     <div class="main-container">
@@ -943,7 +428,7 @@
                     <div class="welcome-screen" id="welcomeScreen">
                         <div class="greeting" id="timeGreeting">Good day!</div>
                         <h1 class="welcome-title">Welcome to Darpan</h1>
-                        <p class="welcome-subtitle" id="welcomeSubtitle">Your intelligent research assistant powered by advanced AI</p>
+                        <p class="welcome-subtitle">Your intelligent research assistant for scholarly conversations</p>
                         <div class="example-prompts">
                             <div class="prompt-card" onclick="usePrompt('Tell me about climate change impacts')">
                                 <div class="prompt-card-title">Climate Research</div>
@@ -976,350 +461,18 @@
     </div>
     
     <script>
-        // Wait for Firebase to load
-        setTimeout(() => {
-            initApp();
-        }, 1000);
-        
-        let userData = null;
-        let isSignedIn = false;
-        let knowledgeBase = {};
-        let conversations = [];
+        let knowledgeBase = JSON.parse(localStorage.getItem('darpan_knowledge') || '{}');
+        let conversations = JSON.parse(localStorage.getItem('darpan_chats') || '[]');
         let currentChatId = null;
-        const RAZORPAY_KEY = 'rzp_live_S5I04OR5KhAAve';
         
-        function initApp() {
-            // Load data from localStorage
-            knowledgeBase = JSON.parse(localStorage.getItem('darpan_knowledge') || '{}');
-            conversations = JSON.parse(localStorage.getItem('darpan_chats') || '[]');
-            
-            // Check Firebase auth state
-            if (window.onAuthStateChanged && window.firebaseAuth) {
-                window.onAuthStateChanged(window.firebaseAuth, (user) => {
-                    if (user) {
-                        const storedUserData = JSON.parse(localStorage.getItem('darpan_user_' + user.uid) || 'null');
-                        userData = storedUserData || {
-                            id: user.uid,
-                            email: user.email,
-                            name: user.displayName || user.email.split('@')[0],
-                            questionsUsed: 0,
-                            questionsLimit: 10,
-                            isPremium: false,
-                            subscriptionId: null,
-                            subscriptionExpiry: null
-                        };
-                        isSignedIn = true;
-                        saveUserData();
-                        updateAuthUI();
-                        updateUserUI();
-                        loadChats();
-                    } else {
-                        userData = null;
-                        isSignedIn = false;
-                        updateAuthUI();
-                    }
-                    updateGreeting();
-                });
-            } else {
-                updateAuthUI();
-                updateGreeting();
-            }
-            
-            if (window.innerWidth > 768) {
-                document.getElementById('sidebar').classList.remove('hidden');
-            }
-        }
-        
-        function updateAuthUI() {
-            const authBtn = document.getElementById('authBtn');
-            const profileBtn = document.getElementById('profileBtn');
-            
-            if (isSignedIn) {
-                authBtn.style.display = 'none';
-                profileBtn.style.display = 'flex';
-            } else {
-                authBtn.style.display = 'block';
-                profileBtn.style.display = 'none';
-            }
-        }
-        
-        function openAuthModal() {
-            document.getElementById('authModal').classList.add('active');
-        }
-        
-        function closeAuthModal() {
-            document.getElementById('authModal').classList.remove('active');
-        }
-        
-        async function handleSignIn() {
-            const email = document.getElementById('authEmail').value.trim();
-            const password = document.getElementById('authPassword').value.trim();
-            const name = document.getElementById('authName').value.trim();
-            
-            if (!email || !password) {
-                showToast('Please enter email and password', 'error');
-                return;
-            }
-            
-            if (password.length < 6) {
-                showToast('Password must be at least 6 characters', 'error');
-                return;
-            }
-            
-            if (!email.includes('@')) {
-                showToast('Please enter a valid email', 'error');
-                return;
-            }
-            
+        // Get user timezone and update greeting
+        async function getUserTimezone() {
             try {
-                let userCredential;
-                try {
-                    // Try to sign in
-                    userCredential = await window.signInWithEmailAndPassword(window.firebaseAuth, email, password);
-                    showToast('Signed in successfully!', 'success');
-                } catch (signInError) {
-                    if (signInError.code === 'auth/user-not-found' || signInError.code === 'auth/wrong-password') {
-                        // Create new account
-                        if (!name) {
-                            showToast('Please enter your name for sign up', 'error');
-                            return;
-                        }
-                        userCredential = await window.createUserWithEmailAndPassword(window.firebaseAuth, email, password);
-                        showToast(`Welcome, ${name}! 🎉`, 'success');
-                    } else {
-                        throw signInError;
-                    }
-                }
-                
-                const user = userCredential.user;
-                userData = {
-                    id: user.uid,
-                    email: user.email,
-                    name: name || user.email.split('@')[0],
-                    questionsUsed: 0,
-                    questionsLimit: 10,
-                    isPremium: false,
-                    subscriptionId: null,
-                    subscriptionExpiry: null
-                };
-                
-                isSignedIn = true;
-                saveUserData();
-                closeAuthModal();
-                updateAuthUI();
-                updateUserUI();
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
                 updateGreeting();
-                loadChats();
-                
             } catch (error) {
-                console.error('Auth error:', error);
-                if (error.code === 'auth/email-already-in-use') {
-                    showToast('Email already in use. Try signing in.', 'error');
-                } else if (error.code === 'auth/invalid-email') {
-                    showToast('Invalid email address', 'error');
-                } else if (error.code === 'auth/weak-password') {
-                    showToast('Password is too weak', 'error');
-                } else {
-                    showToast('Authentication error. Please try again.', 'error');
-                }
-            }
-        }
-        
-        async function handleSignOut() {
-            if (confirm('Are you sure you want to sign out?')) {
-                try {
-                    await window.signOut(window.firebaseAuth);
-                    isSignedIn = false;
-                    userData = null;
-                    closeProfileModal();
-                    updateAuthUI();
-                    updateGreeting();
-                    newChat();
-                    showToast('Signed out successfully', 'success');
-                } catch (error) {
-                    console.error('Sign out error:', error);
-                    showToast('Error signing out', 'error');
-                }
-            }
-        }
-        
-        function updateUserUI() {
-            if (!userData) return;
-            
-            const initial = userData.name.charAt(0).toUpperCase();
-            document.getElementById('userInitial').textContent = initial;
-            document.getElementById('userEmail').textContent = userData.email;
-            document.getElementById('premiumBadge').style.display = userData.isPremium ? 'block' : 'none';
-            
-            updateUsageStats();
-            updateSubscriptionSection();
-            checkQuestionLimit();
-        }
-        
-        function updateUsageStats() {
-            if (!userData) return;
-            
-            const used = userData.questionsUsed;
-            const limit = userData.isPremium ? '∞' : userData.questionsLimit;
-            const percentage = userData.isPremium ? 0 : (used / userData.questionsLimit) * 100;
-            
-            document.getElementById('questionsUsed').textContent = `${used} / ${limit}`;
-            const progressFill = document.getElementById('progressFill');
-            progressFill.style.width = Math.min(percentage, 100) + '%';
-            
-            if (percentage > 80) {
-                progressFill.classList.add('warning');
-            } else {
-                progressFill.classList.remove('warning');
-            }
-        }
-        
-        function checkQuestionLimit() {
-            if (!userData) return true;
-            
-            if (userData.isPremium) {
-                document.getElementById('limitWarning').classList.remove('show');
-                return true;
-            }
-            
-            if (userData.questionsUsed >= userData.questionsLimit) {
-                document.getElementById('limitWarning').classList.add('show');
-                return false;
-            }
-            
-            if (userData.questionsUsed >= userData.questionsLimit * 0.8) {
-                document.getElementById('limitWarning').classList.add('show');
-            } else {
-                document.getElementById('limitWarning').classList.remove('show');
-            }
-            
-            return true;
-        }
-        
-        function updateSubscriptionSection() {
-            if (!userData) return;
-            
-            const section = document.getElementById('subscriptionSection');
-            
-            if (userData.isPremium) {
-                const expiryDate = new Date(userData.subscriptionExpiry);
-                section.innerHTML = `
-                    <div class="subscription-info">
-                        <div class="subscription-active">
-                            <span>✓</span>
-                            <span>Premium Active</span>
-                        </div>
-                        <div class="stat-row">
-                            <span class="stat-label">Plan</span>
-                            <span class="stat-value">Premium Monthly</span>
-                        </div>
-                        <div class="stat-row">
-                            <span class="stat-label">Renews on</span>
-                            <span class="stat-value">${expiryDate.toLocaleDateString()}</span>
-                        </div>
-                    </div>
-                    <button class="cancel-btn" onclick="cancelSubscription()">Cancel Subscription</button>
-                `;
-            } else {
-                section.innerHTML = `
-                    <div class="pricing-cards">
-                        <div class="pricing-card recommended">
-                            <div class="recommended-badge">BEST OFFER</div>
-                            <div class="pricing-price">
-                                ₹20<span>/month</span>
-                                <span class="original-price">₹99</span>
-                            </div>
-                            <div class="pricing-discount">80% OFF - Limited Time!</div>
-                            <ul class="pricing-features">
-                                <li>Unlimited questions</li>
-                                <li>Priority responses</li>
-                                <li>Advanced research</li>
-                                <li>No interruptions</li>
-                                <li>Early access</li>
-                            </ul>
-                            <button class="subscribe-btn gold" onclick="initiatePremiumPurchase()">
-                                Get Premium - ₹20/month
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }
-        }
-        
-        function openProfileModal() {
-            if (!isSignedIn) {
-                openAuthModal();
-                return;
-            }
-            document.getElementById('profileModal').classList.add('active');
-        }
-        
-        function closeProfileModal() {
-            document.getElementById('profileModal').classList.remove('active');
-        }
-        
-        function initiatePremiumPurchase() {
-            if (!userData) return;
-            
-            const options = {
-                key: RAZORPAY_KEY,
-                amount: 2000,
-                currency: 'INR',
-                name: 'Darpan Research',
-                description: 'Premium Monthly Subscription',
-                handler: function(response) {
-                    activatePremium(response);
-                },
-                prefill: {
-                    email: userData.email,
-                    contact: ''
-                },
-                theme: {
-                    color: '#5a5de1'
-                },
-                modal: {
-                    ondismiss: function() {
-                        showToast('Payment cancelled', 'error');
-                    }
-                }
-            };
-            
-            const razorpay = new Razorpay(options);
-            razorpay.open();
-        }
-        
-        function activatePremium(paymentResponse) {
-            userData.isPremium = true;
-            userData.subscriptionId = paymentResponse.razorpay_payment_id;
-            
-            const expiry = new Date();
-            expiry.setDate(expiry.getDate() + 30);
-            userData.subscriptionExpiry = expiry.getTime();
-            
-            saveUserData();
-            updateUserUI();
-            closeProfileModal();
-            
-            showToast('🎉 Premium activated! Unlimited research!', 'success');
-        }
-        
-        function cancelSubscription() {
-            if (confirm('Cancel your premium subscription?')) {
-                userData.isPremium = false;
-                userData.subscriptionId = null;
-                userData.subscriptionExpiry = null;
-                userData.questionsUsed = 0;
-                
-                saveUserData();
-                updateUserUI();
-                
-                showToast('Subscription cancelled', 'success');
-            }
-        }
-        
-        function saveUserData() {
-            if (userData && userData.id) {
-                localStorage.setItem('darpan_user_' + userData.id, JSON.stringify(userData));
+                updateGreeting();
             }
         }
         
@@ -1333,20 +486,7 @@
             else { greeting = 'Good night'; emoji = '🌙'; }
             
             const el = document.getElementById('timeGreeting');
-            if (el) {
-                if (isSignedIn && userData) {
-                    el.textContent = `${emoji} ${greeting}, ${userData.name}!`;
-                } else {
-                    el.textContent = `${emoji} ${greeting}!`;
-                }
-            }
-            
-            const subtitle = document.getElementById('welcomeSubtitle');
-            if (subtitle && !isSignedIn) {
-                subtitle.innerHTML = 'Your intelligent research assistant powered by advanced AI<br><span style="font-size: clamp(0.8rem, 2.5vw, 0.9rem); color: var(--accent); cursor: pointer; margin-top: 0.4rem; display: inline-block;" onclick="openAuthModal()">Sign in to get started →</span>';
-            } else if (subtitle && isSignedIn) {
-                subtitle.textContent = 'Your intelligent research assistant powered by advanced AI';
-            }
+            if (el) el.textContent = `${emoji} ${greeting}!`;
         }
         
         function extractKeywords(query) {
@@ -1364,24 +504,11 @@
             document.getElementById('sidebar').classList.toggle('hidden');
         });
         
-        document.getElementById('authBtn').addEventListener('click', openAuthModal);
-        
         document.addEventListener('click', (e) => {
             const sidebar = document.getElementById('sidebar');
             const menuToggle = document.getElementById('menuToggle');
-            const profileModal = document.getElementById('profileModal');
-            const authModal = document.getElementById('authModal');
-            
             if (window.innerWidth <= 768 && !sidebar.contains(e.target) && !menuToggle.contains(e.target) && !sidebar.classList.contains('hidden')) {
                 sidebar.classList.add('hidden');
-            }
-            
-            if (profileModal.classList.contains('active') && e.target === profileModal) {
-                closeProfileModal();
-            }
-            
-            if (authModal.classList.contains('active') && e.target === authModal) {
-                closeAuthModal();
             }
         });
         
@@ -1412,7 +539,6 @@
                 }
                 return results;
             } catch (error) {
-                console.error('DuckDuckGo search error:', error);
                 return [];
             }
         }
@@ -1431,7 +557,6 @@
                 }
                 return [];
             } catch (error) {
-                console.error('Wikipedia search error:', error);
                 return [];
             }
         }
@@ -1445,7 +570,7 @@
                 if (key.toLowerCase().includes(lowerQuery) || value.answer.toLowerCase().includes(lowerQuery) ||
                     key.toLowerCase().includes(keywords) || value.answer.toLowerCase().includes(keywords)) {
                     matches.push({
-                        title: 'Previous Research: ' + value.question,
+                        title: 'Knowledge Base: ' + value.question,
                         snippet: value.answer,
                         url: '#'
                     });
@@ -1475,28 +600,23 @@
             
             if (allSources.length === 0) {
                 return {
-                    answer: `I searched for information about "${query}" but couldn't find comprehensive results at the moment.\n\nCould you rephrase your question or provide more context? I'm here to help you find the information you need.`,
+                    answer: `I apologize, but I couldn't find comprehensive information about "${query}" at the moment. This could be a specialized topic. Would you like me to try searching with different keywords?`,
                     sources: []
                 };
             }
             
-            let answer = '';
-            const mainSource = allSources[0];
-            
-            answer += `I'd be happy to help you understand ${query.toLowerCase()}.\n\n`;
-            answer += mainSource.snippet || mainSource.answer;
+            let answer = `Based on my research:\n\n${allSources[0].snippet || allSources[0].answer}`;
             
             if (allSources.length > 1) {
-                const additionalInfo = allSources.slice(1, 3)
+                const additionalContext = allSources.slice(1, 3)
                     .map(s => s.snippet || s.answer)
-                    .filter(Boolean);
+                    .filter(Boolean)
+                    .join('\n\n');
                 
-                if (additionalInfo.length > 0) {
-                    answer += '\n\n' + additionalInfo.join('\n\n');
-                }
+                if (additionalContext) answer += `\n\n${additionalContext}`;
             }
             
-            answer += '\n\nIs there any particular aspect you'd like me to explore in more detail?';
+            answer += '\n\nWould you like me to elaborate on any specific aspect?';
             
             knowledgeBase[extractKeywords(query)] = {
                 question: query,
@@ -1509,30 +629,9 @@
         }
         
         async function sendMessage() {
-            if (!isSignedIn) {
-                showToast('Please sign in to start chatting', 'error');
-                openAuthModal();
-                return;
-            }
-            
-            if (!checkQuestionLimit()) {
-                if (!userData.isPremium && userData.questionsUsed >= userData.questionsLimit) {
-                    showToast('Question limit reached! Upgrade to Premium.', 'error');
-                    openProfileModal();
-                    return;
-                }
-            }
-            
             const input = document.getElementById('messageInput');
             const text = input.value.trim();
             if (!text) return;
-            
-            if (!userData.isPremium) {
-                userData.questionsUsed++;
-                saveUserData();
-                updateUsageStats();
-                checkQuestionLimit();
-            }
             
             document.getElementById('welcomeScreen').style.display = 'none';
             addMessage(text, 'user');
@@ -1540,21 +639,13 @@
             input.style.height = 'auto';
             
             const typingId = showTyping();
+            const sources = await performResearch(text);
+            const { answer, sources: usedSources } = generateAnswer(text, sources);
             
-            try {
-                const sources = await performResearch(text);
-                const { answer, sources: usedSources } = generateAnswer(text, sources);
-                
-                removeTyping(typingId);
-                await addMessageWithTyping(answer, 'assistant', usedSources);
-                
-                saveMessage(text, 'user');
-                saveMessage(answer, 'assistant', usedSources);
-            } catch (error) {
-                console.error('Error:', error);
-                removeTyping(typingId);
-                addMessage('Sorry, I encountered an error. Please try again.', 'assistant');
-            }
+            removeTyping(typingId);
+            addMessage(answer, 'assistant', usedSources);
+            saveMessage(text, 'user');
+            saveMessage(answer, 'assistant', usedSources);
             
             if (window.innerWidth <= 768) document.getElementById('sidebar').classList.add('hidden');
         }
@@ -1566,21 +657,14 @@
             
             const avatar = document.createElement('div');
             avatar.className = 'message-avatar';
-            avatar.textContent = role === 'user' ? (userData ? userData.name.charAt(0).toUpperCase() : 'U') : 'D';
+            avatar.textContent = role === 'user' ? 'U' : 'D';
             
             const content = document.createElement('div');
             content.className = 'message-content';
             
             const messageText = document.createElement('div');
             messageText.className = 'message-text';
-            
-            const paragraphs = text.split('\n\n');
-            paragraphs.forEach((para) => {
-                const p = document.createElement('p');
-                p.textContent = para;
-                messageText.appendChild(p);
-            });
-            
+            messageText.textContent = text;
             content.appendChild(messageText);
             
             if (sources && sources.length > 0) {
@@ -1601,57 +685,6 @@
             div.appendChild(avatar);
             div.appendChild(content);
             container.appendChild(div);
-            document.getElementById('messagesWrapper').scrollTop = 999999;
-        }
-        
-        async function addMessageWithTyping(text, role, sources = null) {
-            const container = document.getElementById('messagesContainer');
-            const div = document.createElement('div');
-            div.className = `message ${role}`;
-            
-            const avatar = document.createElement('div');
-            avatar.className = 'message-avatar';
-            avatar.textContent = role === 'user' ? (userData ? userData.name.charAt(0).toUpperCase() : 'U') : 'D';
-            
-            const content = document.createElement('div');
-            content.className = 'message-content';
-            
-            const messageText = document.createElement('div');
-            messageText.className = 'message-text';
-            
-            div.appendChild(avatar);
-            div.appendChild(content);
-            content.appendChild(messageText);
-            container.appendChild(div);
-            
-            const paragraphs = text.split('\n\n');
-            for (let i = 0; i < paragraphs.length; i++) {
-                const p = document.createElement('p');
-                messageText.appendChild(p);
-                
-                const words = paragraphs[i].split(' ');
-                for (let j = 0; j < words.length; j++) {
-                    await new Promise(resolve => setTimeout(resolve, 25));
-                    p.textContent += (j > 0 ? ' ' : '') + words[j];
-                    document.getElementById('messagesWrapper').scrollTop = 999999;
-                }
-            }
-            
-            if (sources && sources.length > 0) {
-                const sourcesDiv = document.createElement('div');
-                sourcesDiv.className = 'sources-container';
-                sourcesDiv.innerHTML = `
-                    <div class="sources-title">📚 Sources</div>
-                    ${sources.map(s => `
-                        <div class="source-item">
-                            ${s.url !== '#' ? `<a href="${s.url}" class="source-link" target="_blank" rel="noopener noreferrer">${s.title}</a>` : `<div class="source-link">${s.title}</div>`}
-                            <div class="source-snippet">${(s.snippet || s.answer || '').substring(0, 150)}...</div>
-                        </div>
-                    `).join('')}
-                `;
-                content.appendChild(sourcesDiv);
-            }
-            
             document.getElementById('messagesWrapper').scrollTop = 999999;
         }
         
@@ -1674,18 +707,13 @@
             return id;
         }
         
-        function removeTyping(id) { 
-            document.getElementById(id)?.remove(); 
-        }
+        function removeTyping(id) { document.getElementById(id)?.remove(); }
         
         function saveMessage(text, role, sources = null) {
-            if (!userData) return;
-            
             if (!currentChatId) {
                 currentChatId = 'chat_' + Date.now();
                 conversations.unshift({
                     id: currentChatId,
-                    userId: userData.id,
                     title: text.substring(0, 50),
                     messages: [],
                     timestamp: Date.now()
@@ -1701,11 +729,8 @@
         }
         
         function loadChats() {
-            if (!userData) return;
-            
-            const userChats = conversations.filter(c => c.userId === userData.id);
             const list = document.getElementById('chatList');
-            list.innerHTML = userChats.slice(0, 20).map(chat => `
+            list.innerHTML = conversations.slice(0, 20).map(chat => `
                 <div class="chat-item ${chat.id === currentChatId ? 'active' : ''}" onclick="loadChat('${chat.id}')">
                     <span class="chat-title">${chat.title}</span>
                     <button class="chat-delete" onclick="event.stopPropagation(); deleteChat('${chat.id}')">×</button>
@@ -1742,11 +767,6 @@
         }
         
         function usePrompt(text) {
-            if (!isSignedIn) {
-                showToast('Please sign in first', 'error');
-                openAuthModal();
-                return;
-            }
             document.getElementById('messageInput').value = text;
             document.getElementById('messageInput').focus();
         }
@@ -1768,15 +788,16 @@
         
         document.getElementById('messageInput').addEventListener('input', function() {
             this.style.height = 'auto';
-            this.style.height = Math.min(this.scrollHeight, window.innerHeight * 0.25) + 'px';
+            this.style.height = Math.min(this.scrollHeight, window.innerHeight * 0.3) + 'px';
         });
         
+        getUserTimezone();
+        loadChats();
+        if (window.innerWidth > 768) document.getElementById('sidebar').classList.remove('hidden');
+        
         window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                document.getElementById('sidebar').classList.remove('hidden');
-            } else {
-                document.getElementById('sidebar').classList.add('hidden');
-            }
+            if (window.innerWidth > 768) document.getElementById('sidebar').classList.remove('hidden');
+            else document.getElementById('sidebar').classList.add('hidden');
         });
     </script>
 </body>
