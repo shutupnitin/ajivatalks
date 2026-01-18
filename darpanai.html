@@ -8,6 +8,34 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAGYl3DZDq7S714sveY4yq2s_O5JaFSuf4",
+            authDomain: "ajiva-talks.firebaseapp.com",
+            projectId: "ajiva-talks",
+            storageBucket: "ajiva-talks.firebasestorage.app",
+            messagingSenderId: "627601368262",
+            appId: "1:627601368262:web:8512d155109d1bab5ca3c7",
+            measurementId: "G-47FX4QP4RB"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const analytics = getAnalytics(app);
+        
+        window.firebaseAuth = auth;
+        window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+        window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
+        window.signOut = signOut;
+        window.onAuthStateChanged = onAuthStateChanged;
+    </script>
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -37,64 +65,64 @@
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-primary);
-            padding: 0.875rem 1.25rem;
+            padding: 0.75rem 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 60px;
+            min-height: 56px;
         }
         
-        .header-left { display: flex; align-items: center; gap: 0.75rem; }
+        .header-left { display: flex; align-items: center; gap: 0.5rem; }
         
         .menu-toggle {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             background: transparent;
             border: 1px solid var(--border-primary);
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
             display: none;
             align-items: center;
             justify-content: center;
             color: var(--text-primary);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
         
         .logo {
             font-family: 'Instrument Serif', serif;
-            font-size: clamp(1.25rem, 3vw, 1.5rem);
+            font-size: clamp(1.1rem, 4vw, 1.5rem);
             color: white;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
         
         .badge {
-            font-size: clamp(0.6rem, 1.5vw, 0.65rem);
+            font-size: clamp(0.55rem, 2vw, 0.65rem);
             background: linear-gradient(135deg, #8b5cf6, #3b82f6);
             color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
+            padding: 2px 6px;
+            border-radius: 10px;
             font-weight: 600;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
         
         .header-right {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.5rem;
         }
         
         .user-profile-btn {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             background: var(--accent);
             color: white;
             border: none;
             border-radius: 50%;
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.875rem;
+            font-size: 0.8rem;
             transition: all 0.2s;
             position: relative;
         }
@@ -105,22 +133,22 @@
             position: absolute;
             top: -2px;
             right: -2px;
-            width: 14px;
-            height: 14px;
+            width: 12px;
+            height: 12px;
             background: linear-gradient(135deg, #fbbf24, #f59e0b);
             border-radius: 50%;
             border: 2px solid var(--bg-primary);
         }
         
         .auth-btn {
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 0.8rem;
             background: var(--accent);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             font-weight: 600;
             cursor: pointer;
-            font-size: clamp(0.8rem, 2vw, 0.875rem);
+            font-size: clamp(0.75rem, 2.5vw, 0.875rem);
             transition: all 0.2s;
         }
         
@@ -133,55 +161,44 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(4px);
             display: none;
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            animation: fadeIn 0.2s ease;
+            padding: 1rem;
         }
         
         .modal-overlay.active { display: flex; }
         
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
         .modal {
             background: var(--bg-secondary);
             border: 1px solid var(--border-primary);
-            border-radius: 16px;
-            padding: 2rem;
-            max-width: 500px;
-            width: 90%;
-            max-height: 85vh;
+            border-radius: 12px;
+            padding: 1.5rem;
+            max-width: 450px;
+            width: 100%;
+            max-height: 90vh;
             overflow-y: auto;
             position: relative;
-            animation: slideUp 0.3s ease;
-        }
-        
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
         }
         
         .modal-close {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
+            top: 0.75rem;
+            right: 0.75rem;
             background: transparent;
             border: none;
             color: var(--text-secondary);
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             cursor: pointer;
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 6px;
+            border-radius: 4px;
             transition: all 0.2s;
         }
         
@@ -192,35 +209,35 @@
         
         .modal-title {
             font-family: 'Instrument Serif', serif;
-            font-size: 1.75rem;
-            margin-bottom: 0.5rem;
+            font-size: clamp(1.3rem, 5vw, 1.75rem);
+            margin-bottom: 0.4rem;
         }
         
         .modal-subtitle {
             color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
+            margin-bottom: 1.25rem;
+            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
         }
         
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 0.875rem;
         }
         
         .form-label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             color: var(--text-secondary);
-            font-size: 0.875rem;
+            font-size: clamp(0.75rem, 2.5vw, 0.875rem);
         }
         
         .form-input {
             width: 100%;
-            padding: 0.75rem;
+            padding: 0.65rem;
             background: var(--bg-tertiary);
             border: 1px solid var(--border-primary);
-            border-radius: 8px;
+            border-radius: 6px;
             color: var(--text-primary);
-            font-size: 0.9375rem;
+            font-size: clamp(0.85rem, 2.5vw, 0.9375rem);
             outline: none;
             transition: all 0.2s;
             font-family: 'Inter', sans-serif;
@@ -234,43 +251,43 @@
         .usage-stats {
             background: var(--bg-tertiary);
             border: 1px solid var(--border-primary);
-            border-radius: 12px;
-            padding: 1.25rem;
-            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.25rem;
         }
         
         .stat-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.6rem;
         }
         
         .stat-row:last-child { margin-bottom: 0; }
         
         .stat-label {
             color: var(--text-secondary);
-            font-size: 0.875rem;
+            font-size: clamp(0.75rem, 2.5vw, 0.875rem);
         }
         
         .stat-value {
             font-weight: 600;
-            font-size: 1rem;
+            font-size: clamp(0.85rem, 2.5vw, 1rem);
         }
         
         .progress-bar {
             width: 100%;
-            height: 8px;
+            height: 6px;
             background: var(--bg-primary);
-            border-radius: 4px;
+            border-radius: 3px;
             overflow: hidden;
-            margin-top: 0.5rem;
+            margin-top: 0.4rem;
         }
         
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, var(--accent), #8b5cf6);
-            border-radius: 4px;
+            border-radius: 3px;
             transition: width 0.3s ease;
         }
         
@@ -278,19 +295,18 @@
         
         .pricing-cards {
             display: grid;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            gap: 0.875rem;
+            margin-bottom: 1.25rem;
         }
         
         .pricing-card {
             background: var(--bg-tertiary);
             border: 2px solid var(--border-primary);
-            border-radius: 12px;
-            padding: 1.5rem;
+            border-radius: 10px;
+            padding: 1.25rem;
             cursor: pointer;
             transition: all 0.2s;
             position: relative;
-            overflow: hidden;
         }
         
         .pricing-card:hover {
@@ -305,25 +321,25 @@
         
         .recommended-badge {
             position: absolute;
-            top: 12px;
-            right: 12px;
+            top: 10px;
+            right: 10px;
             background: linear-gradient(135deg, #fbbf24, #f59e0b);
             color: var(--bg-primary);
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: clamp(0.6rem, 2vw, 0.7rem);
             font-weight: 700;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
         
         .pricing-price {
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 6vw, 2rem);
             font-weight: 700;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.2rem;
         }
         
         .pricing-price span {
-            font-size: 1rem;
+            font-size: clamp(0.85rem, 3vw, 1rem);
             color: var(--text-secondary);
             font-weight: 400;
         }
@@ -331,33 +347,33 @@
         .original-price {
             text-decoration: line-through;
             color: var(--text-secondary);
-            font-size: 1rem;
-            margin-left: 0.5rem;
+            font-size: clamp(0.85rem, 3vw, 1rem);
+            margin-left: 0.4rem;
         }
         
         .pricing-discount {
             display: inline-block;
             background: var(--success);
             color: white;
-            padding: 2px 8px;
-            border-radius: 6px;
-            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 5px;
+            font-size: clamp(0.65rem, 2vw, 0.75rem);
             font-weight: 600;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.6rem;
         }
         
         .pricing-features {
             list-style: none;
-            margin-top: 1rem;
+            margin-top: 0.875rem;
         }
         
         .pricing-features li {
-            padding: 0.4rem 0;
+            padding: 0.3rem 0;
             color: var(--text-secondary);
-            font-size: 0.875rem;
+            font-size: clamp(0.75rem, 2.5vw, 0.875rem);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
         
         .pricing-features li:before {
@@ -368,16 +384,16 @@
         
         .subscribe-btn {
             width: 100%;
-            padding: 0.875rem;
+            padding: 0.75rem;
             background: linear-gradient(135deg, var(--accent), #8b5cf6);
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: clamp(0.85rem, 2.5vw, 1rem);
             transition: all 0.2s;
-            margin-top: 1rem;
+            margin-top: 0.875rem;
         }
         
         .subscribe-btn:hover {
@@ -392,30 +408,32 @@
         .subscription-info {
             background: var(--bg-tertiary);
             border: 1px solid var(--border-primary);
-            border-radius: 12px;
-            padding: 1.25rem;
-            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.25rem;
         }
         
         .subscription-active {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
+            gap: 0.4rem;
+            margin-bottom: 0.875rem;
             font-weight: 600;
             color: var(--success);
+            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
         }
         
         .cancel-btn {
             width: 100%;
-            padding: 0.75rem;
+            padding: 0.65rem;
             background: transparent;
             color: var(--text-secondary);
             border: 1px solid var(--border-primary);
-            border-radius: 8px;
+            border-radius: 6px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
+            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
         }
         
         .cancel-btn:hover {
@@ -424,28 +442,21 @@
             color: var(--error);
         }
         
-        /* Limit Warning Banner */
         .limit-warning {
             background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(239, 68, 68, 0.1));
             border: 1px solid var(--gold);
-            border-radius: 12px;
-            padding: 1rem 1.25rem;
-            margin: 1rem;
+            border-radius: 10px;
+            padding: 0.875rem 1rem;
+            margin: 0.875rem;
             display: none;
             align-items: center;
-            gap: 1rem;
-            animation: slideDown 0.3s ease;
-        }
-        
-        @keyframes slideDown {
-            from { transform: translateY(-10px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            gap: 0.875rem;
         }
         
         .limit-warning.show { display: flex; }
         
         .limit-warning-icon {
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
         }
         
         .limit-warning-content {
@@ -454,24 +465,26 @@
         
         .limit-warning-title {
             font-weight: 600;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.2rem;
+            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
         }
         
         .limit-warning-text {
-            font-size: 0.875rem;
+            font-size: clamp(0.75rem, 2.5vw, 0.875rem);
             color: var(--text-secondary);
         }
         
         .upgrade-btn {
-            padding: 0.5rem 1rem;
+            padding: 0.45rem 0.875rem;
             background: linear-gradient(135deg, #fbbf24, #f59e0b);
             color: var(--bg-primary);
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             font-weight: 600;
             cursor: pointer;
             white-space: nowrap;
             transition: all 0.2s;
+            font-size: clamp(0.75rem, 2.5vw, 0.85rem);
         }
         
         .upgrade-btn:hover {
@@ -481,17 +494,17 @@
         
         .main-container {
             display: flex;
-            height: calc(100vh - 60px);
+            height: calc(100vh - 56px);
             overflow: hidden;
         }
         
         .sidebar {
-            width: min(260px, 25vw);
+            width: 240px;
             background: var(--bg-primary);
             border-right: 1px solid var(--border-primary);
             display: flex;
             flex-direction: column;
-            padding: 0.75rem;
+            padding: 0.65rem;
             overflow-y: auto;
             transition: transform 0.3s ease;
         }
@@ -500,27 +513,27 @@
         
         .new-chat-btn {
             width: 100%;
-            padding: 0.75rem;
+            padding: 0.65rem;
             background: var(--accent);
             border: none;
             color: white;
-            border-radius: 10px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 500;
-            margin-bottom: 1rem;
-            font-size: clamp(0.8rem, 2vw, 0.875rem);
+            margin-bottom: 0.875rem;
+            font-size: clamp(0.8rem, 2.5vw, 0.875rem);
             transition: all 0.2s;
         }
         
         .new-chat-btn:hover { opacity: 0.9; }
         
         .chat-item {
-            padding: 0.625rem 0.75rem;
-            border-radius: 8px;
+            padding: 0.55rem 0.65rem;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: clamp(0.75rem, 1.8vw, 0.875rem);
+            font-size: clamp(0.75rem, 2.5vw, 0.85rem);
             color: var(--text-secondary);
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -538,8 +551,8 @@
             border: none;
             color: var(--text-secondary);
             cursor: pointer;
-            padding: 0.25rem 0.5rem;
-            font-size: 1.2rem;
+            padding: 0.2rem 0.4rem;
+            font-size: 1.1rem;
         }
         
         .chat-item:hover .chat-delete { opacity: 1; }
@@ -556,52 +569,58 @@
             flex: 1;
             overflow-y: auto;
             width: 100%;
-            max-width: min(768px, 90vw);
+            max-width: 720px;
         }
         
-        .messages-container { padding: clamp(1rem, 3vw, 2rem) clamp(0.75rem, 2vw, 1rem); min-height: 100%; }
+        .messages-container { 
+            padding: clamp(0.875rem, 3vw, 1.5rem) clamp(0.65rem, 2vw, 1rem); 
+            min-height: 100%; 
+        }
         
-        .welcome-screen { text-align: center; padding: clamp(2rem, 5vw, 3rem) clamp(0.75rem, 2vw, 1rem); }
+        .welcome-screen { 
+            text-align: center; 
+            padding: clamp(1.5rem, 5vw, 2.5rem) clamp(0.65rem, 2vw, 1rem); 
+        }
         
         .greeting {
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            font-size: clamp(0.95rem, 3vw, 1.2rem);
             color: var(--accent);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             font-weight: 500;
         }
         
         .welcome-title {
             font-family: 'Instrument Serif', serif;
-            font-size: clamp(2rem, 6vw, 3rem);
-            margin-bottom: 1rem;
+            font-size: clamp(1.75rem, 7vw, 3rem);
+            margin-bottom: 0.875rem;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
         .welcome-subtitle {
-            font-size: clamp(0.9rem, 2.5vw, 1.125rem);
+            font-size: clamp(0.85rem, 3vw, 1.125rem);
             color: var(--text-secondary);
-            margin-bottom: 2rem;
-            line-height: 1.6;
-            max-width: 600px;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+            max-width: 550px;
             margin-left: auto;
             margin-right: auto;
         }
         
         .example-prompts {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-            gap: clamp(0.75rem, 2vw, 1rem);
-            max-width: 600px;
+            grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+            gap: clamp(0.65rem, 2vw, 0.875rem);
+            max-width: 550px;
             margin: 0 auto;
         }
         
         .prompt-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border-primary);
-            padding: clamp(0.875rem, 2.5vw, 1rem);
-            border-radius: 12px;
+            padding: clamp(0.75rem, 2.5vw, 0.875rem);
+            border-radius: 10px;
             cursor: pointer;
             text-align: left;
             transition: all 0.2s;
@@ -609,32 +628,28 @@
         
         .prompt-card:hover { border-color: var(--accent); transform: translateY(-2px); }
         
-        .prompt-card-title { font-weight: 600; margin-bottom: 0.5rem; font-size: clamp(0.85rem, 2vw, 0.9rem); }
-        .prompt-card-text { font-size: clamp(0.75rem, 1.8vw, 0.8rem); color: var(--text-secondary); line-height: 1.4; }
+        .prompt-card-title { 
+            font-weight: 600; 
+            margin-bottom: 0.4rem; 
+            font-size: clamp(0.8rem, 2.5vw, 0.9rem); 
+        }
+        
+        .prompt-card-text { 
+            font-size: clamp(0.7rem, 2.5vw, 0.8rem); 
+            color: var(--text-secondary); 
+            line-height: 1.3; 
+        }
         
         .message { 
             display: flex; 
-            gap: clamp(0.75rem, 2vw, 1rem); 
-            margin-bottom: clamp(1.5rem, 3vw, 2rem);
-            opacity: 0;
-            animation: messageSlideIn 0.4s ease forwards;
-        }
-        
-        @keyframes messageSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            gap: clamp(0.65rem, 2vw, 0.875rem); 
+            margin-bottom: clamp(1.25rem, 3vw, 1.75rem);
         }
         
         .message-avatar {
-            width: clamp(32px, 7vw, 40px);
-            height: clamp(32px, 7vw, 40px);
-            border-radius: 10px;
+            width: clamp(28px, 7vw, 36px);
+            height: clamp(28px, 7vw, 36px);
+            border-radius: 8px;
             background: var(--bg-secondary);
             border: 1px solid var(--border-primary);
             display: flex;
@@ -642,21 +657,21 @@
             justify-content: center;
             flex-shrink: 0;
             font-weight: 600;
-            font-size: clamp(0.75rem, 2vw, 0.875rem);
+            font-size: clamp(0.7rem, 2.5vw, 0.8rem);
         }
         
         .message.user .message-avatar { background: var(--accent); }
         .message-content { flex: 1; min-width: 0; }
         
         .message-text {
-            line-height: 1.7;
+            line-height: 1.6;
             color: var(--text-primary);
             word-wrap: break-word;
-            font-size: clamp(0.875rem, 2.2vw, 1rem);
+            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
         }
         
         .message-text p {
-            margin-bottom: 1rem;
+            margin-bottom: 0.875rem;
         }
         
         .message-text p:last-child {
@@ -664,31 +679,29 @@
         }
         
         .sources-container {
-            margin-top: 1rem;
-            padding: clamp(0.75rem, 2vw, 1rem);
+            margin-top: 0.875rem;
+            padding: clamp(0.65rem, 2vw, 0.875rem);
             background: var(--bg-tertiary);
             border: 1px solid var(--border-primary);
-            border-radius: 8px;
-            opacity: 0;
-            animation: fadeIn 0.3s ease 0.3s forwards;
+            border-radius: 6px;
         }
         
         .sources-title {
             font-weight: 600;
-            margin-bottom: 0.75rem;
-            font-size: clamp(0.8rem, 2vw, 0.875rem);
+            margin-bottom: 0.6rem;
+            font-size: clamp(0.75rem, 2.5vw, 0.85rem);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
         
         .source-item {
-            padding: clamp(0.5rem, 1.5vw, 0.625rem);
+            padding: clamp(0.45rem, 2vw, 0.55rem);
             background: var(--bg-secondary);
             border: 1px solid var(--border-primary);
-            border-radius: 6px;
-            margin-bottom: 0.5rem;
-            font-size: clamp(0.75rem, 1.8vw, 0.8rem);
+            border-radius: 5px;
+            margin-bottom: 0.4rem;
+            font-size: clamp(0.7rem, 2.5vw, 0.775rem);
             transition: all 0.2s;
         }
         
@@ -703,18 +716,22 @@
             text-decoration: none;
             font-weight: 500;
             display: block;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.2rem;
             word-break: break-word;
         }
         
         .source-link:hover { text-decoration: underline; }
-        .source-snippet { color: var(--text-secondary); font-size: clamp(0.7rem, 1.6vw, 0.75rem); line-height: 1.4; }
+        .source-snippet { 
+            color: var(--text-secondary); 
+            font-size: clamp(0.65rem, 2.5vw, 0.725rem); 
+            line-height: 1.3; 
+        }
         
-        .typing-indicator { display: flex; gap: 0.25rem; padding: 0.75rem 0; }
+        .typing-indicator { display: flex; gap: 0.2rem; padding: 0.65rem 0; }
         
         .typing-dot {
-            width: 8px;
-            height: 8px;
+            width: 7px;
+            height: 7px;
             background: var(--accent);
             border-radius: 50%;
             animation: typing 1.4s infinite;
@@ -725,25 +742,25 @@
         
         @keyframes typing {
             0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
-            30% { opacity: 1; transform: translateY(-6px); }
+            30% { opacity: 1; transform: translateY(-5px); }
         }
         
         .input-area {
             border-top: 1px solid var(--border-primary);
-            padding: clamp(0.75rem, 2vw, 1rem);
+            padding: clamp(0.65rem, 2vw, 0.875rem);
             background: var(--bg-primary);
             width: 100%;
-            max-width: min(768px, 90vw);
+            max-width: 720px;
         }
         
         .input-container {
             background: var(--bg-secondary);
             border: 1px solid var(--border-primary);
-            border-radius: 12px;
-            padding: 0.75rem clamp(0.75rem, 2vw, 1rem);
+            border-radius: 10px;
+            padding: 0.65rem clamp(0.65rem, 2vw, 0.875rem);
             display: flex;
             align-items: flex-end;
-            gap: clamp(0.5rem, 1.5vw, 0.75rem);
+            gap: clamp(0.45rem, 2vw, 0.65rem);
             transition: all 0.2s;
         }
         
@@ -759,27 +776,27 @@
             outline: none;
             color: var(--text-primary);
             font-family: 'Inter', sans-serif;
-            font-size: clamp(0.875rem, 2.2vw, 0.9375rem);
+            font-size: clamp(0.85rem, 2.5vw, 0.9375rem);
             resize: none;
-            max-height: min(200px, 30vh);
-            line-height: 1.5;
-            min-height: 24px;
+            max-height: min(180px, 25vh);
+            line-height: 1.4;
+            min-height: 22px;
         }
         
         .message-input::placeholder { color: var(--text-secondary); }
         
         .send-btn {
-            width: clamp(36px, 8vw, 40px);
-            height: clamp(36px, 8vw, 40px);
+            width: clamp(32px, 8vw, 36px);
+            height: clamp(32px, 8vw, 36px);
             background: var(--accent);
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            font-size: clamp(0.95rem, 3vw, 1.1rem);
             flex-shrink: 0;
             transition: all 0.2s;
         }
@@ -789,25 +806,24 @@
         
         .toast {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
+            bottom: 1.5rem;
+            right: 1.5rem;
             background: var(--bg-secondary);
             border: 1px solid var(--border-primary);
-            padding: 0.875rem 1.25rem;
-            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
             z-index: 1001;
-            font-size: clamp(0.8rem, 2vw, 0.875rem);
-            max-width: calc(100vw - 4rem);
+            font-size: clamp(0.75rem, 2.5vw, 0.85rem);
+            max-width: calc(100vw - 3rem);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            animation: slideUp 0.3s ease;
         }
         
         .toast.success { border-color: var(--success); }
         .toast.error { border-color: var(--error); }
         
-        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--border-primary); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb { background: var(--border-primary); border-radius: 2.5px; }
         ::-webkit-scrollbar-thumb:hover { background: #3a3a3a; }
         
         @media (max-width: 768px) {
@@ -815,10 +831,10 @@
             .sidebar {
                 position: fixed;
                 left: 0;
-                top: 60px;
-                height: calc(100vh - 60px);
+                top: 56px;
+                height: calc(100vh - 56px);
                 z-index: 90;
-                width: min(280px, 75vw);
+                width: min(260px, 70vw);
                 box-shadow: 4px 0 12px rgba(0, 0, 0, 0.5);
             }
             .example-prompts { grid-template-columns: 1fr; }
@@ -830,6 +846,15 @@
             }
             .upgrade-btn {
                 width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header {
+                padding: 0.65rem 0.75rem;
+            }
+            .pricing-features li {
+                font-size: 0.75rem;
             }
         }
     </style>
@@ -849,7 +874,6 @@
         </div>
     </div>
     
-    <!-- Limit Warning Banner -->
     <div class="limit-warning" id="limitWarning">
         <div class="limit-warning-icon">⚡</div>
         <div class="limit-warning-content">
@@ -859,7 +883,6 @@
         <button class="upgrade-btn" onclick="openProfileModal()">Upgrade Now</button>
     </div>
     
-    <!-- Auth Modal -->
     <div class="modal-overlay" id="authModal">
         <div class="modal">
             <button class="modal-close" onclick="closeAuthModal()">×</button>
@@ -871,18 +894,21 @@
                 <input type="email" class="form-input" id="authEmail" placeholder="your@email.com">
             </div>
             <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-input" id="authPassword" placeholder="Password (min 6 characters)">
+            </div>
+            <div class="form-group">
                 <label class="form-label">Name</label>
                 <input type="text" class="form-input" id="authName" placeholder="Your Name">
             </div>
-            <button class="subscribe-btn" onclick="handleSignIn()">Sign In</button>
+            <button class="subscribe-btn" onclick="handleSignIn()">Sign In / Sign Up</button>
             
-            <div style="text-align: center; color: var(--text-secondary); font-size: 0.8rem; margin-top: 1.5rem;">
+            <div style="text-align: center; color: var(--text-secondary); font-size: clamp(0.7rem, 2.5vw, 0.8rem); margin-top: 1.25rem;">
                 By signing in, you agree to our Terms of Service and Privacy Policy
             </div>
         </div>
     </div>
     
-    <!-- Profile Modal -->
     <div class="modal-overlay" id="profileModal">
         <div class="modal">
             <button class="modal-close" onclick="closeProfileModal()">×</button>
@@ -901,7 +927,7 @@
             
             <div id="subscriptionSection"></div>
             
-            <button class="cancel-btn" onclick="handleSignOut()" style="margin-top: 1rem;">Sign Out</button>
+            <button class="cancel-btn" onclick="handleSignOut()" style="margin-top: 0.875rem;">Sign Out</button>
         </div>
     </div>
     
@@ -950,39 +976,58 @@
     </div>
     
     <script>
-        // User data management
-        let userData = JSON.parse(localStorage.getItem('darpan_user') || 'null');
-        let isSignedIn = userData !== null;
+        // Wait for Firebase to load
+        setTimeout(() => {
+            initApp();
+        }, 1000);
         
-        if (!isSignedIn) {
-            userData = {
-                id: 'guest',
-                email: '',
-                name: 'Guest',
-                questionsUsed: 0,
-                questionsLimit: 10,
-                isPremium: false,
-                subscriptionId: null,
-                subscriptionExpiry: null
-            };
-        }
-        
-        let knowledgeBase = JSON.parse(localStorage.getItem('darpan_knowledge') || '{}');
-        let conversations = JSON.parse(localStorage.getItem('darpan_chats') || '[]');
+        let userData = null;
+        let isSignedIn = false;
+        let knowledgeBase = {};
+        let conversations = [];
         let currentChatId = null;
-        
-        // Razorpay configuration
         const RAZORPAY_KEY = 'rzp_live_S5I04OR5KhAAve';
         
-        // Initialize
-        function init() {
-            updateAuthUI();
-            if (isSignedIn) {
-                updateUserUI();
-                loadChats();
+        function initApp() {
+            // Load data from localStorage
+            knowledgeBase = JSON.parse(localStorage.getItem('darpan_knowledge') || '{}');
+            conversations = JSON.parse(localStorage.getItem('darpan_chats') || '[]');
+            
+            // Check Firebase auth state
+            if (window.onAuthStateChanged && window.firebaseAuth) {
+                window.onAuthStateChanged(window.firebaseAuth, (user) => {
+                    if (user) {
+                        const storedUserData = JSON.parse(localStorage.getItem('darpan_user_' + user.uid) || 'null');
+                        userData = storedUserData || {
+                            id: user.uid,
+                            email: user.email,
+                            name: user.displayName || user.email.split('@')[0],
+                            questionsUsed: 0,
+                            questionsLimit: 10,
+                            isPremium: false,
+                            subscriptionId: null,
+                            subscriptionExpiry: null
+                        };
+                        isSignedIn = true;
+                        saveUserData();
+                        updateAuthUI();
+                        updateUserUI();
+                        loadChats();
+                    } else {
+                        userData = null;
+                        isSignedIn = false;
+                        updateAuthUI();
+                    }
+                    updateGreeting();
+                });
+            } else {
+                updateAuthUI();
+                updateGreeting();
             }
-            updateGreeting();
-            if (window.innerWidth > 768) document.getElementById('sidebar').classList.remove('hidden');
+            
+            if (window.innerWidth > 768) {
+                document.getElementById('sidebar').classList.remove('hidden');
+            }
         }
         
         function updateAuthUI() {
@@ -1006,12 +1051,18 @@
             document.getElementById('authModal').classList.remove('active');
         }
         
-        function handleSignIn() {
+        async function handleSignIn() {
             const email = document.getElementById('authEmail').value.trim();
+            const password = document.getElementById('authPassword').value.trim();
             const name = document.getElementById('authName').value.trim();
             
-            if (!email || !name) {
-                showToast('Please enter both email and name', 'error');
+            if (!email || !password) {
+                showToast('Please enter email and password', 'error');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showToast('Password must be at least 6 characters', 'error');
                 return;
             }
             
@@ -1020,36 +1071,31 @@
                 return;
             }
             
-            userData = {
-                id: 'user_' + Date.now(),
-                email: email,
-                name: name,
-                questionsUsed: 0,
-                questionsLimit: 10,
-                isPremium: false,
-                subscriptionId: null,
-                subscriptionExpiry: null
-            };
-            
-            isSignedIn = true;
-            saveUserData();
-            closeAuthModal();
-            updateAuthUI();
-            updateUserUI();
-            updateGreeting();
-            
-            showToast(`Welcome, ${name}! 🎉`, 'success');
-        }
-        
-        function handleSignOut() {
-            if (confirm('Are you sure you want to sign out? Your chat history will be saved.')) {
-                isSignedIn = false;
-                localStorage.removeItem('darpan_user');
+            try {
+                let userCredential;
+                try {
+                    // Try to sign in
+                    userCredential = await window.signInWithEmailAndPassword(window.firebaseAuth, email, password);
+                    showToast('Signed in successfully!', 'success');
+                } catch (signInError) {
+                    if (signInError.code === 'auth/user-not-found' || signInError.code === 'auth/wrong-password') {
+                        // Create new account
+                        if (!name) {
+                            showToast('Please enter your name for sign up', 'error');
+                            return;
+                        }
+                        userCredential = await window.createUserWithEmailAndPassword(window.firebaseAuth, email, password);
+                        showToast(`Welcome, ${name}! 🎉`, 'success');
+                    } else {
+                        throw signInError;
+                    }
+                }
                 
+                const user = userCredential.user;
                 userData = {
-                    id: 'guest',
-                    email: '',
-                    name: 'Guest',
+                    id: user.uid,
+                    email: user.email,
+                    name: name || user.email.split('@')[0],
                     questionsUsed: 0,
                     questionsLimit: 10,
                     isPremium: false,
@@ -1057,16 +1103,49 @@
                     subscriptionExpiry: null
                 };
                 
-                closeProfileModal();
+                isSignedIn = true;
+                saveUserData();
+                closeAuthModal();
                 updateAuthUI();
+                updateUserUI();
                 updateGreeting();
-                newChat();
+                loadChats();
                 
-                showToast('Signed out successfully', 'success');
+            } catch (error) {
+                console.error('Auth error:', error);
+                if (error.code === 'auth/email-already-in-use') {
+                    showToast('Email already in use. Try signing in.', 'error');
+                } else if (error.code === 'auth/invalid-email') {
+                    showToast('Invalid email address', 'error');
+                } else if (error.code === 'auth/weak-password') {
+                    showToast('Password is too weak', 'error');
+                } else {
+                    showToast('Authentication error. Please try again.', 'error');
+                }
+            }
+        }
+        
+        async function handleSignOut() {
+            if (confirm('Are you sure you want to sign out?')) {
+                try {
+                    await window.signOut(window.firebaseAuth);
+                    isSignedIn = false;
+                    userData = null;
+                    closeProfileModal();
+                    updateAuthUI();
+                    updateGreeting();
+                    newChat();
+                    showToast('Signed out successfully', 'success');
+                } catch (error) {
+                    console.error('Sign out error:', error);
+                    showToast('Error signing out', 'error');
+                }
             }
         }
         
         function updateUserUI() {
+            if (!userData) return;
+            
             const initial = userData.name.charAt(0).toUpperCase();
             document.getElementById('userInitial').textContent = initial;
             document.getElementById('userEmail').textContent = userData.email;
@@ -1078,6 +1157,8 @@
         }
         
         function updateUsageStats() {
+            if (!userData) return;
+            
             const used = userData.questionsUsed;
             const limit = userData.isPremium ? '∞' : userData.questionsLimit;
             const percentage = userData.isPremium ? 0 : (used / userData.questionsLimit) * 100;
@@ -1094,6 +1175,8 @@
         }
         
         function checkQuestionLimit() {
+            if (!userData) return true;
+            
             if (userData.isPremium) {
                 document.getElementById('limitWarning').classList.remove('show');
                 return true;
@@ -1114,6 +1197,8 @@
         }
         
         function updateSubscriptionSection() {
+            if (!userData) return;
+            
             const section = document.getElementById('subscriptionSection');
             
             if (userData.isPremium) {
@@ -1148,9 +1233,9 @@
                             <ul class="pricing-features">
                                 <li>Unlimited questions</li>
                                 <li>Priority responses</li>
-                                <li>Advanced research capabilities</li>
-                                <li>No ads or interruptions</li>
-                                <li>Early access to new features</li>
+                                <li>Advanced research</li>
+                                <li>No interruptions</li>
+                                <li>Early access</li>
                             </ul>
                             <button class="subscribe-btn gold" onclick="initiatePremiumPurchase()">
                                 Get Premium - ₹20/month
@@ -1174,6 +1259,8 @@
         }
         
         function initiatePremiumPurchase() {
+            if (!userData) return;
+            
             const options = {
                 key: RAZORPAY_KEY,
                 amount: 2000,
@@ -1213,11 +1300,11 @@
             updateUserUI();
             closeProfileModal();
             
-            showToast('🎉 Premium activated! Welcome to unlimited research!', 'success');
+            showToast('🎉 Premium activated! Unlimited research!', 'success');
         }
         
         function cancelSubscription() {
-            if (confirm('Are you sure you want to cancel your premium subscription?')) {
+            if (confirm('Cancel your premium subscription?')) {
                 userData.isPremium = false;
                 userData.subscriptionId = null;
                 userData.subscriptionExpiry = null;
@@ -1231,7 +1318,9 @@
         }
         
         function saveUserData() {
-            localStorage.setItem('darpan_user', JSON.stringify(userData));
+            if (userData && userData.id) {
+                localStorage.setItem('darpan_user_' + userData.id, JSON.stringify(userData));
+            }
         }
         
         function updateGreeting() {
@@ -1245,7 +1334,7 @@
             
             const el = document.getElementById('timeGreeting');
             if (el) {
-                if (isSignedIn) {
+                if (isSignedIn && userData) {
                     el.textContent = `${emoji} ${greeting}, ${userData.name}!`;
                 } else {
                     el.textContent = `${emoji} ${greeting}!`;
@@ -1254,7 +1343,9 @@
             
             const subtitle = document.getElementById('welcomeSubtitle');
             if (subtitle && !isSignedIn) {
-                subtitle.innerHTML = 'Your intelligent research assistant powered by advanced AI<br><span style="font-size: 0.9rem; color: var(--accent); cursor: pointer; margin-top: 0.5rem; display: inline-block;" onclick="openAuthModal()">Sign in to get started →</span>';
+                subtitle.innerHTML = 'Your intelligent research assistant powered by advanced AI<br><span style="font-size: clamp(0.8rem, 2.5vw, 0.9rem); color: var(--accent); cursor: pointer; margin-top: 0.4rem; display: inline-block;" onclick="openAuthModal()">Sign in to get started →</span>';
+            } else if (subtitle && isSignedIn) {
+                subtitle.textContent = 'Your intelligent research assistant powered by advanced AI';
             }
         }
         
@@ -1321,6 +1412,7 @@
                 }
                 return results;
             } catch (error) {
+                console.error('DuckDuckGo search error:', error);
                 return [];
             }
         }
@@ -1339,6 +1431,7 @@
                 }
                 return [];
             } catch (error) {
+                console.error('Wikipedia search error:', error);
                 return [];
             }
         }
@@ -1382,7 +1475,7 @@
             
             if (allSources.length === 0) {
                 return {
-                    answer: `I searched for information about "${query}" but couldn't find comprehensive results at the moment. This might be a specialized topic that requires more specific keywords.\n\nCould you rephrase your question or provide more context? I'm here to help you find the information you need.`,
+                    answer: `I searched for information about "${query}" but couldn't find comprehensive results at the moment.\n\nCould you rephrase your question or provide more context? I'm here to help you find the information you need.`,
                     sources: []
                 };
             }
@@ -1403,7 +1496,7 @@
                 }
             }
             
-            answer += '\n\nIs there any particular aspect of this topic you'd like me to explore in more detail?';
+            answer += '\n\nIs there any particular aspect you'd like me to explore in more detail?';
             
             knowledgeBase[extractKeywords(query)] = {
                 question: query,
@@ -1424,7 +1517,7 @@
             
             if (!checkQuestionLimit()) {
                 if (!userData.isPremium && userData.questionsUsed >= userData.questionsLimit) {
-                    showToast('Question limit reached! Upgrade to Premium for unlimited questions.', 'error');
+                    showToast('Question limit reached! Upgrade to Premium.', 'error');
                     openProfileModal();
                     return;
                 }
@@ -1447,14 +1540,21 @@
             input.style.height = 'auto';
             
             const typingId = showTyping();
-            const sources = await performResearch(text);
-            const { answer, sources: usedSources } = generateAnswer(text, sources);
             
-            removeTyping(typingId);
-            await addMessageWithTyping(answer, 'assistant', usedSources);
-            
-            saveMessage(text, 'user');
-            saveMessage(answer, 'assistant', usedSources);
+            try {
+                const sources = await performResearch(text);
+                const { answer, sources: usedSources } = generateAnswer(text, sources);
+                
+                removeTyping(typingId);
+                await addMessageWithTyping(answer, 'assistant', usedSources);
+                
+                saveMessage(text, 'user');
+                saveMessage(answer, 'assistant', usedSources);
+            } catch (error) {
+                console.error('Error:', error);
+                removeTyping(typingId);
+                addMessage('Sorry, I encountered an error. Please try again.', 'assistant');
+            }
             
             if (window.innerWidth <= 768) document.getElementById('sidebar').classList.add('hidden');
         }
@@ -1466,7 +1566,7 @@
             
             const avatar = document.createElement('div');
             avatar.className = 'message-avatar';
-            avatar.textContent = role === 'user' ? userData.name.charAt(0).toUpperCase() : 'D';
+            avatar.textContent = role === 'user' ? (userData ? userData.name.charAt(0).toUpperCase() : 'U') : 'D';
             
             const content = document.createElement('div');
             content.className = 'message-content';
@@ -1475,7 +1575,7 @@
             messageText.className = 'message-text';
             
             const paragraphs = text.split('\n\n');
-            paragraphs.forEach((para, index) => {
+            paragraphs.forEach((para) => {
                 const p = document.createElement('p');
                 p.textContent = para;
                 messageText.appendChild(p);
@@ -1511,7 +1611,7 @@
             
             const avatar = document.createElement('div');
             avatar.className = 'message-avatar';
-            avatar.textContent = role === 'user' ? userData.name.charAt(0).toUpperCase() : 'D';
+            avatar.textContent = role === 'user' ? (userData ? userData.name.charAt(0).toUpperCase() : 'U') : 'D';
             
             const content = document.createElement('div');
             content.className = 'message-content';
@@ -1531,7 +1631,7 @@
                 
                 const words = paragraphs[i].split(' ');
                 for (let j = 0; j < words.length; j++) {
-                    await new Promise(resolve => setTimeout(resolve, 30));
+                    await new Promise(resolve => setTimeout(resolve, 25));
                     p.textContent += (j > 0 ? ' ' : '') + words[j];
                     document.getElementById('messagesWrapper').scrollTop = 999999;
                 }
@@ -1579,10 +1679,13 @@
         }
         
         function saveMessage(text, role, sources = null) {
+            if (!userData) return;
+            
             if (!currentChatId) {
                 currentChatId = 'chat_' + Date.now();
                 conversations.unshift({
                     id: currentChatId,
+                    userId: userData.id,
                     title: text.substring(0, 50),
                     messages: [],
                     timestamp: Date.now()
@@ -1598,8 +1701,11 @@
         }
         
         function loadChats() {
+            if (!userData) return;
+            
+            const userChats = conversations.filter(c => c.userId === userData.id);
             const list = document.getElementById('chatList');
-            list.innerHTML = conversations.slice(0, 20).map(chat => `
+            list.innerHTML = userChats.slice(0, 20).map(chat => `
                 <div class="chat-item ${chat.id === currentChatId ? 'active' : ''}" onclick="loadChat('${chat.id}')">
                     <span class="chat-title">${chat.title}</span>
                     <button class="chat-delete" onclick="event.stopPropagation(); deleteChat('${chat.id}')">×</button>
@@ -1662,15 +1768,16 @@
         
         document.getElementById('messageInput').addEventListener('input', function() {
             this.style.height = 'auto';
-            this.style.height = Math.min(this.scrollHeight, window.innerHeight * 0.3) + 'px';
+            this.style.height = Math.min(this.scrollHeight, window.innerHeight * 0.25) + 'px';
         });
         
         window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) document.getElementById('sidebar').classList.remove('hidden');
-            else document.getElementById('sidebar').classList.add('hidden');
+            if (window.innerWidth > 768) {
+                document.getElementById('sidebar').classList.remove('hidden');
+            } else {
+                document.getElementById('sidebar').classList.add('hidden');
+            }
         });
-        
-        init();
     </script>
 </body>
 </html>
